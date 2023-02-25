@@ -1,0 +1,140 @@
+namespace ca.mcgill.ecse.snowshoetours.model;
+
+class Tour{
+  // Tour attributes
+  Integer guideCost;
+}
+
+class Season{
+  Date startDate;
+  Date endDate;
+  Integer numberOfWeeks;
+}
+
+class Week{
+  autounique number; // starting with 1
+}
+
+class Lodge {
+  String name;
+  address;
+  LodgeClass lodgeClass;
+  
+  // "classes" of lodge
+  enum LodgeClass{
+    oneStar,
+    twoStars,
+    threeStars,
+    fourStars,
+    fiveStars
+  }
+}
+
+class Person {
+  abstract; // make Person an abstract class
+  unique email; 
+  name; 
+  accountName;
+  password;
+  emergencyContact;
+}
+
+class Participant {
+  isA Person;
+  // email (and password) must be unique
+  Integer numberOfWeeks;
+  Week startWeek;
+  Week endWeek;
+}
+
+class Manager {
+  defaulted password = "manager"; // default set to manager
+}
+
+class Guide {
+  isA Person;
+  Integer weeklyCost;
+  // Constraint: email -> account name (must be unique)
+  // 1 Tour at a time
+}
+
+class Combo {
+  Integer comboPrice;
+  comboName;
+}
+
+associationClass LodgeRental{
+  Double discount;
+  1 Lodge lodge;
+  1 Combo combo;
+}
+ 
+class Registration{
+  Integer tourCost;
+  unique authCode;
+  Double refundRate;
+  Boolean lodgeRented;
+}
+
+class GearRequest{
+  enum GearType{
+    Boots,
+    ShowShoe,
+    Poles,
+    Others
+  }
+  Integer cost;
+  GearType type;
+}
+
+class SnowShoeTour{
+}
+
+// Associations
+
+association {
+  
+  // Tour associations
+  * Tour tours -- 1 Lodge lodge;   // 1 lodge can be assigned to many different tours
+  1 Tour tour -- * Participant participants; // Many participants can be in 1 tour
+  * Tour tour -- 1..* Week; // A tour can span 1 to many weeks; weeks can be assigned to multiple tour, even at the same time
+  * Tour tour -- 1 Guide guide; // A tour can only have 1 guide at a time, but a guide can "tour" multiple tours throughout the season
+  1 Tour tour -- 1 Registration registration; // Each tour is assigned to a Registration, and vice versa.
+  
+  // Season
+  1 Season season -- * Week weeks;
+  
+  // Lodge
+  0..1 Lodge lodge -- * Registration registration;
+  
+  // Participant
+  1 Participant participant -- 1 Registration registration;
+
+  // Manager associations
+  * Manager manager -> * Season seasons;
+  * Manager manager -> * Combo combos;
+
+  // Combo
+  * Combo combos -- 2..* GearRequest gears;
+  0..1 Combo combo  -- 0..1 Lodge lodge;
+  * Registration registration -- 0..* Combo combo;
+
+  // GearRequest
+  * GearRequest gears -- * Registration registration;
+
+  // System composition
+  1 SnowShoeTour <@>- * Person;
+  1 SnowShoeTour <@>- * Registration;
+  1 SnowShoeTour <@>- * Week;
+  1 SnowShoeTour <@>- * Guide;
+  1 SnowShoeTour <@>- * Season;
+  1 SnowShoeTour <@>- * Participant;
+  1 SnowShoeTour <@>- * Tour;
+  1 SnowShoeTour <@>- * Manager;
+  1 SnowShoeTour <@>- * GearRequest;
+  1 SnowShoeTour <@>- * Combo;
+  1 SnowShoeTour <@>- * LodgeRental;
+  1 SnowShoeTour <@>- * Lodge;
+
+}
+
