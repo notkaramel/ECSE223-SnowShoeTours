@@ -1,6 +1,4 @@
-# :snowflake::ski: ECSE223 SnowShoeTours Project: Team N
-
-_(Edit this file as needed, then remove this sentence)._
+# :snowflake::ski: ECSE223 SnowShoeTours Project: Team 7
 
 ## Project Overview
 
@@ -12,9 +10,9 @@ For more information about the SnowShoeTours application, please consult the [wi
 
 | Name          | GitHub username |
 | ------------- | --------------- |
-| Team Member A | ...             |
-| Team Member B | ...             |
-| Team Member C | ...             |
-| Team Member D | ...             |
-| Team Member E | ...             |
-| Team Member F | ...             |
+| Emma Friesen | 260886914 |
+| Bilar Mokhtari | 261017786 |
+| Sameer Riaz | 260985497 |
+| Antoine Phan | 260948633 |
+| Angela Zhu | 260982612 |
+| Jennifer Tram Su | 260923530 |
