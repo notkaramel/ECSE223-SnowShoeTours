@@ -7,5 +7,7 @@ public class GuideController {
     return "Not implemented!";
   }
 
-  public static void deleteGuide(String email) {}
+  public static void deleteGuide(String email) {
+    // TODO Implement the method
+  }
 }

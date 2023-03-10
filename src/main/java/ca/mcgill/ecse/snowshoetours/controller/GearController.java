@@ -16,7 +16,9 @@ public class GearController {
     return "Not implemented!";
   }
 
-  public static void deleteCombo(String name) {}
+  public static void deleteCombo(String name) {
+    // TODO Implement the method
+  }
 
   // this method does not need to be implemented by a team with five team members
   public static String addGearToCombo(String gearName, String comboName) {

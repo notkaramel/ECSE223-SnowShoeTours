@@ -8,7 +8,9 @@ public class ParticipantController {
     return "Not implemented!";
   }
 
-  public static void deleteParticipant(String email) {}
+  public static void deleteParticipant(String email) {
+     // TODO Implement the method
+  }
 
   public static String addBookableItemToParticipant(String email, String bookableItemName) {
     // TODO Implement the method, return error message (if any)
