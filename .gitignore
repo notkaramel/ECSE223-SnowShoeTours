@@ -10,3 +10,6 @@ bin
 .vscode
 
 */**/__pycache__
+
+.settings
+.project
