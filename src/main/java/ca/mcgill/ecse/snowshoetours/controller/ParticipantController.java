@@ -25,7 +25,7 @@ public class ParticipantController {
       return "Empty email.";
     } else if (email.contains(" ")) {
       return "Email must not contain any spaces.";
-    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@"))) || (email.indexOf("@") < email.lastIndexOf(".") - 1)) || (email.lastIndexOf(".") < email.length() - 1)) {
+    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
       return "Invalid email input.";
     }
     
@@ -106,7 +106,7 @@ public class ParticipantController {
       return "Empty email.";
     } else if (email.contains(" ")) {
       return "Email must not contain any spaces.";
-    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@"))) || (email.indexOf("@") < email.lastIndexOf(".") - 1)) || (email.lastIndexOf(".") < email.length() - 1)) {
+    } else if (!((email.indexOf("@") > 0) || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
       return "Invalid email input.";
     }
     
@@ -160,15 +160,15 @@ public class ParticipantController {
     } catch (Exception e) {
       return "Something went wrong!";
     }
+    return "Something went wrong!";
   }
 
   public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
-    // Input validation
     if (email == null || email.equals("")) {
       return "Empty email.";
     } else if (email.contains(" ")) {
       return "Email must not contain any spaces.";
-    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@"))) || (email.indexOf("@") < email.lastIndexOf(".") - 1)) || (email.lastIndexOf(".") < email.length() - 1)) {
+    } else if (!((email.indexOf("@") > 0) || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
       return "Invalid email input.";
     }
     
@@ -195,7 +195,7 @@ public class ParticipantController {
     
     List<BookedItem> items = participant.getBookedItems();
     boolean found = false;
-    BookedItem toRemove;
+    BookedItem toRemove = null;
 
     for (BookedItem item : items) {
       BookableItem currentItem = item.getItem();
@@ -213,10 +213,14 @@ public class ParticipantController {
 
     // Remove item
     try {
-      participant.removeBookedItem(toRemove);
-      return "";
+      if (toRemove != null) {
+        participant.removeBookedItem(toRemove);
+        return "";
+      }
+      
     } catch (Exception e) {
       return "Something went wrong!";
     }
+    return "Something went wrong!";
   }
 }
