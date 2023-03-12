@@ -59,13 +59,6 @@ public class ParticipantController {
       return "Invalid availability.";
     }
 
-    // Check if the participant exists
-    boolean p = Participant.hasWithAccountName(name);
-    
-    if (!p) {
-      return "Participant doesn't exist.";
-    } 
-
     // Check that the participant is not already registered
     Participant participant = (Participant) User.getWithAccountName(name);
     
@@ -75,8 +68,13 @@ public class ParticipantController {
 
     // Try registering participant
     try {
-      sst.addParticipant(participant);
-      return "";
+      boolean added = sst.addParticipant(participant);
+
+      if (added) {
+        return "";
+      } else {
+        return "Participant is already registered in the system.";
+      }
     } catch (Exception e) {
       return "Something went wrong!";
     }
