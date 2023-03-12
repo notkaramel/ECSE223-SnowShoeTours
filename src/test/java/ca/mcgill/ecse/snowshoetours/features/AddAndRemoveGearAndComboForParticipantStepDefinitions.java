@@ -1,9 +1,14 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ca.mcgill.ecse.snowshoetours.model.*;
+
+import java.util.List;
+import java.util.Map;
+
 import ca.mcgill.ecse.snowshoetours.application.*;
 
 public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
@@ -34,8 +39,12 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
    */
   @Given("the following pieces of gear exist in the system \\(g7)")
   public void the_following_pieces_of_gear_exist_in_the_system_g7(io.cucumber.datatable.DataTable dataTable) {
-    
-    throw new io.cucumber.java.PendingException();
+    List<Map<String, String>> rows = dataTable.asMaps();
+    for(var row: rows) {
+      String gearName = row.get("name");
+      int pricePerWeek = Integer.parseInt(row.get("pricePerWeek"));
+      SST.addGear(gearName, pricePerWeek);
+    }
   }
 
   /**
