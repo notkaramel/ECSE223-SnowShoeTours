@@ -1,5 +1,8 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
+import java.util.List;
+import java.util.Map;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,15 +20,9 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
 	 */
   @Given("the following SnowShoeTour system exists \\(g7)")
   public void the_following_snow_shoe_tour_system_exists_g7(io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    
+    // Ensure that the system is not null
+	// This was introduced by TA Katrina from tutorial 8
     SST = SnowShoeToursApplication.getSnowShoeTour();
-
-    throw new io.cucumber.java.PendingException();
   }
 
   /**
@@ -44,7 +41,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
    */
   @Given("the following combos exist in the system \\(g7)")
   public void the_following_combos_exist_in_the_system_g7(
-      io.cucumber.datatable.DataTable dataTable) {
+		io.cucumber.datatable.DataTable dataTable) {
     // Write code here that turns the phrase above into concrete actions
     // For automatic transformation, change DataTable to one of
     // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
@@ -52,7 +49,15 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     // Double, Byte, Short, Long, BigInteger or BigDecimal.
     //
     // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+    // List<Map<String, Integer, List<String>, List<Integer>>> valueRow = dataTable;
+    List<Map<String, String>> valueRow = dataTable.asMaps();
+	for (var map : valueRow) {
+		String name = map.get("name");
+		int price = map.get("price");
+		List<String> items = map.get("items");
+		List<int> quantity = List<int>(map.get("quantity").split(","));
+
+	}
   }
 
 	/**
@@ -90,7 +95,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Bilar @bmokhtari
+	 * @author Jennifer 
 	 * @param dataTable
 	 */
   @Given("the following participants request the following pieces of gear \\(g7)")
@@ -107,7 +112,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Antoine Phan (@notkaramel)
+	 * @author Jennifer 
 	 * @param dataTable
 	 */
   @Given("the following participants request the following combos \\(g7)")
@@ -156,7 +161,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Antoine Phan (@notkaramel)
+	 * @author Sameer 
 	 * @param dataTable
 	 */
   @Then("a piece of gear or combo shall not exist with name {string} for the participant with email {string} \\(g7)")
@@ -167,7 +172,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Bilar @bmokhtari
+	 * @author Sameer
 	 * @param dataTable
 	 */
   @Then("the system shall raise the error {string} \\(g7)")
@@ -177,7 +182,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Antoine Phan (@notkaramel)
+	 * @author Angela 
 	 * @param dataTable
 	 */
   @Then("a piece of gear or combo shall exist with name {string} and quantity {string} for the participant with email {string} \\(g7)")
@@ -188,7 +193,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Bilar @bmokhtari
+	 * @author Bilar @bmokhtari OR Jennifer
 	 * @param dataTable
 	 */
   @When("the manager attempts to add a piece of gear or combo with name {string} to the participant with email {string} \\(g7)")
