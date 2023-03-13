@@ -1,7 +1,9 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,9 +11,12 @@ import io.cucumber.java.en.When;
 import ca.mcgill.ecse.snowshoetours.model.*;
 import ca.mcgill.ecse.snowshoetours.application.*;
 
+import static org.junit.Assert.*;
+
 public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
 
   SnowShoeTour SST;
+  String error;
 	
 	/**
 	 * Check if the system exists
@@ -51,13 +56,19 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     // For other transformations you can register a DataTableType.
     // List<Map<String, Integer, List<String>, List<Integer>>> valueRow = dataTable;
     List<Map<String, String>> valueRow = dataTable.asMaps();
-	for (var map : valueRow) {
-		String name = map.get("name");
-		int price = map.get("price");
-		List<String> items = map.get("items");
-		List<int> quantity = List<int>(map.get("quantity").split(","));
+    for (var map : valueRow) {
+      String name = map.get("name"); // combo name
+      int price = Integer.parseInt(map.get("price"));
+      List<String> items = Arrays.asList(map.get("items").split("\\s*,\\s*"));
+      List<Integer> quantity = Arrays.stream(map.get("quantity").split("\\s+")).map(Integer::parseInt).collect(Collectors.toList());
+      Combo combo = new Combo(name, price, SST);
 
-	}
+      for(int i = 0; i < items.size(); i++) {
+        Gear gear = new Gear(items.get(i), price, SST);
+        combo.addComboItem(quantity.get(i), SST, gear);
+      }
+      SST.addCombo(combo);
+    }
   }
 
 	/**
@@ -91,6 +102,8 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     // Double, Byte, Short, Long, BigInteger or BigDecimal.
     //
     // For other transformations you can register a DataTableType.
+    List<Map<String, String>> valueRow = dataTable.asMaps();
+
     throw new io.cucumber.java.PendingException();
   }
 
@@ -146,6 +159,8 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Then("the number of participants shall be {string} \\(g7)")
   public void the_number_of_participants_shall_be_g7(String string) {
     // Write code here that turns the phrase above into concrete actions
+
+    // assertEquals(expected, actual);
     throw new io.cucumber.java.PendingException();
   }
 
