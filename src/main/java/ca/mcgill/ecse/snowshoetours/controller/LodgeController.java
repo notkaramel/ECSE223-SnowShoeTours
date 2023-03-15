@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.snowshoetours.controller;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+import ca.mcgill.ecse.snowshoetours.model.Guide;
 import ca.mcgill.ecse.snowshoetours.model.Lodge;
 import ca.mcgill.ecse.snowshoetours.model.Lodge.LodgeRating;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
@@ -46,5 +47,15 @@ public class LodgeController {
   
 
   // this method only needs to be implemented by a team with seven team members
-  public static void deleteLodge(String name) {}
+  public static void deleteLodge(String name) {
+	  // ADD VALIDATION
+	  if (Lodge.hasWithName(name)) {
+		  try {sst.removeLodge(Lodge.getWithName(name));
+		  Lodge.getWithName(name).delete(); // VERFIY IF THIS IS REQUIRED
+	  }
+		  catch (Exception e) {
+		  }
+		  }
+	  
+  }
 }

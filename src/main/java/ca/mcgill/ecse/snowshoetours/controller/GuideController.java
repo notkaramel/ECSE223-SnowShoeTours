@@ -51,6 +51,7 @@ public class GuideController {
   }
 
   public static void deleteGuide(String email) {
+	  // ADD DATA VALIDATION
 	  if (Guide.hasWithAccountName(email)) {
 		  try {sst.removeGuide((Guide) Guide.getWithAccountName(email));
 	  }
