@@ -62,12 +62,12 @@ public class SnowShoeTourController {
 						}
 					}	
 					
-					bookableitems = bookableitems+((single_cost * num_item)-discount);
+					bookableitems = (int)(bookableitems+((single_cost * num_item)-(bookableitems+((single_cost * num_item))*discount*0.001)));
 				}
 				
 				
 				//Calculate the total cost of the trip for a single participant 
-				int totalcost = (int) ((bookableitems + tour_cost)*(participant.getRefundedPercentageAmount()*0.001)); 
+				int totalcost = (int) ((bookableitems+tour_cost)-((bookableitems + tour_cost)*(participant.getRefundedPercentageAmount()*0.001))); 
 				//Adding the info to the list of participants
 				participants.set(p, new TOParticipantCost(participant.getAccountName(),participant.getName(),bookableitems,totalcost));
 				
