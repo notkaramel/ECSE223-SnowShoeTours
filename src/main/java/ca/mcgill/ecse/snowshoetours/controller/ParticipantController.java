@@ -22,23 +22,23 @@ public class ParticipantController {
     
     // Input validation
     if (email == null || email.equals("")) {
-      return "Empty email.";
+      return "Email cannot be empty";
     } else if (email.contains(" ")) {
-      return "Email must not contain any spaces.";
+      return "Invalid email";
     } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
-      return "Invalid email input.";
+      return "Invalid email";
     }
     
     if (password == null || password.equals("")) {
-      return "Empty password.";
+      return "Password cannot be empty";
     }
     
     if (name == null || name.equals("")) {
-      return "Empty name.";
+      return "Name cannot be empty";
     }
     
     if (emergencyContact == null || emergencyContact.equals("")) {
-      return "Empty emergency contact.";
+      return "Emergency contact cannot be empty";
     }
     
     if (nrWeeks < 0) {
@@ -63,18 +63,13 @@ public class ParticipantController {
     Participant participant = (Participant) User.getWithAccountName(name);
     
     if (sst.getParticipants().contains(participant)) {
-      return "Participant is already registered.";
+      return "Email already linked to a participant account";
     }
 
     // Try registering participant
     try {
-      boolean added = sst.addParticipant(participant);
-
-      if (added) {
-        return "";
-      } else {
-        return "Participant is already registered in the system.";
-      }
+      sst.addParticipant(name, password, name, emergencyContact, nrWeeks, weekAvailableFrom, weekAvailableUntil, lodgeRequired, "", 0); // code is empty, refund set to 0
+      return "";
     } catch (Exception e) {
       return "Something went wrong!";
     }
@@ -101,11 +96,11 @@ public class ParticipantController {
   public static String addBookableItemToParticipant(String email, String bookableItemName) {
     // Input validation
     if (email == null || email.equals("")) {
-      return "Empty email.";
+      return "Email cannot be empty";
     } else if (email.contains(" ")) {
-      return "Email must not contain any spaces.";
-    } else if (!((email.indexOf("@") > 0) || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
-      return "Invalid email input.";
+      return "Invalid email";
+    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
+      return "Invalid email";
     }
     
     if (bookableItemName == null || bookableItemName.equals("")) {
@@ -116,7 +111,7 @@ public class ParticipantController {
     boolean p = Participant.hasWithAccountName(email);
     
     if (!p) {
-      return "Participant doesn't exist.";
+      return "The participant does not exist";
     }
     
     Participant participant = (Participant) User.getWithAccountName(email);
@@ -125,7 +120,7 @@ public class ParticipantController {
     boolean b = BookableItem.hasWithName(bookableItemName);
 
     if (!b) {
-      return "Bookable item doesn't exist.";
+      return "The piece of gear or combo does not exist";
     }
 
     try {
@@ -133,27 +128,44 @@ public class ParticipantController {
       if (BookableItem.getWithName(bookableItemName) instanceof Gear) {
         Gear gear = (Gear) BookableItem.getWithName(bookableItemName);
         
-        // Assume quantity is one?
-        BookedItem booked = participant.addBookedItem(1, sst, gear);
-        boolean added = participant.addBookedItem(booked);
-        
-        if (added) {
-          return "";
-        } else {
-          return "Gear already booked.";
-        }
+          // Check if participant has booked item
+          List<BookedItem> items = participant.getBookedItems();
+          boolean found = false;
+
+          for (BookedItem item : items) {
+            BookableItem currentItem = item.getItem();
+            String name = currentItem.getName();
+
+            if (bookableItemName.equals(name)) {
+              found = true;
+              item.setQuantity(item.getQuantity() + 1); // Increase by one
+              break;
+            }
+          }
+
+          if (!found) {
+            participant.addBookedItem(1, sst, gear);
+          }
       } else if (BookableItem.getWithName(bookableItemName) instanceof Combo) {
         Combo combo = (Combo) BookableItem.getWithName(bookableItemName);
         
-        // Quantity is one?
-        BookedItem booked = participant.addBookedItem(1, sst, combo);
-        boolean added = participant.addBookedItem(booked);
-        
-        if (added) {
-          return "";
-        } else {
-          return "Combo already booked.";
-        }
+        List<BookedItem> items = participant.getBookedItems();
+          boolean found = false;
+
+          for (BookedItem item : items) {
+            BookableItem currentItem = item.getItem();
+            String name = currentItem.getName();
+
+            if (bookableItemName.equals(name)) {
+              found = true;
+              item.setQuantity(item.getQuantity() + 1); // Increase by one
+              break;
+            }
+          }
+
+          if (!found) {
+            participant.addBookedItem(1, sst, combo);
+          }
       }
     } catch (Exception e) {
       return "Something went wrong!";
@@ -163,11 +175,11 @@ public class ParticipantController {
 
   public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
     if (email == null || email.equals("")) {
-      return "Empty email.";
+      return "Email cannot be empty";
     } else if (email.contains(" ")) {
-      return "Email must not contain any spaces.";
-    } else if (!((email.indexOf("@") > 0) || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
-      return "Invalid email input.";
+      return "Invalid email";
+    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
+      return "Invalid email";
     }
     
     if (bookableItemName == null || bookableItemName.equals("")) {
@@ -178,7 +190,7 @@ public class ParticipantController {
     boolean p = Participant.hasWithAccountName(email);
     
     if (!p) {
-      return "Participant doesn't exist.";
+      return "The participant does not exist";
     }
     
     // Check if bookable item exists
