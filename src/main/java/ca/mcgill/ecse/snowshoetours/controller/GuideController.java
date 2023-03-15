@@ -3,6 +3,7 @@ package ca.mcgill.ecse.snowshoetours.controller;
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.Guide;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
+import ca.mcgill.ecse.snowshoetours.model.User;
 
 public class GuideController {
 	private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
@@ -51,9 +52,8 @@ public class GuideController {
   }
 
   public static void deleteGuide(String email) {
-	  // ADD DATA VALIDATION
 	  if (Guide.hasWithAccountName(email)) {
-		  try {sst.removeGuide((Guide) Guide.getWithAccountName(email));
+		  try { User.getWithAccountName(email).delete();
 	  }
 		  catch (Exception e) {
 		  }
