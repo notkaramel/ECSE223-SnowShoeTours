@@ -103,8 +103,22 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     //
     // For other transformations you can register a DataTableType.
     List<Map<String, String>> valueRow = dataTable.asMaps();
+    for (var map : valueRow) {
+      String email = map.get("email");
+      String password = map.get("password");
+      String name = map.get("name");
+      String emergencyContact = map.get("emergencyContact");
+      int nrWeeks = Integer.parseInt(map.get("nrWeeks"));
+      int weeksAvailableFrom = Integer.parseInt(map.get("weeksAvailableFrom"));
+      int weeksAvailableUntil = Integer.parseInt(map.get("weeksAvailableUntil"));
+      boolean lodgeRequired = Boolean.parseBoolean(map.get("lodgeRequired"));
+      
+      String aAuthorizationCode = "";
+      int aRefundedPercentageAmount = 0;
+      SST.addParticipant(email, password, name, emergencyContact, nrWeeks, weeksAvailableFrom, weeksAvailableUntil, lodgeRequired, aAuthorizationCode, aRefundedPercentageAmount);
+    }
 
-    throw new io.cucumber.java.PendingException();
+    // throw new io.cucumber.java.PendingException();
   }
 
 	/**
@@ -158,10 +172,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
 	 */
   @Then("the number of participants shall be {string} \\(g7)")
   public void the_number_of_participants_shall_be_g7(String string) {
-    // Write code here that turns the phrase above into concrete actions
-
-    // assertEquals(expected, actual);
-    throw new io.cucumber.java.PendingException();
+    assertEquals(Integer.parseInt(string), SST.numberOfParticipants());
   }
 
 	/**
