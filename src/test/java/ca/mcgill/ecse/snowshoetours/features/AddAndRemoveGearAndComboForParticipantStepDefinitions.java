@@ -1,10 +1,19 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
+import java.util.List;
+
+import ca.mcgill.ecse.snowshoetours.model.BookedItem;
+import ca.mcgill.ecse.snowshoetours.model.Participant;
+import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
+	
+	SnowShoeTour SST;
+	
+	
   @Given("the following SnowShoeTour system exists \\(g7)")
   public void the_following_snow_shoe_tour_system_exists_g7(
       io.cucumber.datatable.DataTable dataTable) {
@@ -119,14 +128,27 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Then("a piece of gear or combo shall not exist with name {string} for the participant with email {string} \\(g7)")
   public void a_piece_of_gear_or_combo_shall_not_exist_with_name_for_the_participant_with_email_g7(
       String string, String string2) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+	  List<Participant> list = SST.getParticipants();
+	  
+	  Participant selected_participant;
+	  
+	  for (Participant p: list) {
+		  if (p.getAccountName() == string2) {
+			  selected_participant = p;
+		  }
+	  }
+	  for (BookedItem b: selected_participant.getBookedItems()) {
+		  if (b.getItem().getName() == string) {
+			  assert(false);
+		  }
+	  }
+	  assert(true);
+    
   }
 
   @Then("the system shall raise the error {string} \\(g7)")
   public void the_system_shall_raise_the_error_g7(String string) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    assertEquals(error, string);
   }
 
   @Then("a piece of gear or combo shall exist with name {string} and quantity {string} for the participant with email {string} \\(g7)")
