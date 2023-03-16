@@ -272,12 +272,14 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Bilar @bmokhtari OR Jennifer
-	 * @param dataTable
-	 */
-  @When("the manager attempts to add a piece of gear or combo with name {string} to the participant with email {string} \\(g7)")
+   * @author Bilar @bmokhtari OR Jennifer
+   * @param dataTable
+   */
+  @When("the manager attempts to add a piece of gear or combo with name {gear} to the participant with email {email} \\(g7)")
   public void the_manager_attempts_to_add_a_piece_of_gear_or_combo_with_name_to_the_participant_with_email_g7(
-      String string, String string2) {
-  throw new io.cucumber.java.PendingException();
-      }
+      String email, String gear) {
+    // Write code here that turns the phrase above into concrete actions
+
+    error = ParticipantController.addBookableItemToParticipant(email, gear);
+  }
 }
