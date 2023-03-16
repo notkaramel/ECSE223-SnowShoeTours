@@ -1,19 +1,26 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import ca.mcgill.ecse.snowshoetours.model.*;
-
-import java.util.List;
-import java.util.Map;
-
 import ca.mcgill.ecse.snowshoetours.application.*;
+import ca.mcgill.ecse.snowshoetours.controller.ParticipantController;
+import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
+
+import static org.junit.Assert.*;
 
 public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
 
   SnowShoeTour SST;
+  String error;
+
 	
 	/**
 	 * Check if the system exists
@@ -22,15 +29,9 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
 	 */
   @Given("the following SnowShoeTour system exists \\(g7)")
   public void the_following_snow_shoe_tour_system_exists_g7(io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    
+    // Ensure that the system is not null
+	// This was introduced by TA Katrina from tutorial 8
     SST = SnowShoeToursApplication.getSnowShoeTour();
-
-    throw new io.cucumber.java.PendingException();
   }
 
   /**
@@ -40,7 +41,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Given("the following pieces of gear exist in the system \\(g7)")
   public void the_following_pieces_of_gear_exist_in_the_system_g7(io.cucumber.datatable.DataTable dataTable) {
     List<Map<String, String>> rows = dataTable.asMaps();
-    for(var row: rows) {
+    for(var row: rows) { // Goes through each row of the datatable and checks if they each have a name and a price per week
       String gearName = row.get("name");
       int pricePerWeek = Integer.parseInt(row.get("pricePerWeek"));
       SST.addGear(gearName, pricePerWeek);
@@ -53,7 +54,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
    */
   @Given("the following combos exist in the system \\(g7)")
   public void the_following_combos_exist_in_the_system_g7(
-      io.cucumber.datatable.DataTable dataTable) {
+		io.cucumber.datatable.DataTable dataTable) {
     // Write code here that turns the phrase above into concrete actions
     // For automatic transformation, change DataTable to one of
     // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
@@ -61,7 +62,21 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     // Double, Byte, Short, Long, BigInteger or BigDecimal.
     //
     // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+    // List<Map<String, Integer, List<String>, List<Integer>>> valueRow = dataTable;
+    List<Map<String, String>> valueRow = dataTable.asMaps();
+    for (var map : valueRow) {
+      String name = map.get("name"); // combo name
+      int price = Integer.parseInt(map.get("price"));
+      List<String> items = Arrays.asList(map.get("items").split("\\s*,\\s*"));
+      List<Integer> quantity = Arrays.stream(map.get("quantity").split("\\s+")).map(Integer::parseInt).collect(Collectors.toList());
+      Combo combo = new Combo(name, price, SST);
+
+      for(int i = 0; i < items.size(); i++) {
+        Gear gear = new Gear(items.get(i), price, SST);
+        combo.addComboItem(quantity.get(i), SST, gear);
+      }
+      SST.addCombo(combo);
+    }
   }
 
 	/**
@@ -71,15 +86,15 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Given("the following guides exist in the system \\(g7)")
   public void the_following_guides_exist_in_the_system_g7(
       io.cucumber.datatable.DataTable dataTable) {
-    // Write code here that turns the phrase above into concrete actions
-    // For automatic transformation, change DataTable to one of
-    // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-    // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-    // Double, Byte, Short, Long, BigInteger or BigDecimal.
-    //
-    // For other transformations you can register a DataTableType.
-    throw new io.cucumber.java.PendingException();
+    List<Map<String, String>> rows = dataTable.asMaps();
+    for (var row : rows) { // Goes row by row and collects the guide's information from the table
+      String email = row.get("email"); // sets variables and details associated with the guide
+      String password = row.get("password");
+      String guideName = row.get("name");
+      String emergencyContact = row.get("emergencyContact");
+      SST.addGuide(email,password,guideName,emergencyContact);//Creates the guide
   }
+}
 
   	/**
 	 * @author Antoine Phan (@notkaramel)
@@ -95,11 +110,13 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     // Double, Byte, Short, Long, BigInteger or BigDecimal.
     //
     // For other transformations you can register a DataTableType.
+    List<Map<String, String>> valueRow = dataTable.asMaps();
+
     throw new io.cucumber.java.PendingException();
   }
 
 	/**
-	 * @author Bilar @bmokhtari
+	 * @author Jennifer 
 	 * @param dataTable
 	 */
   @Given("the following participants request the following pieces of gear \\(g7)")
@@ -116,7 +133,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Antoine Phan (@notkaramel)
+	 * @author Jennifer 
 	 * @param dataTable
 	 */
   @Given("the following participants request the following combos \\(g7)")
@@ -140,7 +157,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   public void the_manager_attempts_to_remove_a_piece_of_gear_or_combo_with_name_from_the_participant_with_email_g7(
       String string, String string2) {
     // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+   ParticipantController.removeBookableItemFromParticipant(string, string2); // This line calls a static method removeBookableItemFromParticipant() in the ParticipantController class, passing two strings as parameters. 
   }
 
 	/**
@@ -150,6 +167,8 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Then("the number of participants shall be {string} \\(g7)")
   public void the_number_of_participants_shall_be_g7(String string) {
     // Write code here that turns the phrase above into concrete actions
+
+    // assertEquals(expected, actual);
     throw new io.cucumber.java.PendingException();
   }
 
@@ -161,11 +180,15 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   public void the_number_of_pieces_of_gear_or_combos_for_the_participant_with_email_shall_be_g7(
       String string, String string2) {
     // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    Participant emailPart = (Participant) Participant.getWithAccountName(string); //This line retrieves a participant object with the given account name (stored in the string variable) and assigns it to the emailPart
+    if (emailPart == null) {
+      throw new AssertionError("The participant isn't registered in the system"); //This line checks if the emailPart variable is null. If it is, then it throws an AssertionError with the message "The participant isn't registered in the system". 
+    }
+    assertEquals(Integer.parseInt(string2), emailPart.getBookedItems().size()); // This line checks if the size of the bookedItems list of the emailPart participant object is equal to the integer value of string2 (which is presumably a string representation of an integer). 
   }
 
 	/**
-	 * @author Antoine Phan (@notkaramel)
+	 * @author Sameer 
 	 * @param dataTable
 	 */
   @Then("a piece of gear or combo shall not exist with name {string} for the participant with email {string} \\(g7)")
@@ -176,7 +199,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Bilar @bmokhtari
+	 * @author Sameer
 	 * @param dataTable
 	 */
   @Then("the system shall raise the error {string} \\(g7)")
@@ -186,7 +209,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Antoine Phan (@notkaramel)
+	 * @author Angela 
 	 * @param dataTable
 	 */
   @Then("a piece of gear or combo shall exist with name {string} and quantity {string} for the participant with email {string} \\(g7)")
@@ -197,13 +220,12 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   }
 
 	/**
-	 * @author Bilar @bmokhtari
+	 * @author Bilar @bmokhtari OR Jennifer
 	 * @param dataTable
 	 */
   @When("the manager attempts to add a piece of gear or combo with name {string} to the participant with email {string} \\(g7)")
   public void the_manager_attempts_to_add_a_piece_of_gear_or_combo_with_name_to_the_participant_with_email_g7(
       String string, String string2) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-  }
+  throw new io.cucumber.java.PendingException();
+      }
 }
