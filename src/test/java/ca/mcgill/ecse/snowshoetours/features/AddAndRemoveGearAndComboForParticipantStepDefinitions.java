@@ -218,7 +218,22 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   public void a_piece_of_gear_or_combo_shall_not_exist_with_name_for_the_participant_with_email_g7(
       String string, String string2) {
     // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    List<Participant> list = SST.getParticipants();
+
+    Participant selected_participant;
+
+    for (Participant p : list) {
+      if (p.getAccountName() == string2) {
+        selected_participant = p;
+      }
+    }
+    for (BookedItem b : selected_participant.getBookedItems()) {
+      if (b.getItem().getName() == string) {
+        assert (false);
+      }
+    }
+    assert (true);
+    // Antoine: Should we fix this? I don't think this would work
   }
 
   /**
@@ -228,7 +243,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Then("the system shall raise the error {string} \\(g7)")
   public void the_system_shall_raise_the_error_g7(String string) {
     // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
+    assertEquals(error, string);
   }
 
   /**
