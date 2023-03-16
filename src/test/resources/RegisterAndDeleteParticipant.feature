@@ -1,4 +1,4 @@
-Feature: Register and Update Participant (g1)
+Feature: Register and Delete Participant (g1)
 As a participant, I want to register and update my participant account so that I can take a snowshoe tours
 
 Background:

@@ -1,4 +1,4 @@
-Feature: Add and Update Combo (g4)
+Feature: Add and Delete Combo (g4)
 As a manager, I want to add and update combos so that participants can rent them
 
 Background:

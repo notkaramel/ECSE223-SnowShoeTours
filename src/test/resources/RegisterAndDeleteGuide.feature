@@ -1,4 +1,4 @@
-Feature: Register and Update Guide (g6)
+Feature: Register and Delete Guide (g6)
 As a guide, I want to register and update my guide account so that I can work on snowshoe tours
 
 Background:

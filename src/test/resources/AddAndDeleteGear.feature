@@ -1,4 +1,4 @@
-Feature: Add and Update Gear (g5)
+Feature: Add and Delete Gear (g5)
 As a manager, I want to add and update pieces of gear so that participants can rent them
 
 Background:
