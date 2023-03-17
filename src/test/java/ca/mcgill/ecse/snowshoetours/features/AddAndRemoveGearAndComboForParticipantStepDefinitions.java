@@ -220,20 +220,24 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     // Write code here that turns the phrase above into concrete actions
     List<Participant> list = SST.getParticipants();
 
-    Participant selected_participant;
-
     for (Participant p : list) {
-      if (p.getAccountName() == string2) {
-        selected_participant = p;
+      if (p.getAccountName() == string2)
+      {
+        for (BookedItem b : p.getBookedItems()) {
+          assertNotEquals(b.getItem().getName(), string);
+        }
+        return; // break out of the for loop since email is unique
       }
     }
-    for (BookedItem b : selected_participant.getBookedItems()) {
-      if (b.getItem().getName() == string) {
-        assert (false);
-      }
-    }
-    assert (true);
-    // Antoine: Should we fix this? I don't think this would work
+    // Did not found the participant
+    assertFalse("Error: Participant not exists in the system", true);
+    
+
+      // if (b.getItem().getName() == string) {
+        
+      //   assert (false);
+      // }
+    // assert (true);
   }
 
   /**
