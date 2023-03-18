@@ -1,6 +1,7 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
 import java.util.Arrays;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,6 +32,19 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     // Ensure that the system is not null
     // This was introduced by TA Katrina from tutorial 8
     SST = SnowShoeToursApplication.getSnowShoeTour();
+    
+    //  {startDate, nrWeeks, priceOfGuidePerWeek}
+    List<Map<String, String>> rows = dataTable.asMaps();
+    
+    for (var row : rows) {
+      Date startDate = Date.valueOf(row.get("startDate"));      
+      int nrWeeks = Integer.parseInt(row.get("nrWeeks"));
+      int pricePerGuidePerWeek = Integer.parseInt(row.get("priceOfGuidePerWeek"));
+
+      SST.setStartDate(startDate);
+      SST.setNrWeeks(nrWeeks);
+      SST.setPriceOfGuidePerWeek(pricePerGuidePerWeek);
+    }
   }
 
   /**
@@ -65,17 +79,31 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     List<Map<String, String>> valueRow = dataTable.asMaps();
     for (var map : valueRow) {
       String name = map.get("name"); // combo name
-      int price = Integer.parseInt(map.get("price"));
+      int price = Integer.parseInt(map.get("discount"));
       List<String> items = Arrays.asList(map.get("items").split("\\s*,\\s*"));
-      List<Integer> quantity = Arrays.stream(map.get("quantity").split("\\s+")).map(Integer::parseInt)
+      List<Integer> quantity = Arrays.stream(map.get("quantity").split(",")).map(Integer::parseInt)
           .collect(Collectors.toList());
       Combo combo = new Combo(name, price, SST);
 
+      //for (int i = 0; i < items.size(); i++) {
+      //  Gear gear = SST.get
+      //  combo.addComboItem(quantity.get(i), SST, gear);
+      //}
+      
+      // Traverse to find gear in system
+      List<Gear> gears = SST.getGear();
+      
       for (int i = 0; i < items.size(); i++) {
-        Gear gear = new Gear(items.get(i), price, SST);
-        combo.addComboItem(quantity.get(i), SST, gear);
+        String gearName = items.get(i);
+        Gear gear;
+        for (int j = 0; j < gears.size(); j++) {
+          if (gearName.equals(gears.get(j).getName())) {
+            gear = gears.get(i);
+            combo.addComboItem(quantity.get(i), SST, gear);
+          }
+        }
+        SST.addCombo(combo);
       }
-      SST.addCombo(combo); // Jen: I believe this is already called in the addComboItem method
     }
   }
 
