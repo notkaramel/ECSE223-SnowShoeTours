@@ -7,6 +7,7 @@ import ca.mcgill.ecse.snowshoetours.model.BookableItem;
 import ca.mcgill.ecse.snowshoetours.model.BookedItem;
 import ca.mcgill.ecse.snowshoetours.model.Combo;
 import ca.mcgill.ecse.snowshoetours.model.Gear;
+import ca.mcgill.ecse.snowshoetours.model.Guide;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.User;
@@ -98,7 +99,6 @@ public class ParticipantController {
     }
   }
   
-  // FOLLOW UP, does this mean we're turning bookable item into a booked item
   public static String addBookableItemToParticipant(String email, String bookableItemName) {
     // Input validation
     if (email == null || email.equals("")) {
@@ -116,14 +116,21 @@ public class ParticipantController {
     }
     
     if (bookableItemName == null || bookableItemName.equals("")) {
-      return "Empty bookable item name.";
+      return "The piece of gear or combo does not exist";
     }
     
     // Check that participant exists
-    boolean p = Participant.hasWithAccountName(email);
+    boolean p = User.hasWithAccountName(email);
     
     if (!p) {
       return "The participant does not exist";
+    }
+    
+    // Check that User is not a Guide
+    for (Guide guide : sst.getGuides() ) {
+      if (guide.getAccountName().equals(email)) { // Guide found
+        return "The participant does not exist";
+      }
     }
     
     Participant participant = (Participant) User.getWithAccountName(email);
@@ -151,10 +158,8 @@ public class ParticipantController {
             if (bookableItemName.equals(name)) {
               found = true;
               item.setQuantity(item.getQuantity() + 1); // Increase by one
-              break;
             }
           }
-
           if (!found) {
             participant.addBookedItem(1, sst, gear);
           }
@@ -174,15 +179,14 @@ public class ParticipantController {
               break;
             }
           }
-
-          if (!found) {
+          if (!found) { // BookedItem for Gear doesn't exist yet
             participant.addBookedItem(1, sst, combo);
           }
       }
+      return "";
     } catch (Exception e) {
       return "Something went wrong!";
     }
-    return "Something went wrong!";
   }
 
   public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
@@ -206,11 +210,20 @@ public class ParticipantController {
     }
     
     // Check if participant exists
-    boolean p = Participant.hasWithAccountName(email);
+    boolean p = User.hasWithAccountName(email);
     
     if (!p) {
       return "The participant does not exist";
     }
+    
+    // Check that User is not a Guide
+    for (Guide guide : sst.getGuides() ) {
+      if (guide.getAccountName().equals(email)) { // Guide found
+        return "The participant does not exist";
+      }
+    }
+    
+    Participant participant = (Participant) User.getWithAccountName(email);
     
     // Check if bookable item exists
     boolean b = BookableItem.hasWithName(bookableItemName);
@@ -218,38 +231,26 @@ public class ParticipantController {
     if (!b) {
       return "Bookable item doesn't exist.";
     }
-
-    // Check if participant has booked item
-    Participant participant = (Participant) User.getWithAccountName(email);
     
-    List<BookedItem> items = participant.getBookedItems();
-    boolean found = false;
-    BookedItem toRemove = null;
-
-    for (BookedItem item : items) {
-      BookableItem currentItem = item.getItem();
-      String name = currentItem.getName();
-
-      if (bookableItemName.equals(name)) {
-        found = true;
-        toRemove = item;
-      }
-    }
-
-    if (!found) {
-      return "Bookable item currently not registered with participant.";
-    }
-
-    // Remove item
     try {
-      if (toRemove != null) {
-        participant.removeBookedItem(toRemove);
-        return "";
-      }
+      // Check if participant has booked item and check for quantity
+      List<BookedItem> items = participant.getBookedItems();
       
+      for (BookedItem item : items) {
+        BookableItem currentItem = item.getItem();
+        String name = currentItem.getName();
+
+        if (bookableItemName.equals(name)) { // Found the booked item
+          item.setQuantity(item.getQuantity() - 1); // Decrease by one
+          
+          if (item.getQuantity() == 0) { // Quantity is zero, remove item
+            item.delete();
+          }
+        }
+      }
+      return "";
     } catch (Exception e) {
       return "Something went wrong!";
     }
-    return "Something went wrong!";
   }
 }
