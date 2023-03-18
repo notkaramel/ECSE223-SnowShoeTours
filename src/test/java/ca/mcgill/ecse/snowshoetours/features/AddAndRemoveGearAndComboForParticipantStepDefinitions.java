@@ -31,19 +31,17 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   public void the_following_snow_shoe_tour_system_exists_g7(io.cucumber.datatable.DataTable dataTable) {
     // Ensure that the system is not null
     // This was introduced by TA Katrina from tutorial 8
-    SST = SnowShoeToursApplication.getSnowShoeTour();
-    
-    //  {startDate, nrWeeks, priceOfGuidePerWeek}
-    List<Map<String, String>> rows = dataTable.asMaps();
-    
-    for (var row : rows) {
-      Date startDate = Date.valueOf(row.get("startDate"));      
-      int nrWeeks = Integer.parseInt(row.get("nrWeeks"));
-      int pricePerGuidePerWeek = Integer.parseInt(row.get("priceOfGuidePerWeek"));
+    SST = SnowShoeToursApplication.getSnowShoeTour(); // given by TA Katrina from Tutorial 8
 
-      SST.setStartDate(startDate);
+    List<Map<String, String>> rowValue = dataTable.asMaps();
+    for(var r : rowValue)
+    {
+      Date start = Date.valueOf(r.get("startDate"));
+      int nrWeeks = Integer.parseInt(r.get("nrWeeks"));
+      int price = Integer.parseInt(r.get("priceOfGuidePerWeek"));
+      SST.setStartDate(start);
       SST.setNrWeeks(nrWeeks);
-      SST.setPriceOfGuidePerWeek(pricePerGuidePerWeek);
+      SST.setPriceOfGuidePerWeek(price);
     }
   }
 
@@ -85,25 +83,17 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
           .collect(Collectors.toList());
       Combo combo = new Combo(name, price, SST);
 
-      //for (int i = 0; i < items.size(); i++) {
-      //  Gear gear = SST.get
-      //  combo.addComboItem(quantity.get(i), SST, gear);
-      //}
-      
-      // Traverse to find gear in system
-      List<Gear> gears = SST.getGear();
-      
       for (int i = 0; i < items.size(); i++) {
-        String gearName = items.get(i);
-        Gear gear;
-        for (int j = 0; j < gears.size(); j++) {
-          if (gearName.equals(gears.get(j).getName())) {
-            gear = gears.get(i);
+        // Gear gear = new Gear(items.get(i), price, SST);
+        List<Gear> listGear = SST.getGear();
+
+        for (Gear gear : listGear) {
+          if (items.get(i).equals(gear.getName())) {
             combo.addComboItem(quantity.get(i), SST, gear);
           }
         }
-        SST.addCombo(combo);
       }
+      SST.addCombo(combo);
     }
   }
 
@@ -211,7 +201,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   public void the_manager_attempts_to_remove_a_piece_of_gear_or_combo_with_name_from_the_participant_with_email_g7(
       String string, String string2) {
     // Write code here that turns the phrase above into concrete actions
-   ParticipantController.removeBookableItemFromParticipant(string, string2); // This line calls a static method removeBookableItemFromParticipant() in the ParticipantController class, passing two strings as parameters. 
+   ParticipantController.removeBookableItemFromParticipant(string2, string); // This line calls a static method removeBookableItemFromParticipant() in the ParticipantController class, passing two strings as parameters. 
   }
 
   /**
@@ -252,13 +242,14 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
       if (p.getAccountName() == string2)
       {
         for (BookedItem b : p.getBookedItems()) {
-          assertNotEquals(b.getItem().getName(), string);
+          assertNotEquals(string, b.getItem().getName());
         }
         return; // break out of the for loop since email is unique
       }
     }
     // Did not found the participant
-    assertFalse("Error: Participant not exists in the system", true);
+    //assertFalse("Error: Participant not exists in the system", true);
+    assertEquals("The participant does not exist", error);
     
 
       // if (b.getItem().getName() == string) {
@@ -275,7 +266,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Then("the system shall raise the error {string} \\(g7)")
   public void the_system_shall_raise_the_error_g7(String string) {
     // Write code here that turns the phrase above into concrete actions
-    assertEquals(error, string);
+    assertEquals(string, error);
   }
 
   /**
@@ -305,7 +296,6 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
             num = item.getQuantity();
           }
         }
-
       }
     }
     // There exists a participant with that email
@@ -313,7 +303,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
     // The participant has that item
     assertTrue(item != null);
     // The item has the correct quantity
-    assertEquals(Integer.toString(num), quantity);
+    assertEquals(quantity, Integer.toString(num));
 
     // throw new io.cucumber.java.PendingException();
   }
@@ -324,7 +314,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
    */
   @When("the manager attempts to add a piece of gear or combo with name {string} to the participant with email {string} \\(g7)")
   public void the_manager_attempts_to_add_a_piece_of_gear_or_combo_with_name_to_the_participant_with_email_g7(
-      String email, String gear) {
+      String gear, String email) {
     // Write code here that turns the phrase above into concrete actions
 
     error = ParticipantController.addBookableItemToParticipant(email, gear);
