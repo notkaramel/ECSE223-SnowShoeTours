@@ -194,7 +194,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @When("the manager attempts to remove a piece of gear or combo with name {string} from the participant with email {string} \\(g7)")
   public void the_manager_attempts_to_remove_a_piece_of_gear_or_combo_with_name_from_the_participant_with_email_g7(
       String name, String email) {
-   ParticipantController.removeBookableItemFromParticipant(email, name); // This line calls a static method removeBookableItemFromParticipant() in the ParticipantController class, passing two strings as parameters. 
+   error = ParticipantController.removeBookableItemFromParticipant(email, name); // This line calls a static method removeBookableItemFromParticipant() in the ParticipantController class, passing two strings as parameters. 
   }
 
   /**
@@ -228,6 +228,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Then("a piece of gear or combo shall not exist with name {string} for the participant with email {string} \\(g7)")
   public void a_piece_of_gear_or_combo_shall_not_exist_with_name_for_the_participant_with_email_g7(
       String name, String email) {
+        
     List<Participant> list = SST.getParticipants();
 
     for (Participant p : list) {
