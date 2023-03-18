@@ -1,5 +1,6 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.sql.Date;
 import java.util.List;
@@ -30,9 +31,8 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Given("the following SnowShoeTour system exists \\(g7)")
   public void the_following_snow_shoe_tour_system_exists_g7(io.cucumber.datatable.DataTable dataTable) {
     // Ensure that the system is not null
-    // This was introduced by TA Katrina from tutorial 8
     SST = SnowShoeToursApplication.getSnowShoeTour(); // given by TA Katrina from Tutorial 8
-
+    
     List<Map<String, String>> rowValue = dataTable.asMaps();
     for(var r : rowValue)
     {
@@ -83,10 +83,11 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
           .collect(Collectors.toList());
       Combo combo = new Combo(name, price, SST);
 
+      // looping through list of items and their quantity (same size lists)
       for (int i = 0; i < items.size(); i++) {
         // Gear gear = new Gear(items.get(i), price, SST);
         List<Gear> listGear = SST.getGear();
-
+        
         for (Gear gear : listGear) {
           if (items.get(i).equals(gear.getName())) {
             combo.addComboItem(quantity.get(i), SST, gear);
