@@ -25,7 +25,13 @@ public class ParticipantController {
       return "Email cannot be empty";
     } else if (email.contains(" ")) {
       return "Invalid email";
-    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
+    } else if (!(email.indexOf("@") > 0)) {
+      return "Invalid email";
+    } else if (email.indexOf("@") != email.lastIndexOf("@")) {
+      return "Invalid email";
+    } else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
+      return "Invalid email";
+    } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
       return "Invalid email";
     }
     
@@ -99,7 +105,13 @@ public class ParticipantController {
       return "Email cannot be empty";
     } else if (email.contains(" ")) {
       return "Invalid email";
-    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
+    } else if (!(email.indexOf("@") > 0)) {
+      return "Invalid email";
+    } else if (email.indexOf("@") != email.lastIndexOf("@")) {
+      return "Invalid email";
+    } else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
+      return "Invalid email";
+    } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
       return "Invalid email";
     }
     
@@ -174,11 +186,18 @@ public class ParticipantController {
   }
 
   public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
+    // Input validation
     if (email == null || email.equals("")) {
       return "Email cannot be empty";
     } else if (email.contains(" ")) {
       return "Invalid email";
-    } else if (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")) || (email.indexOf("@") < email.lastIndexOf(".") - 1) || (email.lastIndexOf(".") < email.length() - 1))) {
+    } else if (!(email.indexOf("@") > 0)) {
+      return "Invalid email";
+    } else if (email.indexOf("@") != email.lastIndexOf("@")) {
+      return "Invalid email";
+    } else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
+      return "Invalid email";
+    } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
       return "Invalid email";
     }
     
