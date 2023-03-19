@@ -27,19 +27,19 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
    * @param dataTable
    */
   @Given("the following SnowShoeTour system exists \\(g7)")
-  public void the_following_snow_shoe_tour_system_exists_g7(io.cucumber.datatable.DataTable dataTable) {
+  public void the_following_snow_shoe_tour_system_exists_g7(
+      io.cucumber.datatable.DataTable dataTable) {
     // Ensure that the system is not null
     SST = SnowShoeToursApplication.getSnowShoeTour(); // given by TA Katrina from Tutorial 8
-    
+
     List<Map<String, String>> rowValue = dataTable.asMaps();
-    
+
     // {startDate, nrWeeks, priceOfGuidePerWeek}
-    for(var r : rowValue)
-    {
+    for (var r : rowValue) {
       Date start = Date.valueOf(r.get("startDate"));
       int nrWeeks = Integer.parseInt(r.get("nrWeeks"));
       int price = Integer.parseInt(r.get("priceOfGuidePerWeek"));
-      
+
       SST.setStartDate(start);
       SST.setNrWeeks(nrWeeks);
       SST.setPriceOfGuidePerWeek(price);
@@ -51,11 +51,13 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
    * @param dataTable
    */
   @Given("the following pieces of gear exist in the system \\(g7)")
-  public void the_following_pieces_of_gear_exist_in_the_system_g7(io.cucumber.datatable.DataTable dataTable) {
+  public void the_following_pieces_of_gear_exist_in_the_system_g7(
+      io.cucumber.datatable.DataTable dataTable) {
     List<Map<String, String>> rows = dataTable.asMaps();
-    
+
     // {name, pricePerWeek}
-    for(var row: rows) { // Goes through each row of the datatable and checks if they each have a name and a price per week
+    for (var row : rows) { // Goes through each row of the datatable and checks if they each have a
+                           // name and a price per week
       String gearName = row.get("name");
       int pricePerWeek = Integer.parseInt(row.get("pricePerWeek"));
       SST.addGear(gearName, pricePerWeek);
@@ -68,9 +70,9 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
    */
   @Given("the following combos exist in the system \\(g7)")
   public void the_following_combos_exist_in_the_system_g7(
-		io.cucumber.datatable.DataTable dataTable) {
+      io.cucumber.datatable.DataTable dataTable) {
     List<Map<String, String>> valueRow = dataTable.asMaps();
-    
+
     // {name, discount, items, quantity}
     for (var map : valueRow) {
       String name = map.get("name"); // combo name
@@ -84,7 +86,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
       for (int i = 0; i < items.size(); i++) {
         // Gear gear = new Gear(items.get(i), price, SST);
         List<Gear> listGear = SST.getGear();
-        
+
         for (Gear gear : listGear) {
           if (items.get(i).equals(gear.getName())) {
             combo.addComboItem(quantity.get(i), SST, gear);
@@ -103,17 +105,17 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   public void the_following_guides_exist_in_the_system_g7(
       io.cucumber.datatable.DataTable dataTable) {
     List<Map<String, String>> rows = dataTable.asMaps();
-    
+
     // {email, password, name, emergencyContact}
     for (var row : rows) { // Goes row by row and collects the guide's information from the table
       String email = row.get("email"); // sets variables and details associated with the guide
       String password = row.get("password");
       String guideName = row.get("name");
       String emergencyContact = row.get("emergencyContact");
-      
-      SST.addGuide(email,password,guideName,emergencyContact);//Creates the guide
+
+      SST.addGuide(email, password, guideName, emergencyContact);// Creates the guide
+    }
   }
-}
 
   /**
    * @author Antoine Phan (@notkaramel)
@@ -123,8 +125,9 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   public void the_following_participants_exist_in_the_system_g7(
       io.cucumber.datatable.DataTable dataTable) {
     List<Map<String, String>> valueRow = dataTable.asMaps();
-    
-    // {email, password, name, emergencyContact, nrWeeks, weeksAvailableFrom, weeksAvailableUntil, lodgeRequired}
+
+    // {email, password, name, emergencyContact, nrWeeks, weeksAvailableFrom, weeksAvailableUntil,
+    // lodgeRequired}
     for (var map : valueRow) {
       String email = map.get("email");
       String password = map.get("password");
@@ -137,8 +140,8 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
 
       String aAuthorizationCode = "";
       int aRefundedPercentageAmount = 0;
-      SST.addParticipant(email, password, name, emergencyContact, nrWeeks, weeksAvailableFrom, weeksAvailableUntil,
-          lodgeRequired, aAuthorizationCode, aRefundedPercentageAmount);
+      SST.addParticipant(email, password, name, emergencyContact, nrWeeks, weeksAvailableFrom,
+          weeksAvailableUntil, lodgeRequired, aAuthorizationCode, aRefundedPercentageAmount);
     }
   }
 
@@ -194,7 +197,14 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @When("the manager attempts to remove a piece of gear or combo with name {string} from the participant with email {string} \\(g7)")
   public void the_manager_attempts_to_remove_a_piece_of_gear_or_combo_with_name_from_the_participant_with_email_g7(
       String name, String email) {
-   error = ParticipantController.removeBookableItemFromParticipant(email, name); // This line calls a static method removeBookableItemFromParticipant() in the ParticipantController class, passing two strings as parameters. 
+    error = ParticipantController.removeBookableItemFromParticipant(email, name); // This line calls
+                                                                                  // a static method
+                                                                                  // removeBookableItemFromParticipant()
+                                                                                  // in the
+                                                                                  // ParticipantController
+                                                                                  // class, passing
+                                                                                  // two strings as
+                                                                                  // parameters.
   }
 
   /**
@@ -214,11 +224,32 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   public void the_number_of_pieces_of_gear_or_combos_for_the_participant_with_email_shall_be_g7(
       String email, String num) {
     // Write code here that turns the phrase above into concrete actions
-    Participant emailPart = (Participant) Participant.getWithAccountName(email); //This line retrieves a participant object with the given account name (stored in the string variable) and assigns it to the emailPart
-    //if (emailPart == null) {
-    //  throw new AssertionError("The participant isn't registered in the system"); //This line checks if the emailPart variable is null. If it is, then it throws an AssertionError with the message "The participant isn't registered in the system". 
-    //}
-    assertEquals(Integer.parseInt(num), emailPart.getBookedItems().size()); // This line checks if the size of the bookedItems list of the emailPart participant object is equal to the integer value of string2 (which is presumably a string representation of an integer). 
+    Participant emailPart = (Participant) Participant.getWithAccountName(email); // This line
+                                                                                 // retrieves a
+                                                                                 // participant
+                                                                                 // object with the
+                                                                                 // given account
+                                                                                 // name (stored in
+                                                                                 // the string
+                                                                                 // variable) and
+                                                                                 // assigns it to
+                                                                                 // the emailPart
+    // if (emailPart == null) {
+    // throw new AssertionError("The participant isn't registered in the system"); //This line
+    // checks if the emailPart variable is null. If it is, then it throws an AssertionError with the
+    // message "The participant isn't registered in the system".
+    // }
+    assertEquals(Integer.parseInt(num), emailPart.getBookedItems().size()); // This line checks if
+                                                                            // the size of the
+                                                                            // bookedItems list of
+                                                                            // the emailPart
+                                                                            // participant object is
+                                                                            // equal to the integer
+                                                                            // value of string2
+                                                                            // (which is presumably
+                                                                            // a string
+                                                                            // representation of an
+                                                                            // integer).
   }
 
   /**
@@ -228,12 +259,11 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
   @Then("a piece of gear or combo shall not exist with name {string} for the participant with email {string} \\(g7)")
   public void a_piece_of_gear_or_combo_shall_not_exist_with_name_for_the_participant_with_email_g7(
       String name, String email) {
-        
+
     List<Participant> list = SST.getParticipants();
 
     for (Participant p : list) {
-      if (p.getAccountName() == email)
-      {
+      if (p.getAccountName() == email) {
         for (BookedItem b : p.getBookedItems()) {
           assertNotEquals(name, b.getItem().getName());
         }
@@ -241,14 +271,14 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
       }
     }
     // Did not found the participant
-    //assertFalse("Error: Participant not exists in the system", true);
-    //assertEquals("The participant does not exist", error);
-    
+    // assertFalse("Error: Participant not exists in the system", true);
+    // assertEquals("The participant does not exist", error);
 
-      // if (b.getItem().getName() == string) {
-        
-      //   assert (false);
-      // }
+
+    // if (b.getItem().getName() == string) {
+
+    // assert (false);
+    // }
     // assert (true);
   }
 
@@ -297,7 +327,7 @@ public class AddAndRemoveGearAndComboForParticipantStepDefinitions {
 
   }
 
-	/**
+  /**
    * @author Jennifer Tram Su (@jennifertramsu)
    * @param dataTable
    */
