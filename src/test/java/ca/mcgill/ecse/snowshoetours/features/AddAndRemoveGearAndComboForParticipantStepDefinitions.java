@@ -20,9 +20,6 @@ import ca.mcgill.ecse.snowshoetours.model.User;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import ca.mcgill.ecse.snowshoetours.model.*;
-import ca.mcgill.ecse.snowshoetours.application.*;
-import ca.mcgill.ecse.snowshoetours.controller.*;
 
 import static org.junit.Assert.*;
 
