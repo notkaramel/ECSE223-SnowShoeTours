@@ -29,7 +29,7 @@ public class ParticipantController {
     if (email == null || email.equals("")) {
       return "Email cannot be empty";
     } else if (email.contains(" ")) {
-      return "Invalid email";
+      return "Email must not contain any spaces";
     } else if (!(email.indexOf("@") > 0)) {
       return "Invalid email";
     } else if (email.indexOf("@") != email.lastIndexOf("@")) {
@@ -38,6 +38,18 @@ public class ParticipantController {
       return "Invalid email";
     } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
       return "Invalid email";
+    }
+
+    // Cannot have manager email
+    if (email.equals("manager@btp.com")) {
+      return "Email cannot be manager@btp.com";
+    }
+
+    // Cannot be a guide
+    for (Guide guide : sst.getGuides()) {
+      if (guide.getAccountName().equals(email)) {
+        return "Email already linked to a guide account";
+      }
     }
 
     if (password == null || password.equals("")) {
@@ -52,36 +64,37 @@ public class ParticipantController {
       return "Emergency contact cannot be empty";
     }
 
-    if (nrWeeks < 0) {
-      return "Number of weeks must be greater than zero.";
-    } else if (nrWeeks > sst.getNrWeeks()) {
-      return "Number of weeks cannot be greater than the tour season.";
+    if (!(nrWeeks > 0)) {
+      return "Number of weeks must be greater than zero";
+    } else if (!(nrWeeks <= sst.getNrWeeks())) {
+      return "Number of weeks must be less than or equal to the number of biking weeks in the biking season";
     }
+    
+    if (!(weekAvailableFrom > 0) || !(weekAvailableFrom <= sst.getNrWeeks()) || !(weekAvailableUntil > 0) 
+            || !(weekAvailableUntil <= sst.getNrWeeks())) {
+          return "Available weeks must be within weeks of biking season (1-10)";
+        }
+    
+    if (!(weekAvailableFrom <= weekAvailableUntil)) {
+        return "Week from which one is available must be less than or equal to the week until which one is available";
+      }
 
-    if (weekAvailableUntil - weekAvailableFrom < nrWeeks - 1) {
-      return "Invalid availability.";
-    }
-
-    if (weekAvailableFrom > weekAvailableUntil) {
-      return "Invalid availability.";
-    }
-
-    if (weekAvailableFrom < 0 || weekAvailableFrom > sst.getNrWeeks() || weekAvailableUntil < 0
-        || weekAvailableUntil > sst.getNrWeeks()) {
-      return "Invalid availability.";
+    if (!(weekAvailableUntil - weekAvailableFrom >= nrWeeks - 1)) {
+      return "Number of weeks must be less than or equal to the number of available weeks";
     }
 
     // Check that the participant is not already registered
-    Participant participant = (Participant) User.getWithAccountName(name);
+    Participant participant = (Participant) User.getWithAccountName(email);
 
-    if (sst.getParticipants().contains(participant)) {
+    if (participant != null) {
       return "Email already linked to a participant account";
     }
 
     // Try registering participant
     try {
-      sst.addParticipant(name, password, name, emergencyContact, nrWeeks, weekAvailableFrom,
+      Participant participantAdded = sst.addParticipant(email, password, name, emergencyContact, nrWeeks, weekAvailableFrom,
           weekAvailableUntil, lodgeRequired, "", 0); // code is empty, refund set to 0
+        sst.addParticipant(participantAdded);
       return "";
     } catch (Exception e) {
       return "Something went wrong!";
