@@ -1,3 +1,7 @@
+/*
+ * Author: Jennifer Tram Su (@jennifertramsu)
+ */
+
 package ca.mcgill.ecse.snowshoetours.controller;
 
 import java.util.List;
