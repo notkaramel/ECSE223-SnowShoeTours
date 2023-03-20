@@ -15,4 +15,4 @@ bin
 .project
 .metadata
 .DS_Store
-.classpath
+*.classpath
