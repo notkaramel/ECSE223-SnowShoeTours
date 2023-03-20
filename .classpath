@@ -28,5 +28,30 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17/"/>
 	<classpathentry kind="con" path="org.eclipse.buildship.core.gradleclasspathcontainer"/>
+	<classpathentry kind="lib" path="C:/Users/jts/.gradle/caches/modules-2/files-2.1/io.cucumber/cucumber-java/6.6.0/a04d1a0090a8c3ef6b675a290d3f6a7940690e1d/cucumber-java-6.6.0.jar" sourcepath="C:/Users/jts/.gradle/caches/modules-2/files-2.1/io.cucumber/cucumber-java/6.6.0/3842151a297e20f4a81cdcb648725f1ce911cd1f/cucumber-java-6.6.0-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="test"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/jts/.gradle/caches/modules-2/files-2.1/io.cucumber/datatable/3.4.0/a255e2bdd603ff525ee44ad7df88746ad9dffe42/datatable-3.4.0.jar" sourcepath="C:/Users/jts/.gradle/caches/modules-2/files-2.1/io.cucumber/datatable/3.4.0/a1cead5e8c77bc08965388ced699a5bdcc9e1efd/datatable-3.4.0-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="test"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
+	<classpathentry kind="lib" path="C:/Users/jts/.gradle/caches/modules-2/files-2.1/io.cucumber/cucumber-core/6.6.0/1bcfa3db0a65a599c9d63a24b28517c250867725/cucumber-core-6.6.0.jar" sourcepath="C:/Users/jts/.gradle/caches/modules-2/files-2.1/io.cucumber/cucumber-core/6.6.0/df4e8287b4c87497248029c5834c7ad2ce4d5bd6/cucumber-core-6.6.0-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="test"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/jts/.gradle/caches/modules-2/files-2.1/io.cucumber/cucumber-junit/6.6.0/b7a30fdf9a61699421db3fb8bf19a9114c95f667/cucumber-junit-6.6.0.jar" sourcepath="C:/Users/jts/.gradle/caches/modules-2/files-2.1/io.cucumber/cucumber-junit/6.6.0/463fd5b456e73231666682a76492cf6318698428/cucumber-junit-6.6.0-sources.jar">
+		<attributes>
+			<attribute name="gradle_used_by_scope" value="test"/>
+			<attribute name="test" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin/default"/>
 </classpath>
