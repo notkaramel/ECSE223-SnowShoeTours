@@ -11,8 +11,5 @@ bin
 
 */**/__pycache__
 
-.settings
-.project
 .metadata
 .DS_Store
-*.classpath
