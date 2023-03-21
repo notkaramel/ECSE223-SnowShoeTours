@@ -8,6 +8,7 @@ import ca.mcgill.ecse.snowshoetours.model.BookedItem;
 import ca.mcgill.ecse.snowshoetours.model.Combo;
 import ca.mcgill.ecse.snowshoetours.model.Gear;
 import ca.mcgill.ecse.snowshoetours.model.Guide;
+import ca.mcgill.ecse.snowshoetours.model.Manager;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.User;
@@ -85,19 +86,42 @@ public class ParticipantController {
   }
 
   public static void deleteParticipant(String email) {
-    // Do nothing if invalid email input
-    if (email == null || email.equals("") || (email.contains(" "))
-        || (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")))
-            || (email.indexOf("@") < email.lastIndexOf(".") - 1))
-        || (email.lastIndexOf(".") < email.length() - 1)) {
-      return;
+	if(email.equals("manager")) {
+		Manager manager = new Manager("manager","manager",sst);
+      	return;
+      }  
+	// Do nothing if invalid email input
+	else if (    email == null 
+    		//the email is empty
+    		|| email.equals("") 
+    		//there is empty space
+    		|| (email.contains(" "))
+    		//if the first letter is @
+    		|| !(email.indexOf("@") > 0)
+    		//if there is more than one @
+    		|| !(email.indexOf("@") == email.lastIndexOf("@"))
+    		//if . comes before @
+            || !(email.indexOf("@") < email.lastIndexOf(".") - 1)
+            //if . is the last character
+            || !(email.lastIndexOf(".") < email.length() - 1)
+        ) {
+        
+		return;
+    // Do nothing if there is no user with that account
     } else if (!User.hasWithAccountName(email)) {
       return;
     } else {
       try {
         // Referential integrity taken care of by UMPLE
-        Participant participant = (Participant) User.getWithAccountName(email);
-        participant.delete();
+    	//Check what kind of user it is 
+        User user = User.getWithAccountName(email);
+        if (user instanceof Guide) {
+        	return;
+        	
+        }else if (user instanceof Participant) {
+        	user.delete();
+        }
+    	  
       } catch (Exception e) {
         return;
       }
