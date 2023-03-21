@@ -56,13 +56,13 @@ As a participant, I want to register and update my participant account so that I
       | user@mail.ca    | password |      | (555)555-5555    |       5 |                  2 |                  10 | false         | Name cannot be empty                                                                                 |
       | user@mail.ca    | password | User |                  |       5 |                  2 |                  10 | false         | Emergency contact cannot be empty                                                                    |
       | user@mail.ca    | password | User | (555)555-5555    |       0 |                  5 |                   8 | true          | Number of weeks must be greater than zero                                                            |
-      | user@mail.ca    | password | User | (555)555-5555    |      11 |                  5 |                   8 | true          | Number of weeks must be less than or equal to the number of biking weeks in the biking season        |
+      | user@mail.ca    | password | User | (555)555-5555    |      11 |                  5 |                   8 | true          | Number of weeks must be less than or equal to the number of snowshoe weeks in the snowshoe season        |
       | user@mail.ca    | password | User | (555)555-5555    |       3 |                  5 |                   6 | true          | Number of weeks must be less than or equal to the number of available weeks                          |
       | user@mail.ca    | password | User | (555)555-5555    |       3 |                  6 |                   5 | true          | Week from which one is available must be less than or equal to the week until which one is available |
-      | user@mail.ca    | password | User | (555)555-5555    |       3 |                  0 |                   6 | true          | Available weeks must be within weeks of biking season (1-10)                                         |
-      | user@mail.ca    | password | User | (555)555-5555    |       3 |                 11 |                   6 | true          | Available weeks must be within weeks of biking season (1-10)                                         |
-      | user@mail.ca    | password | User | (555)555-5555    |       3 |                 -1 |                   0 | true          | Available weeks must be within weeks of biking season (1-10)                                         |
-      | user@mail.ca    | password | User | (555)555-5555    |       3 |                  6 |                  11 | true          | Available weeks must be within weeks of biking season (1-10)                                         |
+      | user@mail.ca    | password | User | (555)555-5555    |       3 |                  0 |                   6 | true          | Available weeks must be within weeks of snowshoe season (1-10)                                         |
+      | user@mail.ca    | password | User | (555)555-5555    |       3 |                 11 |                   6 | true          | Available weeks must be within weeks of snowshoe season (1-10)                                         |
+      | user@mail.ca    | password | User | (555)555-5555    |       3 |                 -1 |                   0 | true          | Available weeks must be within weeks of snowshoe season (1-10)                                         |
+      | user@mail.ca    | password | User | (555)555-5555    |       3 |                  6 |                  11 | true          | Available weeks must be within weeks of snowshoe season (1-10)                                         |
 
   Scenario Outline: Delete a participant successfully
     When the manager attempts to delete the participant with email "<email>" (g1)
