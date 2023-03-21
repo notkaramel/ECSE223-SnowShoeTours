@@ -8,31 +8,38 @@ import ca.mcgill.ecse.snowshoetours.model.*;
 
 import java.util.*;
 
+//Angela 
+
 public class SnowShoeTourController {
 	private static SnowShoeTour ssts = SnowShoeToursApplication.getSnowShoeTour();
 	
   public static TOSnowShoeTour getSnowShoeTour(int id) {
-    // TODO Implement the method
+
 	//Can't find tour if there are no tours for this season
 	if(!ssts.hasTours()) {
 		return null;
 	}
 	//If there is no tour with that id (index out of range) --> no tour returned
-	if (id <= 0 || id > ssts.numberOfTours()-1 ) {
+	//id starts at 1 but index start at 0
+	if (id <= 0 || id > ssts.numberOfTours() ) {
 		return null;
 	}
 		
 	//Create a new instance of TOSnowShoeTour
 	else {
 		try {
-			Tour tour = ssts.getTour(id);
-			int tour_duration = tour.getEndWeek()-tour.getStartWeek();
+			//id-1 because getTour takes the index which starts at 0
+			Tour tour = ssts.getTour(id-1);
+			//+1 because start week 1 to end week 1 is still one week not 0
+			int tour_duration = tour.getEndWeek()-tour.getStartWeek()+1;
 			int tour_cost = ssts.getPriceOfGuidePerWeek()*(tour_duration);
+			
 			//TOParticipant Attributes --> Create a TOParticipant object for each participant registered for the tour 
 			int p_no = tour.numberOfParticipants();
 			ArrayList <TOParticipantCost> participants = new ArrayList<TOParticipantCost>();
 			for(int p = 0; p < p_no ; p++) {
 				Participant participant = tour.getParticipant(p);
+				boolean lodge_rented = participant.isLodgeRequired();
 				
 				//Calculate the total cost for bookable items for the participant
 				int bookableitems = 0;
@@ -55,21 +62,27 @@ public class SnowShoeTourController {
 						
 						//add the price of each type of item in the combo
 						//Iterating through each type of gear
-						for(int ci = 0; ci<combo.getBookedItems().size();ci ++) {
+						int num_comboItem = combo.numberOfComboItems();
+						for(int ci = 0; ci<num_comboItem;ci ++) {
 							ComboItem combo_item= combo.getComboItem(ci);
 							int num_ci = combo_item.getQuantity();
 							single_cost = single_cost + combo_item.getGear().getPricePerWeek()*tour_duration*num_ci;
 						}
+						if (lodge_rented == false) {
+							discount=0;
+						}
+						//price of a single combo
+						single_cost = (int)( single_cost - (single_cost*discount*0.01));
 					}	
-					
-					bookableitems = (int)(bookableitems+((single_cost * num_item)-(bookableitems+((single_cost * num_item))*discount*0.001)));
+					//total price of gear for one participant
+					bookableitems = (bookableitems+(single_cost * num_item));
 				}
 				
 				
 				//Calculate the total cost of the trip for a single participant 
-				int totalcost = (int) ((bookableitems+tour_cost)-((bookableitems + tour_cost)*(participant.getRefundedPercentageAmount()*0.001))); 
+				int totalcost = (bookableitems+tour_cost); 
 				//Adding the info to the list of participants
-				participants.set(p, new TOParticipantCost(participant.getAccountName(),participant.getName(),bookableitems,totalcost));
+				participants.add(p, new TOParticipantCost(participant.getAccountName(),participant.getName(),bookableitems,totalcost));
 				
 			}
 			//Instancing TOSnowShoeTour
