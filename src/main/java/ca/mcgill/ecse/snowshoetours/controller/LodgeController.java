@@ -46,7 +46,6 @@ public class LodgeController {
   }
   
 
-  // this method only needs to be implemented by a team with seven team members
   public static void deleteLodge(String name) {
 	  // ADD VALIDATION
 	  if (Lodge.hasWithName(name)) {
