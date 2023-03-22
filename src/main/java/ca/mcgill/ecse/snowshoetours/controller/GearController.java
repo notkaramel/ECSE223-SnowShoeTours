@@ -151,6 +151,13 @@ public class GearController {
 		BookableItem gear = Gear.getWithName(gearName);
 		BookableItem combo = Combo.getWithName(comboName);
 		
+		if(!(combo instanceof Combo)){
+			return "Error: The combo does not exist";
+		  }
+
+		if(!(gear instanceof Gear)){
+			return "Error: The gear does not exist";
+		  }
 		//TRY ADDING GEAR TO COMBO
 		try {
 	
@@ -185,7 +192,12 @@ public class GearController {
 		BookableItem gear = Gear.getWithName(gearName);
 		BookableItem combo = Combo.getWithName(comboName);
 		
-		
+    if(!(combo instanceof Combo)){
+      return "Error: The combo does not exist";
+    }
+    if(!(gear instanceof Gear)){
+      return "Error: The gear does not exist";
+    }
 		//TRY DELETING GEAR FROM COMBO
 		//initiate comboIndex
 		Integer comboIndex = null;
