@@ -8,12 +8,15 @@ import ca.mcgill.ecse.snowshoetours.model.*;
 
 import java.util.*;
 
-//Angela 
-
 public class SnowShoeTourController {
 	private static SnowShoeTour ssts = SnowShoeToursApplication.getSnowShoeTour();
 	
-  public static TOSnowShoeTour getSnowShoeTour(int id) {
+	/**
+	 * @author Angela Zhu @angelaxzhu
+	 * @param id
+	 * @return
+	 */
+  	public static TOSnowShoeTour getSnowShoeTour(int id) {
 
 	//Can't find tour if there are no tours for this season
 	if(!ssts.hasTours()) {
@@ -95,8 +98,15 @@ public class SnowShoeTourController {
 	  
   }
 
-  public static String updateSnowShoeTour(Date startDate, int nrWeeks, int priceOfGuidePerWeek) {
-    // TODO Implement the method, return error message (if any)
+  	/**
+	 * @author Angela Zhu @angelaxzhu
+	 * 
+	 * @param startDate
+	 * @param nrWeeks
+	 * @param priceOfGuidePerWeek
+	 * @return
+	 */
+  	public static String updateSnowShoeTour(Date startDate, int nrWeeks, int priceOfGuidePerWeek) {
 	if (nrWeeks < 0) {
 		return "The number of riding weeks must be greater than or equal to zero";
 	}

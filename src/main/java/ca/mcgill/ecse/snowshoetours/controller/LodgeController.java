@@ -8,9 +8,11 @@ import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 
 public class LodgeController {
 	private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
-  public static String addLodge(String name, String address, int nrStars) {
-    // TODO Implement the method, return error message (if any)
-	  
+
+	/**
+	 * @author: Sameer Riaz (@SRIAZ77)
+	 */
+  	public static String addLodge(String name, String address, int nrStars) {	  
 	  // check if inputs are valid
 	  if (name == "" || name == null || address == "" || address == null || nrStars < 1 || nrStars > 5) {
 		  return "Invalid Input";
@@ -45,8 +47,10 @@ public class LodgeController {
 	  }
   }
   
-
-  public static void deleteLodge(String name) {
+  	/**
+	 * @author: Sameer Riaz (@SRIAZ77)
+	 */
+  	public static void deleteLodge(String name) {
 	  // ADD VALIDATION
 	  if (Lodge.hasWithName(name)) {
 		  try {sst.removeLodge(Lodge.getWithName(name));

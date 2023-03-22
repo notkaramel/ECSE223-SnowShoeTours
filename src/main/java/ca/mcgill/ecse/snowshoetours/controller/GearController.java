@@ -182,7 +182,7 @@ public class GearController {
   /**
    * Method that adds gear to a combo
    * 
-   * @author Bilar Mokhtari
+   * @author Bilar Mokhtari @bmokhtari
    * @param gearName
    * @param comboName
    * @return
@@ -219,7 +219,7 @@ public class GearController {
   }
   /**
    * Method that deletes a gear from a combo
-   * @author Bilar Mokhtari
+   * @author Bilar Mokhtari (@bmokhtari)
    * @param gearName
    * @param comboName
    * @return
@@ -269,6 +269,13 @@ public class GearController {
 		return "";
 		
 	}
+
+	/**
+	 * @author Bilar Mokhtari (@bmokhtari)
+	 * Helper functions
+	 * @param name
+	 * @return
+	 */
 	// Checks if the combo in question is actually a type combo by using their name
 	private static boolean isCombo(String name) {
 		return BookableItem.getWithName(name) instanceof Combo;

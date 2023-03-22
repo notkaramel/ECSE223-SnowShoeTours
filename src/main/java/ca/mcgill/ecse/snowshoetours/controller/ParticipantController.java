@@ -18,7 +18,7 @@ public class ParticipantController {
   // Constructing instance of application object
   private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
 
-  /*
+  /**
    * @author Jennifer Tram Su (@jennifertramsu)
    */
   public static String registerParticipant(String email, String password, String name,
@@ -101,9 +101,12 @@ public class ParticipantController {
     }
   }
 
+  /**
+   * @author Angela Zhu @angelaxzhu
+   */
   public static void deleteParticipant(String email) {
 	if(email.equals("manager")) {
-		Manager manager = new Manager("manager","manager",sst);
+		// Manager manager = new Manager("manager","manager",sst);
       	return;
       }  
 	// Do nothing if invalid email input
@@ -144,7 +147,7 @@ public class ParticipantController {
     }
   }
 
-  /*
+  /**
    * @author Jennifer Tram Su (@jennifertramsu)
    */
   public static String addBookableItemToParticipant(String email, String bookableItemName) {
@@ -237,7 +240,7 @@ public class ParticipantController {
     }
   }
 
-  /*
+  /**
    * @author Jennifer Tram Su (@jennifertramsu)
    */
   public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
