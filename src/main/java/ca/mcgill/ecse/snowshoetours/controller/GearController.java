@@ -94,14 +94,21 @@ public class GearController {
 			return "Discount must be no more than 100"; 
 		}
 		
-		//check if gear with same name already exists 		
-		// ?????????????????????
-		if (Gear.hasWithName(name) && Gear.getWithName(name) instanceof Gear) {
-			return "A piece of gear with the same name already exists";
-		}
-		else if (Combo.hasWithName(name)) {
+		// * Check if combo with same name already exists
+		
+		// Explaining: Since Gear and Combo are both subclasses of
+		// BookableItem, using hasWithName() which only returns boolean 
+		// would not be enough for these two tests.
+
+		// So we can use getWithName() then use check `instanceof`
+		// to check if the name is already taken for the object.
+		if (Combo.getWithName(name) instanceof Combo) {
 			return "A combo with the same name already exists";
 		} 
+		// Check if gear with same name already exists 
+		else if (Gear.getWithName(name) instanceof Gear) {
+			return "A piece of gear with the same name already exists";
+		}
 
 		//TRY ADDING COMBO
 		try {
