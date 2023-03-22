@@ -133,6 +133,9 @@ public class GearController {
 		
 		//INPUT VALIDATION
 		// check if gearName or comboName inputed  null
+		//get gear and combo with gearName and comboName, respectively
+		BookableItem gear = Gear.getWithName(gearName);
+		BookableItem combo = Combo.getWithName(comboName);
 		if (gearName == null || comboName == null) {
 			return "Error: gearName and/or comboName are null";
 		}
@@ -146,18 +149,14 @@ public class GearController {
 		if (Combo.hasWithName(comboName)) {
 			return "Error: Combo with that name already exists.";
 		} 
-		
-		//get gear and combo with gearName and comboName, respectively
-		BookableItem gear = Gear.getWithName(gearName);
-		BookableItem combo = Combo.getWithName(comboName);
-		
 		if(!(combo instanceof Combo)){
-			return "Error: The combo does not exist";
+			return "The combo does not exist";
 		  }
+		  if(!(gear instanceof Gear)){
+			return "The gear does not exist";
+		  }
+		
 
-		if(!(gear instanceof Gear)){
-			return "Error: The gear does not exist";
-		  }
 		//TRY ADDING GEAR TO COMBO
 		try {
 	
@@ -174,6 +173,8 @@ public class GearController {
 		
 		//INPUT VALIDATION
 		// check if gearName or comboName inputed  null
+		BookableItem gear = Gear.getWithName(gearName);
+		BookableItem combo = Combo.getWithName(comboName);
 		if (gearName == null || comboName == null) {
 			return "Error: gearName and/or comboName are null";
 		}
@@ -187,17 +188,15 @@ public class GearController {
 		if (Combo.hasWithName(comboName)) {
 			return "Error: Combo with that name already exists.";
 		} 
+		if(!(combo instanceof Combo)){
+			return "The combo does not exist";
+		  }
+		  if(!(gear instanceof Gear)){
+			return "The gear does not exist";
+		  }
 			
-		//get gear and combo with gearName and comboName, respectively
-		BookableItem gear = Gear.getWithName(gearName);
-		BookableItem combo = Combo.getWithName(comboName);
-		
-    if(!(combo instanceof Combo)){
-      return "Error: The combo does not exist";
-    }
-    if(!(gear instanceof Gear)){
-      return "Error: The gear does not exist";
-    }
+
+
 		//TRY DELETING GEAR FROM COMBO
 		//initiate comboIndex
 		Integer comboIndex = null;
