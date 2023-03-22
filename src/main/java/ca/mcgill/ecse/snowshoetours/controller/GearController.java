@@ -13,7 +13,12 @@ public class GearController {
 	// CREATE INSTANCE OF APPLICATION OBJECT
 	private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour(); 
 	
-	
+	/**
+	 * @author Emma Friesen (@emma-friesen)
+	 * @param name
+	 * @param pricePerWeek
+	 * @return
+	 */
 	public static String addGear(String name, int pricePerWeek) {
 		
 		//INPUT VALIDATION
@@ -45,7 +50,12 @@ public class GearController {
 		}
   }
 
-
+  	/**
+	 * @author Emma Friesen (@emma-friesen)
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public static String deleteGear(String name) {
 	
 		//INPUT VALIDATION
