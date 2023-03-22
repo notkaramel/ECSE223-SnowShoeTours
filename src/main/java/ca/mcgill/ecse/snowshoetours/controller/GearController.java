@@ -42,6 +42,7 @@ public class GearController {
 		}
   }
 
+
 	public static String deleteGear(String name) {
 	
 		//INPUT VALIDATION
@@ -130,84 +131,99 @@ public class GearController {
   }
 
 	public static String addGearToCombo(String gearName, String comboName) {
-		
-		//INPUT VALIDATION
-		// check if gearName or comboName inputed  null
-		if (gearName == null || comboName == null) {
-			return "Error: gearName and/or comboName are null";
+		// checks if comboName inputs does in fact exist
+		if (!isCombo(comboName)){
+			return "The combo does not exist";
+		}
+		// checks if gearName inputs does in fact exist
+		if(!isGear(gearName)){
+			return "The piece of gear does not exist";
 		}
 		
-		//check if gear with same name already exists 
-		if (Gear.hasWithName(gearName)) {
-			return "Error: Gear with that name already exists.";
-		} 
-		
-		//check if combo with same name already exists 
-		if (Combo.hasWithName(comboName)) {
-			return "Error: Combo with that name already exists.";
-		} 
-		
 		//get gear and combo with gearName and comboName, respectively
-		BookableItem gear = Gear.getWithName(gearName);
-		BookableItem combo = Combo.getWithName(comboName);
+		Gear gear = (Gear) BookableItem.getWithName(gearName);
+		Combo combo = (Combo) BookableItem.getWithName(comboName);
+		ComboItem comboItem = getComboItem(combo, gear);
+		Integer comboIndex = null;
 		
 		//TRY ADDING GEAR TO COMBO
 		try {
-	
-			//type casting gear and combo to their appropriate classes, and adding gear to the combo
-			((Gear) gear).addComboItem(1, sst, ((Combo) combo)); 
-			return "";
-			
+      		// When we already have an instance of this gear type in the combo
+      		if (comboItem != null) {
+        	comboItem.setQuantity(comboItem.getQuantity() + 1);
+        	// When we add a gear item for the first time to the combo
+     	 	} else {
+        		combo.addComboItem(1, sst, gear);
+      	}
 		} catch(Exception e) {
 			return "Something went wrong";
 		}
+		return "";
   }
 
 	public static String removeGearFromCombo(String gearName, String comboName) {
 		
-		//INPUT VALIDATION
-		// check if gearName or comboName inputed  null
-		if (gearName == null || comboName == null) {
-			return "Error: gearName and/or comboName are null";
+
+		// checks comboName inputs does in fact exist
+		if (!isCombo(comboName)){
+			return "The combo does not exist";
+		}
+		// checks if gearName inputs does in fact exist
+		if(!isGear(gearName)){
+			return "The piece of gear does not exist";
+		}
+			
+		//get gear and combo with gearName and comboName, respectively, 
+		//then creates a comboItem using the helper method getComboItem 
+		Gear gear = (Gear) BookableItem.getWithName(gearName);
+		Combo combo = (Combo) BookableItem.getWithName(comboName);
+		ComboItem comboItem = getComboItem(combo, gear);
+		Integer comboIndex = null;
+		if (comboItem == null) {
+		  return "";
 		}
 		
-		//check if gear with same name already exists 
-		if (Gear.hasWithName(gearName)) {
-			return "Error: Gear with that name already exists.";
-		} 
-			
-		//check if combo with same name already exists 
-		if (Combo.hasWithName(comboName)) {
-			return "Error: Combo with that name already exists.";
-		} 
-			
-		//get gear and combo with gearName and comboName, respectively
-		BookableItem gear = Gear.getWithName(gearName);
-		BookableItem combo = Combo.getWithName(comboName);
 		
-		
-		//TRY DELETING GEAR FROM COMBO
-		//initiate comboIndex
-		Integer comboIndex = null;
+
 		
 		try {
-			
-			//find index of the comboItem with name in the list of comboItems, and set to comboIndex
-			for (int i=0; i < sst.getComboItems().size() ; i++) {
-				if(sst.getComboItem(i).getGear().getName() == gearName) {
-					comboIndex = i;
-					break;
+			// If there's only one instance of that gear left in the combo
+			if(comboItem.getQuantity() == 1) {
+				// Just makes sure that even after we remove that gear from the combo it will still have 2 gears left
+				if(combo.numberOfComboItems() == Combo.minimumNumberOfComboItems()) {
+					return "A combo must have at least two pieces of gear";
+				}else {
+					//If it has more than 2 left even afte we delete that gearType then we go on with the deletion
+					comboItem.delete();
 				}
+			}else {
+				//If it has more than 1 instance of that gear type we simply remove one
+				comboItem.setQuantity(comboItem.getQuantity() - 1);
 			}
-			
-			//remove comboItem
-			sst.removeComboItem(sst.getComboItem(comboIndex));
-
-			return "";
-			
-			
 		} catch(Exception e) {
 			return "Something went wrong";
 		}
+		return "";
+		
+	}
+	// Checks if the combo in question is actually a type combo by using their name
+	private static boolean isCombo(String name) {
+		return BookableItem.getWithName(name) instanceof Combo;
+ 	}
+	// Checks if the item in question is actually a type gear by using their name
+ 	private static boolean isGear(String name) {
+		return BookableItem.getWithName(name) instanceof Gear;
+ 	}
+	// Gets the specific item from a combo using the items name and the combos name by iterating through them
+	private static ComboItem getComboItem(Combo combo, Gear gear) {
+		ComboItem comboItem = null;
+		for (ComboItem item : sst.getComboItems()) {
+		  if (item.getCombo() == combo) {
+			if(item.getGear() == gear){
+				comboItem = item;
+			}
+		  }
+		}
+		return comboItem;
 	}
 }
