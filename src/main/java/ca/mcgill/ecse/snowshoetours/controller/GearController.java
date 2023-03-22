@@ -78,6 +78,12 @@ public class GearController {
 		}
   }
 	
+  	/**
+	 * @author Antoine Phan (@notkaramel)
+	 * @param name
+	 * @param discount
+	 * @return
+	 */
 	public static String addCombo(String name, int discount) { 
 		
 		// <-- Antoine's changes -->
@@ -121,6 +127,10 @@ public class GearController {
 	  		
   }
 
+  	/**
+	 * @author Antoine Phan (@notkaramel)
+	 * @param name
+	 */
 	public static void deleteCombo(String name) {
 		
 		//TRY DELETING COMBO
