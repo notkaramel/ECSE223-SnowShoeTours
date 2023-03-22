@@ -130,6 +130,14 @@ public class GearController {
 			} catch(Exception e) {}
   }
 
+  /**
+   * Method that adds gear to a combo
+   * 
+   * @author Bilar Mokhtari
+   * @param gearName
+   * @param comboName
+   * @return
+   */
 	public static String addGearToCombo(String gearName, String comboName) {
 		// checks if comboName inputs does in fact exist
 		if (!isCombo(comboName)){
@@ -160,7 +168,13 @@ public class GearController {
 		}
 		return "";
   }
-
+  /**
+   * Method that deletes a gear from a combo
+   * @author Bilar Mokhtari
+   * @param gearName
+   * @param comboName
+   * @return
+   */
 	public static String removeGearFromCombo(String gearName, String comboName) {
 		
 
