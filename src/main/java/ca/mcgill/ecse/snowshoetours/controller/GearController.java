@@ -19,17 +19,20 @@ public class GearController {
 		//INPUT VALIDATION
 		// check if name inputed is null
 		if (name == null || name.equals("")) {
-			return "Error: empty/null name";
+			return "The name must not be empty";
 		  }
 		
 		//check if pricePerWeek is less than 0
 		if (pricePerWeek < 0) {
-			return "Error: invalid price"; // TODO: are there any other ways prices can be invalid?
+			return "The price per week must be greater than or equal to 0";
 			}
 	  
-		//check if gear with same name already exists 
-		if (Gear.hasWithName(name)) {
-			return "Error: Gear with that name already exists.";
+		//check if gear or combo with same name already exists 
+		if (Gear.hasWithName(name) && Gear.getWithName(name) instanceof Gear) {
+			return "A piece of gear with the same name already exists";
+		} 
+		else if (Combo.hasWithName(name)) {
+			return "A combo with the same name already exists";
 		} 
 		
 		//TRY ADDING GEAR TO SST
@@ -46,32 +49,37 @@ public class GearController {
 	
 		//INPUT VALIDATION
 		// check if name inputed is null
-		if (name == null || name.equals("")) {// is input validation needed for deleting?
-			return "Error: empty/null name";
+		if (name == null || name.equals("")) {
+			return "The name must not be empty";
 		}
 		  
-		//check if gear with same name already exists 
+		//check if gear with same name exists 
 		if (Gear.hasWithName(name) == false) {
-			return "Error: No gear with that name exists.";
+			return "A piece of gear with the same name doesnt exists"; 
 		} 
-	  
-		//TRY DELETING GEAR
-		//initiate gearIndex
-		Integer gearIndex = null;
-	  
-		try {
+		
+		//check if gear is currently in any combo items
+		int comboIndex = sst.getCombos().size();
+		for(int i=0; i<comboIndex; i++) {
 			
-			//find index of the gear with name in the list of gear, and set to gearIndex
-			for (int i=0; i < sst.getGear().size(); i++) {
-				if(sst.getGear(i).getName() == name) {
-					gearIndex = i;
-					break;
+			int comboItemIndex = sst.getCombo(i).getComboItems().size();
+			for(int j=0; j < comboItemIndex; j++) {
+				Gear gearInCombo = sst.getCombo(i).getComboItem(j).getGear();
+				if (gearInCombo == Gear.getWithName(name)) {
+					return "The piece of gear is in a combo and cannot be deleted";
 				}
 			}
+		}
 			
-			//delete gear with name located at gearIndex
-			sst.getGear(gearIndex).delete();
-			return "";
+		
+		//TRY DELETING GEAR
+
+			try {
+					
+				Gear gear = (Gear) Gear.getWithName(name);
+				if (gear != null && Gear.getWithName(name) instanceof Gear) {
+					gear.delete();}			
+					return "";
 			  
 		} catch(Exception e) {
 			return "Error: something went wrong";
