@@ -17,99 +17,93 @@ public class GearController {
 	public static String addGear(String name, int pricePerWeek) {
 		
 		//INPUT VALIDATION
-		// check if name inputed is null
-		if (name == null || name.equals("")) {
-			return "Error: empty/null name";
-		  }
-		
-		//check if pricePerWeek is less than 0
-		if (pricePerWeek < 0) {
-			return "Error: invalid price"; // TODO: are there any other ways prices can be invalid?
-			}
-	  
-		//check if gear with same name already exists 
-		if (Gear.hasWithName(name)) {
-			return "Error: Gear with that name already exists.";
-		} 
-		
-		//TRY ADDING GEAR TO SST
-		try {
-			sst.addGear(name, pricePerWeek);
-			return "";
-			
-		} catch(Exception e) {
-			return "Error: something went wrong";
-		}
+				// check if name inputed is null
+				if (name == null || name.equals("")) {
+					return "The name must not be empty";
+				  }
+				
+				//check if pricePerWeek is less than 0
+				if (pricePerWeek < 0) {
+					return "The price per week must be greater than or equal to 0"; 
+					}
+			  
+				//check if gear or combo with same name already exists 
+				if (Gear.hasWithName(name) && Gear.getWithName(name) instanceof Gear) {
+					return "A piece of gear with the same name already exists";
+				} 
+				else if (Combo.hasWithName(name)) {
+					return "A combo with the same name already exists";
+				}
+				
+				//TRY ADDING GEAR TO SST
+				try {
+					sst.addGear(name, pricePerWeek);
+					return "";
+					
+				} catch(Exception e) {
+					return "Error: something went wrong";
+				}
   }
 
 	public static String deleteGear(String name) {
 	
 		//INPUT VALIDATION
-		// check if name inputed is null
-		if (name == null || name.equals("")) {// is input validation needed for deleting?
-			return "Error: empty/null name";
-		}
-		  
-		//check if gear with same name already exists 
-		if (Gear.hasWithName(name) == false) {
-			return "Error: No gear with that name exists.";
-		} 
-	  
-		//TRY DELETING GEAR
-		//initiate gearIndex
-		Integer gearIndex = null;
-	  
-		try {
-			
-			//find index of the gear with name in the list of gear, and set to gearIndex
-			for (int i=0; i < sst.getGear().size(); i++) {
-				if(sst.getGear(i).getName() == name) {
-					gearIndex = i;
-					break;
+				// check if name inputed is null
+				if (name == null || name.equals("")) {
+					return "The name must not be empty";
 				}
-			}
-			
-			//delete gear with name located at gearIndex
-			sst.getGear(gearIndex).delete();
-			return "";
+				  
+				//check if gear with same name exists 
+				if (Gear.hasWithName(name) == false) {
+					return "A piece of gear with the same name doesnt exists"; 
+				} 
+				
+				//check if gear is currently in any combo items
+				int comboIndex = sst.getCombos().size();
+				for(int i=0; i<comboIndex; i++) {
+					
+					int comboItemIndex = sst.getCombo(i).getComboItems().size();
+					for(int j=0; j < comboItemIndex; j++) {
+						Gear gearInCombo = sst.getCombo(i).getComboItem(j).getGear();
+						if (gearInCombo == Gear.getWithName(name)) {
+							return "The piece of gear is in a combo and cannot be deleted";
+						}
+					}
+				}
+				
 			  
-		} catch(Exception e) {
-			return "Error: something went wrong";
-		}
+				//TRY DELETING GEAR
+
+				try {
+					
+					Gear gear = (Gear) Gear.getWithName(name);
+					if (gear != null && Gear.getWithName(name) instanceof Gear) {
+						gear.delete();}
+					return "";
+					  
+				} catch(Exception e) {
+					return "Error: something went wrong";
+				}
   }
 	
 	public static String addCombo(String name, int discount) { 
 		
-		// <-- Antoine's changes -->
 		//INPUT VALIDATION
 		// check if name inputed is null
 		if (name == null || name.equals("")) {
-			return "The name must not be empty";
+			return "Error: empty/null name";
 		}
 		
 		//check if discount number is valid
-		if (discount < 0) {
-			return "Discount must be at least 0";
-		} else if(discount > 100) {
-			return "Discount must be no more than 100"; 
+		if (discount < 0 || discount > 100) {
+			return "Error: invalid "; 
 		}
 		
-		// * Check if combo with same name already exists
+		//check if gear with same name already exists 
+		if (Combo.hasWithName(name)) {
+			return "Error: Combo with that name already exists.";
+		} 	
 		
-		// Explaining: Since Gear and Combo are both subclasses of
-		// BookableItem, using hasWithName() which only returns boolean 
-		// would not be enough for these two tests.
-
-		// So we can use getWithName() then use check `instanceof`
-		// to check if the name is already taken for the object.
-		if (Combo.getWithName(name) instanceof Combo) {
-			return "A combo with the same name already exists";
-		} 
-		// Check if gear with same name already exists 
-		else if (Gear.getWithName(name) instanceof Gear) {
-			return "A piece of gear with the same name already exists";
-		}
-
 		//TRY ADDING COMBO
 		try {
 			sst.addCombo(name, discount);
@@ -125,30 +119,23 @@ public class GearController {
 		
 		//TRY DELETING COMBO
 		//initiate comboIndex
-		// Integer comboIndex = null;
+		Integer comboIndex = null;
 	  
-		// try {
+		try {
 			
-		// 	//find index of the combo with name in the list of combos, and set to comboIndex
-		// 	for (int i=0; i < sst.getCombos().size() ; i++) {
-		// 		if(sst.getCombo(i).getName() == name) {
-		// 			comboIndex = i;
-		// 			break;
-		// 		}
-		// 	}
+			//find index of the combo with name in the list of combos, and set to comboIndex
+			for (int i=0; i < sst.getCombos().size() ; i++) {
+				if(sst.getCombo(i).getName() == name) {
+					comboIndex = i;
+					break;
+				}
+			}
 			 
-		// 	//delete combo with name located at comboIndex
-		// 	sst.getCombo(comboIndex).delete();
+			//delete combo with name located at comboIndex
+			sst.getCombo(comboIndex).delete();
 				
-		// } catch(Exception e) { }
-		
-		// Antoine's reimplementation
-		Combo combo = (Combo) Combo.getWithName(name);
-		if (combo != null) {
-			combo.delete();
-		}
-
-	}
+			} catch(Exception e) {}
+  }
 
 	public static String addGearToCombo(String gearName, String comboName) {
 		
