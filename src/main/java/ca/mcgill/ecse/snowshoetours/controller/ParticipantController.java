@@ -1,7 +1,3 @@
-/*
- * Author: Jennifer Tram Su (@jennifertramsu)
- */
-
 package ca.mcgill.ecse.snowshoetours.controller;
 
 import java.util.List;
@@ -12,6 +8,7 @@ import ca.mcgill.ecse.snowshoetours.model.BookedItem;
 import ca.mcgill.ecse.snowshoetours.model.Combo;
 import ca.mcgill.ecse.snowshoetours.model.Gear;
 import ca.mcgill.ecse.snowshoetours.model.Guide;
+import ca.mcgill.ecse.snowshoetours.model.Manager;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.User;
@@ -21,6 +18,9 @@ public class ParticipantController {
   // Constructing instance of application object
   private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
 
+  /*
+   * @author Jennifer Tram Su (@jennifertramsu)
+   */
   public static String registerParticipant(String email, String password, String name,
       String emergencyContact, int nrWeeks, int weekAvailableFrom, int weekAvailableUntil,
       boolean lodgeRequired) {
@@ -29,7 +29,7 @@ public class ParticipantController {
     if (email == null || email.equals("")) {
       return "Email cannot be empty";
     } else if (email.contains(" ")) {
-      return "Invalid email";
+      return "Email must not contain any spaces";
     } else if (!(email.indexOf("@") > 0)) {
       return "Invalid email";
     } else if (email.indexOf("@") != email.lastIndexOf("@")) {
@@ -38,6 +38,18 @@ public class ParticipantController {
       return "Invalid email";
     } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
       return "Invalid email";
+    }
+
+    // Cannot have manager email
+    if (email.equals("manager@btp.com")) {
+      return "Email cannot be manager@btp.com";
+    }
+
+    // Cannot be a guide
+    for (Guide guide : sst.getGuides()) {
+      if (guide.getAccountName().equals(email)) {
+        return "Email already linked to a guide account";
+      }
     }
 
     if (password == null || password.equals("")) {
@@ -52,36 +64,37 @@ public class ParticipantController {
       return "Emergency contact cannot be empty";
     }
 
-    if (nrWeeks < 0) {
-      return "Number of weeks must be greater than zero.";
-    } else if (nrWeeks > sst.getNrWeeks()) {
-      return "Number of weeks cannot be greater than the tour season.";
+    if (!(nrWeeks > 0)) {
+      return "Number of weeks must be greater than zero";
+    } else if (!(nrWeeks <= sst.getNrWeeks())) {
+      return "Number of weeks must be less than or equal to the number of snowshoe weeks in the snowshoe season";
     }
+    
+    if (!(weekAvailableFrom > 0) || !(weekAvailableFrom <= sst.getNrWeeks()) || !(weekAvailableUntil > 0) 
+            || !(weekAvailableUntil <= sst.getNrWeeks())) {
+          return "Available weeks must be within weeks of snowshoe season (1-10)";
+        }
+    
+    if (!(weekAvailableFrom <= weekAvailableUntil)) {
+        return "Week from which one is available must be less than or equal to the week until which one is available";
+      }
 
-    if (weekAvailableUntil - weekAvailableFrom < nrWeeks - 1) {
-      return "Invalid availability.";
-    }
-
-    if (weekAvailableFrom > weekAvailableUntil) {
-      return "Invalid availability.";
-    }
-
-    if (weekAvailableFrom < 0 || weekAvailableFrom > sst.getNrWeeks() || weekAvailableUntil < 0
-        || weekAvailableUntil > sst.getNrWeeks()) {
-      return "Invalid availability.";
+    if (!(weekAvailableUntil - weekAvailableFrom >= nrWeeks - 1)) {
+      return "Number of weeks must be less than or equal to the number of available weeks";
     }
 
     // Check that the participant is not already registered
-    Participant participant = (Participant) User.getWithAccountName(name);
+    Participant participant = (Participant) User.getWithAccountName(email);
 
-    if (sst.getParticipants().contains(participant)) {
+    if (participant != null) {
       return "Email already linked to a participant account";
     }
 
     // Try registering participant
     try {
-      sst.addParticipant(name, password, name, emergencyContact, nrWeeks, weekAvailableFrom,
+      Participant participantAdded = sst.addParticipant(email, password, name, emergencyContact, nrWeeks, weekAvailableFrom,
           weekAvailableUntil, lodgeRequired, "", 0); // code is empty, refund set to 0
+        sst.addParticipant(participantAdded);
       return "";
     } catch (Exception e) {
       return "Something went wrong!";
@@ -89,25 +102,51 @@ public class ParticipantController {
   }
 
   public static void deleteParticipant(String email) {
-    // Do nothing if invalid email input
-    if (email == null || email.equals("") || (email.contains(" "))
-        || (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")))
-            || (email.indexOf("@") < email.lastIndexOf(".") - 1))
-        || (email.lastIndexOf(".") < email.length() - 1)) {
-      return;
+	if(email.equals("manager")) {
+		Manager manager = new Manager("manager","manager",sst);
+      	return;
+      }  
+	// Do nothing if invalid email input
+	else if (    email == null 
+    		//the email is empty
+    		|| email.equals("") 
+    		//there is empty space
+    		|| (email.contains(" "))
+    		//if the first letter is @
+    		|| !(email.indexOf("@") > 0)
+    		//if there is more than one @
+    		|| !(email.indexOf("@") == email.lastIndexOf("@"))
+    		//if . comes before @
+            || !(email.indexOf("@") < email.lastIndexOf(".") - 1)
+            //if . is the last character
+            || !(email.lastIndexOf(".") < email.length() - 1)
+        ) {
+        
+		return;
+    // Do nothing if there is no user with that account
     } else if (!User.hasWithAccountName(email)) {
       return;
     } else {
       try {
         // Referential integrity taken care of by UMPLE
-        Participant participant = (Participant) User.getWithAccountName(email);
-        participant.delete();
+    	//Check what kind of user it is 
+        User user = User.getWithAccountName(email);
+        if (user instanceof Guide) {
+        	return;
+        	
+        }else if (user instanceof Participant) {
+        	user.delete();
+        }
+    	  
       } catch (Exception e) {
         return;
       }
     }
   }
 
+  /*
+   * @author Jennifer Tram Su (@jennifertramsu)
+   */
   public static String addBookableItemToParticipant(String email, String bookableItemName) {
     // Input validation
     if (email == null || email.equals("")) {
@@ -198,6 +237,9 @@ public class ParticipantController {
     }
   }
 
+  /*
+   * @author Jennifer Tram Su (@jennifertramsu)
+   */
   public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
     // Input validation
     if (email == null || email.equals("")) {
