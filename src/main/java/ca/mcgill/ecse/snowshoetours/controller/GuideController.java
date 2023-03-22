@@ -6,6 +6,12 @@ import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.User;
 
+/*
+ * Author: Sameer Riaz (@SRIAZ77)
+ */
+
+
+
 public class GuideController {
 	private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
   public static String registerGuide(String email, String password, String name, String emergencyContact) {
@@ -70,8 +76,8 @@ public class GuideController {
   }
 
   public static void deleteGuide(String email) {
-	  if (User.hasWithAccountName(email)) {
-		if (Guide.getWithAccountName(email) instanceof Guide){
+	  if (User.hasWithAccountName(email)) { 
+		if (Guide.getWithAccountName(email) instanceof Guide){ // CHECK IF INPUTTED USER IS A GUIDE TO NOT REMOVE PARTICIPANT
 		  try {Guide.getWithAccountName(email).delete();
 	  }
 		  catch (Exception e) {
@@ -79,7 +85,9 @@ public class GuideController {
 		  }
 	  }
 	  if (email == "manager"){
-		
+
+		// UNCLEAR WHAT TO DO HERE; THE MANAGER SHOULD BE CREATED IN SnowShoeToursApplication.java
+
 	  }
   }
 }
