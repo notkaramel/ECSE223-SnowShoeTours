@@ -70,11 +70,16 @@ public class GuideController {
   }
 
   public static void deleteGuide(String email) {
-	  if (Guide.hasWithAccountName(email)) {
-		  try { Guide.getWithAccountName(email).delete();
+	  if (User.hasWithAccountName(email)) {
+		if (Guide.getWithAccountName(email) instanceof Guide){
+		  try {Guide.getWithAccountName(email).delete();
 	  }
 		  catch (Exception e) {
 		  }
 		  }
 	  }
+	  if (email == "manager"){
+		
+	  }
   }
+}
