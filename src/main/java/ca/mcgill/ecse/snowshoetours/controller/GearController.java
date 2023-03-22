@@ -80,22 +80,36 @@ public class GearController {
 	
 	public static String addCombo(String name, int discount) { 
 		
+		// <-- Antoine's changes -->
 		//INPUT VALIDATION
 		// check if name inputed is null
 		if (name == null || name.equals("")) {
-			return "Error: empty/null name";
+			return "The name must not be empty";
 		}
 		
 		//check if discount number is valid
-		if (discount < 0 || discount > 100) {
-			return "Error: invalid "; 
+		if (discount < 0) {
+			return "Discount must be at least 0";
+		} else if(discount > 100) {
+			return "Discount must be no more than 100"; 
 		}
 		
-		//check if gear with same name already exists 
-		if (Combo.hasWithName(name)) {
-			return "Error: Combo with that name already exists.";
-		} 	
+		// * Check if combo with same name already exists
 		
+		// Explaining: Since Gear and Combo are both subclasses of
+		// BookableItem, using hasWithName() which only returns boolean 
+		// would not be enough for these two tests.
+
+		// So we can use getWithName() then use check `instanceof`
+		// to check if the name is already taken for the object.
+		if (Combo.getWithName(name) instanceof Combo) {
+			return "A combo with the same name already exists";
+		} 
+		// Check if gear with same name already exists 
+		else if (Gear.getWithName(name) instanceof Gear) {
+			return "A piece of gear with the same name already exists";
+		}
+
 		//TRY ADDING COMBO
 		try {
 			sst.addCombo(name, discount);
@@ -111,23 +125,30 @@ public class GearController {
 		
 		//TRY DELETING COMBO
 		//initiate comboIndex
-		Integer comboIndex = null;
+		// Integer comboIndex = null;
 	  
-		try {
+		// try {
 			
-			//find index of the combo with name in the list of combos, and set to comboIndex
-			for (int i=0; i < sst.getCombos().size() ; i++) {
-				if(sst.getCombo(i).getName() == name) {
-					comboIndex = i;
-					break;
-				}
-			}
+		// 	//find index of the combo with name in the list of combos, and set to comboIndex
+		// 	for (int i=0; i < sst.getCombos().size() ; i++) {
+		// 		if(sst.getCombo(i).getName() == name) {
+		// 			comboIndex = i;
+		// 			break;
+		// 		}
+		// 	}
 			 
-			//delete combo with name located at comboIndex
-			sst.getCombo(comboIndex).delete();
+		// 	//delete combo with name located at comboIndex
+		// 	sst.getCombo(comboIndex).delete();
 				
-			} catch(Exception e) {}
-  }
+		// } catch(Exception e) { }
+		
+		// Antoine's reimplementation
+		Combo combo = (Combo) Combo.getWithName(name);
+		if (combo != null) {
+			combo.delete();
+		}
+
+	}
 
 	public static String addGearToCombo(String gearName, String comboName) {
 		
