@@ -68,12 +68,12 @@ public class ParticipantController {
     if (!(nrWeeks > 0)) {
       return "Number of weeks must be greater than zero";
     } else if (!(nrWeeks <= sst.getNrWeeks())) {
-      return "Number of weeks must be less than or equal to the number of biking weeks in the biking season";
+      return "Number of weeks must be less than or equal to the number of snowshoe weeks in the snowshoe season";
     }
     
     if (!(weekAvailableFrom > 0) || !(weekAvailableFrom <= sst.getNrWeeks()) || !(weekAvailableUntil > 0) 
             || !(weekAvailableUntil <= sst.getNrWeeks())) {
-          return "Available weeks must be within weeks of biking season (1-10)";
+          return "Available weeks must be within weeks of snowshoe season (1-10)";
         }
     
     if (!(weekAvailableFrom <= weekAvailableUntil)) {
