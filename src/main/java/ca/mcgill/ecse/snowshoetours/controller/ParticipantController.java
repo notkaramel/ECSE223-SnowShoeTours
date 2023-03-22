@@ -1,7 +1,3 @@
-/*
- * Author: Jennifer Tram Su (@jennifertramsu)
- */
-
 package ca.mcgill.ecse.snowshoetours.controller;
 
 import java.util.List;
@@ -22,6 +18,9 @@ public class ParticipantController {
   // Constructing instance of application object
   private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
 
+  /*
+   * @author Jennifer Tram Su (@jennifertramsu)
+   */
   public static String registerParticipant(String email, String password, String name,
       String emergencyContact, int nrWeeks, int weekAvailableFrom, int weekAvailableUntil,
       boolean lodgeRequired) {
@@ -145,6 +144,9 @@ public class ParticipantController {
     }
   }
 
+  /*
+   * @author Jennifer Tram Su (@jennifertramsu)
+   */
   public static String addBookableItemToParticipant(String email, String bookableItemName) {
     // Input validation
     if (email == null || email.equals("")) {
@@ -235,6 +237,9 @@ public class ParticipantController {
     }
   }
 
+  /*
+   * @author Jennifer Tram Su (@jennifertramsu)
+   */
   public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
     // Input validation
     if (email == null || email.equals("")) {
