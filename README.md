@@ -66,9 +66,21 @@ git checckout emma	# switch to branch named "Emma"
 - How to:
 
 ```sh
-# Switch
+# Switch to your target branch
+git checkout <your-target-branch>
 
+# Merge to your target branch from your reference branch
+git merge <your-reference-branch>
 ```
+
+- At this step, you may encounter a pop-up window asking you to write/edit a merge message, and it will be [by default] use a text editor called VIM. If you know how to use VIM, amazing! Else, no need to worry. The message has already written for you by default. All you have to do is type the following sequence: (see the lower left corner of your terminal window)
+```
+:wq
+```
+- Merge conflicts may occurs. In this case, it's recommended that you resolves conflicts on editor such as VSCode, by either choosing to keep the current changes or apply the incoming changes to your branch.
+
+- Further instruction on this will be updated for ECSE 321 I guess :))
+
 
 ## Common commands for Git
 >Make sure that you work on your branch and not on the `main` branch.
