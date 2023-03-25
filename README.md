@@ -5,6 +5,17 @@ For more information about the SnowShoeTours application, please consult the [wi
 
 More details on [Iteration 2 Instruction](https://github.com/McGill-ECSE223-W23/ecse223-tutorials/wiki/Technical-Instructions-for-Group-Project-Iteration-2)
 
+## Team Members
+
+| Name          | GitHub username |
+| ------------- | --------------- |
+| Angela Zhu    | [angelaxzhu](https://github.com/angelaxzhu) |
+| Antoine Phan  | [notkaramel](https://github.com/notkaramel) |
+| Bilar Mokhtari| [bmokhtari](https://github.com/bmokhtari)   |
+| Emma Friesen  | [emma-friesen](https://github.com/emma-friesen) |
+| Jennifer Tram Su | [jennifertramsu](https://github.com/jennifertramsu) |
+| Sameer Riaz   | [SRIAZ77](https://github.com/SRIAZ77) |
+
 ## Command-line nagivation basics
 ### The "terminal"
 - On Windows: please use **PowerShell** or **Git Bash** (or maybe `PuTTY` :\\)
@@ -107,13 +118,4 @@ git commit -m "Commit message"
 git push
 ```
 
-## Team Members
 
-| Name          | GitHub username |
-| ------------- | --------------- |
-| Angela Zhu    | [angelaxzhu](https://github.com/angelaxzhu) |
-| Antoine Phan  | [notkaramel](https://github.com/notkaramel) |
-| Bilar Mokhtari| [bmokhtari](https://github.com/bmokhtari)   |
-| Emma Friesen  | [emma-friesen](https://github.com/emma-friesen) |
-| Jennifer Tram Su | [jennifertramsu](https://github.com/jennifertramsu) |
-| Sameer Riaz   | [SRIAZ77](https://github.com/SRIAZ77) |
