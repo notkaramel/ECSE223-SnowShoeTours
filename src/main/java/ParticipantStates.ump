@@ -1,0 +1,86 @@
+class Participant {
+  Status{
+    Idle {
+      assignGuide(Guide aGuide)[isGuideAvailable()]
+        / {
+        doAssignGuide(aGuide); 
+      }-> NotPaid;
+      
+      assignGuide(Guide aGuide)[!isGuideAvailable()]
+        / {
+        rejectAssignGuide("Guide is unavailable");
+        }-> Idle;
+      
+      // 100% refund
+      cancel()
+        /{
+        doRefund("No penalty. Nothing happened yet");
+      } -> Cancelled;
+    }
+    
+    NotPaid {
+      pay()[!hasAuthCode()]
+        / {
+        rejectPayment("Payment not accepted");
+      }  -> NotPaid;
+      
+      pay()[hasAuthCode()]
+         -> Paid;
+      
+      // 100% refund
+      cancel()
+        / {
+        doRefund("No penalty, participant cancelled.");
+      } -> Cancelled;
+      
+      startTour(Tour aTour)[isTime()]
+        / {
+        doRefund("No penalty, participant has not paid."); 
+      } -> Cancelled;
+    }
+    
+    Paid {
+      // start tour, and it's time to go
+      startTour(Tour aTour)[isTime]
+        /{
+        doStartTour(aTour);
+      } -> TourOnGoing;
+      
+      // start tour, but not time to start yet
+      startTour(Tour aTour)[!isTime]
+        -> Paid;
+      
+      // 50% refund
+      cancel() /{
+        doRefund("50% refund. Participant cancelled before tour starts.");
+      } -> Cancelled;
+    }
+    
+    TourOnGoing {
+      finish() 
+        /{
+        doFinishTour();
+      } -> TourFinished;
+      
+      // 10% refund
+      cancel() 
+        /{
+        doRefund("10% refund.");
+      }-> Cancelled;
+    
+    }
+    
+    TourFinished {}
+    
+    Cancelled {}
+  }
+  
+  private void doAssignGuide(Guide aGuide){
+    setGuide(aGuide);
+  }
+
+  private void rejectAssignGuide(){
+    throw new RuntimeException("Cannot assign guide to this participant");
+  }
+}
+
