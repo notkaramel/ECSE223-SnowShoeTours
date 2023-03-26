@@ -14,7 +14,7 @@ class Participant {
       // 100% refund
       cancel()
         /{
-        doRefund("No penalty. Nothing happened yet");
+        doRefund(null);
       } -> Cancelled;
     }
     
@@ -30,12 +30,12 @@ class Participant {
       // 100% refund
       cancel()
         / {
-        doRefund("No penalty, participant cancelled.");
+        doRefund(null);
       } -> Cancelled;
       
       startTour(Tour aTour)[isTime()]
         / {
-        doRefund("No penalty, participant has not paid."); 
+        doRefund(null); 
       } -> Cancelled;
     }
     
@@ -76,11 +76,34 @@ class Participant {
   }
   
   private void doAssignGuide(Guide aGuide){
-    setGuide(aGuide);
+    getTour().setGuide(aGuide);
+  }
+  
+  private boolean isGuideAvailable() {
+    return getTour().getGuide() != null;
   }
 
-  private void rejectAssignGuide(){
-    throw new RuntimeException("Cannot assign guide to this participant");
+  private void rejectAssignGuide(String error){
+    throw new RuntimeException(error);
   }
+
+  private void doRefund(Integer refundedPercentage) {
+    if(refundedPercentage == null){
+      throw new RuntimeException("No penalty, user has not paid");
+    }
+    else {
+      setRefundedPercentageAmount(refundedPercentage);
+    }
+  }
+  
+  private boolean hasAuthCode() {
+    return getAuthorizationCode() != null;
+  }
+
+  private boolean isTime() {
+    SnowShowTour = new java.util.Date();
+    return d == getTour().startWeek;
+  }
+
 }
 
