@@ -1,7 +1,3 @@
-/*
- * Author: Jennifer Tram Su (@jennifertramsu)
- */
-
 package ca.mcgill.ecse.snowshoetours.controller;
 
 import java.util.List;
@@ -12,254 +8,301 @@ import ca.mcgill.ecse.snowshoetours.model.BookedItem;
 import ca.mcgill.ecse.snowshoetours.model.Combo;
 import ca.mcgill.ecse.snowshoetours.model.Gear;
 import ca.mcgill.ecse.snowshoetours.model.Guide;
+import ca.mcgill.ecse.snowshoetours.model.Manager;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.User;
 
 public class ParticipantController {
 
-  // Constructing instance of application object
-  private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
+	// Constructing instance of application object
+	private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
 
-  public static String registerParticipant(String email, String password, String name,
-      String emergencyContact, int nrWeeks, int weekAvailableFrom, int weekAvailableUntil,
-      boolean lodgeRequired) {
+	/**
+	 * @author Jennifer Tram Su (@jennifertramsu)
+	 */
+	public static String registerParticipant(String email, String password, String name, String emergencyContact,
+			int nrWeeks, int weekAvailableFrom, int weekAvailableUntil, boolean lodgeRequired) {
 
-    // Input validation
-    if (email == null || email.equals("")) {
-      return "Email cannot be empty";
-    } else if (email.contains(" ")) {
-      return "Invalid email";
-    } else if (!(email.indexOf("@") > 0)) {
-      return "Invalid email";
-    } else if (email.indexOf("@") != email.lastIndexOf("@")) {
-      return "Invalid email";
-    } else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
-      return "Invalid email";
-    } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
-      return "Invalid email";
-    }
+		// Input validation
+		if (email == null || email.equals("")) {
+			return "Email cannot be empty";
+		} else if (email.contains(" ")) {
+			return "Email must not contain any spaces";
+		} else if (!(email.indexOf("@") > 0)) {
+			return "Invalid email";
+		} else if (email.indexOf("@") != email.lastIndexOf("@")) {
+			return "Invalid email";
+		} else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
+			return "Invalid email";
+		} else if (!(email.lastIndexOf(".") < email.length() - 1)) {
+			return "Invalid email";
+		}
 
-    if (password == null || password.equals("")) {
-      return "Password cannot be empty";
-    }
+		// Cannot have manager email
+		if (email.equals("manager@btp.com")) {
+			return "Email cannot be manager@btp.com";
+		}
 
-    if (name == null || name.equals("")) {
-      return "Name cannot be empty";
-    }
+		// Cannot be a guide
+		for (Guide guide : sst.getGuides()) {
+			if (guide.getAccountName().equals(email)) {
+				return "Email already linked to a guide account";
+			}
+		}
 
-    if (emergencyContact == null || emergencyContact.equals("")) {
-      return "Emergency contact cannot be empty";
-    }
+		if (password == null || password.equals("")) {
+			return "Password cannot be empty";
+		}
 
-    if (nrWeeks < 0) {
-      return "Number of weeks must be greater than zero.";
-    } else if (nrWeeks > sst.getNrWeeks()) {
-      return "Number of weeks cannot be greater than the tour season.";
-    }
+		if (name == null || name.equals("")) {
+			return "Name cannot be empty";
+		}
 
-    if (weekAvailableUntil - weekAvailableFrom < nrWeeks - 1) {
-      return "Invalid availability.";
-    }
+		if (emergencyContact == null || emergencyContact.equals("")) {
+			return "Emergency contact cannot be empty";
+		}
 
-    if (weekAvailableFrom > weekAvailableUntil) {
-      return "Invalid availability.";
-    }
+		if (!(nrWeeks > 0)) {
+			return "Number of weeks must be greater than zero";
+		} else if (!(nrWeeks <= sst.getNrWeeks())) {
+			return "Number of weeks must be less than or equal to the number of snowshoe weeks in the snowshoe season";
+		}
 
-    if (weekAvailableFrom < 0 || weekAvailableFrom > sst.getNrWeeks() || weekAvailableUntil < 0
-        || weekAvailableUntil > sst.getNrWeeks()) {
-      return "Invalid availability.";
-    }
+		if (!(weekAvailableFrom > 0) || !(weekAvailableFrom <= sst.getNrWeeks()) || !(weekAvailableUntil > 0)
+				|| !(weekAvailableUntil <= sst.getNrWeeks())) {
+			return "Available weeks must be within weeks of snowshoe season (1-10)";
+		}
 
-    // Check that the participant is not already registered
-    Participant participant = (Participant) User.getWithAccountName(name);
+		if (!(weekAvailableFrom <= weekAvailableUntil)) {
+			return "Week from which one is available must be less than or equal to the week until which one is available";
+		}
 
-    if (sst.getParticipants().contains(participant)) {
-      return "Email already linked to a participant account";
-    }
+		if (!(weekAvailableUntil - weekAvailableFrom >= nrWeeks - 1)) {
+			return "Number of weeks must be less than or equal to the number of available weeks";
+		}
 
-    // Try registering participant
-    try {
-      sst.addParticipant(name, password, name, emergencyContact, nrWeeks, weekAvailableFrom,
-          weekAvailableUntil, lodgeRequired, "", 0); // code is empty, refund set to 0
-      return "";
-    } catch (Exception e) {
-      return "Something went wrong!";
-    }
-  }
+		// Check that the participant is not already registered
+		Participant participant = (Participant) User.getWithAccountName(email);
 
-  public static void deleteParticipant(String email) {
-    // Do nothing if invalid email input
-    if (email == null || email.equals("") || (email.contains(" "))
-        || (!(email.indexOf("@") > 0 || (email.indexOf("@") == email.lastIndexOf("@")))
-            || (email.indexOf("@") < email.lastIndexOf(".") - 1))
-        || (email.lastIndexOf(".") < email.length() - 1)) {
-      return;
-    } else if (!User.hasWithAccountName(email)) {
-      return;
-    } else {
-      try {
-        // Referential integrity taken care of by UMPLE
-        Participant participant = (Participant) User.getWithAccountName(email);
-        participant.delete();
-      } catch (Exception e) {
-        return;
-      }
-    }
-  }
+		if (participant != null) {
+			return "Email already linked to a participant account";
+		}
 
-  public static String addBookableItemToParticipant(String email, String bookableItemName) {
-    // Input validation
-    if (email == null || email.equals("")) {
-      return "Email cannot be empty";
-    } else if (email.contains(" ")) {
-      return "Invalid email";
-    } else if (!(email.indexOf("@") > 0)) {
-      return "Invalid email";
-    } else if (email.indexOf("@") != email.lastIndexOf("@")) {
-      return "Invalid email";
-    } else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
-      return "Invalid email";
-    } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
-      return "Invalid email";
-    }
+		// Try registering participant
+		try {
+			Participant participantAdded = sst.addParticipant(email, password, name, emergencyContact, nrWeeks,
+					weekAvailableFrom, weekAvailableUntil, lodgeRequired, "", 0); // code is empty, refund set to 0
+			sst.addParticipant(participantAdded);
+			return "";
+		} catch (Exception e) {
+			return "Something went wrong!";
+		}
+	}
 
-    if (bookableItemName == null || bookableItemName.equals("")) {
-      return "The piece of gear or combo does not exist";
-    }
+	/**
+	 * @author Angela Zhu @angelaxzhu
+	 */
+	public static void deleteParticipant(String email) {
+		if (email.equals("manager")) {
+			// Manager manager = new Manager("manager","manager",sst);
+			return;
+		}
+		// Do nothing if invalid email input
+		else if (email == null
+				// the email is empty
+				|| email.equals("")
+				// there is empty space
+				|| (email.contains(" "))
+				// if the first letter is @
+				|| !(email.indexOf("@") > 0)
+				// if there is more than one @
+				|| !(email.indexOf("@") == email.lastIndexOf("@"))
+				// if . comes before @
+				|| !(email.indexOf("@") < email.lastIndexOf(".") - 1)
+				// if . is the last character
+				|| !(email.lastIndexOf(".") < email.length() - 1)) {
 
-    // Check that participant exists
-    boolean p = User.hasWithAccountName(email);
+			return;
+			// Do nothing if there is no user with that account
+		} else if (!User.hasWithAccountName(email)) {
+			return;
+		} else {
+			try {
+				// Referential integrity taken care of by UMPLE
+				// Check what kind of user it is
+				User user = User.getWithAccountName(email);
+				if (user instanceof Guide) {
+					return;
 
-    if (!p) {
-      return "The participant does not exist";
-    }
+				} else if (user instanceof Participant) {
+					user.delete();
+				}
 
-    // Check that User is not a Guide
-    for (Guide guide : sst.getGuides()) {
-      if (guide.getAccountName().equals(email)) { // Guide found
-        return "The participant does not exist";
-      }
-    }
+			} catch (Exception e) {
+				return;
+			}
+		}
+	}
 
-    Participant participant = (Participant) User.getWithAccountName(email);
+	/**
+	 * @author Jennifer Tram Su (@jennifertramsu)
+	 */
+	public static String addBookableItemToParticipant(String email, String bookableItemName) {
+		// Input validation
+		if (email == null || email.equals("")) {
+			return "Email cannot be empty";
+		} else if (email.contains(" ")) {
+			return "Invalid email";
+		} else if (!(email.indexOf("@") > 0)) {
+			return "Invalid email";
+		} else if (email.indexOf("@") != email.lastIndexOf("@")) {
+			return "Invalid email";
+		} else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
+			return "Invalid email";
+		} else if (!(email.lastIndexOf(".") < email.length() - 1)) {
+			return "Invalid email";
+		}
 
-    // See if bookable item exists
-    boolean b = BookableItem.hasWithName(bookableItemName);
+		if (bookableItemName == null || bookableItemName.equals("")) {
+			return "The piece of gear or combo does not exist";
+		}
 
-    if (!b) {
-      return "The piece of gear or combo does not exist";
-    }
+		// Check that participant exists
+		boolean p = User.hasWithAccountName(email);
 
-    try {
-      // Check if bookable is type Gear or Combo
-      if (BookableItem.getWithName(bookableItemName) instanceof Gear) {
-        Gear gear = (Gear) BookableItem.getWithName(bookableItemName);
+		if (!p) {
+			return "The participant does not exist";
+		}
 
-        // Check if participant has booked item
-        List<BookedItem> items = participant.getBookedItems();
-        boolean found = false;
+		// Check that User is not a Guide
+		for (Guide guide : sst.getGuides()) {
+			if (guide.getAccountName().equals(email)) { // Guide found
+				return "The participant does not exist";
+			}
+		}
 
-        for (BookedItem item : items) {
-          BookableItem currentItem = item.getItem();
-          String name = currentItem.getName();
+		Participant participant = (Participant) User.getWithAccountName(email);
 
-          if (bookableItemName.equals(name)) {
-            found = true;
-            item.setQuantity(item.getQuantity() + 1); // Increase by one
-          }
-        }
-        if (!found) {
-          participant.addBookedItem(1, sst, gear);
-        }
-      } else if (BookableItem.getWithName(bookableItemName) instanceof Combo) {
-        Combo combo = (Combo) BookableItem.getWithName(bookableItemName);
+		// See if bookable item exists
+		boolean b = BookableItem.hasWithName(bookableItemName);
 
-        List<BookedItem> items = participant.getBookedItems();
-        boolean found = false;
+		if (!b) {
+			return "The piece of gear or combo does not exist";
+		}
 
-        for (BookedItem item : items) {
-          BookableItem currentItem = item.getItem();
-          String name = currentItem.getName();
+		try {
+			// Check if bookable is type Gear or Combo
+			if (BookableItem.getWithName(bookableItemName) instanceof Gear) {
+				Gear gear = (Gear) BookableItem.getWithName(bookableItemName);
 
-          if (bookableItemName.equals(name)) {
-            found = true;
-            item.setQuantity(item.getQuantity() + 1); // Increase by one
-            break;
-          }
-        }
-        if (!found) { // BookedItem for Gear doesn't exist yet
-          participant.addBookedItem(1, sst, combo);
-        }
-      }
-      return "";
-    } catch (Exception e) {
-      return "Something went wrong!";
-    }
-  }
+				// Check if participant has booked item
+				List<BookedItem> items = participant.getBookedItems();
+				boolean found = false;
 
-  public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
-    // Input validation
-    if (email == null || email.equals("")) {
-      return "Email cannot be empty";
-    } else if (email.contains(" ")) {
-      return "Invalid email";
-    } else if (!(email.indexOf("@") > 0)) {
-      return "Invalid email";
-    } else if (email.indexOf("@") != email.lastIndexOf("@")) {
-      return "Invalid email";
-    } else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
-      return "Invalid email";
-    } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
-      return "Invalid email";
-    }
+				for (BookedItem item : items) {
+					BookableItem currentItem = item.getItem();
+					String name = currentItem.getName();
 
-    if (bookableItemName == null || bookableItemName.equals("")) {
-      return "Empty bookable item name.";
-    }
+					if (bookableItemName.equals(name)) {
+						found = true;
+						item.setQuantity(item.getQuantity() + 1); // Increase by one
+					}
+				}
+				if (!found) {
+					participant.addBookedItem(1, sst, gear);
+				}
+			} else if (BookableItem.getWithName(bookableItemName) instanceof Combo) {
+				Combo combo = (Combo) BookableItem.getWithName(bookableItemName);
 
-    // Check if participant exists
-    boolean p = User.hasWithAccountName(email);
+				List<BookedItem> items = participant.getBookedItems();
+				boolean found = false;
 
-    if (!p) {
-      return "The participant does not exist";
-    }
+				for (BookedItem item : items) {
+					BookableItem currentItem = item.getItem();
+					String name = currentItem.getName();
 
-    // Check that User is not a Guide
-    for (Guide guide : sst.getGuides()) {
-      if (guide.getAccountName().equals(email)) { // Guide found
-        return "The participant does not exist";
-      }
-    }
+					if (bookableItemName.equals(name)) {
+						found = true;
+						item.setQuantity(item.getQuantity() + 1); // Increase by one
+						break;
+					}
+				}
+				if (!found) { // BookedItem for Gear doesn't exist yet
+					participant.addBookedItem(1, sst, combo);
+				}
+			}
+			return "";
+		} catch (Exception e) {
+			return "Something went wrong!";
+		}
+	}
 
-    Participant participant = (Participant) User.getWithAccountName(email);
+	/**
+	 * @author Jennifer Tram Su (@jennifertramsu)
+	 */
+	public static String removeBookableItemFromParticipant(String email, String bookableItemName) {
+		// Input validation
+		if (email == null || email.equals("")) {
+			return "Email cannot be empty";
+		} else if (email.contains(" ")) {
+			return "Invalid email";
+		} else if (!(email.indexOf("@") > 0)) {
+			return "Invalid email";
+		} else if (email.indexOf("@") != email.lastIndexOf("@")) {
+			return "Invalid email";
+		} else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
+			return "Invalid email";
+		} else if (!(email.lastIndexOf(".") < email.length() - 1)) {
+			return "Invalid email";
+		}
 
-    // Check if bookable item exists
-    boolean b = BookableItem.hasWithName(bookableItemName);
+		if (bookableItemName == null || bookableItemName.equals("")) {
+			return "Empty bookable item name.";
+		}
 
-    if (!b) {
-      return "Bookable item doesn't exist.";
-    }
+		// Check if participant exists
+		boolean p = User.hasWithAccountName(email);
 
-    try {
-      // Check if participant has booked item and check for quantity
-      List<BookedItem> items = participant.getBookedItems();
+		if (!p) {
+			return "The participant does not exist";
+		}
 
-      for (BookedItem item : items) {
-        BookableItem currentItem = item.getItem();
-        String name = currentItem.getName();
+		// Check that User is not a Guide
+		for (Guide guide : sst.getGuides()) {
+			if (guide.getAccountName().equals(email)) { // Guide found
+				return "The participant does not exist";
+			}
+		}
 
-        if (bookableItemName.equals(name)) { // Found the booked item
-          item.setQuantity(item.getQuantity() - 1); // Decrease by one
+		Participant participant = (Participant) User.getWithAccountName(email);
 
-          if (item.getQuantity() == 0) { // Quantity is zero, remove item
-            item.delete();
-          }
-        }
-      }
-      return "";
-    } catch (Exception e) {
-      return "Something went wrong!";
-    }
-  }
+		// Check if bookable item exists
+		boolean b = BookableItem.hasWithName(bookableItemName);
+
+		if (!b) {
+			return "Bookable item doesn't exist.";
+		}
+
+		try {
+			// Check if participant has booked item and check for quantity
+			List<BookedItem> items = participant.getBookedItems();
+
+			for (BookedItem item : items) {
+				BookableItem currentItem = item.getItem();
+				String name = currentItem.getName();
+
+				if (bookableItemName.equals(name)) { // Found the booked item
+					item.setQuantity(item.getQuantity() - 1); // Decrease by one
+
+					if (item.getQuantity() == 0) { // Quantity is zero, remove item
+						item.delete();
+					}
+				}
+			}
+			return "";
+		} catch (Exception e) {
+			return "Something went wrong!";
+		}
+	}
 }
