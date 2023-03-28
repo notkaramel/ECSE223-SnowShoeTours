@@ -1,4 +1,5 @@
 namespace ca.mcgill.ecse.snowshoetours.model;
+use ParticipantStates.ump;
 
 class SnowShoeTour {
   Date startDate;

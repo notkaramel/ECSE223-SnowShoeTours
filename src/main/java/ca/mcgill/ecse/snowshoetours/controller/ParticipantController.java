@@ -21,8 +21,9 @@ public class ParticipantController {
 	/**
 	 * @author Jennifer Tram Su (@jennifertramsu)
 	 */
-	public static String registerParticipant(String email, String password, String name, String emergencyContact,
-			int nrWeeks, int weekAvailableFrom, int weekAvailableUntil, boolean lodgeRequired) {
+	public static String registerParticipant(String email, String password, String name,
+			String emergencyContact, int nrWeeks, int weekAvailableFrom, int weekAvailableUntil,
+			boolean lodgeRequired) {
 
 		// Input validation
 		if (email == null || email.equals("")) {
@@ -69,8 +70,8 @@ public class ParticipantController {
 			return "Number of weeks must be less than or equal to the number of snowshoe weeks in the snowshoe season";
 		}
 
-		if (!(weekAvailableFrom > 0) || !(weekAvailableFrom <= sst.getNrWeeks()) || !(weekAvailableUntil > 0)
-				|| !(weekAvailableUntil <= sst.getNrWeeks())) {
+		if (!(weekAvailableFrom > 0) || !(weekAvailableFrom <= sst.getNrWeeks())
+				|| !(weekAvailableUntil > 0) || !(weekAvailableUntil <= sst.getNrWeeks())) {
 			return "Available weeks must be within weeks of snowshoe season (1-10)";
 		}
 
@@ -91,8 +92,13 @@ public class ParticipantController {
 
 		// Try registering participant
 		try {
-			Participant participantAdded = sst.addParticipant(email, password, name, emergencyContact, nrWeeks,
-					weekAvailableFrom, weekAvailableUntil, lodgeRequired, "", 0); // code is empty, refund set to 0
+			Participant participantAdded =
+					sst.addParticipant(email, password, name, emergencyContact, nrWeeks,
+							weekAvailableFrom, weekAvailableUntil, lodgeRequired, "", 0); // code is
+																							// empty,
+																							// refund
+																							// set
+																							// to 0
 			sst.addParticipant(participantAdded);
 			return "";
 		} catch (Exception e) {

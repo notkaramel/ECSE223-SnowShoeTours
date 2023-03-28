@@ -14,7 +14,8 @@ public class LodgeController {
 	 */
 	public static String addLodge(String name, String address, int nrStars) {
 		// check if inputs are valid
-		if (name == "" || name == null || address == "" || address == null || nrStars < 1 || nrStars > 5) {
+		if (name == "" || name == null || address == "" || address == null || nrStars < 1
+				|| nrStars > 5) {
 			return "Invalid Input";
 		}
 		// ensuring lodge name is not already in use
@@ -26,16 +27,16 @@ public class LodgeController {
 			LodgeRating rating = LodgeRating.OneStar;
 
 			switch (nrStars) {
-			case 1:
-				rating = LodgeRating.OneStar;
-			case 2:
-				rating = LodgeRating.TwoStars;
-			case 3:
-				rating = LodgeRating.ThreeStars;
-			case 4:
-				rating = LodgeRating.FourStars;
-			case 5:
-				rating = LodgeRating.FiveStars;
+				case 1:
+					rating = LodgeRating.OneStar;
+				case 2:
+					rating = LodgeRating.TwoStars;
+				case 3:
+					rating = LodgeRating.ThreeStars;
+				case 4:
+					rating = LodgeRating.FourStars;
+				case 5:
+					rating = LodgeRating.FiveStars;
 			}
 			try {
 				sst.addLodge(name, address, rating);
