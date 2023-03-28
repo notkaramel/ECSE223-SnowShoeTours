@@ -14,7 +14,6 @@ public class Participant extends NamedUser
   //------------------------
 
   //Participant Attributes
-  private boolean tourStarted;
   private int nrWeeks;
   private int weekAvailableFrom;
   private int weekAvailableUntil;
@@ -38,7 +37,6 @@ public class Participant extends NamedUser
   public Participant(String aAccountName, String aPassword, String aName, String aEmergencyContact, int aNrWeeks, int aWeekAvailableFrom, int aWeekAvailableUntil, boolean aLodgeRequired, String aAuthorizationCode, int aRefundedPercentageAmount, SnowShoeTour aSnowShoeTour)
   {
     super(aAccountName, aPassword, aName, aEmergencyContact);
-    tourStarted = false;
     nrWeeks = aNrWeeks;
     weekAvailableFrom = aWeekAvailableFrom;
     weekAvailableUntil = aWeekAvailableUntil;
@@ -57,14 +55,6 @@ public class Participant extends NamedUser
   //------------------------
   // INTERFACE
   //------------------------
-
-  public boolean setTourStarted(boolean aTourStarted)
-  {
-    boolean wasSet = false;
-    tourStarted = aTourStarted;
-    wasSet = true;
-    return wasSet;
-  }
 
   public boolean setNrWeeks(int aNrWeeks)
   {
@@ -112,11 +102,6 @@ public class Participant extends NamedUser
     refundedPercentageAmount = aRefundedPercentageAmount;
     wasSet = true;
     return wasSet;
-  }
-
-  public boolean getTourStarted()
-  {
-    return tourStarted;
   }
 
   public int getNrWeeks()
@@ -506,27 +491,27 @@ public class Participant extends NamedUser
     super.delete();
   }
 
-  // line 81 "../../../../../../ParticipantStates.ump"
+  // line 79 "../../../../../../ParticipantStates.ump"
    private void doAssignGuide(Guide aGuide){
     getTour().setGuide(aGuide);
   }
 
-  // line 85 "../../../../../../ParticipantStates.ump"
+  // line 83 "../../../../../../ParticipantStates.ump"
    private boolean isGuideAvailable(){
     return getTour().getGuide() != null;
   }
 
-  // line 89 "../../../../../../ParticipantStates.ump"
+  // line 87 "../../../../../../ParticipantStates.ump"
    private void rejectAssignGuide(String error){
     throw new RuntimeException(error);
   }
 
-  // line 93 "../../../../../../ParticipantStates.ump"
+  // line 91 "../../../../../../ParticipantStates.ump"
    private void rejectPayment(){
     throw new RuntimeException("Payment not accepted");
   }
 
-  // line 97 "../../../../../../ParticipantStates.ump"
+  // line 95 "../../../../../../ParticipantStates.ump"
    private void doRefund(Integer refundedPercentage){
     if(refundedPercentage == null){
       throw new RuntimeException("No penalty, user has not paid");
@@ -536,12 +521,12 @@ public class Participant extends NamedUser
     }
   }
 
-  // line 106 "../../../../../../ParticipantStates.ump"
+  // line 104 "../../../../../../ParticipantStates.ump"
    private boolean hasAuthCode(){
     return getAuthorizationCode() != null;
   }
 
-  // line 110 "../../../../../../ParticipantStates.ump"
+  // line 108 "../../../../../../ParticipantStates.ump"
    private boolean isTime(){
     java.util.Date today = new java.util.Date();
     // timeDifference = today - getSnowShoeTour().getStartDate() (using getTime --> in ms)
@@ -557,7 +542,6 @@ public class Participant extends NamedUser
   public String toString()
   {
     return super.toString() + "["+
-            "tourStarted" + ":" + getTourStarted()+ "," +
             "nrWeeks" + ":" + getNrWeeks()+ "," +
             "weekAvailableFrom" + ":" + getWeekAvailableFrom()+ "," +
             "weekAvailableUntil" + ":" + getWeekAvailableUntil()+ "," +
