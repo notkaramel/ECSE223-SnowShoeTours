@@ -1,10 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 39 "../../../../../SnowShoeTour.ump"
+// line 1 "../../../../../../ParticipantStates.ump"
+// line 40 "../../../../../../SnowShoeTour.ump"
 public class Participant extends NamedUser
 {
 
@@ -19,6 +20,10 @@ public class Participant extends NamedUser
   private boolean lodgeRequired;
   private String authorizationCode;
   private int refundedPercentageAmount;
+
+  //Participant State Machines
+  public enum Status { Idle, NotPaid, Paid, TourOnGoing, TourFinished, Cancelled }
+  private Status status;
 
   //Participant Associations
   private SnowShoeTour snowShoeTour;
@@ -44,6 +49,7 @@ public class Participant extends NamedUser
       throw new RuntimeException("Unable to create participant due to snowShoeTour. See http://manual.umple.org?RE002ViolationofAssociationMultiplicity.html");
     }
     bookedItems = new ArrayList<BookedItem>();
+    setStatus(Status.Idle);
   }
 
   //------------------------
@@ -131,6 +137,182 @@ public class Participant extends NamedUser
   public boolean isLodgeRequired()
   {
     return lodgeRequired;
+  }
+
+  public String getStatusFullName()
+  {
+    String answer = status.toString();
+    return answer;
+  }
+
+  public Status getStatus()
+  {
+    return status;
+  }
+
+  public boolean assignGuide(Guide aGuide)
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case Idle:
+        if (isGuideAvailable())
+        {
+        // line 5 "../../../../../../ParticipantStates.ump"
+          doAssignGuide(aGuide);
+          setStatus(Status.NotPaid);
+          wasEventProcessed = true;
+          break;
+        }
+        if (!(isGuideAvailable()))
+        {
+        // line 10 "../../../../../../ParticipantStates.ump"
+          rejectAssignGuide("Guide is unavailable");
+          setStatus(Status.Idle);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean cancel()
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case Idle:
+        // line 16 "../../../../../../ParticipantStates.ump"
+        doRefund(null);
+        setStatus(Status.Cancelled);
+        wasEventProcessed = true;
+        break;
+      case NotPaid:
+        // line 32 "../../../../../../ParticipantStates.ump"
+        doRefund(null);
+        setStatus(Status.Cancelled);
+        wasEventProcessed = true;
+        break;
+      case Paid:
+        // line 54 "../../../../../../ParticipantStates.ump"
+        doRefund(50);
+        setStatus(Status.Cancelled);
+        wasEventProcessed = true;
+        break;
+      case TourOnGoing:
+        // line 67 "../../../../../../ParticipantStates.ump"
+        doRefund(10);
+        setStatus(Status.Cancelled);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean pay()
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case NotPaid:
+        if (!(hasAuthCode()))
+        {
+        // line 23 "../../../../../../ParticipantStates.ump"
+          rejectPayment();
+          setStatus(Status.NotPaid);
+          wasEventProcessed = true;
+          break;
+        }
+        if (hasAuthCode())
+        {
+          setStatus(Status.Paid);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean startTour()
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case NotPaid:
+        if (isTime())
+        {
+        // line 37 "../../../../../../ParticipantStates.ump"
+          doRefund(null);
+          setStatus(Status.Cancelled);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      case Paid:
+        if (isTime())
+        {
+        // line 45 "../../../../../../ParticipantStates.ump"
+          // doStartTour();
+          setStatus(Status.TourOnGoing);
+          wasEventProcessed = true;
+          break;
+        }
+        if (!(isTime()))
+        {
+          setStatus(Status.Paid);
+          wasEventProcessed = true;
+          break;
+        }
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  public boolean finish()
+  {
+    boolean wasEventProcessed = false;
+    
+    Status aStatus = status;
+    switch (aStatus)
+    {
+      case TourOnGoing:
+        // line 61 "../../../../../../ParticipantStates.ump"
+        // doFinishTour();
+        setStatus(Status.TourFinished);
+        wasEventProcessed = true;
+        break;
+      default:
+        // Other states do respond to this event
+    }
+
+    return wasEventProcessed;
+  }
+
+  private void setStatus(Status aStatus)
+  {
+    status = aStatus;
   }
   /* Code from template association_GetOne */
   public SnowShoeTour getSnowShoeTour()
@@ -307,6 +489,53 @@ public class Participant extends NamedUser
       aBookedItem.delete();
     }
     super.delete();
+  }
+
+  // line 79 "../../../../../../ParticipantStates.ump"
+   private void doAssignGuide(Guide aGuide){
+    getTour().setGuide(aGuide);
+  }
+
+  // line 83 "../../../../../../ParticipantStates.ump"
+   private boolean isGuideAvailable(){
+    return getTour().getGuide() != null;
+  }
+
+  // line 87 "../../../../../../ParticipantStates.ump"
+   private void rejectAssignGuide(String error){
+    throw new RuntimeException(error);
+  }
+
+  // line 91 "../../../../../../ParticipantStates.ump"
+   private void rejectPayment(){
+    throw new RuntimeException("Payment not accepted");
+  }
+
+  // line 95 "../../../../../../ParticipantStates.ump"
+   private void doRefund(Integer refundedPercentage){
+    if(refundedPercentage == null){
+      throw new RuntimeException("No penalty, user has not paid");
+    }
+    else {
+      setRefundedPercentageAmount(refundedPercentage);
+    }
+  }
+
+  // line 104 "../../../../../../ParticipantStates.ump"
+   private boolean hasAuthCode(){
+    return getAuthorizationCode() != null;
+  }
+
+  // line 108 "../../../../../../ParticipantStates.ump"
+   private boolean isTime(){
+    java.util.Date today = new java.util.Date();
+    // timeDifference = today - getSnowShoeTour().getStartDate() (using getTime --> in ms)
+    long timeDifference = today.getTime() - getSnowShoeTour().getStartDate().getTime();
+    // convert ms to weeks
+    int weekDifference = (int) timeDifference / (1000*60*60*24*7);
+
+    // isTime = (weekDifference == getTour().getStartWeek())
+    return weekDifference == getTour().getStartWeek();
   }
 
 
