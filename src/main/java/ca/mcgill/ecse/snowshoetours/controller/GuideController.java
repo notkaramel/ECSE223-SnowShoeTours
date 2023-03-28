@@ -12,7 +12,8 @@ public class GuideController {
 	/**
 	 * @author: Sameer Riaz (@SRIAZ77)
 	 */
-	public static String registerGuide(String email, String password, String name, String emergencyContact) {
+	public static String registerGuide(String email, String password, String name,
+			String emergencyContact) {
 
 		// EMAIL VALIDATION
 		// email must not contain any spaces
@@ -76,7 +77,8 @@ public class GuideController {
 	 */
 	public static void deleteGuide(String email) {
 		if (User.hasWithAccountName(email)) {
-			if (Guide.getWithAccountName(email) instanceof Guide) { // CHECK IF INPUTTED USER IS A GUIDE TO NOT REMOVE
+			if (Guide.getWithAccountName(email) instanceof Guide) { // CHECK IF INPUTTED USER IS A
+																	// GUIDE TO NOT REMOVE
 																	// PARTICIPANT
 				try {
 					Guide.getWithAccountName(email).delete();

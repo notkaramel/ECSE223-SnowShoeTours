@@ -78,7 +78,7 @@ public class RegisterAndDeleteGuideStepDefinitions {
 
   /**
    *
-   *         Manager attempts to delete a guide with their email
+   * Manager attempts to delete a guide with their email
    *
    * @param string the guide's email
    */
@@ -92,12 +92,12 @@ public class RegisterAndDeleteGuideStepDefinitions {
   @Then("a guide account shall not exist with email {string}, password {string}, name {string}, and emergency contact {string} \\(g6)")
   public void a_guide_account_shall_not_exist_with_email_password_name_and_emergency_contact_g6(
       String email, String password, String name, String emergencyContact) {
-    User user = User.getWithAccountName(email); 
-    Guide guide = user instanceof Guide ? ((Guide) user) : null; 
-    if (guide != null) { 
-      boolean atLeastOneGuideAttributeInvalid = (!(password.equals(guide.getPassword()))
-          || !(name.equals(guide.getName()))
-          || !(emergencyContact.equals(guide.getEmergencyContact())));
+    User user = User.getWithAccountName(email);
+    Guide guide = user instanceof Guide ? ((Guide) user) : null;
+    if (guide != null) {
+      boolean atLeastOneGuideAttributeInvalid =
+          (!(password.equals(guide.getPassword())) || !(name.equals(guide.getName()))
+              || !(emergencyContact.equals(guide.getEmergencyContact())));
       assertTrue(atLeastOneGuideAttributeInvalid);
     }
   }
@@ -123,7 +123,7 @@ public class RegisterAndDeleteGuideStepDefinitions {
   public void a_guide_account_shall_exist_with_email_password_name_and_emergency_contact_g6(
       String email, String password, String name, String emergencyContact) {
     User user = User.getWithAccountName(email); // try to find user with given email
-    Guide guide = user instanceof Guide ? ((Guide) user) : null; 
+    Guide guide = user instanceof Guide ? ((Guide) user) : null;
     // assert that guide exists
     assertNotNull(guide);
     // assert that all information corresponds to the inputs
@@ -146,7 +146,7 @@ public class RegisterAndDeleteGuideStepDefinitions {
 
   /**
    *
-   *         Checking that a manager exists with the given email
+   * Checking that a manager exists with the given email
    *
    * @param string
    */
@@ -155,13 +155,14 @@ public class RegisterAndDeleteGuideStepDefinitions {
     Manager manager = sst.getManager();
     assertNotNull(manager); // making sure that the manager exists
     User managerUser = (User) manager;
-    assertEquals(string, managerUser.getAccountName()); // making sure the manager has the email {string}
+    assertEquals(string, managerUser.getAccountName()); // making sure the manager has the email
+                                                        // {string}
 
   }
 
   /**
    *
-   *         Checking number of managers
+   * Checking number of managers
    *
    * @param string number of managers
    */
@@ -178,7 +179,7 @@ public class RegisterAndDeleteGuideStepDefinitions {
 
   /**
    *
-   *         Check if a participant account exists with the email given
+   * Check if a participant account exists with the email given
    *
    * @param string, the email of the participant
    */
@@ -197,33 +198,33 @@ public class RegisterAndDeleteGuideStepDefinitions {
 
   /**
    *
-   *         Checking number of participants
+   * Checking number of participants
    *
    * @param string number of participants
    */
   @Then("the number of participants shall be {string} \\(g6)")
   public void the_number_of_participants_shall_be_g6(String string) {
     // Write code here that turns the phrase above into concrete actions
-    int nrParticipants = Integer.valueOf(string); 
-    assertEquals(nrParticipants, sst.getParticipants().size()); 
+    int nrParticipants = Integer.valueOf(string);
+    assertEquals(nrParticipants, sst.getParticipants().size());
 
   }
 
   /**
    *
-   *         Checking that a guide doesn't exist with the given email
+   * Checking that a guide doesn't exist with the given email
    *
    * @param string
    */
   @Then("a guide account shall not exist with email {string} \\(g6)")
   public void a_guide_account_shall_not_exist_with_email_g6(String string) {
-    User existingUser = User.getWithAccountName(string); 
-    Boolean guideExistance = false; 
-    if (existingUser != null) { 
-      if (existingUser instanceof Guide) { 
-        guideExistance = true; 
+    User existingUser = User.getWithAccountName(string);
+    Boolean guideExistance = false;
+    if (existingUser != null) {
+      if (existingUser instanceof Guide) {
+        guideExistance = true;
       }
     }
-    assertFalse(guideExistance); 
+    assertFalse(guideExistance);
   }
 }
