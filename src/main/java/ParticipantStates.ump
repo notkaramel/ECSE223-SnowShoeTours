@@ -101,7 +101,7 @@ class Participant {
   }
   
   private boolean hasAuthCode() {
-    return getAuthorizationCode() != null;
+    return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();
   }
 
   private boolean isTime() {
@@ -114,13 +114,5 @@ class Participant {
     // isTime = (weekDifference == getTour().getStartWeek())
     return weekDifference == getTour().getStartWeek();
   }
-
-  // private void doStartTour() {
-  //   getTour().start();
-  // }
-
-  // private void doFinishTour() {
-  //   getTour().finish();
-  // }
 }
 
