@@ -1,41 +1,49 @@
-Class snowshoetours {
+class SnowShoeTour {
     public void reinitialize() {
-    User.reinitializeUniqueAccountName(new List<User> getGuides().addAll(getParticpants))
-    BookableItem.reinitializeUniqueItemName(new List<BookableItem> getGear.addAll(getCombos))
-    Lodge.reinitializeUniqueLodgeName(getLodges());
-    Tour.reinitializeUniqueID(getTours());
-  }
-  Class User{
-    public static void reinitializeUniqueAccountName(List <User> users){
-        usersByAccountName.clear();{
-            for (var u: users){
-                usersByAccountName.put(u.getAccountName, u);
-            }
-        }
+      List<User> userList = new ArrayList<>();
+      userList.addAll(getGuides());
+      userList.addAll(getParticipants());
+      User.reinitializeUniqueAccountName(userList);
+
+      List<BookableItem> bookableItemList = new ArrayList<>();
+      bookableItemList.addAll(getGear());
+      bookableItemList.addAll(getCombos());
+      BookableItem.reinitializeUniqueItemName(bookableItemList);
+
+      Lodge.reinitializeUniqueLodgeName(getLodges());
+      Tour.reinitializeUniqueID(getTours());
     }
-  }
-  Class BookableItem{
-    public static void reinitializeUniqueItemName(List <BookableItem> items){
-        bookableitemsByName.clear();
-        for (var b:items){
-            bookableitemsByName.put(b.getName, b);
-        }
-    }
-  }
-  Class Lodge {
-    public static void reinitializeUniqueLodgeName(List <Lodge> lodges){
-        lodgesByName.clear();
-        for (var l:lodges){
-            lodgesByName.put(l.getName, l);
-        }
-    }
-  }
-  Class Tour {
-    public static void reinitializeUniqueID(List <Tour> tours){
-        toursById.clear();
-        for (var t: tours){
-            toursById.put(t.getId, g);
-        }
-    }
+}
+class User{
+  public static void reinitializeUniqueAccountName(List <User> users){
+      usersByAccountName.clear();
+      for (var u: users){
+          usersByAccountName.put(u.getAccountName(), u);
+      }
   }
 }
+class BookableItem{
+  public static void reinitializeUniqueItemName(List <BookableItem> items){
+      bookableitemsByName.clear();
+      for (var b:items){
+          bookableitemsByName.put(b.getName(), b);
+      }
+  }
+}
+class Lodge {
+  public static void reinitializeUniqueLodgeName(List <Lodge> lodges){
+      lodgesByName.clear();
+      for (var l:lodges){
+          lodgesByName.put(l.getName(), l);
+      }
+  }
+}
+class Tour {
+  public static void reinitializeUniqueID(List <Tour> tours){
+      toursById.clear();
+      for (var t: tours){
+          toursById.put(t.getId(), t);
+      }
+  }
+}
+

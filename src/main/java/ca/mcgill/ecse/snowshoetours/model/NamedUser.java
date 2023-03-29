@@ -4,7 +4,7 @@
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 29 "../../../../../../SnowShoeTour.ump"
+// line 30 "../../../../../../SnowShoeTour.ump"
 public abstract class NamedUser extends User
 {
 

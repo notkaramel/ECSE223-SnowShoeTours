@@ -5,7 +5,7 @@ package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
 // line 1 "../../../../../../ParticipantStates.ump"
-// line 40 "../../../../../../SnowShoeTour.ump"
+// line 41 "../../../../../../SnowShoeTour.ump"
 public class Participant extends NamedUser
 {
 
@@ -523,7 +523,7 @@ public class Participant extends NamedUser
 
   // line 104 "../../../../../../ParticipantStates.ump"
    private boolean hasAuthCode(){
-    return getAuthorizationCode() != null;
+    return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();
   }
 
   // line 108 "../../../../../../ParticipantStates.ump"

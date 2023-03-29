@@ -6,7 +6,7 @@ import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 public class SnowShoeTourPersistence {
 
     private static String filename = "data.json";
-    private static JsonSerializer serializer = new JsonSerializer("ca.mcgill.ecse.flightmanagementsystem");
+    private static JsonSerializer serializer = new JsonSerializer("ca.mcgill.ecse.snowshoetours");
 
     public static void setFilename(String filename) {
       SnowShoeTourPersistence.filename = filename;

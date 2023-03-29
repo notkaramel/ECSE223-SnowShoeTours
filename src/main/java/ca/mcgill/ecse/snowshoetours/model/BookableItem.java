@@ -4,7 +4,8 @@
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 56 "../../../../../../SnowShoeTour.ump"
+// line 25 "../../../../../../SnowShoeTourPersistence.ump"
+// line 57 "../../../../../../SnowShoeTour.ump"
 public abstract class BookableItem
 {
 
@@ -185,6 +186,14 @@ public abstract class BookableItem
       BookedItem aBookedItem = bookedItems.get(i - 1);
       aBookedItem.delete();
     }
+  }
+
+  // line 27 "../../../../../../SnowShoeTourPersistence.ump"
+   public static  void reinitializeUniqueItemName(List<BookableItem> items){
+    bookableitemsByName.clear();
+      for (var b:items){
+          bookableitemsByName.put(b.getName(), b);
+      }
   }
 
 

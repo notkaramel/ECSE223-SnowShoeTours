@@ -4,7 +4,7 @@
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 61 "../../../../../../SnowShoeTour.ump"
+// line 62 "../../../../../../SnowShoeTour.ump"
 public class Gear extends BookableItem
 {
 
