@@ -5,7 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ToursStepDefinitions {
-    // Emma
+    // Angela
     @Given("the following SnowShoeTours system exists")
     public void the_following_snow_shoe_tours_system_exists(io.cucumber.datatable.DataTable dataTable) {
         // Write code here that turns the phrase above into concrete actions
@@ -17,7 +17,7 @@ public class ToursStepDefinitions {
         // For other transformations you can register a DataTableType.
         throw new io.cucumber.java.PendingException();
     }
-    // Emma
+    // Angela
     @Given("the participant with email {string} has started their tour")
     public void the_participant_with_email_has_started_their_tour(String string) {
         // Write code here that turns the phrase above into concrete actions
