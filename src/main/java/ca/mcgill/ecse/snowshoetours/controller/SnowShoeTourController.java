@@ -5,6 +5,7 @@ import java.sql.Date;
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 
 import ca.mcgill.ecse.snowshoetours.model.*;
+import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 
 import java.util.*;
 
@@ -124,6 +125,7 @@ public class SnowShoeTourController {
 				ssts.setStartDate(startDate);
 				ssts.setNrWeeks(nrWeeks);
 				ssts.setPriceOfGuidePerWeek(priceOfGuidePerWeek);
+				SnowShoeTourPersistence.save();
 				return "";
 			} catch (Exception e) {
 				return "Error: something went wrong";

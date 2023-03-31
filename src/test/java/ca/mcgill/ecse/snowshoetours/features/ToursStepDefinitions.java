@@ -3,7 +3,11 @@ package ca.mcgill.ecse.snowshoetours.features;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.List;
+import java.util.Map;
+
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+import ca.mcgill.ecse.snowshoetours.model.Guide;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import io.cucumber.java.en.Given;
@@ -73,14 +77,14 @@ public class ToursStepDefinitions {
     // Sameer
     @Given("the following snowshoe tours exist in the system")
     public void the_following_snowshoe_tours_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+        List<Map<String, String>> rows = dataTable.asMaps();
+        for (var row : rows) {
+             // Extract data from  the given table
+          int id = Integer.parseInt(row.get("id")); 
+          int startWeek = Integer.parseInt(row.get("startWeek"));
+          int endWeek = Integer.parseInt(row.get("endWeek"));
+          sst.addTour(id, startWeek, endWeek, (Guide) Guide.getWithAccountName(row.get("guide"))); // Add extracted data
+        }
     }
 
     // Angela
