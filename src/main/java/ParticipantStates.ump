@@ -1,21 +1,17 @@
 class Participant {
   Status{
     NotAssigned {
-      assign(Guide aGuide8)[isGuideAvailable()]
+      assign(Guide aGuide)[isGuideAvailable()]
         / {
         doAssignGuide(aGuide); 
       }-> Assigned;
       
-      // 100% refund
-      cancel()
-        /{
-        doRefund(0);
-      } -> Cancelled;
+      // no refund penalty
+      cancel() /{ doRefund(0);}
+      -> Cancelled;
       
-      start()[isTime()]
-        / {
-        doRefund(0); 
-      } -> Cancelled;
+      start()[isTime()] /{ doRefund(0);}
+      -> Cancelled;
       
       start() -> NotAssigned;
       
@@ -23,50 +19,41 @@ class Participant {
     }
 	// Same as NotPaid
     Assigned{
-      pay()[!hasAuthCode()]
-        / {
-        rejectPayment();
-      }  -> Assigned;
+      pay()[!hasAuthCode()] /{ rejectPayment();}
+      -> Assigned;
       
       pay()[hasAuthCode()]
-         -> Paid;
+      -> Paid;
       
-      start()
-        / {
-        doRefund(0)
-        }
+      // no refund penalty
+      start() / { doRefund(0) }
       -> Cancelled;
     }
     
     Paid {
       // start tour, and it's time to go
-      start()[isTime()]
-        /{
-        // doStartTour();
-      } -> Started;
+      start()[isTime()] -> Started;
       
       // start tour, but not time to start yet
-      start()[!isTime()]
-        -> Paid;
+      start()[!isTime()] -> Paid;
       
       // 50% refund
-      cancel() /{
-        doRefund(50);
-      } -> Cancelled;
+      cancel() /{ doRefund(50);}
+      -> Cancelled;
       
       pay() -> Paid;
     }
     
+    // Tour starts
     Started {
       finish() -> Finished;
       
       // 10% refund
-      cancel() 
-        /{
-        doRefund(10);
-      }-> Cancelled;
+      cancel() /{doRefund(10);}
+      -> Cancelled;
 		
       pay() -> Started;
+      start() -> Started;
     }
     
     Finished {
