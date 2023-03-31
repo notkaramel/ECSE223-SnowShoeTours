@@ -10,6 +10,13 @@ public class SnowShoeTourCreationController {
     private  SnowShoeTourCreationController(){
   }
 
+
+/**
+	 * This method initiates the creation of snow tours using available guides and participants in the system.
+	 * 
+	 * @author Bilar Mokhtari @bmokhtari
+	 * @return
+	 */
   
   public static String initiateSnowToursCreation() {
     List<Guide> unAssignedGuides = sst.getGuides();
@@ -41,6 +48,14 @@ public class SnowShoeTourCreationController {
     return "";
 }
 
+/**
+	 * This method let's participants pay for their trip
+	 * 
+	 * @author Bilar Mokhtari @bmokhtari
+   * @param email : The AccountName of a participant
+   * @param authorizationCode
+	 * @return
+	 */
 public static String payForTrip(String email, String authorizationCode) {
   Participant participant = getParticipantByEmail(email); 
 
@@ -61,6 +76,13 @@ public static String payForTrip(String email, String authorizationCode) {
   return "";
 }
 
+/**
+	 * This method to start a trip for participants for during a specific week
+	 * 
+	 * @author Bilar Mokhtari @bmokhtari
+   * @param week
+	 * @return
+	 */
 public static String startAllTripsForSpecificWeek(int week) {
   List<Tour> shoeTours = sst.getTours(); // Get all tours
 
@@ -84,6 +106,14 @@ public static String startAllTripsForSpecificWeek(int week) {
     }
 }
 
+/**
+	 * This method to finish a trip for a specific participant
+   * Checks if participant exists
+	 * 
+	 * @author Bilar Mokhtari @bmokhtari
+   * @param email : The AccountName of a participant
+	 * @return
+	 */
 public static String finishParticipantTrip(String email) {
   Participant participant = getParticipantByEmail(email); // Get the participant by email [NOT IMPLEMENTED]
 
@@ -100,6 +130,14 @@ public static String finishParticipantTrip(String email) {
   return ""; // Return an empty string to indicate success
 }
 
+/**
+	 * This method to cancel a trip for participants
+   * Checks whether they exist or not and if they have started their tour yet
+	 * 
+	 * @author Bilar Mokhtari @bmokhtari
+   * @param week
+	 * @return
+	 */
 public static String cancelParticipantTrip(String email) {
   Participant participant = getParticipantByEmail(email);
 
@@ -117,8 +155,11 @@ public static String cancelParticipantTrip(String email) {
 
 
 
-
-
+/**
+	 * @author Bilar Mokhtari (@bmokhtari) Helper function
+	 * @param email : The AccountName of a participant
+	 * @return
+	 */
 
 public static Participant getParticipantByEmail(String email) {
   List<Participant> participants = sst.getParticipants();
