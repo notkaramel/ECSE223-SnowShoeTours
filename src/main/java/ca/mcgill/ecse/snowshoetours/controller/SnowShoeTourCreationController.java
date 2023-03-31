@@ -9,6 +9,8 @@ public class SnowShoeTourCreationController {
   private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
     private  SnowShoeTourCreationController(){
   }
+
+  
   public static String initiateSnowToursCreation() {
     List<Guide> unAssignedGuides = sst.getGuides();
     List<Participant> unAssignedParticipants = sst.getParticipants();
@@ -40,14 +42,14 @@ public class SnowShoeTourCreationController {
 }
 
 public static String payForTrip(String email, String authorizationCode) {
-  Participant participant = getAccountList().getA; // [NOT IMPLEMENTED]
+  Participant participant = getParticipantByEmail(email); 
 
   if (participant == null) {
       return String.format("Participant with email address %s does not exist", email);
   }
 
   if (authorizationCode == null || authorizationCode.isEmpty()) {
-      return "Authorization code is missing or empty"; // Return an error message if the authorization code is missing or empty
+      return "<error>"; // Return an error message if the authorization code is missing or empty
   }
 
   try {
@@ -78,12 +80,12 @@ public static String startAllTripsForSpecificWeek(int week) {
     if (tripStarted) { // Check if any trips were started
       return ""; // Return an empty string to indicate that the trips were started successfully
   } else {
-      return "No trips were started for week " + week; // Return a message indicating that no trips were started
+      return String.format("No trips were started for %s", week) ; // Return a message indicating that no trips were started
     }
 }
 
 public static String finishParticipantTrip(String email) {
-  Participant participant = sst.getParticipantByEmail(email); // Get the participant by email [NOT IMPLEMENTED]
+  Participant participant = getParticipantByEmail(email); // Get the participant by email [NOT IMPLEMENTED]
 
   if (participant == null) {
       return String.format("Participant with email address %s does not exist", email); // Use string interpolation for the error message 
@@ -98,50 +100,37 @@ public static String finishParticipantTrip(String email) {
   return ""; // Return an empty string to indicate success
 }
 
-public static String cancelParticipantTrip(String name) {
-  Participant participant = participant.getWithAccountName(email); // Get the participant by accountName
+public static String cancelParticipantTrip(String email) {
+  Participant participant = getParticipantByEmail(email);
 
   if (participant == null) {
-      return String.format("Participant with Account Name address %s does not exist", name); // Use string interpolation for the error message
+      return String.format("Participant with email address %s does not exist", email);
   }
 
   if (!participant.hasTour()) {
-      return "Participant has not started their tour"; // Return an error message if the participant has not started their tour
+      return "Participant has not started their tour";
   }
 
-  participant.cancel(); // Cancel the participant's tour
-  return ""; // Return an empty string to indicate success
+  participant.cancel();
+  return "";
 }
 
 
 
 
 
-public static List<Participant> getAccountList() {
-  List<User> usersOfSystem = new ArrayList<>(sst.getParticipants().size() + sst.getGuides().size()); // Initialize the list with an initial capacity
 
-  for (Participant participant : sst.getParticipants()) {
-      usersOfSystem.add(new Pa(
-              participant.getAccountName(),
-              participant.getName(),
-              "Participant",
-              participant.getStatusFullName(),
-              participant.getWeekAvailableFrom(),
-              participant.getWeekAvailableUntil(),
-              participant.getNrWeeks(),
-              participant.isLodgeRequired()
-      ));
+public static Participant getParticipantByEmail(String email) {
+  List<Participant> participants = sst.getParticipants();
+  
+  for (Participant participant : participants) {
+      if (participant.getAccountName().equals(email)) {
+          return participant;
+      }
   }
-
-  for (Guide guide : sst.getGuides()) {
-      usersOfSystem.add(new User(
-              guide.getAccountName(),
-              guide.getName(),
-              "Guide"
-      ));
-  }
-
-  return getAccountList();
+  
+  // Participant not found with matching email
+  return null;
 }
 
 
