@@ -6,6 +6,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -154,8 +155,12 @@ public class ToursStepDefinitions {
     // Angela
     @Then("the participant with email {string} shall be marked as {string}")
     public void the_participant_with_email_shall_be_marked_as(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    	List <Participant> participants = sst.getParticipants();
+    	for (int p = 0; p<participants.size();p++) {
+    		if(participants.get(p).getAccountName() == string) {
+    			assertEquals(string2,participants.get(p).getStatusFullName());
+    		}
+    	}
     }
 
     // Angela
