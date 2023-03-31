@@ -3,6 +3,7 @@ package ca.mcgill.ecse.snowshoetours.features;
 import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+import static org.junit.Assert.assertEquals;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
@@ -87,7 +88,7 @@ public class ToursStepDefinitions {
     		int week_from = Integer.valueOf(row.get("weeksAvailableFrom"));
     		int week_until = Integer.valueOf(row.get("weeksAvailableUntil"));
     		boolean lodge_required = Boolean.valueOf(row.get("lodgeRequired"));
-    		sst.addParticipant(email, password, name, emergency_contact, nr_weeks, week_from, week_until, lodge_required,"",0);
+    		sst.addParticipant(email, password, name, emergency_contact, nr_weeks, week_from, week_until, lodge_required,null,0);
     		
     	}
         
@@ -160,8 +161,8 @@ public class ToursStepDefinitions {
     // Angela
     @Then("the number of snowshoe tours shall be {string}")
     public void the_number_of_snowshoe_tours_shall_be(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    	int num_tours = sst.getTours().size();
+    	assertEquals(Integer.parseInt(string),num_tours);
     }
 
     // Jen
