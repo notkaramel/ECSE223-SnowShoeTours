@@ -1,10 +1,11 @@
 class Participant {
   Status{
     NotAssigned {
-      assign(Guide aGuide)[isGuideAvailable()]
-        / {
-        doAssignGuide(aGuide); 
-      }-> Assigned;
+      assign(Tour aTour)[isGuideAvailable(aTour)] /{doAssign(aTour);}
+        -> Assigned;
+
+      assign(Tour aTour)[!isGuideAvailable(aTour)] /{rejectAssign();}
+        -> NotAssigned;
       
       // no refund penalty
       cancel() /{ doRefund(0);}
@@ -26,7 +27,7 @@ class Participant {
       -> Paid;
       
       // no refund penalty
-      start() / { doRefund(0) }
+      start() / { doRefund(0); }
       -> Cancelled;
     }
     
@@ -66,17 +67,17 @@ class Participant {
     }
   }
 
-  private void doAssignGuide(Guide aGuide){
-    getTour().setGuide(aGuide);
-  }
-  
-  private boolean isGuideAvailable() {
-    Guide g = getTour().getGuide();
-    return g != null || !g.isEmpty();
+  private boolean isGuideAvailable(Tour aTour) {
+    Guide g = aTour.getGuide();
+    return g != null;
   }
 
-  private void rejectAssignGuide(String error){
-    throw new RuntimeException(error);
+  private void doAssign(Tour aTour){
+    setTour(aTour);
+  }
+  
+  private void rejectAssign(){
+    throw new RuntimeException("No guide is assigned to this tour!");
   }
 
   private void rejectPayment(){
