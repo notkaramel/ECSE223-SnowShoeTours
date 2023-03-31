@@ -22,11 +22,10 @@ public class SnowShoeTourPersistence {
 
     public static SnowShoeTour load() {
       var snowShoeTour = (SnowShoeTour) serializer.deserialize(filename);
-      // model cannot be loaded - create empty BTMS
       if (snowShoeTour == null) {
         snowShoeTour = new SnowShoeTour(null, 0, 0);
       } else {
-        // snowShoeTour.reinitialize();
+        snowShoeTour.reinitialize();
       }
       return snowShoeTour;
     }

@@ -1,5 +1,8 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
@@ -8,6 +11,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ToursStepDefinitions {
+
+    private SnowShoeTour sst;
+  private String error;
+
     // Emma
     @Given("the following SnowShoeTours system exists")
     public void the_following_snow_shoe_tours_system_exists(io.cucumber.datatable.DataTable dataTable) {
@@ -34,13 +41,13 @@ public class ToursStepDefinitions {
     @Given("the participant with email {string} has paid for their tour")
     public void the_participant_with_email_has_paid_for_their_tour(String string) {
         // Write code here that turns the phrase above into concrete actions
-        SnowShoeTour SST = SnowShoeToursApplication.getSnowShoeTour();
-        for (Participant p : SST.getParticipants()){
-            // Find the participant with the email {string}
-            if (p.getAccountName().equals(string)){
-                if ()
-            }
-        }
+        // SnowShoeTour SST = SnowShoeToursApplication.getSnowShoeTour();
+        // for (Participant p : SST.getParticipants()){
+        //     // Find the participant with the email {string}
+        //     if (p.getAccountName().equals(string)){
+        //         if ()
+        //     }
+        // }
     }
     // Antoine
     @Given("the following guides exist in the system")
@@ -58,8 +65,9 @@ public class ToursStepDefinitions {
     // Sameer
     @Given("the participant with email {string} has cancelled their tour")
     public void the_participant_with_email_has_cancelled_their_tour(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        Participant p = (Participant) Participant.getWithAccountName(string);
+        p.cancel();
+
     }
 
     // Sameer
@@ -176,21 +184,24 @@ public class ToursStepDefinitions {
     // Sameer
     @Then("the number of participants shall be {string}")
     public void the_number_of_participants_shall_be(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(sst.getParticipants().size(), Integer.parseInt(string)); 
+        
     }
 
     // Sameer
     @Then("a participant account shall exist with email {string} and a refund of {string} percent")
     public void a_participant_account_shall_exist_with_email_and_a_refund_of_percent(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertNotNull((Participant) Participant.getWithAccountName(string));
+        Participant p = (Participant) Participant.getWithAccountName(string);
+        assertEquals(p.getRefundedPercentageAmount(), Integer.parseInt(string2));
     }
 
     // Sameer
     @Then("a participant account shall exist with email {string} and authorization code {string}")
     public void a_participant_account_shall_exist_with_email_and_authorization_code(String string, String string2) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertNotNull((Participant) Participant.getWithAccountName(string));
+        Participant p = (Participant) Participant.getWithAccountName(string);
+        assertEquals(p.getAuthorizationCode(), string2);
+     
     }
 }
