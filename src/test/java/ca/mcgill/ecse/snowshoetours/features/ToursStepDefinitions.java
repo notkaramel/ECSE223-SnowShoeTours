@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
@@ -14,8 +15,9 @@ import io.cucumber.java.en.When;
 
 public class ToursStepDefinitions {
 	private SnowShoeTour sst;
-	private String error;
-    // Angela
+	/**
+	 * @author Angela Zhu @angelaxzhu
+	 */
     @Given("the following SnowShoeTours system exists")
     public void the_following_snow_shoe_tours_system_exists(io.cucumber.datatable.DataTable dataTable) {    	
     	sst= SnowShoeToursApplication.getSnowShoeTour();
@@ -31,12 +33,20 @@ public class ToursStepDefinitions {
     	}
     }
     
-    // Angela
+    /**
+	 * @author Angela Zhu @angelaxzhu
+	 */
     @Given("the participant with email {string} has started their tour")
-    public void the_participant_with_email_has_started_their_tour(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_participant_with_email_has_started_their_tour(String email) {
+    	List <Participant> participants = sst.getParticipants();
+    	for (int p = 0; p<participants.size();p++) {
+    		if(participants.get(p).getAccountName() == email) {
+    			Participant participant = participants.get(p);
+    			participant.startTour();
+    		}
+    	}
     }
+    
     // Antoine
     @Given("the participant with email {string} has paid for their tour")
     public void the_participant_with_email_has_paid_for_their_tour(String string) {
@@ -76,7 +86,9 @@ public class ToursStepDefinitions {
         throw new io.cucumber.java.PendingException();
     }
 
-    // Angela
+    /**
+	 * @author Angela Zhu @angelaxzhu
+	 */
     @Given("the following participants exist in the system")
     public void the_following_participants_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {  
     	List<Map<String,String>> rows = dataTable.asMaps();
@@ -95,11 +107,18 @@ public class ToursStepDefinitions {
         
     }
 
-    // Angela
+    /**
+	 * @author Angela Zhu @angelaxzhu
+	 */
     @Given("the participant with email {string} has finished their tour")
-    public void the_participant_with_email_has_finished_their_tour(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void the_participant_with_email_has_finished_their_tour(String email) {
+    	List <Participant> participants = sst.getParticipants();
+    	for (int p = 0; p<participants.size();p++) {
+    		if(participants.get(p).getAccountName() == email) {
+    			Participant participant = participants.get(p);
+    			participant.finish();
+    		}
+    	}
     }
 
     // Jen
@@ -152,22 +171,29 @@ public class ToursStepDefinitions {
         throw new io.cucumber.java.PendingException();
     }
 
-    // Angela
+    /**
+	 * @author Angela Zhu @angelaxzhu
+	 */
     @Then("the participant with email {string} shall be marked as {string}")
-    public void the_participant_with_email_shall_be_marked_as(String string, String string2) {
+    public void the_participant_with_email_shall_be_marked_as(String email, String mark) {
     	List <Participant> participants = sst.getParticipants();
+    	boolean participant_exists = false;
     	for (int p = 0; p<participants.size();p++) {
-    		if(participants.get(p).getAccountName() == string) {
-    			assertEquals(string2,participants.get(p).getStatusFullName());
+    		if(participants.get(p).getAccountName() == email) {
+    			assertEquals(mark,participants.get(p).getStatusFullName());
+    			participant_exists = true;
     		}
     	}
+    	assertTrue(participant_exists);
     }
 
-    // Angela
+    /**
+	 * @author Angela Zhu @angelaxzhu
+	 */
     @Then("the number of snowshoe tours shall be {string}")
-    public void the_number_of_snowshoe_tours_shall_be(String string) {
+    public void the_number_of_snowshoe_tours_shall_be(String number) {
     	int num_tours = sst.getTours().size();
-    	assertEquals(Integer.parseInt(string),num_tours);
+    	assertEquals(Integer.parseInt(number),num_tours);
     }
 
     // Jen
