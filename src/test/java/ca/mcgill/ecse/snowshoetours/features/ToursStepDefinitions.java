@@ -1,15 +1,10 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
-import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
-import ca.mcgill.ecse.snowshoetours.model.Participant;
-import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ToursStepDefinitions {
-    SnowShoeTour SST = SnowShoeToursApplication.getSnowShoeTour();
-
     // Emma
     @Given("the following SnowShoeTours system exists")
     public void the_following_snow_shoe_tours_system_exists(io.cucumber.datatable.DataTable dataTable) {
@@ -28,20 +23,11 @@ public class ToursStepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-    
-    /**
-     * @author Antoine Phan @notkaramel
-     * @param string
-     */
+    // Antoine
     @Given("the participant with email {string} has paid for their tour")
     public void the_participant_with_email_has_paid_for_their_tour(String string) {
         // Write code here that turns the phrase above into concrete actions
-        for (Participant p : SST.getParticipants()){
-            // Find the participant with the email {string}
-            if (p.getAccountName().equals(string)){
-                return;
-            }
-        }
+        throw new io.cucumber.java.PendingException();
     }
     // Antoine
     @Given("the following guides exist in the system")
