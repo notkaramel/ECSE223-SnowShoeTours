@@ -1,23 +1,35 @@
 package ca.mcgill.ecse.snowshoetours.features;
 
+import java.sql.Date;
+import java.util.List;
+import java.util.Map;
+
+import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class ToursStepDefinitions {
-    // Emma
+	private SnowShoeTour sst;
+	private String error;
+    // Angela
     @Given("the following SnowShoeTours system exists")
-    public void the_following_snow_shoe_tours_system_exists(io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+    public void the_following_snow_shoe_tours_system_exists(io.cucumber.datatable.DataTable dataTable) {    	
+    	sst= SnowShoeToursApplication.getSnowShoeTour();
+    	List<Map<String,String>> rows = dataTable.asMaps();
+    	for (var row:rows) {
+    		Date startDate = Date.valueOf(row.get("startDate"));
+    		int nrWeeks = Integer.valueOf(row.get("nrWeeks"));
+    		int weeklyGuidePrice = Integer.valueOf(row.get("priceOfGuidePerWeek"));
+    		
+    		sst.setStartDate(startDate);
+    		sst.setNrWeeks(nrWeeks);
+    		sst.setPriceOfGuidePerWeek(weeklyGuidePrice);
+    	}
     }
-    // Emma
+    
+    // Angela
     @Given("the participant with email {string} has started their tour")
     public void the_participant_with_email_has_started_their_tour(String string) {
         // Write code here that turns the phrase above into concrete actions
@@ -132,14 +144,14 @@ public class ToursStepDefinitions {
         throw new io.cucumber.java.PendingException();
     }
 
-    // Emma
+    // Angela
     @Then("the participant with email {string} shall be marked as {string}")
     public void the_participant_with_email_shall_be_marked_as(String string, String string2) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
 
-    // Emma
+    // Angela
     @Then("the number of snowshoe tours shall be {string}")
     public void the_number_of_snowshoe_tours_shall_be(String string) {
         // Write code here that turns the phrase above into concrete actions
