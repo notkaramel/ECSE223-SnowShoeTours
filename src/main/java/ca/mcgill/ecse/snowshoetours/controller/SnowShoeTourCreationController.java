@@ -17,7 +17,7 @@ public class SnowShoeTourCreationController {
 
     // Check if there are enough guides to lead all snow tours
     if (unAssignedGuides.size() < unAssignedParticipants.size())
-        return "There are not enough guides to lead all snow tours.";
+        return "There are not enough guides to lead all the snow tours.";
 
     if (unAssignedGuides.isEmpty())
       return "A guide must exist.";
@@ -49,7 +49,7 @@ public static String payForTrip(String email, String authorizationCode) {
   }
 
   if (authorizationCode == null || authorizationCode.isEmpty()) {
-      return "<error>"; // Return an error message if the authorization code is missing or empty
+      return "Invalid authorization code"; // Return an error message if the authorization code is missing or empty
   }
 
   try {
