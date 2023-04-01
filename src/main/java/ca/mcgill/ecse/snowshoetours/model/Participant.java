@@ -264,8 +264,6 @@ public class Participant extends NamedUser
       case Assigned:
         if (!(hasAuthCode()))
         {
-        // line 23 "../../../../../../ParticipantStates.ump"
-          rejectPayment();
           setStatus(Status.Assigned);
           wasEventProcessed = true;
           break;
@@ -515,16 +513,11 @@ public class Participant extends NamedUser
   }
 
   // line 83 "../../../../../../ParticipantStates.ump"
-   private void rejectPayment(){
-    throw new RuntimeException("Payment not accepted");
-  }
-
-  // line 87 "../../../../../../ParticipantStates.ump"
    private void doRefund(Integer refundedPercentage){
     setRefundedPercentageAmount(refundedPercentage);
   }
 
-  // line 91 "../../../../../../ParticipantStates.ump"
+  // line 87 "../../../../../../ParticipantStates.ump"
    private boolean hasAuthCode(){
     return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();
   }

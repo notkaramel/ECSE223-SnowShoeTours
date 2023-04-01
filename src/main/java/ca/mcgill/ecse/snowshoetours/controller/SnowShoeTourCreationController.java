@@ -119,44 +119,13 @@ public class SnowShoeTourCreationController {
     for (Tour t : tourList) {
       if (t.getStartWeek() == week) {
         for (Participant p : t.getParticipants()) {
-          if (p.getStatus() == Participant.Status.Finished) {
-            return "Cannot start tour because the participant has finished their tour";
-          } else if (p.getStatusFullName().equals("Started")) {
-            return "Cannot start tour because the participant has already started their tour";
-          } else if (p.getStatusFullName().equals("Cancelled")) {
-            return "Cannot start tour because the participant has cancelled their tour";
+          if (p.start()) {
+            
           }
-          p.start();
         }
       }
     }
     return "nah";
-    // boolean tripStarted = false; // Flag to keep track of whether any trips were started
-
-    // for (Tour shoeTour : shoeTours) { // Loop through all tours
-    // if (shoeTour.getStartWeek() == week) { // Check if tour is starting in the specified week
-    // for (Participant participant : shoeTour.getParticipants()) { // Loop through all
-    // // participants in the tour
-    // if (!participant.hasTour()) { // Check if the participant has not already started the tour
-    // participant.start(); // Start the tour for the participant
-    // tripStarted = true; // Set flag to indicate that a trip was started
-    // }
-    // }
-    // }
-    // }
-
-    // if (tripStarted) { // Check if any trips were started
-    // try {
-    // SnowShoeTourPersistence.save(); // Save the updated system state
-    // } catch (Exception e) {
-    // return e.getMessage(); // Return an error message if the system state could not be saved
-    // }
-    // return ""; // Return an empty string to indicate that the trips were started successfully
-    // } else {
-    // return String.format("No trips were started for week %s", week); // Return a message
-    // // indicating that no trips
-    // // were started
-    // }
   }
 
 
@@ -204,10 +173,10 @@ public class SnowShoeTourCreationController {
     }
 
     // if(participant.getStatus() == Participant.Status.Finished){
-    //   return "Cannot cancel tour because the participant has finished their tour";
+    // return "Cannot cancel tour because the participant has finished their tour";
     // }
     // if (!participant.hasTour()) {
-    //   return "Participant has not started their tour";
+    // return "Participant has not started their tour";
     // }
 
     if (!participant.hasTour()) {

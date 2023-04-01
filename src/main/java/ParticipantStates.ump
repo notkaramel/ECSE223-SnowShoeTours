@@ -20,7 +20,7 @@ class Participant {
     }
 	// Same as NotPaid
     Assigned{
-      pay()[!hasAuthCode()] /{ rejectPayment();}
+      pay()[!hasAuthCode()]
       -> Assigned;
       
       pay()[hasAuthCode()]
@@ -77,10 +77,6 @@ class Participant {
   
   private void rejectAssign(){
     throw new RuntimeException("No guide is assigned to this tour!");
-  }
-
-  private void rejectPayment(){
-    throw new RuntimeException("Payment not accepted");
   }
 
   private void doRefund(Integer refundedPercentage) {
