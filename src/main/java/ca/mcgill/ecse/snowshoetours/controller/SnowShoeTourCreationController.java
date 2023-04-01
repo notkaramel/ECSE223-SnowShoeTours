@@ -4,6 +4,7 @@ import java.util.*;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.*;
+import ca.mcgill.ecse.snowshoetours.model.Participant.Status;
 
 public class SnowShoeTourCreationController {
   private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
@@ -21,6 +22,7 @@ public class SnowShoeTourCreationController {
   public static String initiateSnowToursCreation() {
     List<Guide> unAssignedGuides = sst.getGuides();
     List<Participant> unAssignedParticipants = sst.getParticipants();
+    Tour newTour = new Tour(0, 0, 0, guide, sst);
 
     // Check if there are enough guides to lead all snow tours
     if (unAssignedGuides.size() < unAssignedParticipants.size())
@@ -36,7 +38,7 @@ public class SnowShoeTourCreationController {
         //Makes sure that the participant hasn't been assigned yet
         if (participant.getSnowShoeTour() == null) {
           Guide guide = unAssignedGuides.remove(0); // Get the next unassigned guide
-          participant.assignGuide(guide);
+          participant.assign(null);
           if (unAssignedGuides.isEmpty()) // Exit loop if all guides have been assigned
             break;
         }
@@ -97,9 +99,20 @@ public class SnowShoeTourCreationController {
         if (shoeTour.getStartWeek() == week) { // Check if tour is starting in the specified week
             for (Participant participant : shoeTour.getParticipants()) { // Loop through all participants in the tour
                 if (!participant.hasTour()) { // Check if the participant has not already started the tour
-                    participant.startTour(); // Start the tour for the participant
+                    participant.start(); // Start the tour for the participant
                     tripStarted = true; // Set flag to indicate that a trip was started
                 }
+                
+                if(participant.getStatus().Cancelled.equals(Status.Started)){
+                  return "Cannot start tour because the participant has already started their tour";
+                }
+                if(participant.getStatus().Cancelled.equals(Status.Cancelled)){
+                  return "Cannot cancel tour because the participant has already cancelled their tour";
+                }
+                if(participant.getStatus().Cancelled.equals(Status.Finished)){
+                  return "Cannot cancel tour because the participant has finished their tour";
+                }
+
             }
         }
     }
