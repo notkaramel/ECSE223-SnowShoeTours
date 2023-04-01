@@ -1,18 +1,18 @@
 class Participant {
   Status{
     NotAssigned {
-      assign(Tour aTour)[isGuideAvailable(aTour)] /{doAssign(aTour);}
+      assign(Tour aTour)[hasGuide(aTour)] /{doAssign(aTour);}
         -> Assigned;
 
-      assign(Tour aTour)[!isGuideAvailable(aTour)] /{rejectAssign();}
+      assign(Tour aTour)[!hasGuide(aTour)] /{rejectAssign();}
         -> NotAssigned;
       
       // no refund penalty
       cancel() /{ doRefund(0);}
       -> Cancelled;
       
-      start()[isTime()] /{ doRefund(0);}
-      -> Cancelled;
+      // start() /{ doRefund(0);}
+      // -> Cancelled;
       
       start() -> NotAssigned;
       
@@ -33,10 +33,10 @@ class Participant {
     
     Paid {
       // start tour, and it's time to go
-      start()[isTime()] -> Started;
+      start() -> Started;
       
       // start tour, but not time to start yet
-      start()[!isTime()] -> Paid;
+      //start()[!isTime()] -> Paid;
       
       // 50% refund
       cancel() /{ doRefund(50);}
@@ -67,9 +67,8 @@ class Participant {
     }
   }
 
-  private boolean isGuideAvailable(Tour aTour) {
-    Guide g = aTour.getGuide();
-    return g != null;
+  private boolean hasGuide(Tour aTour) {
+    return aTour.getGuide() != null && !aTour.getGuide().getName().isEmpty();
   }
 
   private void doAssign(Tour aTour){
@@ -90,17 +89,6 @@ class Participant {
   
   private boolean hasAuthCode() {
     return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();
-  }
-
-  private boolean isTime() {
-    java.util.Date today = new java.util.Date();
-    // timeDifference = today - getSnowShoeTour().getStartDate() (using getTime --> in ms)
-    long timeDifference = today.getTime() - getSnowShoeTour().getStartDate().getTime();
-    // convert ms to weeks
-    int weekDifference = (int) timeDifference / (1000*60*60*24*7);
-
-    // isTime = (weekDifference == getTour().getStartWeek())
-    return weekDifference == getTour().getStartWeek();
   }
 }
 

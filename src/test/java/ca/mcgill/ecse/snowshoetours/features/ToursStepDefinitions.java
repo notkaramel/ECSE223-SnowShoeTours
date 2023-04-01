@@ -138,9 +138,14 @@ public class ToursStepDefinitions {
     @When("the manager attempts to start the tours for week {string}")
     public void the_manager_attempts_to_start_the_tours_for_week(String string) {
         // Write code here that turns the phrase above into concrete actions
-        Tour t = SST.getTours().get(Integer.parseInt(string));
-        for(Participant p: t.getParticipants()){
-            p.start();
+        for (Tour t : SST.getTours())
+        {
+            if (t.getStartWeek() == Integer.parseInt(string))
+            {
+                for(Participant p: t.getParticipants()){
+                    p.start();
+                }
+            }
         }
     }
 
