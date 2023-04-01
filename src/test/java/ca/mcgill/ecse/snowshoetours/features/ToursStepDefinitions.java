@@ -68,7 +68,7 @@ public class ToursStepDefinitions {
         for (Participant p : sst.getParticipants()) {
             // Find the participant with the email {string}
             if (p.getAccountName().equals(string)) {
-                error = SnowShoeTourCreationController.payForTrip(string);
+                p.pay();
             }
         }
     }
@@ -195,13 +195,14 @@ public class ToursStepDefinitions {
     @When("the manager attempts to start the tours for week {string}")
     public void the_manager_attempts_to_start_the_tours_for_week(String string) {
         // Write code here that turns the phrase above into concrete actions
-        for (Tour t : sst.getTours()) {
-            if (t.getStartWeek() == Integer.parseInt(string)) {
-                for (Participant p : t.getParticipants()) {
-                    p.start();
-                }
-            }
-        }
+        // for (Tour t : sst.getTours()) {
+        //     if (t.getStartWeek() == Integer.parseInt(string)) {
+        //         for (Participant p : t.getParticipants()) {
+        //             SnowShoeTourCreationController.startAllTripsForSpecificWeek(0)
+        //         }
+        //     }
+        // }
+        error = SnowShoeTourCreationController.startAllTripsForSpecificWeek(Integer.parseInt(string));
     }
 
     /**
@@ -215,8 +216,7 @@ public class ToursStepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         for (Participant p : sst.getParticipants()) {
             if (p.getAccountName().equals(string)) {
-                p.setAuthorizationCode(string2);
-                p.pay();
+                error = SnowShoeTourCreationController.payForTrip(string, string2);
             }
         }
     }
