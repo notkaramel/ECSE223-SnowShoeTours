@@ -5,7 +5,8 @@ package ca.mcgill.ecse.snowshoetours.model;
 import java.sql.Date;
 import java.util.*;
 
-// line 4 "../../../../../../SnowShoeTour.ump"
+// line 1 "../../../../../../SnowShoeTourPersistence.ump"
+// line 5 "../../../../../../SnowShoeTour.ump"
 public class SnowShoeTour
 {
 
@@ -1010,6 +1011,22 @@ public class SnowShoeTour
       tours.remove(aTour);
     }
     
+  }
+
+  // line 3 "../../../../../../SnowShoeTourPersistence.ump"
+   public void reinitialize(){
+    List<User> userList = new ArrayList<>();
+      userList.addAll(getGuides());
+      userList.addAll(getParticipants());
+      User.reinitializeUniqueAccountName(userList);
+
+      List<BookableItem> bookableItemList = new ArrayList<>();
+      bookableItemList.addAll(getGear());
+      bookableItemList.addAll(getCombos());
+      BookableItem.reinitializeUniqueItemName(bookableItemList);
+
+      Lodge.reinitializeUniqueLodgeName(getLodges());
+      Tour.reinitializeUniqueID(getTours());
   }
 
 

@@ -4,7 +4,8 @@
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 77 "../../../../../../SnowShoeTour.ump"
+// line 33 "../../../../../../SnowShoeTourPersistence.ump"
+// line 78 "../../../../../../SnowShoeTour.ump"
 public class Lodge
 {
 
@@ -255,6 +256,14 @@ public class Lodge
     {
       tours.get(0).setLodge(null);
     }
+  }
+
+  // line 35 "../../../../../../SnowShoeTourPersistence.ump"
+   public static  void reinitializeUniqueLodgeName(List<Lodge> lodges){
+    lodgesByName.clear();
+      for (var l:lodges){
+          lodgesByName.put(l.getName(), l);
+      }
   }
 
 
