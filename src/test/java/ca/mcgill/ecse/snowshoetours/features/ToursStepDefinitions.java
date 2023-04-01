@@ -214,11 +214,7 @@ public class ToursStepDefinitions {
     public void the_manager_attempts_to_confirm_payment_for_email_using_authorization_code(
             String string, String string2) {
         // Write code here that turns the phrase above into concrete actions
-        for (Participant p : sst.getParticipants()) {
-            if (p.getAccountName().equals(string)) {
-                error = SnowShoeTourCreationController.payForTrip(string, string2);
-            }
-        }
+        error = SnowShoeTourCreationController.payForTrip(string, string2);
     }
 
     /*

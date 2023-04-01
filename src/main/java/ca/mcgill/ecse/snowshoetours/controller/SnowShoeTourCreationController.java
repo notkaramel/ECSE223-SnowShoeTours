@@ -23,7 +23,7 @@ public class SnowShoeTourCreationController {
   public static String initiateSnowToursCreation() {
     List<Guide> unAssignedGuides = sst.getGuides();
     List<Participant> unAssignedParticipants = sst.getParticipants();
-    Tour newTour = new Tour(0, 0, 0, guide, sst);
+    Tour newTour = new Tour(0, 0, 0, unAssignedGuides.get(0), sst);
 
     // Check if there are enough guides to lead all snow tours
     if (unAssignedGuides.size() < unAssignedParticipants.size())
@@ -38,7 +38,7 @@ public class SnowShoeTourCreationController {
       for (Participant participant : unAssignedParticipants) {
         //Makes sure that the participant hasn't been assigned yet
         if (participant.getSnowShoeTour() == null) {
-          Guide guide = unAssignedGuides.remove(0); // Get the next unassigned guide
+          Guide guide = unAssignedGuides.get(0); // Get the next unassigned guide
           participant.assign(null);
           if (unAssignedGuides.isEmpty()) // Exit loop if all guides have been assigned
             break;
@@ -66,14 +66,28 @@ public class SnowShoeTourCreationController {
     Participant participant = getParticipantByEmail(email); // Get participant by email
 
     if (participant == null) {
-        return String.format("Participant with email address %s does not exist", email); // Return error message if participant is null
+        return "Participant with email address " + email +  " does not exist"; // Return error message if participant is null
     }
+
+    participant.setAuthorizationCode(authorizationCode);
+
 
     if (authorizationCode == null || authorizationCode.isEmpty()) {
         return "Invalid authorization code"; // Return error message if authorization code is missing or empty
     }
+    if(participant.pay()== true){
+      if(participant.getStatusFullName().equals("Paid")){
+        return "The participant has already paid for their tour";
+      } else if (participant.getStatusFullName().equals("Cancelled")){
+        return "Cannot cancel tour because the participant has already cancelled] their tour";
+      }
+    }
+    if(participant.getStatusFullName().equals("NotAssigned")){
+      return "The participant has not been assigned to their tour";
+    }
 
     try {
+        participant.setAuthorizationCode(authorizationCode);
         participant.pay(); // Process payment for participant
         SnowShoeTourPersistence.save(); // Save persistence after payment is processed
     } catch (Exception e) {
@@ -103,20 +117,18 @@ public class SnowShoeTourCreationController {
                     participant.start(); // Start the tour for the participant
                     tripStarted = true; // Set flag to indicate that a trip was started
                 }
-                
-                switch (participant.getStatus()) {
-                  case Started:
-                      return "Cannot start tour because the participant has already started their tour";
-                  case Cancelled:
-                      return "Cannot cancel tour because the participant has already cancelled their tour";
-                  case Finished:
-                      return "Cannot cancel tour because the participant has finished their tour";
-                  default:
-                      // handle any other status
-                      return "";
-              }
-              
 
+                switch (participant.getStatus()) {
+                    case Started:
+                        return("Cannot start tour because the participant has already started their tour\n");
+                    case Cancelled:
+                        return("Cannot cancel tour because the participant has already cancelled their tour\n");
+                    case Finished:
+                        return("Cannot cancel tour because the participant has finished their tour\n");
+                    default:
+                        // handle any other status
+                        break;
+                }
             }
         }
     }
@@ -127,11 +139,13 @@ public class SnowShoeTourCreationController {
         } catch (Exception e) {
             return e.getMessage(); // Return an error message if the system state could not be saved
         }
-        return ""; // Return an empty string to indicate that the trips were started successfully
     } else {
-        return String.format("No trips were started for week %s", week); // Return a message indicating that no trips were started
+       return(String.format("No trips were started for week %s\n", week)); // Append a message indicating that no trips were started
     }
+
+    return "wild"; // Return the accumulated messages
 }
+
 
 
 
@@ -149,6 +163,7 @@ public class SnowShoeTourCreationController {
     if (participant == null) {
         return String.format("Participant with email address %s does not exist", email);
     }
+    if(!participant.start())
   
     try {
         participant.finish();
@@ -185,6 +200,7 @@ public class SnowShoeTourCreationController {
     participant.cancel(); // Cancel the participant's tour
   
     try {
+        participant.cancel();
         SnowShoeTourPersistence.save(); // Save persistence after the participant's tour is cancelled
     } catch (Exception e) {
         return e.getMessage(); // Return the error message from the exception
