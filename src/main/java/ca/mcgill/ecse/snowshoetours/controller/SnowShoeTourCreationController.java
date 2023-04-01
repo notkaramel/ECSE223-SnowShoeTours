@@ -79,20 +79,22 @@ return "";
     if (authorizationCode == null || authorizationCode.isEmpty()) {
         return "Invalid authorization code"; // Return error message if authorization code is missing or empty
     }
-    if(participant.pay()){
-      if(participant.getStatusFullName().equals("Paid")){
-        return "The participant has already paid for their tour";
-      }
-      if(participant.getStatusFullName().equals("NotAssigned")){
-        return "The participant has not been assigned to their tour";
-      }
+    switch (participant.getStatusFullName()) {
+      case "Paid":
+          return("The participant has already paid for their tour");
+      case "Started":
+        return("The participant has already paid for their tour");
+      case "Cancelled":
+          return("Cannot pay for tour because the participant has cancelled their tour");
+      case "Finished":
+          return("The participant has already paid for their tour");
+      case "NotAssigned":
+        return("The participant has not been assigned to their tour");
+      default:
+          // handle any other status
+          break;
     }
-    if(participant.getStatusFullName().equals("NotAssigned")){
-      return "The participant has not been assigned to their tour";
-    }
-
     try {
-        participant.setAuthorizationCode(authorizationCode);
         participant.pay(); // Process payment for participant
         SnowShoeTourPersistence.save(); // Save persistence after payment is processed
     } catch (Exception e) {
@@ -118,18 +120,15 @@ return "";
     for (Tour shoeTour : shoeTours) { // Loop through all tours
         if (shoeTour.getStartWeek() == week) { // Check if tour is starting in the specified week
             for (Participant participant : shoeTour.getParticipants()) { // Loop through all participants in the tour
-                if (!participant.hasTour()) { // Check if the participant has not already started the tour
-                    participant.start(); // Start the tour for the participant
-                    tripStarted = true; // Set flag to indicate that a trip was started
-                }
+                    tripStarted =participant.start(); // Set flag to indicate that a trip was started
 
-                switch (participant.getStatus()) {
-                    case Started:
-                        return("Cannot start tour because the participant has already started their tour\n");
-                    case Cancelled:
-                        return("Cannot cancel tour because the participant has already cancelled their tour\n");
-                    case Finished:
-                        return("Cannot cancel tour because the participant has finished their tour\n");
+                switch (participant.getStatusFullName()) {
+                    case "Started":
+                        return("Cannot start tour because the participant has already started their tour");
+                    case "Cancelled":
+                        return("Cannot start tour because the participant has already cancelled their tour");
+                    case "Finished":
+                        return("Cannot start tour because the participant has finished their tour");
                     default:
                         // handle any other status
                         break;
@@ -168,7 +167,18 @@ return "";
     if (participant == null) {
         return String.format("Participant with email address %s does not exist", email);
     }
-    if(!participant.start())
+    if(!participant.start()){
+      return "Cannot finish a tour for a participant who has not started their tour";
+    }
+    switch (participant.getStatusFullName()) {
+      case "Cancelled":
+          return("Cannot finish tour because the participant has cancelled their tour");
+      case "Finished":
+          return("Cannot finish tour because the participant has already finished their tour");
+      case "NotAssigned":
+        return("Cannot finish a tour for a participant who has not started their tour");
+      default:
+  }
   
     try {
         participant.finish();
@@ -198,9 +208,17 @@ return "";
         return String.format("Participant with email address %s does not exist", email);
     }
   
-    if (!participant.hasTour()) {
-        return "Participant has not started their tour";
-    }
+    switch (participant.getStatus()) {
+      case Started:
+          return("Cannot start tour because the participant has already started their tour");
+      case Cancelled:
+          return("Cannot cancel tour because the participant has already cancelled their tour");
+      case Finished:
+          return("Cannot cancel tour because the participant has finished their tour");
+      default:
+          // handle any other status
+          break;
+  }
   
     participant.cancel(); // Cancel the participant's tour
   

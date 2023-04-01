@@ -120,10 +120,14 @@ public class ToursStepDefinitions {
             int id = Integer.parseInt(row.get("id"));
             int startWeek = Integer.parseInt(row.get("startWeek"));
             int endWeek = Integer.parseInt(row.get("endWeek"));
-            sst.addTour(id, startWeek, endWeek, (Guide) Guide.getWithAccountName(row.get("guide"))); // Add
+            Tour aTour = new Tour(id, startWeek, endWeek, (Guide) Guide.getWithAccountName(row.get("guide")), sst); // Add
                                                                                                      // extracted
                                                                                                      // data
+            Participant participant = (Participant) User.getWithAccountName(row.get("participants"));
+            aTour.addParticipant(participant);
+            participant.assign(aTour);
         }
+        //error = SnowShoeTourCreationController.initiateSnowToursCreation();
     }
 
     /**
