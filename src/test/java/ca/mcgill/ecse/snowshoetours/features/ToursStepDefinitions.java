@@ -10,9 +10,11 @@ import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.Guide;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
+import ca.mcgill.ecse.snowshoetours.model.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.util.*;
 
 public class ToursStepDefinitions {
 
@@ -37,23 +39,21 @@ public class ToursStepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
-    
-    /**
-     * @author Antoine Phan @notkaramel
-     * @param string
-     */
+    // Antoine
     @Given("the participant with email {string} has paid for their tour")
     public void the_participant_with_email_has_paid_for_their_tour(String string) {
         // Write code here that turns the phrase above into concrete actions
-        // SnowShoeTour SST = SnowShoeToursApplication.getSnowShoeTour();
-        // for (Participant p : SST.getParticipants()){
-        //     // Find the participant with the email {string}
-        //     if (p.getAccountName().equals(string)){
-        //         if ()
-        //     }
-        // }
+        for (Participant p : SST.getParticipants()){
+            // Find the participant with the email {string}
+            if (p.getAccountName().equals(string)){
+                p.pay();
+            }
+        }
     }
-    // Antoine
+    /**
+     * @author Antoine Phan (@notkaramel)
+     * @param dataTable
+     */
     @Given("the following guides exist in the system")
     public void the_following_guides_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
         // Write code here that turns the phrase above into concrete actions
@@ -63,7 +63,15 @@ public class ToursStepDefinitions {
         // Double, Byte, Short, Long, BigInteger or BigDecimal.
         //
         // For other transformations you can register a DataTableType.
-        throw new io.cucumber.java.PendingException();
+        List<Map<String, String>> rows = dataTable.asMaps();
+        for(var r : rows){
+            String email = r.get("email");
+            String password = r.get("password");
+            String name = r.get("name");
+            String emergencyContact = r.get("emergencyContact");
+
+            new Guide(email, password, name, emergencyContact, SST);
+        }
     }
 
     // Sameer
@@ -128,19 +136,39 @@ public class ToursStepDefinitions {
         throw new io.cucumber.java.PendingException();
     }
 
-    // Antoine
+    /**
+     * @author Antone Phan @notkaramel
+     * @param string
+     */
     @When("the manager attempts to start the tours for week {string}")
     public void the_manager_attempts_to_start_the_tours_for_week(String string) {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        for (Tour t : SST.getTours())
+        {
+            if (t.getStartWeek() == Integer.parseInt(string))
+            {
+                for(Participant p: t.getParticipants()){
+                    p.start();
+                }
+            }
+        }
     }
 
-    // Antoine    
+    /**
+     * @author Antoine Phan @notkaramel
+     * @param string email/account name of participant
+     * @param string2 authorization code for the payment
+     */
     @When("the manager attempts to confirm payment for email {string} using authorization code {string}")
     public void the_manager_attempts_to_confirm_payment_for_email_using_authorization_code(String string,
             String string2) {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        for (Participant p : SST.getParticipants()){
+            if (p.getAccountName().equals(string)){
+                p.setAuthorizationCode(string2);
+                p.pay();
+            }
+        }
     }
 
     // Jen
