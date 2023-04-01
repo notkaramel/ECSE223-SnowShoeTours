@@ -103,15 +103,18 @@ public class SnowShoeTourCreationController {
                     tripStarted = true; // Set flag to indicate that a trip was started
                 }
                 
-                if(participant.getStatus().equals(Status.Started)){
-                  return "Cannot start tour because the participant has already started their tour";
-                }
-                if(participant.getStatus().equals(Status.Cancelled)){
-                  return "Cannot cancel tour because the participant has already cancelled their tour";
-                }
-                if(participant.getStatus().equals(Status.Finished)){
-                  return "Cannot cancel tour because the participant has finished their tour";
-                }
+                switch (participant.getStatus()) {
+                  case Started:
+                      return "Cannot start tour because the participant has already started their tour";
+                  case Cancelled:
+                      return "Cannot cancel tour because the participant has already cancelled their tour";
+                  case Finished:
+                      return "Cannot cancel tour because the participant has finished their tour";
+                  default:
+                      // handle any other status
+                      return "";
+              }
+              
 
             }
         }
