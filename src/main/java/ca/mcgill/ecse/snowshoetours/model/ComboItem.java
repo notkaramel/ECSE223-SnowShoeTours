@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse.snowshoetours.model;
 
-// line 71 "../../../../../SnowShoeTour.ump"
+// line 72 "../../../../../SnowShoeTour.ump"
 public class ComboItem
 {
 

@@ -3,6 +3,7 @@ package ca.mcgill.ecse.snowshoetours.controller;
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.Gear;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
+import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 import ca.mcgill.ecse.snowshoetours.model.BookableItem;
 import ca.mcgill.ecse.snowshoetours.model.Combo;
 import ca.mcgill.ecse.snowshoetours.model.ComboItem;
@@ -41,6 +42,7 @@ public class GearController {
 		// TRY ADDING GEAR TO SST
 		try {
 			sst.addGear(name, pricePerWeek);
+			SnowShoeTourPersistence.save();
 			return "";
 
 		} catch (Exception e) {
@@ -87,6 +89,7 @@ public class GearController {
 			Gear gear = (Gear) Gear.getWithName(name);
 			if (gear != null && Gear.getWithName(name) instanceof Gear) {
 				gear.delete();
+				SnowShoeTourPersistence.save();
 			}
 			return "";
 
@@ -136,6 +139,7 @@ public class GearController {
 		// TRY ADDING COMBO
 		try {
 			sst.addCombo(name, discount);
+			SnowShoeTourPersistence.save();
 			return "";
 
 		} catch (Exception e) {
@@ -174,6 +178,7 @@ public class GearController {
 		Combo combo = (Combo) Combo.getWithName(name);
 		if (combo != null) {
 			combo.delete();
+			SnowShoeTourPersistence.save();
 		}
 
 	}
@@ -211,6 +216,7 @@ public class GearController {
 			} else {
 				combo.addComboItem(1, sst, gear);
 			}
+			SnowShoeTourPersistence.save();
 		} catch (Exception e) {
 			return "Something went wrong";
 		}
@@ -262,6 +268,7 @@ public class GearController {
 				// If it has more than 1 instance of that gear type we simply remove one
 				comboItem.setQuantity(comboItem.getQuantity() - 1);
 			}
+			SnowShoeTourPersistence.save();
 		} catch (Exception e) {
 			return "Something went wrong";
 		}

@@ -4,7 +4,8 @@
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 84 "../../../../../../SnowShoeTour.ump"
+// line 41 "../../../../../../SnowShoeTourPersistence.ump"
+// line 85 "../../../../../../SnowShoeTour.ump"
 public class Tour
 {
 
@@ -320,6 +321,14 @@ public class Tour
     {
       placeholderSnowShoeTour.removeTour(this);
     }
+  }
+
+  // line 43 "../../../../../../SnowShoeTourPersistence.ump"
+   public static  void reinitializeUniqueID(List<Tour> tours){
+    toursById.clear();
+      for (var t: tours){
+          toursById.put(t.getId(), t);
+      }
   }
 
 
