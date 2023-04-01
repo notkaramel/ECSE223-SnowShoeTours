@@ -17,62 +17,68 @@ import ca.mcgill.ecse.snowshoetours.model.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import java.util.*;
 
 public class ToursStepDefinitions {
 
     private String error;
 
-	private SnowShoeTour sst;
-	/**
-	 * @author Angela Zhu @angelaxzhu
-	 */
-    @Given("the following SnowShoeTours system exists")
-    public void the_following_snow_shoe_tours_system_exists(io.cucumber.datatable.DataTable dataTable) {    	
-    	sst= SnowShoeToursApplication.getSnowShoeTour();
-    	List<Map<String,String>> rows = dataTable.asMaps();
-    	for (var row:rows) {
-    		Date startDate = Date.valueOf(row.get("startDate"));
-    		int nrWeeks = Integer.valueOf(row.get("nrWeeks"));
-    		int weeklyGuidePrice = Integer.valueOf(row.get("priceOfGuidePerWeek"));
-    		
-    		sst.setStartDate(startDate);
-    		sst.setNrWeeks(nrWeeks);
-    		sst.setPriceOfGuidePerWeek(weeklyGuidePrice);
-    	}
-    }
-    
+    private SnowShoeTour sst;
+
     /**
-	 * @author Angela Zhu @angelaxzhu
-	 */
+     * @author Angela Zhu @angelaxzhu
+     */
+    @Given("the following SnowShoeTours system exists")
+    public void the_following_snow_shoe_tours_system_exists(
+            io.cucumber.datatable.DataTable dataTable) {
+        sst = SnowShoeToursApplication.getSnowShoeTour();
+        List<Map<String, String>> rows = dataTable.asMaps();
+        for (var row : rows) {
+            Date startDate = Date.valueOf(row.get("startDate"));
+            int nrWeeks = Integer.valueOf(row.get("nrWeeks"));
+            int weeklyGuidePrice = Integer.valueOf(row.get("priceOfGuidePerWeek"));
+
+            sst.setStartDate(startDate);
+            sst.setNrWeeks(nrWeeks);
+            sst.setPriceOfGuidePerWeek(weeklyGuidePrice);
+        }
+    }
+
+    /**
+     * @author Angela Zhu @angelaxzhu
+     */
     @Given("the participant with email {string} has started their tour")
     public void the_participant_with_email_has_started_their_tour(String email) {
-    	List <Participant> participants = sst.getParticipants();
-    	for (int p = 0; p<participants.size();p++) {
-    		if(participants.get(p).getAccountName() == email) {
-    			Participant participant = participants.get(p);
-    			participant.startTour();
-    		}
-    	}
+        List<Participant> participants = sst.getParticipants();
+        for (int p = 0; p < participants.size(); p++) {
+            if (participants.get(p).getAccountName() == email) {
+                Participant participant = participants.get(p);
+                participant.start();
+            }
+        }
     }
-    
-    // Antoine
+
+    /**
+     * @author Antoine Phan @notkaramel
+     * @param string
+     */
     @Given("the participant with email {string} has paid for their tour")
     public void the_participant_with_email_has_paid_for_their_tour(String string) {
         // Write code here that turns the phrase above into concrete actions
-        for (Participant p : SST.getParticipants()){
+        for (Participant p : sst.getParticipants()) {
             // Find the participant with the email {string}
-            if (p.getAccountName().equals(string)){
+            if (p.getAccountName().equals(string)) {
                 p.pay();
             }
         }
     }
+
     /**
      * @author Antoine Phan (@notkaramel)
      * @param dataTable
      */
     @Given("the following guides exist in the system")
-    public void the_following_guides_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
+    public void the_following_guides_exist_in_the_system(
+            io.cucumber.datatable.DataTable dataTable) {
         // Write code here that turns the phrase above into concrete actions
         // For automatic transformation, change DataTable to one of
         // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
@@ -81,17 +87,19 @@ public class ToursStepDefinitions {
         //
         // For other transformations you can register a DataTableType.
         List<Map<String, String>> rows = dataTable.asMaps();
-        for(var r : rows){
+        for (var r : rows) {
             String email = r.get("email");
             String password = r.get("password");
             String name = r.get("name");
             String emergencyContact = r.get("emergencyContact");
 
-            new Guide(email, password, name, emergencyContact, SST);
+            new Guide(email, password, name, emergencyContact, sst);
         }
     }
 
-    // Sameer
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Given("the participant with email {string} has cancelled their tour")
     public void the_participant_with_email_has_cancelled_their_tour(String string) {
         Participant p = (Participant) Participant.getWithAccountName(string);
@@ -99,52 +107,59 @@ public class ToursStepDefinitions {
 
     }
 
-    // Sameer
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Given("the following snowshoe tours exist in the system")
-    public void the_following_snowshoe_tours_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {
+    public void the_following_snowshoe_tours_exist_in_the_system(
+            io.cucumber.datatable.DataTable dataTable) {
         List<Map<String, String>> rows = dataTable.asMaps();
         for (var row : rows) {
-             // Extract data from  the given table
-          int id = Integer.parseInt(row.get("id")); 
-          int startWeek = Integer.parseInt(row.get("startWeek"));
-          int endWeek = Integer.parseInt(row.get("endWeek"));
-          sst.addTour(id, startWeek, endWeek, (Guide) Guide.getWithAccountName(row.get("guide"))); // Add extracted data
+            // Extract data from the given table
+            int id = Integer.parseInt(row.get("id"));
+            int startWeek = Integer.parseInt(row.get("startWeek"));
+            int endWeek = Integer.parseInt(row.get("endWeek"));
+            sst.addTour(id, startWeek, endWeek, (Guide) Guide.getWithAccountName(row.get("guide"))); // Add
+                                                                                                     // extracted
+                                                                                                     // data
         }
     }
 
     /**
-	 * @author Angela Zhu @angelaxzhu
-	 */
+     * @author Angela Zhu @angelaxzhu
+     */
     @Given("the following participants exist in the system")
-    public void the_following_participants_exist_in_the_system(io.cucumber.datatable.DataTable dataTable) {  
-    	List<Map<String,String>> rows = dataTable.asMaps();
-    	for (var row:rows) {
-    		String email = String.valueOf(row.get("email"));
-    		String password = String.valueOf(row.get("password"));
-    		String name = String.valueOf(row.get("name"));
-    		String emergency_contact = String.valueOf(row.get("emergencyContact"));
-    		int nr_weeks=Integer.valueOf(row.get("nrWeeks"));
-    		int week_from = Integer.valueOf(row.get("weeksAvailableFrom"));
-    		int week_until = Integer.valueOf(row.get("weeksAvailableUntil"));
-    		boolean lodge_required = Boolean.valueOf(row.get("lodgeRequired"));
-    		sst.addParticipant(email, password, name, emergency_contact, nr_weeks, week_from, week_until, lodge_required,null,0);
-    		
-    	}
-        
+    public void the_following_participants_exist_in_the_system(
+            io.cucumber.datatable.DataTable dataTable) {
+        List<Map<String, String>> rows = dataTable.asMaps();
+        for (var row : rows) {
+            String email = String.valueOf(row.get("email"));
+            String password = String.valueOf(row.get("password"));
+            String name = String.valueOf(row.get("name"));
+            String emergency_contact = String.valueOf(row.get("emergencyContact"));
+            int nr_weeks = Integer.valueOf(row.get("nrWeeks"));
+            int week_from = Integer.valueOf(row.get("weeksAvailableFrom"));
+            int week_until = Integer.valueOf(row.get("weeksAvailableUntil"));
+            boolean lodge_required = Boolean.valueOf(row.get("lodgeRequired"));
+            sst.addParticipant(email, password, name, emergency_contact, nr_weeks, week_from,
+                    week_until, lodge_required, null, 0);
+
+        }
+
     }
 
     /**
-	 * @author Angela Zhu @angelaxzhu
-	 */
+     * @author Angela Zhu @angelaxzhu
+     */
     @Given("the participant with email {string} has finished their tour")
     public void the_participant_with_email_has_finished_their_tour(String email) {
-    	List <Participant> participants = sst.getParticipants();
-    	for (int p = 0; p<participants.size();p++) {
-    		if(participants.get(p).getAccountName() == email) {
-    			Participant participant = participants.get(p);
-    			participant.finish();
-    		}
-    	}
+        List<Participant> participants = sst.getParticipants();
+        for (int p = 0; p < participants.size(); p++) {
+            if (participants.get(p).getAccountName() == email) {
+                Participant participant = participants.get(p);
+                participant.finish();
+            }
+        }
     }
 
     // Jen
@@ -163,7 +178,8 @@ public class ToursStepDefinitions {
 
     // Jen
     @When("the manager attempts to finish the tour for the participant with email {string}")
-    public void the_manager_attempts_to_finish_the_tour_for_the_participant_with_email(String string) {
+    public void the_manager_attempts_to_finish_the_tour_for_the_participant_with_email(
+            String string) {
         // Write code here that turns the phrase above into concrete actions
         throw new io.cucumber.java.PendingException();
     }
@@ -175,11 +191,9 @@ public class ToursStepDefinitions {
     @When("the manager attempts to start the tours for week {string}")
     public void the_manager_attempts_to_start_the_tours_for_week(String string) {
         // Write code here that turns the phrase above into concrete actions
-        for (Tour t : SST.getTours())
-        {
-            if (t.getStartWeek() == Integer.parseInt(string))
-            {
-                for(Participant p: t.getParticipants()){
+        for (Tour t : sst.getTours()) {
+            if (t.getStartWeek() == Integer.parseInt(string)) {
+                for (Participant p : t.getParticipants()) {
                     p.start();
                 }
             }
@@ -192,11 +206,11 @@ public class ToursStepDefinitions {
      * @param string2 authorization code for the payment
      */
     @When("the manager attempts to confirm payment for email {string} using authorization code {string}")
-    public void the_manager_attempts_to_confirm_payment_for_email_using_authorization_code(String string,
-            String string2) {
+    public void the_manager_attempts_to_confirm_payment_for_email_using_authorization_code(
+            String string, String string2) {
         // Write code here that turns the phrase above into concrete actions
-        for (Participant p : SST.getParticipants()){
-            if (p.getAccountName().equals(string)){
+        for (Participant p : sst.getParticipants()) {
+            if (p.getAccountName().equals(string)) {
                 p.setAuthorizationCode(string2);
                 p.pay();
             }
@@ -218,28 +232,28 @@ public class ToursStepDefinitions {
     }
 
     /**
-	 * @author Angela Zhu @angelaxzhu
-	 */
+     * @author Angela Zhu @angelaxzhu
+     */
     @Then("the participant with email {string} shall be marked as {string}")
     public void the_participant_with_email_shall_be_marked_as(String email, String mark) {
-    	List <Participant> participants = sst.getParticipants();
-    	boolean participant_exists = false;
-    	for (int p = 0; p<participants.size();p++) {
-    		if(participants.get(p).getAccountName() == email) {
-    			assertEquals(mark,participants.get(p).getStatusFullName());
-    			participant_exists = true;
-    		}
-    	}
-    	assertTrue(participant_exists);
+        List<Participant> participants = sst.getParticipants();
+        boolean participant_exists = false;
+        for (int p = 0; p < participants.size(); p++) {
+            if (participants.get(p).getAccountName() == email) {
+                assertEquals(mark, participants.get(p).getStatusFullName());
+                participant_exists = true;
+            }
+        }
+        assertTrue(participant_exists);
     }
 
     /**
-	 * @author Angela Zhu @angelaxzhu
-	 */
+     * @author Angela Zhu @angelaxzhu
+     */
     @Then("the number of snowshoe tours shall be {string}")
     public void the_number_of_snowshoe_tours_shall_be(String number) {
-    	int num_tours = sst.getTours().size();
-    	assertEquals(Integer.parseInt(number),num_tours);
+        int num_tours = sst.getTours().size();
+        assertEquals(Integer.parseInt(number), num_tours);
     }
 
     // Jen
@@ -256,27 +270,35 @@ public class ToursStepDefinitions {
         throw new io.cucumber.java.PendingException();
     }
 
-    // Sameer
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Then("the number of participants shall be {string}")
     public void the_number_of_participants_shall_be(String string) {
-        assertEquals(sst.getParticipants().size(), Integer.parseInt(string)); 
-        
+        assertEquals(sst.getParticipants().size(), Integer.parseInt(string));
+
     }
 
-    // Sameer
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Then("a participant account shall exist with email {string} and a refund of {string} percent")
-    public void a_participant_account_shall_exist_with_email_and_a_refund_of_percent(String string, String string2) {
+    public void a_participant_account_shall_exist_with_email_and_a_refund_of_percent(String string,
+            String string2) {
         assertNotNull((Participant) Participant.getWithAccountName(string));
         Participant p = (Participant) Participant.getWithAccountName(string);
         assertEquals(p.getRefundedPercentageAmount(), Integer.parseInt(string2));
     }
 
-    // Sameer
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Then("a participant account shall exist with email {string} and authorization code {string}")
-    public void a_participant_account_shall_exist_with_email_and_authorization_code(String string, String string2) {
+    public void a_participant_account_shall_exist_with_email_and_authorization_code(String string,
+            String string2) {
         assertNotNull((Participant) Participant.getWithAccountName(string));
         Participant p = (Participant) Participant.getWithAccountName(string);
         assertEquals(p.getAuthorizationCode(), string2);
-     
+
     }
 }
