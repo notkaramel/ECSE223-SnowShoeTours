@@ -5,6 +5,7 @@ import ca.mcgill.ecse.snowshoetours.model.Guide;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.User;
+import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 
 public class GuideController {
 	private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
@@ -64,6 +65,7 @@ public class GuideController {
 		else {
 			try {
 				sst.addGuide(email, password, name, emergencyContact);
+				SnowShoeTourPersistence.save();
 				return "";
 			} catch (Exception e) {
 				return "Error: something went wrong";
@@ -82,14 +84,12 @@ public class GuideController {
 																	// PARTICIPANT
 				try {
 					Guide.getWithAccountName(email).delete();
+					SnowShoeTourPersistence.save();
 				} catch (Exception e) {
 				}
 			}
 		}
 		if (email == "manager") {
-
-			// UNCLEAR WHAT TO DO HERE; THE MANAGER SHOULD BE CREATED IN
-			// SnowShoeToursApplication.java
 
 		}
 	}

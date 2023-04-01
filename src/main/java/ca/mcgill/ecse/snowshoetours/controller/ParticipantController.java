@@ -12,6 +12,7 @@ import ca.mcgill.ecse.snowshoetours.model.Manager;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.User;
+import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 
 public class ParticipantController {
 
@@ -100,6 +101,7 @@ public class ParticipantController {
 																							// set
 																							// to 0
 			sst.addParticipant(participantAdded);
+			SnowShoeTourPersistence.save();
 			return "";
 		} catch (Exception e) {
 			return "Something went wrong!";
@@ -143,6 +145,7 @@ public class ParticipantController {
 
 				} else if (user instanceof Participant) {
 					user.delete();
+					SnowShoeTourPersistence.save();
 				}
 
 			} catch (Exception e) {
@@ -212,11 +215,14 @@ public class ParticipantController {
 
 					if (bookableItemName.equals(name)) {
 						found = true;
-						item.setQuantity(item.getQuantity() + 1); // Increase by one
-					}
+						item.setQuantity(item.getQuantity() + 1);
+						 // Increase by one
+						 SnowShoeTourPersistence.save();
+						}
 				}
 				if (!found) {
 					participant.addBookedItem(1, sst, gear);
+					SnowShoeTourPersistence.save();
 				}
 			} else if (BookableItem.getWithName(bookableItemName) instanceof Combo) {
 				Combo combo = (Combo) BookableItem.getWithName(bookableItemName);
@@ -231,11 +237,13 @@ public class ParticipantController {
 					if (bookableItemName.equals(name)) {
 						found = true;
 						item.setQuantity(item.getQuantity() + 1); // Increase by one
+						SnowShoeTourPersistence.save();
 						break;
 					}
 				}
 				if (!found) { // BookedItem for Gear doesn't exist yet
 					participant.addBookedItem(1, sst, combo);
+					SnowShoeTourPersistence.save();
 				}
 			}
 			return "";
@@ -300,9 +308,11 @@ public class ParticipantController {
 
 				if (bookableItemName.equals(name)) { // Found the booked item
 					item.setQuantity(item.getQuantity() - 1); // Decrease by one
+					SnowShoeTourPersistence.save();
 
 					if (item.getQuantity() == 0) { // Quantity is zero, remove item
 						item.delete();
+						SnowShoeTourPersistence.save();
 					}
 				}
 			}
