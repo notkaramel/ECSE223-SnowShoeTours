@@ -4,6 +4,7 @@ import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.Guide;
 import ca.mcgill.ecse.snowshoetours.model.Lodge;
 import ca.mcgill.ecse.snowshoetours.model.Lodge.LodgeRating;
+import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 
 public class LodgeController {
@@ -40,6 +41,7 @@ public class LodgeController {
 			}
 			try {
 				sst.addLodge(name, address, rating);
+				SnowShoeTourPersistence.save();
 				return "";
 			} catch (Exception e) {
 				return ("Error: Something went wrong");
@@ -56,7 +58,7 @@ public class LodgeController {
 		if (Lodge.hasWithName(name)) {
 			try {
 				sst.removeLodge(Lodge.getWithName(name));
-				Lodge.getWithName(name).delete(); // VERFIY IF THIS IS REQUIRED
+				SnowShoeTourPersistence.save();
 			} catch (Exception e) {
 			}
 		}
