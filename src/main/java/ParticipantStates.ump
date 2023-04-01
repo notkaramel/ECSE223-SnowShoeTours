@@ -1,90 +1,82 @@
 class Participant {
   Status{
-    Idle {
-      assignGuide(Guide aGuide)[isGuideAvailable()]
-        / {
-        doAssignGuide(aGuide); 
-      }-> NotPaid;
+    NotAssigned {
+      assign(Tour aTour)[hasGuide(aTour)] /{doAssign(aTour);}
+        -> Assigned;
+
+      assign(Tour aTour)[!hasGuide(aTour)] /{rejectAssign();}
+        -> NotAssigned;
       
-      assignGuide(Guide aGuide)[!isGuideAvailable()]
-        / {
-        rejectAssignGuide("Guide is unavailable");
-        }-> Idle;
+      // no refund penalty
+      cancel() /{ doRefund(0);}
+      -> Cancelled;
       
-      // 100% refund
-      cancel()
-        /{
-        doRefund(null);
-      } -> Cancelled;
+      // start() /{ doRefund(0);}
+      // -> Cancelled;
+      
+      start() -> NotAssigned;
+      
+      pay() -> NotAssigned;
     }
-    
-    NotPaid {
-      pay()[!hasAuthCode()]
-        / {
-        rejectPayment();
-      }  -> NotPaid;
+	// Same as NotPaid
+    Assigned{
+      pay()[!hasAuthCode()] /{ rejectPayment();}
+      -> Assigned;
       
       pay()[hasAuthCode()]
-         -> Paid;
+      -> Paid;
       
-      // 100% refund
-      cancel()
-        / {
-        doRefund(null);
-      } -> Cancelled;
-      
-      startTour()[isTime()]
-        / {
-        doRefund(null); 
-      } -> Cancelled;
+      // no refund penalty
+      start() / { doRefund(0); }
+      -> Cancelled;
     }
     
     Paid {
       // start tour, and it's time to go
-      startTour()[isTime()]
-        /{
-        // doStartTour();
-      } -> TourOnGoing;
+      start() -> Started;
       
       // start tour, but not time to start yet
-      startTour()[!isTime()]
-        -> Paid;
+      //start()[!isTime()] -> Paid;
       
       // 50% refund
-      cancel() /{
-        doRefund(50);
-      } -> Cancelled;
+      cancel() /{ doRefund(50);}
+      -> Cancelled;
+      
+      pay() -> Paid;
     }
     
-    TourOnGoing {
-      finish() 
-        /{
-        // doFinishTour();
-      } -> TourFinished;
+    // Tour starts
+    Started {
+      finish() -> Finished;
       
       // 10% refund
-      cancel() 
-        /{
-        doRefund(10);
-      }-> Cancelled;
-    
+      cancel() /{doRefund(10);}
+      -> Cancelled;
+		
+      pay() -> Started;
+      start() -> Started;
     }
     
-    TourFinished {}
+    Finished {
+      start() -> Finished;
+      pay() -> Finished;
+    }
     
-    Cancelled {}
+    Cancelled {
+      pay() -> Cancelled;
+    }
   }
 
-  private void doAssignGuide(Guide aGuide){
-    getTour().setGuide(aGuide);
+  private boolean hasGuide(Tour aTour) {
+    return aTour.getGuide() != null && !aTour.getGuide().getName().isEmpty();
+  }
+
+  private void doAssign(Tour aTour){
+    setTour(aTour);
   }
   
-  private boolean isGuideAvailable() {
-    return getTour().getGuide() != null;
-  }
-
-  private void rejectAssignGuide(String error){
-    throw new RuntimeException(error);
+  private void rejectAssign(){
+    throw new RuntimeException("No guide is assigned to this tour!");
   }
 
   private void rejectPayment(){
@@ -92,27 +84,11 @@ class Participant {
   }
 
   private void doRefund(Integer refundedPercentage) {
-    if(refundedPercentage == null){
-      throw new RuntimeException("No penalty, user has not paid");
+  setRefundedPercentageAmount(refundedPercentage);
     }
-    else {
-      setRefundedPercentageAmount(refundedPercentage);
-    }
-  }
   
   private boolean hasAuthCode() {
     return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();
-  }
-
-  private boolean isTime() {
-    java.util.Date today = new java.util.Date();
-    // timeDifference = today - getSnowShoeTour().getStartDate() (using getTime --> in ms)
-    long timeDifference = today.getTime() - getSnowShoeTour().getStartDate().getTime();
-    // convert ms to weeks
-    int weekDifference = (int) timeDifference / (1000*60*60*24*7);
-
-    // isTime = (weekDifference == getTour().getStartWeek())
-    return weekDifference == getTour().getStartWeek();
   }
 }
 
