@@ -158,7 +158,7 @@ public class Participant extends NamedUser
     switch (aStatus)
     {
       case NotAssigned:
-        if (isGuideAvailable(aTour))
+        if (hasGuide(aTour))
         {
         // line 4 "../../../../../../ParticipantStates.ump"
           doAssign(aTour);
@@ -166,7 +166,7 @@ public class Participant extends NamedUser
           wasEventProcessed = true;
           break;
         }
-        if (!(isGuideAvailable(aTour)))
+        if (!(hasGuide(aTour)))
         {
         // line 7 "../../../../../../ParticipantStates.ump"
           rejectAssign();
@@ -222,14 +222,6 @@ public class Participant extends NamedUser
     switch (aStatus)
     {
       case NotAssigned:
-        if (isTime())
-        {
-        // line 14 "../../../../../../ParticipantStates.ump"
-          doRefund(0);
-          setStatus(Status.Cancelled);
-          wasEventProcessed = true;
-          break;
-        }
         setStatus(Status.NotAssigned);
         wasEventProcessed = true;
         break;
@@ -240,18 +232,8 @@ public class Participant extends NamedUser
         wasEventProcessed = true;
         break;
       case Paid:
-        if (isTime())
-        {
-          setStatus(Status.Started);
-          wasEventProcessed = true;
-          break;
-        }
-        if (!(isTime()))
-        {
-          setStatus(Status.Paid);
-          wasEventProcessed = true;
-          break;
-        }
+        setStatus(Status.Started);
+        wasEventProcessed = true;
         break;
       case Started:
         setStatus(Status.Started);
@@ -518,46 +500,33 @@ public class Participant extends NamedUser
   }
 
   // line 71 "../../../../../../ParticipantStates.ump"
-   private boolean isGuideAvailable(Tour aTour){
-    Guide g = aTour.getGuide();
-    return g != null;
+   private boolean hasGuide(Tour aTour){
+    return aTour.getGuide() != null && !aTour.getGuide().getName().isEmpty();
   }
 
-  // line 76 "../../../../../../ParticipantStates.ump"
+  // line 75 "../../../../../../ParticipantStates.ump"
    private void doAssign(Tour aTour){
     setTour(aTour);
   }
 
-  // line 80 "../../../../../../ParticipantStates.ump"
+  // line 79 "../../../../../../ParticipantStates.ump"
    private void rejectAssign(){
     throw new RuntimeException("No guide is assigned to this tour!");
   }
 
-  // line 84 "../../../../../../ParticipantStates.ump"
+  // line 83 "../../../../../../ParticipantStates.ump"
    private void rejectPayment(){
     throw new RuntimeException("Payment not accepted");
   }
 
-  // line 88 "../../../../../../ParticipantStates.ump"
+  // line 87 "../../../../../../ParticipantStates.ump"
    private void doRefund(Integer refundedPercentage){
     setRefundedPercentageAmount(refundedPercentage);
   }
 
-  // line 92 "../../../../../../ParticipantStates.ump"
+  // line 91 "../../../../../../ParticipantStates.ump"
    private boolean hasAuthCode(){
     return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();
-  }
-
-  // line 96 "../../../../../../ParticipantStates.ump"
-   private boolean isTime(){
-    java.util.Date today = new java.util.Date();
-    // timeDifference = today - getSnowShoeTour().getStartDate() (using getTime --> in ms)
-    long timeDifference = today.getTime() - getSnowShoeTour().getStartDate().getTime();
-    // convert ms to weeks
-    int weekDifference = (int) timeDifference / (1000*60*60*24*7);
-
-    // isTime = (weekDifference == getTour().getStartWeek())
-    return weekDifference == getTour().getStartWeek();
   }
 
 
