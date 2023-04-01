@@ -291,18 +291,20 @@ public class ToursStepDefinitions {
         assertEquals(Integer.parseInt(number), num_tours);
     }
 
-    // Sameer
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Then("the system shall raise the error {string}")
     public void the_system_shall_raise_the_error(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assertEquals(string, error);
     }
 
-    // Sameer
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Then("a participant account shall not exist with email {string}")
     public void a_participant_account_shall_not_exist_with_email(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assert((Participant) Participant.getWithAccountName(string) == null);
     }
 
     /**
