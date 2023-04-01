@@ -28,8 +28,8 @@ class Participant {
       
       cancel() -> Cancelled;
       // no refund penalty
-      // start() / {setRefundedPercentageAmount(0);}
-      // -> Cancelled;
+      start() / {setRefundedPercentageAmount(0);}
+      -> Cancelled;
     }
     
     Paid {

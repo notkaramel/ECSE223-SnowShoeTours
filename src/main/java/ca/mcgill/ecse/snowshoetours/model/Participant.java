@@ -227,6 +227,12 @@ public class Participant extends NamedUser
         setStatus(Status.NotAssigned);
         wasEventProcessed = true;
         break;
+      case Assigned:
+        // line 31 "../../../../../../ParticipantStates.ump"
+        setRefundedPercentageAmount(0);
+        setStatus(Status.Cancelled);
+        wasEventProcessed = true;
+        break;
       case Paid:
         setStatus(Status.Started);
         wasEventProcessed = true;
