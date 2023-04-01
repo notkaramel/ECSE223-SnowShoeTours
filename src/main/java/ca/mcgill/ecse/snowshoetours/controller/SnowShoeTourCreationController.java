@@ -21,36 +21,40 @@ public class SnowShoeTourCreationController {
 	 */
   
   public static String initiateSnowToursCreation() {
+   // Retrieve unassigned guides and participants from the system
     List<Guide> unAssignedGuides = sst.getGuides();
     List<Participant> unAssignedParticipants = sst.getParticipants();
-    Tour newTour = new Tour(0, 0, 0, unAssignedGuides.get(0), sst);
+    int id = 0;
 
-    // Check if there are enough guides to lead all snow tours
-    if (unAssignedGuides.size() < unAssignedParticipants.size())
-        return "There are not enough guides to lead all the snow tours.";
+// Iterate through all unassigned participants
+for (Participant p : unAssignedParticipants) {
+    // Get the participant's number of weeks and availability week
+    int numberOfWeeks = p.getNrWeeks();
+    int weekAvailableFrom = p.getWeekAvailableFrom();
+    int i = id;
+    id++;
 
-    if (unAssignedGuides.isEmpty())
-      return "A guide must exist.";
-    if (unAssignedParticipants.isEmpty())
-      return "A participant must exist.";
-    
-    try {
-      for (Participant participant : unAssignedParticipants) {
-        //Makes sure that the participant hasn't been assigned yet
-        if (participant.getSnowShoeTour() == null) {
-          Guide guide = unAssignedGuides.get(0); // Get the next unassigned guide
-          participant.assign(null);
-          if (unAssignedGuides.isEmpty()) // Exit loop if all guides have been assigned
-            break;
-        }
-      }
-    } catch (Exception e) {
-      return e.getMessage();
-    }
-      
-    SnowShoeTourPersistence.save(); // Save the persistence after all tours have been assigned
-      
-    return "";
+    // Select a guide for the participant based on the current index
+    Guide assignedGuide = unAssignedGuides.get(i % unAssignedGuides.size());
+
+    // Create a new tour with the participant's available week and guide, and add it to the system
+    Tour newTour = sst.addTour(id, weekAvailableFrom, weekAvailableFrom + numberOfWeeks - 1, assignedGuide);
+
+    // Assign the new tour to the participant
+    p.assign(newTour);
+}
+
+// Save the updated system state to persistence
+try {
+    SnowShoeTourPersistence.save();
+} catch (Exception e) {
+    // Return an error message if the system state could not be saved
+    return e.getMessage();
+}
+
+// Return an empty string to indicate that the operation was successful
+return "";
+
       
 }
 
@@ -75,11 +79,12 @@ public class SnowShoeTourCreationController {
     if (authorizationCode == null || authorizationCode.isEmpty()) {
         return "Invalid authorization code"; // Return error message if authorization code is missing or empty
     }
-    if(participant.pay()== true){
+    if(participant.pay()){
       if(participant.getStatusFullName().equals("Paid")){
         return "The participant has already paid for their tour";
-      } else if (participant.getStatusFullName().equals("Cancelled")){
-        return "Cannot cancel tour because the participant has already cancelled] their tour";
+      }
+      if(participant.getStatusFullName().equals("NotAssigned")){
+        return "The participant has not been assigned to their tour";
       }
     }
     if(participant.getStatusFullName().equals("NotAssigned")){

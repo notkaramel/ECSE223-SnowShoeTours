@@ -234,33 +234,41 @@ public class ToursStepDefinitions {
 
             // Grab tour
             List<Tour> tours = sst.getTours();
-
+            Tour tour = null;
             // Check if user is participant or guide
             boolean isP = false;
+            Participant temp_p = null;
             for (Participant p : sst.getParticipants()) {
                 if (p.getAccountName().equals(email)) {
                     isP = true;
+                    temp_p = p;
                 }
             }
 
+            for(Tour t: tours){
+                for(Participant p : t.getParticipants()){
+                    if(p.equals(temp_p))
+                    {
+                        tour = t;
+                        break;
+                    }
+                }
+                                
+            }
             if (isP) {
                 Participant p = (Participant) User.getWithAccountName(email);
 
-                for (Tour tour : tours) {
                     assertTrue(id.equals(tour.getId()));
                     assertTrue(startWeek.equals(tour.getStartWeek()));
                     assertTrue(endWeek.equals(tour.getEndWeek()));
                     assertTrue(email.equals(p.getAccountName()));
-                }
             } else {
                 Guide g = (Guide) User.getWithAccountName(email);
 
-                for (Tour tour : tours) {
                     assertTrue(id.equals(tour.getId()));
                     assertTrue(startWeek.equals(tour.getStartWeek()));
                     assertTrue(endWeek.equals(tour.getEndWeek()));
                     assertTrue(email.equals(g.getAccountName()));
-                }
             }
         }
     }
