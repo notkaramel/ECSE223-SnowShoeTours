@@ -4,11 +4,11 @@ class Participant {
       assign(Tour aTour)[hasGuide(aTour)] /{doAssign(aTour);}
         -> Assigned;
 
-      assign(Tour aTour)[!hasGuide(aTour)] /{rejectAssign();}
+      assign(Tour aTour)[!hasGuide(aTour)]
         -> NotAssigned;
       
       // no refund penalty
-      cancel() /{ doRefund(0);}
+      cancel() /{ setRefundedPercentageAmount(0);}
       -> Cancelled;
       
       // start() /{ doRefund(0);}
@@ -20,15 +20,16 @@ class Participant {
     }
 	// Same as NotPaid
     Assigned{
-      pay()[!hasAuthCode()] /{ rejectPayment();}
-      -> Assigned;
+      // pay()[!hasAuthCode()]
+      // -> Assigned;
       
-      pay()[hasAuthCode()]
+      pay()
       -> Paid;
       
+      cancel() -> Cancelled;
       // no refund penalty
-      start() / { doRefund(0); }
-      -> Cancelled;
+      // start() / {setRefundedPercentageAmount(0);}
+      // -> Cancelled;
     }
     
     Paid {
@@ -39,7 +40,7 @@ class Participant {
       //start()[!isTime()] -> Paid;
       
       // 50% refund
-      cancel() /{ doRefund(50);}
+      cancel() /{ setRefundedPercentageAmount(50);}
       -> Cancelled;
       
       pay() -> Paid;
@@ -50,7 +51,7 @@ class Participant {
       finish() -> Finished;
       
       // 10% refund
-      cancel() /{doRefund(10);}
+      cancel() /{ setRefundedPercentageAmount(10);}
       -> Cancelled;
 		
       pay() -> Started;
@@ -74,18 +75,6 @@ class Participant {
   private void doAssign(Tour aTour){
     setTour(aTour);
   }
-  
-  private void rejectAssign(){
-    throw new RuntimeException("No guide is assigned to this tour!");
-  }
-
-  private void rejectPayment(){
-    throw new RuntimeException("Payment not accepted");
-  }
-
-  private void doRefund(Integer refundedPercentage) {
-  setRefundedPercentageAmount(refundedPercentage);
-    }
   
   private boolean hasAuthCode() {
     return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();

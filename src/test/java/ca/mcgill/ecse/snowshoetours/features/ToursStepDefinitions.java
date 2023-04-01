@@ -10,6 +10,7 @@ import static org.junit.Assert.assertNotNull;
 
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
 import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourCreationController;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
@@ -49,11 +50,10 @@ public class ToursStepDefinitions {
      */
     @Given("the participant with email {string} has started their tour")
     public void the_participant_with_email_has_started_their_tour(String email) {
-        List<Participant> participants = sst.getParticipants();
-        for (int p = 0; p < participants.size(); p++) {
-            if (participants.get(p).getAccountName() == email) {
-                Participant participant = participants.get(p);
-                participant.start();
+        // List<Participant> participants = sst.getParticipants();
+        for (Participant p : sst.getParticipants()) {
+            if (p.getAccountName() == email) {
+                p.start();
             }
         }
     }
@@ -103,8 +103,12 @@ public class ToursStepDefinitions {
      */
     @Given("the participant with email {string} has cancelled their tour")
     public void the_participant_with_email_has_cancelled_their_tour(String string) {
-        Participant p = (Participant) Participant.getWithAccountName(string);
-        p.cancel();
+        // Participant p = (Participant) Participant.getWithAccountName(string);
+        for(Participant p : sst.getParticipants()){
+            if(p.getAccountName().equals(string)){
+                p.cancel();
+            }
+        }
 
     }
 
@@ -124,7 +128,7 @@ public class ToursStepDefinitions {
                                                                                                      // extracted
                                                                                                      // data
             Participant participant = (Participant) User.getWithAccountName(row.get("participants"));
-            aTour.addParticipant(participant);
+            //aTour.addParticipant(participant);
             participant.assign(aTour);
         }
         //error = SnowShoeTourCreationController.initiateSnowToursCreation();

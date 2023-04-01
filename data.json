@@ -39,9 +39,8 @@
                           "weekAvailableFrom": 1,
                           "weekAvailableUntil": 3,
                           "lodgeRequired": true,
-                          "authorizationCode": "PAYup",
                           "refundedPercentageAmount": 0,
-                          "status": "Paid",
+                          "status": "Assigned",
                           "snowShoeTour": {
                             "@reference": "../../../../../../.."
                           },
@@ -128,7 +127,7 @@
                           "weekAvailableUntil": 5,
                           "lodgeRequired": false,
                           "refundedPercentageAmount": 0,
-                          "status": "Assigned",
+                          "status": "Cancelled",
                           "snowShoeTour": {
                             "@reference": "../../../../../../.."
                           },
