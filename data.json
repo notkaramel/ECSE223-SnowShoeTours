@@ -2,7 +2,7 @@
   "SnowShoeTour": {
     "startDate": "2024-03-13",
     "nrWeeks": 10,
-    "priceOfGuidePerWeek": 100,
+    "priceOfGuidePerWeek": 0,
     "manager": {
       "accountName": "manager",
       "password": "manager",
@@ -11,192 +11,10 @@
       }
     },
     "guides": [
-      {
-        "Guide": [
-          {
-            "accountName": "jeff@email.com",
-            "password": "pass1",
-            "name": "Jeff",
-            "emergencyContact": "(555)555-5555",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "tours": [
-              {
-                "Tour": [
-                  {
-                    "id": 1,
-                    "startWeek": 1,
-                    "endWeek": 3,
-                    "participants": [
-                      ""
-                    ],
-                    "guide": {
-                      "@reference": "../../.."
-                    },
-                    "snowShoeTour": {
-                      "@reference": "../../../../.."
-                    }
-                  },
-                  {
-                    "id": 5,
-                    "startWeek": 4,
-                    "endWeek": 5,
-                    "participants": [
-                      ""
-                    ],
-                    "guide": {
-                      "@reference": "../../.."
-                    },
-                    "snowShoeTour": {
-                      "@reference": "../../../../.."
-                    }
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "accountName": "john@email.com",
-            "password": "pass2",
-            "name": "John",
-            "emergencyContact": "(444)444-4444",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "tours": [
-              {
-                "Tour": [
-                  {
-                    "id": 3,
-                    "startWeek": 1,
-                    "endWeek": 3,
-                    "participants": [
-                      ""
-                    ],
-                    "guide": {
-                      "@reference": "../../.."
-                    },
-                    "snowShoeTour": {
-                      "@reference": "../../../../.."
-                    }
-                  },
-                  {
-                    "id": 4,
-                    "startWeek": 1,
-                    "endWeek": 3,
-                    "participants": [
-                      ""
-                    ],
-                    "guide": {
-                      "@reference": "../../.."
-                    },
-                    "snowShoeTour": {
-                      "@reference": "../../../../.."
-                    }
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
+      ""
     ],
     "participants": [
-      {
-        "Participant": [
-          {
-            "accountName": "alice@gmail.com",
-            "password": "pass123",
-            "name": "Alice Jones",
-            "emergencyContact": "(200)5551234",
-            "nrWeeks": 3,
-            "weekAvailableFrom": 1,
-            "weekAvailableUntil": 3,
-            "lodgeRequired": true,
-            "refundedPercentageAmount": 0,
-            "status": "NotAssigned",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "bookedItems": [
-              ""
-            ]
-          },
-          {
-            "accountName": "new@hotmail.ca",
-            "password": "newnew",
-            "name": "Johnny New",
-            "emergencyContact": "(200)5559999",
-            "nrWeeks": 5,
-            "weekAvailableFrom": 2,
-            "weekAvailableUntil": 6,
-            "lodgeRequired": true,
-            "refundedPercentageAmount": 0,
-            "status": "NotAssigned",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "bookedItems": [
-              ""
-            ]
-          },
-          {
-            "accountName": "charlie@hotmail.ca",
-            "password": "charlie",
-            "name": "Charles Tremblay",
-            "emergencyContact": "(200)5559876",
-            "nrWeeks": 3,
-            "weekAvailableFrom": 1,
-            "weekAvailableUntil": 5,
-            "lodgeRequired": false,
-            "refundedPercentageAmount": 0,
-            "status": "NotAssigned",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "bookedItems": [
-              ""
-            ]
-          },
-          {
-            "accountName": "john@hotmail.ca",
-            "password": "john123",
-            "name": "John Doe",
-            "emergencyContact": "(200)5551234",
-            "nrWeeks": 3,
-            "weekAvailableFrom": 1,
-            "weekAvailableUntil": 3,
-            "lodgeRequired": false,
-            "refundedPercentageAmount": 0,
-            "status": "NotAssigned",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "bookedItems": [
-              ""
-            ]
-          },
-          {
-            "accountName": "emily@hotmail.ca",
-            "password": "emily007",
-            "name": "Emily Green",
-            "emergencyContact": "(200)5559876",
-            "nrWeeks": 2,
-            "weekAvailableFrom": 4,
-            "weekAvailableUntil": 5,
-            "lodgeRequired": false,
-            "refundedPercentageAmount": 0,
-            "status": "NotAssigned",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "bookedItems": [
-              ""
-            ]
-          }
-        ]
-      }
+      ""
     ],
     "bookedItems": [
       ""
@@ -214,22 +32,7 @@
       ""
     ],
     "tours": [
-      {
-        "Tour": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour"
-          },
-          {
-            "@reference": "../../guides/Guide[2]/tours/Tour"
-          },
-          {
-            "@reference": "../../guides/Guide[2]/tours/Tour[2]"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour[2]"
-          }
-        ]
-      }
+      ""
     ]
   }
 }

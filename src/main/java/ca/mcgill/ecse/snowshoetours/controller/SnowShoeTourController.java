@@ -95,6 +95,7 @@ public class SnowShoeTourController {
 				TOSnowShoeTour SnowShoeTour = new TOSnowShoeTour(id, tour.getStartWeek(), tour.getEndWeek(),
 						tour.getGuide().getAccountName(), tour.getGuide().getName(), tour_cost,
 						participants.toArray(new TOParticipantCost[0]));
+						SnowShoeTourPersistence.save();
 				return SnowShoeTour;
 			} catch (Exception e) {
 				return null;

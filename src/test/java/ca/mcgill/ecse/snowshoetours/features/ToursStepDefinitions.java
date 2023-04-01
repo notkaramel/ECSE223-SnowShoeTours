@@ -163,21 +163,25 @@ public class ToursStepDefinitions {
         }
     }
 
-    // Jen
+    /*
+     * @author Jennifer Tram Su @jennifertramsu
+     */
     @When("the manager attempts to cancel the tour for email {string}")
     public void the_manager_attempts_to_cancel_the_tour_for_email(String string) {
-        // Write code here that turns the phrase above into concrete actions
         error = SnowShoeTourCreationController.cancelParticipantTrip(string);
     }
 
-    // Jen
+    /*
+     * @author Jennifer Tram Su @jennifertramsu
+     */
     @When("the administrator attempts to initiate the snowshoe tour creation process")
     public void the_administrator_attempts_to_initiate_the_snowshoe_tour_creation_process() {
-        // Write code here that turns the phrase above into concrete actions
         error = SnowShoeTourCreationController.initiateSnowToursCreation();
     }
 
-    // Jen
+    /*
+     * @author Jennifer Tram Su @jennifertramsu
+     */
     @When("the manager attempts to finish the tour for the participant with email {string}")
     public void the_manager_attempts_to_finish_the_tour_for_the_participant_with_email(
             String string) {
@@ -185,13 +189,20 @@ public class ToursStepDefinitions {
     }
 
     /**
-     * @author Antone Phan @notkaramel
+     * @author Antoine Phan @notkaramel
      * @param string
      */
     @When("the manager attempts to start the tours for week {string}")
     public void the_manager_attempts_to_start_the_tours_for_week(String string) {
         // Write code here that turns the phrase above into concrete actions
-        error += SnowShoeTourCreationController.startAllTripsForSpecificWeek(Integer.parseInt(string));
+        // for (Tour t : sst.getTours()) {
+        //     if (t.getStartWeek() == Integer.parseInt(string)) {
+        //         for (Participant p : t.getParticipants()) {
+        //             SnowShoeTourCreationController.startAllTripsForSpecificWeek(0)
+        //         }
+        //     }
+        // }
+        error = SnowShoeTourCreationController.startAllTripsForSpecificWeek(Integer.parseInt(string));
     }
 
     /**
@@ -205,31 +216,56 @@ public class ToursStepDefinitions {
         // Write code here that turns the phrase above into concrete actions
         for (Participant p : sst.getParticipants()) {
             if (p.getAccountName().equals(string)) {
-                p.setAuthorizationCode(string2);
-                p.pay();
+                error = SnowShoeTourCreationController.payForTrip(string, string2);
             }
         }
     }
 
-    // Jen
+    /*
+     * @author Jennifer Tram Su @jennifertramsu
+     */
     @Then("the following snowshoe tours shall exist in the system with a guide")
     public void the_following_snowshoe_tours_shall_exist_in_the_system_with_a_guide(
             io.cucumber.datatable.DataTable dataTable) {
-        // Write code here that turns the phrase above into concrete actions
-        // For automatic transformation, change DataTable to one of
-        // E, List<E>, List<List<E>>, List<Map<K,V>>, Map<K,V> or
-        // Map<K, List<V>>. E,K,V must be a String, Integer, Float,
-        // Double, Byte, Short, Long, BigInteger or BigDecimal.
-        //
-        // For other transformations you can register a DataTableType.
-        List<Map<String,String>> rows = dataTable.asMaps();
-        for(var row: rows)
-        {
-            Integer aId = Integer.parseInt(row.get("id"));
-            Integer aStartWeek = Integer.parseInt(row.get("startWeek"));
-            Integer aEndWeek = Integer.parseInt(row.get("endWeek"));
-            Guide guide = sst.getGuides().get(0);
-            new Tour(aId, aStartWeek, aEndWeek, guide, sst);
+        List<Map<String, String>> rows = dataTable.asMaps();
+        
+        // {id, startWeek, endWeek, participants}
+        for (var row : rows) {
+            Integer id = Integer.parseInt(row.get("id"));
+            Integer startWeek = Integer.parseInt(row.get("startWeek"));
+            Integer endWeek = Integer.parseInt(row.get("endWeek"));
+            String email = row.get("participants");
+
+            // Grab tour
+            List<Tour> tours = sst.getTours();
+
+            // Check if user is participant or guide
+            boolean isP = false;
+            for (Participant p : sst.getParticipants()) {
+                if (p.getAccountName().equals(email)) {
+                    isP = true;
+                }
+            }
+
+            if (isP) {
+                Participant p = (Participant) User.getWithAccountName(email);
+
+                for (Tour tour : tours) {
+                    assertTrue(id.equals(tour.getId()));
+                    assertTrue(startWeek.equals(tour.getStartWeek()));
+                    assertTrue(endWeek.equals(tour.getEndWeek()));
+                    assertTrue(email.equals(p.getAccountName()));
+                }
+            } else {
+                Guide g = (Guide) User.getWithAccountName(email);
+
+                for (Tour tour : tours) {
+                    assertTrue(id.equals(tour.getId()));
+                    assertTrue(startWeek.equals(tour.getStartWeek()));
+                    assertTrue(endWeek.equals(tour.getEndWeek()));
+                    assertTrue(email.equals(g.getAccountName()));
+                }
+            }
         }
     }
 
@@ -239,14 +275,11 @@ public class ToursStepDefinitions {
     @Then("the participant with email {string} shall be marked as {string}")
     public void the_participant_with_email_shall_be_marked_as(String email, String mark) {
         List<Participant> participants = sst.getParticipants();
-        //boolean participant_exists = false;
         for (int p = 0; p < participants.size(); p++) {
             if (participants.get(p).getAccountName() == email) {
                 assertEquals(mark, participants.get(p).getStatusFullName());
-               // participant_exists = true;
             }
         }
-        //assertTrue(participant_exists);
     }
 
     /**
@@ -258,18 +291,20 @@ public class ToursStepDefinitions {
         assertEquals(Integer.parseInt(number), num_tours);
     }
 
-    // Jen
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Then("the system shall raise the error {string}")
     public void the_system_shall_raise_the_error(String string) {
-        // Write code here that turns the phrase above into concrete actions
         assertEquals(string, error);
     }
 
-    // Jen
+    /**
+     * @author Sameer Riaz @SRIAZ77
+     */
     @Then("a participant account shall not exist with email {string}")
     public void a_participant_account_shall_not_exist_with_email(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        assert((Participant) Participant.getWithAccountName(string) == null);
     }
 
     /**
@@ -277,8 +312,7 @@ public class ToursStepDefinitions {
      */
     @Then("the number of participants shall be {string}")
     public void the_number_of_participants_shall_be(String string) {
-        assertEquals(sst.getParticipants().size(), Integer.parseInt(string));
-
+        assertEquals(Integer.parseInt(string), sst.getParticipants().size());
     }
 
     /**
@@ -289,7 +323,7 @@ public class ToursStepDefinitions {
             String string2) {
         //assertNotNull((Participant) Participant.getWithAccountName(string));
         Participant p = (Participant) Participant.getWithAccountName(string);
-        assertEquals(p.getRefundedPercentageAmount(), Integer.parseInt(string2));
+        assertEquals(Integer.parseInt(string2), p.getRefundedPercentageAmount());
     }
 
     /**
@@ -300,7 +334,6 @@ public class ToursStepDefinitions {
             String string2) {
         assertNotNull((Participant) Participant.getWithAccountName(string));
         Participant p = (Participant) Participant.getWithAccountName(string);
-        assertEquals(p.getAuthorizationCode(), string2);
-
+        assertEquals(string2, p.getAuthorizationCode());
     }
 }
