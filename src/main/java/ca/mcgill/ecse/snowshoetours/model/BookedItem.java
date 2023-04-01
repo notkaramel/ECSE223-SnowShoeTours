@@ -3,7 +3,7 @@
 
 package ca.mcgill.ecse.snowshoetours.model;
 
-// line 50 "../../../../../SnowShoeTour.ump"
+// line 51 "../../../../../SnowShoeTour.ump"
 public class BookedItem
 {
 

@@ -1,0 +1,85 @@
+{
+  "SnowShoeTour": {
+    "startDate": "1969-12-31",
+    "nrWeeks": 10,
+    "priceOfGuidePerWeek": 10,
+    "manager": {
+      "accountName": "manager",
+      "password": "manager",
+      "snowShoeTour": {
+        "@reference": "../.."
+      }
+    },
+    "guides": [
+      {
+        "Guide": {
+          "accountName": "Sameer@mcgill.ca",
+          "password": "pass",
+          "name": "Sameer",
+          "emergencyContact": "NA",
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "tours": [
+            ""
+          ]
+        }
+      }
+    ],
+    "participants": [
+      {
+        "Participant": {
+          "accountName": "Antoine@mcgill.ca",
+          "password": "pass",
+          "name": "Antoine",
+          "emergencyContact": "(555)555-5555",
+          "nrWeeks": 1,
+          "weekAvailableFrom": 1,
+          "weekAvailableUntil": 2,
+          "lodgeRequired": false,
+          "authorizationCode": "",
+          "refundedPercentageAmount": 0,
+          "status": "Idle",
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "bookedItems": [
+            ""
+          ]
+        }
+      }
+    ],
+    "bookedItems": [
+      ""
+    ],
+    "gear": [
+      {
+        "Gear": {
+          "name": "Boots",
+          "bookedItems": [
+            ""
+          ],
+          "pricePerWeek": 10,
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "comboItems": [
+            ""
+          ]
+        }
+      }
+    ],
+    "combos": [
+      ""
+    ],
+    "comboItems": [
+      ""
+    ],
+    "lodges": [
+      ""
+    ],
+    "tours": [
+      ""
+    ]
+  }
+}

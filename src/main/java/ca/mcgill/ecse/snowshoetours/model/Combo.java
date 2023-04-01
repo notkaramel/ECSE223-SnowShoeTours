@@ -4,7 +4,7 @@
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 66 "../../../../../../SnowShoeTour.ump"
+// line 67 "../../../../../../SnowShoeTour.ump"
 public class Combo extends BookableItem
 {
 
