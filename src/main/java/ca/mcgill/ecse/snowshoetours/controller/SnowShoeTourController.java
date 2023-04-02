@@ -71,8 +71,8 @@ public class SnowShoeTourController {
 							for (int ci = 0; ci < num_comboItem; ci++) {
 								ComboItem combo_item = combo.getComboItem(ci);
 								int num_ci = combo_item.getQuantity();
-								single_cost = single_cost
-										+ combo_item.getGear().getPricePerWeek() * tour_duration * num_ci;
+								single_cost = single_cost + combo_item.getGear().getPricePerWeek()
+										* tour_duration * num_ci;
 							}
 							if (lodge_rented == false) {
 								discount = 0;
@@ -87,15 +87,16 @@ public class SnowShoeTourController {
 					// Calculate the total cost of the trip for a single participant
 					int totalcost = (bookableitems + tour_cost);
 					// Adding the info to the list of participants
-					participants.add(p, new TOParticipantCost(participant.getAccountName(), participant.getName(),
-							bookableitems, totalcost));
+					participants.add(p, new TOParticipantCost(participant.getAccountName(),
+							participant.getName(), bookableitems, totalcost));
 
 				}
 				// Instancing TOSnowShoeTour
-				TOSnowShoeTour SnowShoeTour = new TOSnowShoeTour(id, tour.getStartWeek(), tour.getEndWeek(),
-						tour.getGuide().getAccountName(), tour.getGuide().getName(), tour_cost,
-						participants.toArray(new TOParticipantCost[0]));
-						SnowShoeTourPersistence.save();
+				TOSnowShoeTour SnowShoeTour =
+						new TOSnowShoeTour(id, tour.getStartWeek(), tour.getEndWeek(),
+								tour.getGuide().getAccountName(), tour.getGuide().getName(),
+								tour_cost, participants.toArray(new TOParticipantCost[0]));
+				SnowShoeTourPersistence.save();
 				return SnowShoeTour;
 			} catch (Exception e) {
 				return null;

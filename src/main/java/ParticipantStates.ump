@@ -1,28 +1,21 @@
 class Participant {
   Status{
     NotAssigned {
-      assign(Tour aTour)[hasGuide(aTour)] /{doAssign(aTour);}
+      assign(Tour aTour)[hasGuide(aTour)] /{setTour(aTour);}
         -> Assigned;
 
       assign(Tour aTour)[!hasGuide(aTour)]
         -> NotAssigned;
       
       // no refund penalty
-      cancel() /{ setRefundedPercentageAmount(0);}
-      -> Cancelled;
-      
-      // start() /{ doRefund(0);}
-      // -> Cancelled;
-      
+      cancel() -> NotAssigned;
+
       start() -> NotAssigned;
       
       pay() -> NotAssigned;
     }
 	// Same as NotPaid
     Assigned{
-      // pay()[!hasAuthCode()]
-      // -> Assigned;
-      
       pay()
       -> Paid;
       
@@ -35,9 +28,6 @@ class Participant {
     Paid {
       // start tour, and it's time to go
       start() -> Started;
-      
-      // start tour, but not time to start yet
-      //start()[!isTime()] -> Paid;
       
       // 50% refund
       cancel() /{ setRefundedPercentageAmount(50);}
@@ -70,14 +60,6 @@ class Participant {
 
   private boolean hasGuide(Tour aTour) {
     return aTour.getGuide() != null && !aTour.getGuide().getName().isEmpty();
-  }
-
-  private void doAssign(Tour aTour){
-    setTour(aTour);
-  }
-  
-  private boolean hasAuthCode() {
-    return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();
   }
 }
 

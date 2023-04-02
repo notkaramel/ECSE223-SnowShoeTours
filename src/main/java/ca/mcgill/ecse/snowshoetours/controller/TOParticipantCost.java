@@ -1,5 +1,5 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/* PLEASE DO NOT EDIT THIS CODE */
+/* This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language! */
 
 package ca.mcgill.ecse.snowshoetours.controller;
 
@@ -20,8 +20,8 @@ public class TOParticipantCost {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public TOParticipantCost(String aParticipantEmail, String aParticipantName, int aTotalCostForBookableItems,
-			int aTotalCostForSnowShoeTour) {
+	public TOParticipantCost(String aParticipantEmail, String aParticipantName,
+			int aTotalCostForBookableItems, int aTotalCostForSnowShoeTour) {
 		participantEmail = aParticipantEmail;
 		participantName = aParticipantName;
 		totalCostForBookableItems = aTotalCostForBookableItems;
@@ -48,12 +48,12 @@ public class TOParticipantCost {
 		return totalCostForSnowShoeTour;
 	}
 
-	public void delete() {
-	}
+	public void delete() {}
 
 	public String toString() {
-		return super.toString() + "[" + "participantEmail" + ":" + getParticipantEmail() + "," + "participantName" + ":"
-				+ getParticipantName() + "," + "totalCostForBookableItems" + ":" + getTotalCostForBookableItems() + ","
-				+ "totalCostForSnowShoeTour" + ":" + getTotalCostForSnowShoeTour() + "]";
+		return super.toString() + "[" + "participantEmail" + ":" + getParticipantEmail() + ","
+				+ "participantName" + ":" + getParticipantName() + "," + "totalCostForBookableItems"
+				+ ":" + getTotalCostForBookableItems() + "," + "totalCostForSnowShoeTour" + ":"
+				+ getTotalCostForSnowShoeTour() + "]";
 	}
 }

@@ -4,7 +4,6 @@ import java.util.*;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.model.*;
-import ca.mcgill.ecse.snowshoetours.model.Participant.Status;
 import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 
 public class SnowShoeTourCreationController {
@@ -25,18 +24,16 @@ public class SnowShoeTourCreationController {
         // Retrieve unassigned guides and participants from the system
         List<Guide> unAssignedGuides = sst.getGuides();
         List<Participant> unAssignedParticipants = sst.getParticipants();
-        int id = 0;
+        int id = 1;
 
         // Iterate through all unassigned participants
         for (Participant p : unAssignedParticipants) {
             // Get the participant's number of weeks and availability week
             int numberOfWeeks = p.getNrWeeks();
             int weekAvailableFrom = p.getWeekAvailableFrom();
-            int i = id;
-            id++;
 
             // Select a guide for the participant based on the current index
-            Guide assignedGuide = unAssignedGuides.get(i % unAssignedGuides.size());
+            Guide assignedGuide = unAssignedGuides.get(id % unAssignedGuides.size());
 
             // Create a new tour with the participant's available week and guide, and add it to the
             // system
@@ -44,7 +41,10 @@ public class SnowShoeTourCreationController {
                     assignedGuide);
 
             // Assign the new tour to the participant
+            // and then add the participant to the new tour
             p.assign(newTour);
+            newTour.addParticipant(p);
+            id++;
         }
 
         // Save the updated system state to persistence
@@ -57,36 +57,45 @@ public class SnowShoeTourCreationController {
 
         // Return an empty string to indicate that the operation was successful
         return "";
-
-
     }
 
     /**
      * This method let's participants pay for their trip
      * 
-     * @author Bilar Mokhtari @bmokhtari
+     * @author Bilar Mokhtari @bmokhtari, Antoine Phan @notkaramel, Jennifer Tram
+     *         Su @jennifertramsu, Emma Friesen @emma-friesen
      * @param email : The AccountName of a participant
      * @param authorizationCode
      * @return
      */
     public static String payForTrip(String email, String authorizationCode) {
-        Participant participant = getParticipantByEmail(email); // Get participant by email
-
-        if (participant == null) {
-            return "Participant with email address " + email + " does not exist"; // Return error
-                                                                                  // message if
-                                                                                  // participant is
-                                                                                  // null
+        // Input validation
+        if (email == null || email.equals("")) {
+            return "Email cannot be empty";
+        } else if (email.contains(" ")) {
+            return "Email must not contain any spaces";
+        } else if (!(email.indexOf("@") > 0)) {
+            return "Invalid email";
+        } else if (email.indexOf("@") != email.lastIndexOf("@")) {
+            return "Invalid email";
+        } else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
+            return "Invalid email";
+        } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
+            return "Invalid email";
         }
 
-        participant.setAuthorizationCode(authorizationCode);
+        Participant participant = getParticipantByEmail(email); // Get participant by email
+
+        // Return error message if participant is null
+        if (participant == null) {
+            return "Participant with email address " + email + " does not exist";
+        }
 
 
         if (authorizationCode == null || authorizationCode.isEmpty()) {
-            return "Invalid authorization code"; // Return error message if authorization code is
-                                                 // missing or empty
+            // Return error message if authorization code is missing or empty
+            return "Invalid authorization code";
         }
-        participant.pay(); // Process payment for participant
 
         switch (participant.getStatusFullName()) {
             case "Paid":
@@ -99,15 +108,18 @@ public class SnowShoeTourCreationController {
                 return ("The participant has already paid for their tour");
             case "NotAssigned":
                 return ("The participant has not been assigned to their tour");
-            default:
-                // handle any other status
+            case "Assigned": {
+                participant.setAuthorizationCode(authorizationCode);
+                participant.pay(); // Process payment for participant
                 break;
+            }
         }
+        
         try {
             SnowShoeTourPersistence.save(); // Save persistence after payment is processed
         } catch (Exception e) {
-            return e.getMessage(); // Return error message if payment processing or persistence
-                                   // saving fails
+            // Return error message if payment processing or persistence saving fails
+            return e.getMessage();
         }
 
         return ""; // Return empty string to indicate success
@@ -118,53 +130,47 @@ public class SnowShoeTourCreationController {
     /**
      * This method to start a trip for participants for during a specific week
      * 
-     * @author Bilar Mokhtari @bmokhtari
+     * @author Bilar Mokhtari @bmokhtari, Antoine Phan @notkaramel, Jennifer Tram
+     *         Su @jennifertramsu, Emma Friesen @emma-friesen
      * @param week
      * @return
      */
     public static String startAllTripsForSpecificWeek(int week) {
         List<Tour> shoeTours = sst.getTours(); // Get all tours in the system
-        boolean tripStarted = false; // Flag to keep track of whether any trips were started
 
         for (Tour shoeTour : shoeTours) { // Loop through all tours
-            if (shoeTour.getStartWeek() == week) { // Check if tour is starting in the specified
-                                                   // week
-                for (Participant participant : shoeTour.getParticipants()) { // Loop through all
-                                                                             // participants in the
-                                                                             // tour
-                    tripStarted = participant.start(); // Set flag to indicate that a trip was
-                                                       // started
-
+            // Check if tour is starting in the specified week
+            if (shoeTour.getStartWeek() == week) {
+                // Loop through all participants in the tour
+                for (Participant participant : shoeTour.getParticipants()) {
                     switch (participant.getStatusFullName()) {
+                        case "NotAssigned":
+                            return "";
+                        case "Assigned":
+                            return "";
                         case "Started":
                             return ("Cannot start tour because the participant has already started their tour");
                         case "Cancelled":
-                            return ("Cannot start tour because the participant has already cancelled their tour");
+                            return ("Cannot start tour because the participant has cancelled their tour");
                         case "Finished":
                             return ("Cannot start tour because the participant has finished their tour");
-                        default:
-                            // handle any other status
+                        case "Paid": {
+                            participant.start();
                             break;
+                        }
                     }
                 }
             }
         }
 
-        if (tripStarted) { // Check if any trips were started
-            try {
-                SnowShoeTourPersistence.save(); // Save the updated system state
-            } catch (Exception e) {
-                return e.getMessage(); // Return an error message if the system state could not be
-                                       // saved
-            }
-        } else {
-            return (String.format("No trips were started for week %s\n", week)); // Append a message
-                                                                                 // indicating that
-                                                                                 // no trips were
-                                                                                 // started
+        try {
+            SnowShoeTourPersistence.save(); // Save the updated system state
+        } catch (Exception e) {
+            // Return an error message if the system state could not be saved
+            return e.getMessage();
         }
 
-        return "wild"; // Return the accumulated messages
+        return "No trip started this week"; // Return the accumulated messages
     }
 
 
@@ -172,19 +178,33 @@ public class SnowShoeTourCreationController {
     /**
      * This method to finish a trip for a specific participant Checks if participant exists
      * 
-     * @author Bilar Mokhtari @bmokhtari
+     * @author Bilar Mokhtari @bmokhtari, Antoine Phan @notkaramel, Jennifer Tram
+     *         Su @jennifertramsu, Emma Friesen @emma-friesen
      * @param email : The AccountName of a participant
      * @return
      */
     public static String finishParticipantTrip(String email) {
+        // Input validation
+        if (email == null || email.equals("")) {
+            return "Email cannot be empty";
+        } else if (email.contains(" ")) {
+            return "Email must not contain any spaces";
+        } else if (!(email.indexOf("@") > 0)) {
+            return "Invalid email";
+        } else if (email.indexOf("@") != email.lastIndexOf("@")) {
+            return "Invalid email";
+        } else if (!(email.indexOf("@") < email.lastIndexOf(".") - 1)) {
+            return "Invalid email";
+        } else if (!(email.lastIndexOf(".") < email.length() - 1)) {
+            return "Invalid email";
+        }
+
         Participant participant = getParticipantByEmail(email);
 
         if (participant == null) {
             return String.format("Participant with email address %s does not exist", email);
         }
-        if (!participant.start()) {
-            return "Cannot finish a tour for a participant who has not started their tour";
-        }
+
         switch (participant.getStatusFullName()) {
             case "Cancelled":
                 return ("Cannot finish tour because the participant has cancelled their tour");
@@ -192,11 +212,16 @@ public class SnowShoeTourCreationController {
                 return ("Cannot finish tour because the participant has already finished their tour");
             case "NotAssigned":
                 return ("Cannot finish a tour for a participant who has not started their tour");
-            default:
+            case "Assigned":
+                return ("Cannot finish a tour for a participant who has not started their tour");
+            case "Paid":
+                return ("Cannot finish a tour for a participant who has not started their tour");
+            case "Started":
+                participant.finish();
         }
 
         try {
-            participant.finish();
+
             SnowShoeTourPersistence.save(); // Save persistence after the participant's tour is
                                             // finished
         } catch (RuntimeException e) {
@@ -211,7 +236,8 @@ public class SnowShoeTourCreationController {
      * This method to cancel a trip for participants Checks whether they exist or not and if they
      * have started their tour yet
      * 
-     * @author Bilar Mokhtari @bmokhtari
+     * @author Bilar Mokhtari @bmokhtari, Antoine Phan @notkaramel, Jennifer Tram
+     *         Su @jennifertramsu, Emma Friesen @emma-friesen
      * @param week
      * @return
      */
@@ -224,22 +250,30 @@ public class SnowShoeTourCreationController {
             return String.format("Participant with email address %s does not exist", email);
         }
 
-        switch (participant.getStatus()) {
-            case Started:
-                return ("Cannot start tour because the participant has already started their tour");
-            case Cancelled:
+        switch (participant.getStatusFullName()) {
+            case "Started": {
+                participant.cancel(); // Cancel the participant's tour
+                return "";
+            }
+            case "NotAssigned": {
+                participant.cancel(); // Cancel the participant's tour
+                return "";
+            }
+            case "Assigned": {
+                participant.cancel(); // Cancel the participant's tour
+                return "";
+            }
+            case "Paid": {
+                participant.cancel(); // Cancel the participant's tour
+                return "";
+            }
+            case "Cancelled":
                 return ("Cannot cancel tour because the participant has already cancelled their tour");
-            case Finished:
+            case "Finished":
                 return ("Cannot cancel tour because the participant has finished their tour");
-            default:
-                // handle any other status
-                break;
         }
 
-        participant.cancel(); // Cancel the participant's tour
-
         try {
-            participant.cancel();
             SnowShoeTourPersistence.save(); // Save persistence after the participant's tour is
                                             // cancelled
         } catch (Exception e) {
@@ -256,7 +290,6 @@ public class SnowShoeTourCreationController {
      * @param email : The AccountName of a participant
      * @return
      */
-
     public static Participant getParticipantByEmail(String email) {
         List<Participant> participants = sst.getParticipants();
 
@@ -269,8 +302,5 @@ public class SnowShoeTourCreationController {
         // Participant not found with matching email
         return null;
     }
-
-
-
 }
 

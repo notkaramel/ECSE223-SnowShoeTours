@@ -52,7 +52,15 @@ public class ToursStepDefinitions {
     public void the_participant_with_email_has_started_their_tour(String email) {
         // List<Participant> participants = sst.getParticipants();
         for (Participant p : sst.getParticipants()) {
-            if (p.getAccountName() == email) {
+            if (p.getAccountName().equals(email)) {
+                // Forcing people to be at Paid status
+                if(p.getStatusFullName().equals("NotAssigned")){
+                    p.assign(sst.getTours().get(0));
+                    p.pay();
+                }
+                if(p.getStatusFullName().equals("Assigned")){
+                    p.pay();
+                }
                 p.start();
             }
         }
@@ -68,6 +76,10 @@ public class ToursStepDefinitions {
         for (Participant p : sst.getParticipants()) {
             // Find the participant with the email {string}
             if (p.getAccountName().equals(string)) {
+                // Forcing people to be at Assigned status
+                if(p.getStatusFullName().equals("NotAssigned")){
+                    p.assign(sst.getTours().get(0));
+                }
                 p.pay();
             }
         }
@@ -128,7 +140,7 @@ public class ToursStepDefinitions {
                                                                                                      // extracted
                                                                                                      // data
             Participant participant = (Participant) User.getWithAccountName(row.get("participants"));
-            //aTour.addParticipant(participant);
+            aTour.addParticipant(participant);
             participant.assign(aTour);
         }
         //error = SnowShoeTourCreationController.initiateSnowToursCreation();
@@ -164,8 +176,24 @@ public class ToursStepDefinitions {
     public void the_participant_with_email_has_finished_their_tour(String email) {
         List<Participant> participants = sst.getParticipants();
         for (int p = 0; p < participants.size(); p++) {
-            if (participants.get(p).getAccountName() == email) {
+            if (participants.get(p).getAccountName().equals(email)) {
                 Participant participant = participants.get(p);
+                // Forcing people to be at Started status
+                switch(participant.getStatusFullName()){
+                    case "NotAssigned":
+                    {
+                        participant.assign(sst.getTours().get(0));
+                        participant.pay();
+                        participant.start();
+                    }
+                    case "Assigned":
+                    {
+                        participant.pay();
+                        participant.start();
+                    }
+                    case "Paid":
+                        participant.start();
+                }
                 participant.finish();
             }
         }
@@ -202,14 +230,6 @@ public class ToursStepDefinitions {
      */
     @When("the manager attempts to start the tours for week {string}")
     public void the_manager_attempts_to_start_the_tours_for_week(String string) {
-        // Write code here that turns the phrase above into concrete actions
-        // for (Tour t : sst.getTours()) {
-        //     if (t.getStartWeek() == Integer.parseInt(string)) {
-        //         for (Participant p : t.getParticipants()) {
-        //             SnowShoeTourCreationController.startAllTripsForSpecificWeek(0)
-        //         }
-        //     }
-        // }
         error = SnowShoeTourCreationController.startAllTripsForSpecificWeek(Integer.parseInt(string));
     }
 
