@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.snowshoetours.controller;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
-import ca.mcgill.ecse.snowshoetours.model.Guide;
 import ca.mcgill.ecse.snowshoetours.model.Lodge;
 import ca.mcgill.ecse.snowshoetours.model.Lodge.LodgeRating;
 import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;

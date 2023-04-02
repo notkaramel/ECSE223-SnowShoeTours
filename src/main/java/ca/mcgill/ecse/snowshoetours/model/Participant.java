@@ -168,8 +168,6 @@ public class Participant extends NamedUser
         }
         if (!(hasGuide(aTour)))
         {
-        // line 7 "../../../../../../ParticipantStates.ump"
-          rejectAssign();
           setStatus(Status.NotAssigned);
           wasEventProcessed = true;
           break;
@@ -191,19 +189,23 @@ public class Participant extends NamedUser
     {
       case NotAssigned:
         // line 11 "../../../../../../ParticipantStates.ump"
-        doRefund(0);
+        setRefundedPercentageAmount(0);
+        setStatus(Status.Cancelled);
+        wasEventProcessed = true;
+        break;
+      case Assigned:
         setStatus(Status.Cancelled);
         wasEventProcessed = true;
         break;
       case Paid:
-        // line 42 "../../../../../../ParticipantStates.ump"
-        doRefund(50);
+        // line 43 "../../../../../../ParticipantStates.ump"
+        setRefundedPercentageAmount(50);
         setStatus(Status.Cancelled);
         wasEventProcessed = true;
         break;
       case Started:
-        // line 53 "../../../../../../ParticipantStates.ump"
-        doRefund(10);
+        // line 54 "../../../../../../ParticipantStates.ump"
+        setRefundedPercentageAmount(10);
         setStatus(Status.Cancelled);
         wasEventProcessed = true;
         break;
@@ -226,8 +228,8 @@ public class Participant extends NamedUser
         wasEventProcessed = true;
         break;
       case Assigned:
-        // line 30 "../../../../../../ParticipantStates.ump"
-        doRefund(0);
+        // line 31 "../../../../../../ParticipantStates.ump"
+        setRefundedPercentageAmount(0);
         setStatus(Status.Cancelled);
         wasEventProcessed = true;
         break;
@@ -262,20 +264,8 @@ public class Participant extends NamedUser
         wasEventProcessed = true;
         break;
       case Assigned:
-        if (!(hasAuthCode()))
-        {
-        // line 23 "../../../../../../ParticipantStates.ump"
-          rejectPayment();
-          setStatus(Status.Assigned);
-          wasEventProcessed = true;
-          break;
-        }
-        if (hasAuthCode())
-        {
-          setStatus(Status.Paid);
-          wasEventProcessed = true;
-          break;
-        }
+        setStatus(Status.Paid);
+        wasEventProcessed = true;
         break;
       case Paid:
         setStatus(Status.Paid);
@@ -499,32 +489,17 @@ public class Participant extends NamedUser
     super.delete();
   }
 
-  // line 71 "../../../../../../ParticipantStates.ump"
+  // line 72 "../../../../../../ParticipantStates.ump"
    private boolean hasGuide(Tour aTour){
     return aTour.getGuide() != null && !aTour.getGuide().getName().isEmpty();
   }
 
-  // line 75 "../../../../../../ParticipantStates.ump"
+  // line 76 "../../../../../../ParticipantStates.ump"
    private void doAssign(Tour aTour){
     setTour(aTour);
   }
 
-  // line 79 "../../../../../../ParticipantStates.ump"
-   private void rejectAssign(){
-    throw new RuntimeException("No guide is assigned to this tour!");
-  }
-
-  // line 83 "../../../../../../ParticipantStates.ump"
-   private void rejectPayment(){
-    throw new RuntimeException("Payment not accepted");
-  }
-
-  // line 87 "../../../../../../ParticipantStates.ump"
-   private void doRefund(Integer refundedPercentage){
-    setRefundedPercentageAmount(refundedPercentage);
-  }
-
-  // line 91 "../../../../../../ParticipantStates.ump"
+  // line 80 "../../../../../../ParticipantStates.ump"
    private boolean hasAuthCode(){
     return getAuthorizationCode() != null && !getAuthorizationCode().isEmpty();
   }

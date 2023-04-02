@@ -8,7 +8,6 @@ import ca.mcgill.ecse.snowshoetours.model.BookedItem;
 import ca.mcgill.ecse.snowshoetours.model.Combo;
 import ca.mcgill.ecse.snowshoetours.model.Gear;
 import ca.mcgill.ecse.snowshoetours.model.Guide;
-import ca.mcgill.ecse.snowshoetours.model.Manager;
 import ca.mcgill.ecse.snowshoetours.model.Participant;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.User;
@@ -39,11 +38,6 @@ public class ParticipantController {
 			return "Invalid email";
 		} else if (!(email.lastIndexOf(".") < email.length() - 1)) {
 			return "Invalid email";
-		}
-
-		// Cannot have manager email
-		if (email.equals("manager@btp.com")) {
-			return "Email cannot be manager@btp.com";
 		}
 
 		// Cannot be a guide

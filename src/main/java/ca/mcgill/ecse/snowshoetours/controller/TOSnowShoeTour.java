@@ -1,5 +1,5 @@
-/*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/* PLEASE DO NOT EDIT THIS CODE */
+/* This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language! */
 
 package ca.mcgill.ecse.snowshoetours.controller;
 
@@ -30,8 +30,8 @@ public class TOSnowShoeTour {
 	// CONSTRUCTOR
 	// ------------------------
 
-	public TOSnowShoeTour(int aId, int aStartWeek, int aEndWeek, String aGuideEmail, String aGuideName,
-			int aTotalCostForGuide, TOParticipantCost... allParticipantCosts) {
+	public TOSnowShoeTour(int aId, int aStartWeek, int aEndWeek, String aGuideEmail,
+			String aGuideName, int aTotalCostForGuide, TOParticipantCost... allParticipantCosts) {
 		id = aId;
 		startWeek = aStartWeek;
 		endWeek = aEndWeek;
@@ -82,7 +82,8 @@ public class TOSnowShoeTour {
 	}
 
 	public List<TOParticipantCost> getParticipantCosts() {
-		List<TOParticipantCost> newParticipantCosts = Collections.unmodifiableList(participantCosts);
+		List<TOParticipantCost> newParticipantCosts =
+				Collections.unmodifiableList(participantCosts);
 		return newParticipantCosts;
 	}
 
@@ -131,12 +132,12 @@ public class TOSnowShoeTour {
 		return wasSet;
 	}
 
-	public void delete() {
-	}
+	public void delete() {}
 
 	public String toString() {
-		return super.toString() + "[" + "id" + ":" + getId() + "," + "startWeek" + ":" + getStartWeek() + ","
-				+ "endWeek" + ":" + getEndWeek() + "," + "guideEmail" + ":" + getGuideEmail() + "," + "guideName" + ":"
-				+ getGuideName() + "," + "totalCostForGuide" + ":" + getTotalCostForGuide() + "]";
+		return super.toString() + "[" + "id" + ":" + getId() + "," + "startWeek" + ":"
+				+ getStartWeek() + "," + "endWeek" + ":" + getEndWeek() + "," + "guideEmail" + ":"
+				+ getGuideEmail() + "," + "guideName" + ":" + getGuideName() + ","
+				+ "totalCostForGuide" + ":" + getTotalCostForGuide() + "]";
 	}
 }
