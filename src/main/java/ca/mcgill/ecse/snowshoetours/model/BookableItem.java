@@ -1,10 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 55 "../../../../../SnowShoeTour.ump"
+// line 25 "../../../../../../SnowShoeTourPersistence.ump"
+// line 57 "../../../../../../SnowShoeTour.ump"
 public abstract class BookableItem
 {
 
@@ -185,6 +186,14 @@ public abstract class BookableItem
       BookedItem aBookedItem = bookedItems.get(i - 1);
       aBookedItem.delete();
     }
+  }
+
+  // line 27 "../../../../../../SnowShoeTourPersistence.ump"
+   public static  void reinitializeUniqueItemName(List<BookableItem> items){
+    bookableitemsByName.clear();
+      for (var b:items){
+          bookableitemsByName.put(b.getName(), b);
+      }
   }
 
 

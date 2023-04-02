@@ -29,8 +29,7 @@ public class AddAndDeleteComboStepDefinitions {
   /**
    * This method creates a sst and initializes the error message.
    * 
-   * @param dataTable from feature file containing startDate, nrWeeks and
-   *                  priceOfGuidePerWeek
+   * @param dataTable from feature file containing startDate, nrWeeks and priceOfGuidePerWeek
    * @return returns nothing
    */
   @Given("the following SnowShoeTour system exists \\(g4)")
@@ -45,8 +44,8 @@ public class AddAndDeleteComboStepDefinitions {
   }
 
   /**
-   * Given step to make sure that certain participants exist in the system
-   * before the beginning of a certain test
+   * Given step to make sure that certain participants exist in the system before the beginning of a
+   * certain test
    * 
    */
   @Given("the following participants exist in the system \\(g4)")
@@ -62,14 +61,13 @@ public class AddAndDeleteComboStepDefinitions {
       int weekAvailableFrom = Integer.parseInt(row.get("weeksAvailableFrom"));
       int weekAvailableUntil = Integer.parseInt(row.get("weeksAvailableUntil"));
       boolean lodgeRequired = Boolean.parseBoolean(row.get("lodgeRequired"));
-      new Participant(email, password, name, emergencyContact, nrWeeks, weekAvailableFrom, weekAvailableUntil,
-          lodgeRequired, null, 0, sst);
+      new Participant(email, password, name, emergencyContact, nrWeeks, weekAvailableFrom,
+          weekAvailableUntil, lodgeRequired, null, 0, sst);
     }
   }
 
   /**
-   * This method checks whether the pieces of gear in the datatable are in the
-   * system.
+   * This method checks whether the pieces of gear in the datatable are in the system.
    * 
    * @param dataTable from feature file containing the gears
    * @return returns error message, if any
@@ -84,9 +82,8 @@ public class AddAndDeleteComboStepDefinitions {
   }
 
   /**
-   * Given step to make sure that certain participants have been assigned certain
-   * combos
-   * in the system before the beginning of a certain test
+   * Given step to make sure that certain participants have been assigned certain combos in the
+   * system before the beginning of a certain test
    * 
    */
   @Given("the following participants request the following combos \\(g4)")
@@ -104,8 +101,7 @@ public class AddAndDeleteComboStepDefinitions {
   }
 
   /**
-   * This method checks whether the pieces of combos in the datatable are in the
-   * system.
+   * This method checks whether the pieces of combos in the datatable are in the system.
    * 
    * @param dataTable from feature file containing the combos
    * @return returns error message, if any
@@ -151,9 +147,8 @@ public class AddAndDeleteComboStepDefinitions {
   }
 
   /**
-   * When step that uses the controller to delete the Combo with name <string>
-   * when
-   * the manager tries to.
+   * When step that uses the controller to delete the Combo with name <string> when the manager
+   * tries to.
    * 
    */
   @When("the manager attempts to delete the combo with name {string} \\(g4)")
@@ -244,8 +239,7 @@ public class AddAndDeleteComboStepDefinitions {
   }
 
   /**
-   * Then step definition to make sure that a certain participant has the right
-   * amount of combos
+   * Then step definition to make sure that a certain participant has the right amount of combos
    * 
    * @param string
    */
@@ -254,7 +248,8 @@ public class AddAndDeleteComboStepDefinitions {
       String string2, String string3) {
     boolean name = false;
     boolean quantity = false; // j
-    for (BookedItem bookedItem : ((Participant) Participant.getWithAccountName(string)).getBookedItems()) {
+    for (BookedItem bookedItem : ((Participant) Participant.getWithAccountName(string))
+        .getBookedItems()) {
       name = bookedItem.getItem().getName().equals(string2);
       if (name && bookedItem.getItem() instanceof Combo) {
         if (Integer.parseInt(string3) == bookedItem.getQuantity()) {

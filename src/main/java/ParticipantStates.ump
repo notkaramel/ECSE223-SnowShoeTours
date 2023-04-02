@@ -1,0 +1,65 @@
+class Participant {
+  Status{
+    NotAssigned {
+      assign(Tour aTour)[hasGuide(aTour)] /{setTour(aTour);}
+        -> Assigned;
+
+      assign(Tour aTour)[!hasGuide(aTour)]
+        -> NotAssigned;
+      
+      // no refund penalty
+      cancel() -> NotAssigned;
+
+      start() -> NotAssigned;
+      
+      pay() -> NotAssigned;
+    }
+	// Same as NotPaid
+    Assigned{
+      pay()
+      -> Paid;
+      
+      cancel() -> Cancelled;
+      // no refund penalty
+      start() / {setRefundedPercentageAmount(0);}
+      -> Cancelled;
+    }
+    
+    Paid {
+      // start tour, and it's time to go
+      start() -> Started;
+      
+      // 50% refund
+      cancel() /{ setRefundedPercentageAmount(50);}
+      -> Cancelled;
+      
+      pay() -> Paid;
+    }
+    
+    // Tour starts
+    Started {
+      finish() -> Finished;
+      
+      // 10% refund
+      cancel() /{ setRefundedPercentageAmount(10);}
+      -> Cancelled;
+		
+      pay() -> Started;
+      start() -> Started;
+    }
+    
+    Finished {
+      start() -> Finished;
+      pay() -> Finished;
+    }
+    
+    Cancelled {
+      pay() -> Cancelled;
+    }
+  }
+
+  private boolean hasGuide(Tour aTour) {
+    return aTour.getGuide() != null && !aTour.getGuide().getName().isEmpty();
+  }
+}
+

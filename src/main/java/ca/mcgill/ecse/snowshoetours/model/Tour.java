@@ -1,10 +1,11 @@
 /*PLEASE DO NOT EDIT THIS CODE*/
-/*This code was generated using the UMPLE 1.31.1.5860.78bb27cc6 modeling language!*/
+/*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.snowshoetours.model;
 import java.util.*;
 
-// line 83 "../../../../../SnowShoeTour.ump"
+// line 41 "../../../../../../SnowShoeTourPersistence.ump"
+// line 85 "../../../../../../SnowShoeTour.ump"
 public class Tour
 {
 
@@ -320,6 +321,14 @@ public class Tour
     {
       placeholderSnowShoeTour.removeTour(this);
     }
+  }
+
+  // line 43 "../../../../../../SnowShoeTourPersistence.ump"
+   public static  void reinitializeUniqueID(List<Tour> tours){
+    toursById.clear();
+      for (var t: tours){
+          toursById.put(t.getId(), t);
+      }
   }
 
 
