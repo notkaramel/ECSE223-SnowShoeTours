@@ -153,34 +153,11 @@ public class GearController {
 	 * @param name
 	 */
 	public static void deleteCombo(String name) {
-
-		// TRY DELETING COMBO
-		// initiate comboIndex
-		// Integer comboIndex = null;
-
-		// try {
-
-		// //find index of the combo with name in the list of combos, and set to
-		// comboIndex
-		// for (int i=0; i < sst.getCombos().size() ; i++) {
-		// if(sst.getCombo(i).getName() == name) {
-		// comboIndex = i;
-		// break;
-		// }
-		// }
-
-		// //delete combo with name located at comboIndex
-		// sst.getCombo(comboIndex).delete();
-
-		// } catch(Exception e) { }
-
-		// Antoine's reimplementation
 		Combo combo = (Combo) Combo.getWithName(name);
 		if (combo != null) {
 			combo.delete();
 			SnowShoeTourPersistence.save();
 		}
-
 	}
 
 	/**
@@ -205,7 +182,6 @@ public class GearController {
 		Gear gear = (Gear) BookableItem.getWithName(gearName);
 		Combo combo = (Combo) BookableItem.getWithName(comboName);
 		ComboItem comboItem = getComboItem(combo, gear);
-		Integer comboIndex = null;
 
 		// TRY ADDING GEAR TO COMBO
 		try {
@@ -247,7 +223,6 @@ public class GearController {
 		Gear gear = (Gear) BookableItem.getWithName(gearName);
 		Combo combo = (Combo) BookableItem.getWithName(comboName);
 		ComboItem comboItem = getComboItem(combo, gear);
-		Integer comboIndex = null;
 		if (comboItem == null) {
 			return "";
 		}
