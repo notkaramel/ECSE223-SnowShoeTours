@@ -1,1 +1,73 @@
-<!-- Angela -->
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane hgap="10.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.flightmanagementsystem.javafx.fxml.controllers.AddElementPageController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.20000000000002" minWidth="10.0" prefWidth="25.60000610351563" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.20000000000002" minWidth="0.0" prefWidth="141.1999938964844" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="561.0" minWidth="0.0" prefWidth="142.79999542236328" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="561.0" minWidth="0.0" prefWidth="107.59996337890624" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="561.0" minWidth="10.0" prefWidth="181.20002441406245" />
+      
+         </columnConstraints>
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Frosty Snow Shoe Tours!" textAlignment="CENTER" wrappingWidth="574.9366416931152" GridPane.columnIndex="1">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="How can we help you today?" wrappingWidth="496.13671493530273" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. View a Summary of Each Tour (Registered Participant and Assigned Guide)" wrappingWidth="411.73669052124023" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Button fx:id="goToOverview" mnemonicParsing="false" onAction="#goToOverviewClicked" prefHeight="25.0" prefWidth="152.0" text="Overview" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+      <Button fx:id="goToGearAndCombo" mnemonicParsing="false" onAction="#goToGearAndComboClicked" prefHeight="25.0" prefWidth="152.0" text="Gear and Combo" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+      <Button fx:id="goToLodge" mnemonicParsing="false" onAction="#goToLodgeClicked" prefHeight="25.0" prefWidth="152.0" text="Lodge" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+      <Button fx:id="goToParticipants" mnemonicParsing="false" onAction="#goToParticipantsClicked" prefHeight="25.0" prefWidth="152.0" text="Participants" GridPane.columnIndex="4" GridPane.rowIndex="8" />
+      <Button fx:id="goToGuide" mnemonicParsing="false" onAction="#goToGuideClicked" prefHeight="25.0" prefWidth="153.0" text="Guide" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+      <Button fx:id="goToSettings" mnemonicParsing="false" onAction="#goToSettingsClicked" prefHeight="25.0" prefWidth="153.0" text="Settings" GridPane.columnIndex="4" GridPane.rowIndex="10" />
+      <Button fx:id="goToTourCreation" mnemonicParsing="false" onAction="#goToTourCreationClicked" prefHeight="25.0" prefWidth="152.0" text="Tour Creation" GridPane.columnIndex="4" GridPane.rowIndex="11" />
+      <Button fx:id="goToPayment" mnemonicParsing="false" onAction="#goToPaymentClicked" prefHeight="25.0" prefWidth="152.0" text="Payment" GridPane.columnIndex="4" GridPane.rowIndex="12" />
+      <Button fx:id="goToStatus" mnemonicParsing="false" onAction="#goToStatusClicked" prefHeight="25.0" prefWidth="152.0" text="Tour Status" GridPane.columnIndex="4" GridPane.rowIndex="13" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Add or Delete Combos / Add or Delete Gear / Add or Delete Gears from Combos" wrappingWidth="338.2133102416992" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Add or Delete a Lodge" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4. Register or Remove a Participant from a Tour / Add or Remove Gear or   Combo From Participant" wrappingWidth="413.5992736816406" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5. Register or Delete a Guide from a Tour" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6. Update Snow Shoe Tour General Information (Season and Guide Cost)" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="7. Create Tours" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="8. Pay for a Tour" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="9. Start Tours / End a Participant's Tour / Cancel a Participant's Tour" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+      
+            
+      
+         </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <rowConstraints>
+      <RowConstraints maxHeight="42.00000915527344" minHeight="10.0" prefHeight="42.00000915527344" />
+      <RowConstraints maxHeight="38.800018310546875" minHeight="10.0" prefHeight="25.199990844726564" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" />
+   </rowConstraints>
+</GridPane>
