@@ -1,7 +1,7 @@
 package ca.mcgill.ecse.snowshoetours.application;
 
 import java.sql.Date;
-
+import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.model.Manager;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 
@@ -10,7 +10,8 @@ public class SnowShoeToursApplication {
   private static SnowShoeTour snowShoeTour;
 
   public static void main(String[] args) {
-    // TODO Start the application user interface here
+    MainPageView.launch(MainPageView.class, args);
+
   }
 
   public static SnowShoeTour getSnowShoeTour() {
