@@ -21,8 +21,6 @@ public class SSTSettingsPageController {
 		private TextField noWeeksTextField;
 		
 		@FXML
-		private Button setCostButton;
-		@FXML
 		private TextField guideCostTextField;
 		
 

@@ -1,7 +1,6 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
 import java.io.IOException;
-import java.sql.Date;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
