@@ -134,4 +134,47 @@ public class SnowShoeTourController {
 			}
 		}
 	}
+
+	/**
+	 * Getting a list of all the guide emails
+	 * 
+	 * @author Antoine Phan @notkaramel
+	 * @return
+	 */
+	public static List<String> getGuides() {
+		return ssts.getGuides().stream().map(Guide::getAccountName).toList();
+	}
+	
+	/**
+	 * Getting a list of all the start weeks of the tours
+	 * 
+	 * @author Antoine Phan @notkaramel
+	 * @return
+	 */
+	public static List<Integer> getTourWeeks() {
+		return ssts.getTours().stream().map(Tour::getStartWeek).toList();
+	}
+
+	/**
+	 * Getting a list of all the tour IDs
+	 * 
+	 * @author Antoine Phan @notkaramel
+	 * @return
+	 */
+	public static List<Integer> getTourIDs() {
+		return ssts.getTours().stream().map(Tour::getId).toList();
+	}
+
+	/**
+	 * Get tours as TOSnowShoeTour
+	 * @author Antoine Phan @notkaramel
+	 */
+	public static List<TOSnowShoeTour> getSnowShoeTours() {
+		List<TOSnowShoeTour> tours = new ArrayList<>();
+		for (Tour tour : ssts.getTours()) {
+			tours.add(getSnowShoeTour(tour.getId()));
+		}
+		return tours;
+	}
+	
 }

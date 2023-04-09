@@ -2,17 +2,13 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.OverviewPageController"
-          maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-          prefHeight="400.0" prefWidth="600.0" 
-          xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.OverviewPageController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="249.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="241.0" />
@@ -24,21 +20,13 @@
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TableView prefHeight="153.0" prefWidth="602.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
-        <columns>
-          <TableColumn prefWidth="75.0" text="Tour ID" />
-          <TableColumn prefWidth="139.0" text="Start Week" />
-            <TableColumn prefWidth="135.0" text="Participant" />
-            <TableColumn prefWidth="132.0" text="Guide" />
-            <TableColumn minWidth="0.0" prefWidth="109.0" text="Status" />
-        </columns>
-      </TableView>
+      <TableView fx:id="overviewTable" prefHeight="153.0" prefWidth="602.0" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.rowSpan="2" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" />
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="392.0" text="Overview of SST" textAlignment="CENTER" GridPane.columnSpan="2" GridPane.halignment="CENTER">
          <font>
             <Font name="Cantarell Regular" size="35.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" mnemonicParsing="false" text="REFRESH" textAlignment="CENTER" textFill="#030000" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#refreshOverview" text="REFRESH" textAlignment="CENTER" textFill="#030000" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER">
          <font>
             <Font size="14.0" />
          </font>

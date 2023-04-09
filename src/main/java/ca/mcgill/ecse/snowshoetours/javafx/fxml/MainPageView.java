@@ -31,7 +31,7 @@ public class MainPageView extends Application{
       primaryStage.setScene(scene);
       primaryStage.setMinWidth(800);
       primaryStage.setMinHeight(600);
-      primaryStage.setTitle("SnowShoeTours");
+      primaryStage.setTitle("SnowShoeTours Management System");
       primaryStage.show();
       refresh();
     } catch (IOException e) {
