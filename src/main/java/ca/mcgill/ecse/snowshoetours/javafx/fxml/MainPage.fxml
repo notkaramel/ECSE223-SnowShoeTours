@@ -12,7 +12,7 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
             <tabs>
                 <Tab text="Welcome">
                     <content>
-                        <fx:include source="pages/WelcomePage.fxml" />
+                        <!--<fx:include source="pages/WelcomePage.fxml" />-->
                     </content>
                 </Tab>
                 <Tab text="Overview">

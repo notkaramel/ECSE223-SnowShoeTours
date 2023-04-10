@@ -64,6 +64,9 @@ public class ParticipantPageController {
     void deleteParticipantClicked(ActionEvent event) {
         String email = participantChoiceBox.getValue().toString();
         ParticipantController.deleteParticipant(email);
+        
+        // Refresh the choice box
+        MainPageView.getInstance().refresh();
     }
 
     @FXML
