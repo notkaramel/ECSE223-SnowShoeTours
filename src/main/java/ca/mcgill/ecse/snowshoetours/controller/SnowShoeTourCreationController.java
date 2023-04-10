@@ -33,6 +33,10 @@ public class SnowShoeTourCreationController {
         List<Guide> unAssignedGuides = sst.getGuides();
         List<Participant> unAssignedParticipants = sst.getParticipants();
         int id = 1;
+        if (unAssignedGuides.isEmpty()) {
+            // Return an error message or handle the situation when no guides are available.
+            return "No unassigned guides available.";
+        }
 
         // Iterate through all unassigned participants
         for (Participant p : unAssignedParticipants) {

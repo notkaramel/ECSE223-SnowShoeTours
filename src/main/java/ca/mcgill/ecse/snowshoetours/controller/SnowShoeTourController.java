@@ -190,5 +190,23 @@ public class SnowShoeTourController {
 		}
 		return tours;
 	}
+/**
+	 * Get tours as TOSnowShoeTour
+	 * @author Bilar Mokhtari @bmok
+	 */
+	public static List<Integer> getWeeksWithParticipants() {
+		List<Integer> weeks = new ArrayList<>();
+		List<Tour> tours = ssts.getTours();
+	
+		for (Tour tour : tours) {
+			int week = tour.getStartWeek();
+			if (!weeks.contains(week) && !tour.getParticipants().isEmpty()) {
+				weeks.add(week);
+			}
+		}
+	
+		Collections.sort(weeks);
+		return weeks;
+	}
 	
 }

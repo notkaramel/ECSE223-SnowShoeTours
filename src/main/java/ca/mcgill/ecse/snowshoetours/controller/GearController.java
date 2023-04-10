@@ -209,6 +209,7 @@ public class GearController {
 	 */
 	public static String removeGearFromCombo(String gearName, String comboName) {
 
+
 		// checks comboName inputs does in fact exist
 		if (!isCombo(comboName)) {
 			return "The combo does not exist";
@@ -218,11 +219,16 @@ public class GearController {
 			return "The piece of gear does not exist";
 		}
 
+
+
 		// get gear and combo with gearName and comboName, respectively,
 		// then creates a comboItem using the helper method getComboItem
 		Gear gear = (Gear) BookableItem.getWithName(gearName);
 		Combo combo = (Combo) BookableItem.getWithName(comboName);
 		ComboItem comboItem = getComboItem(combo, gear);
+		if (!comboContainsGear(combo, gear)) {
+			return "The combo does not contain the specified piece of gear";
+		}
 		if (comboItem == null) {
 			return "";
 		}
@@ -278,5 +284,14 @@ public class GearController {
 			}
 		}
 		return comboItem;
+	}
+
+	public static boolean comboContainsGear(Combo combo, Gear gear) {
+		for (ComboItem comboItem : combo.getComboItems()) {
+			if (comboItem.getGear().equals(gear)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

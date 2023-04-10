@@ -1,16 +1,16 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
 import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourCreationController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-/**
- * @author Bilar Mokhtari @bmokhtari
- */
+import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 public class TourStatusPageController {
 
     @FXML
@@ -26,49 +26,60 @@ public class TourStatusPageController {
     private Button finishTripButton;
 
     @FXML
-    private ChoiceBox<?> participantChoiceBox;
+    private ChoiceBox<String> participantChoiceBox;
 
     @FXML
-    private ChoiceBox<?> weekChoiceBox;
+    private ChoiceBox<Integer> weekChoiceBox;
 
     @FXML
     private Button startTripButton;
 
     @FXML
     void cancelParticipantTrip(ActionEvent event) {
-
-    }
-
-    @FXML
-    private void handleFinishTrip() {
-        String email = (String) participantChoiceBox.getValue();
-        String result = SnowShoeTourCreationController.finishParticipantTrip(email);
-        if (!result.isEmpty()) {
-            System.out.println(result); // Display the error message or handle it accordingly
-        }
-    }
-    @FXML
-    private void handleCancelTrip() {
-        String email = (String) weekChoiceBox.getValue();
+        String email = participantChoiceBox.getValue().toString();
         String result = SnowShoeTourCreationController.cancelParticipantTrip(email);
         if (!result.isEmpty()) {
-            System.out.println(result); // Display the error message or handle it accordingly
+            ViewUtils.showError(result); // Display the error message or handle it accordingly
         }
     }
+
+    @FXML
+    void finishParticipantTrip(ActionEvent event) {
+        String email = participantChoiceBox.getValue().toString();
+        String result = SnowShoeTourCreationController.finishParticipantTrip(email);
+        if (!result.isEmpty()) {
+            ViewUtils.showError(result); // Display the error message or handle it accordingly
+        }else {
+            ViewUtils.makePopupWindow("Success !!!", "Participant Successfully Finished their Trip");
+        }
+    }
+
+
+    
+
 
     @FXML
     void startTrip(ActionEvent event) {
+        int week = weekChoiceBox.getValue();
+        String result = SnowShoeTourCreationController.startAllTripsForSpecificWeek(week);
+        if (!result.isEmpty()) {
+            System.out.println(result); // Display the error message or handle it accordingly
+        }
 
     }
 
     @FXML
     void initialize() {
-        assert cancelTripButton != null : "fx:id=\"cancelTripButton\" was not injected: check your FXML file 'TourStatusPage.fxml'.";
-        assert finishTripButton != null : "fx:id=\"finishTripButton\" was not injected: check your FXML file 'TourStatusPage.fxml'.";
-        assert participantChoiceBox != null : "fx:id=\"participantChoiceBox\" was not injected: check your FXML file 'TourStatusPage.fxml'.";
-        assert weekChoiceBox != null : "fx:id=\"participantChoiceBox1\" was not injected: check your FXML file 'TourStatusPage.fxml'.";
-        assert startTripButton != null : "fx:id=\"startTripButton\" was not injected: check your FXML file 'TourStatusPage.fxml'.";
+        // Participant choice box is refreshable
+        participantChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
+        participantChoiceBox.setItems(ViewUtils.getParticipants());
+        participantChoiceBox.setValue(null);
+        });
 
+    // Register the refreshable nodes
+        MainPageView.getInstance().registerRefreshEvent(participantChoiceBox);
+
+            // Use the getParticipants() method from the ViewUtils class
+            participantChoiceBox.setItems(ViewUtils.getParticipants());
     }
-
 }
