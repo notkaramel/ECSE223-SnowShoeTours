@@ -14,7 +14,8 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
                     <content>
                         <fx:include source="pages/WelcomePage.fxml" />
                     </content>
-                </Tab> 
+
+                </Tab>
                 <Tab text="Overview">
                     <content>
                         <fx:include source="pages/OverviewPage.fxml" />
@@ -32,7 +33,7 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
                 </Tab>
                 <Tab text="Participants">
                     <content>
-                        <!-- <fx:include source="pages/ParticipantPage.fxml"/> -->
+                        <fx:include source="pages/ParticipantPage.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Guide">
@@ -42,7 +43,7 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
                 </Tab>
                 <Tab text="Settings">
                     <content>
-                         <fx:include source="pages/SSTSettingsPage.fxml"/> 
+                        <!-- <fx:include source="pages/SSTSettingsPage.fxml"/> -->
                     </content>
                 </Tab>
                 <Tab text="Tour Creation">

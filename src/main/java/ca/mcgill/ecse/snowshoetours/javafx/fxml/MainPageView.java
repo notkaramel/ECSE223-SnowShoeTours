@@ -66,5 +66,6 @@ public class MainPageView extends Application{
   public static MainPageView getInstance() {
     return instance;
   }
-
 }
+
+
