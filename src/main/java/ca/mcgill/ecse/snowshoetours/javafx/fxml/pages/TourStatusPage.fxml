@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
@@ -38,3 +39,6 @@
       <ChoiceBox fx:id="weekChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" />
    </children>
 </GridPane>
+=======
+<!-- Bilar is working on this -->
+>>>>>>> antoine

@@ -18,7 +18,7 @@
     <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="246.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button mnemonicParsing="false" onAction="#initiateSnowToursCreation" onMouseClicked="#yoyoMa" prefHeight="97.0" prefWidth="606.0" text="Create Tour" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <Button fx:id="initiateSnowToursCreationButton" mnemonicParsing="false" onAction="#handleInitiateSnowToursCreation" prefHeight="97.0" prefWidth="606.0" text="Create Tour" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <font>
             <Font size="32.0" />
          </font>
