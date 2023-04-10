@@ -75,7 +75,7 @@ public class ParticipantPageController {
         int nrWeeks = Integer.parseInt(participantAvailabilityTextField.getText());
         int weekAvailableFrom = Integer.parseInt(weekFromTextField.getText());
         int weekAvailableUntil = Integer.parseInt(weekToTextField.getText());
-        boolean lodgeRequired;
+        boolean lodgeRequired = false; // I think it should be initialized with a default value, like false maybe
 
         if (lodgeRequestCheckBox.isSelected()) {
             lodgeRequired = true;
