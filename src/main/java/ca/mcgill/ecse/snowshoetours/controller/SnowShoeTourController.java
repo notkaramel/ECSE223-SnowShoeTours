@@ -134,4 +134,51 @@ public class SnowShoeTourController {
 			}
 		}
 	}
+
+	/**
+	 * Getting a list of all the guide emails
+	 * 
+	 * @author Antoine Phan @notkaramel
+	 * @return
+	 */
+	public static List<String> getGuides() {
+		return ssts.getGuides().stream().map(Guide::getAccountName).toList();
+	}
+	
+	/**
+	 * Getting a list of all the start weeks of the tours
+	 * 
+	 * @author Antoine Phan @notkaramel
+	 * @return
+	 */
+	public static List<Integer> getTourWeeks() {
+		return ssts.getTours().stream().map(Tour::getStartWeek).toList();
+	}
+
+	/**
+	 * Getting a list of all the tour IDs
+	 * 
+	 * @author Antoine Phan @notkaramel
+	 * @return
+	 */
+	public static List<Integer> getTourIDs() {
+		return ssts.getTours().stream().map(Tour::getId).toList();
+	}
+
+	/**
+	 * Get tours as TOSnowShoeTour
+	 * @author Antoine Phan @notkaramel
+	 */
+	public static List<TOSnowShoeTour> getSnowShoeTours() {
+		List<TOSnowShoeTour> tours = new ArrayList<TOSnowShoeTour>();
+		for (Tour tour : ssts.getTours()) {
+			for(Participant participant : tour.getParticipants()){
+				TOParticipantCost toPC = new TOParticipantCost(participant.getAccountName(), participant.getName(), 0, 0);
+				TOSnowShoeTour toTour = new TOSnowShoeTour(tour.getId(), tour.getStartWeek(), tour.getEndWeek(), tour.getGuide().getAccountName(), tour.getGuide().getName(), 0, toPC);
+				tours.add(toTour);
+			}
+		}
+		return tours;
+	}
+	
 }

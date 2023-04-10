@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <tabs>
+                <!-- <Tab text="Welcome">
+                    <content>
+                        <fx:include source="pages/WelcomePage.fxml" />
+                    </content>
+                </Tab> -->
+                <Tab text="Overview">
+                    <content>
+                        <fx:include source="pages/OverviewPage.fxml" />
+                    </content>
+                </Tab>
+                <Tab text="Gear and Combo">
+                    <content>
+                        <!-- <fx:include source="pages/GearAndComboPage.fxml"/> -->
+                    </content>
+                </Tab>
+                <Tab text="Lodge">
+                    <content>
+                        <!-- <fx:include source="pages/LodgePage.fxml"/> -->
+                    </content>
+                </Tab>
+                <Tab text="Participants">
+                    <content>
+                        <!-- <fx:include source="pages/ParticipantPage.fxml"/> -->
+                    </content>
+                </Tab>
+                <Tab text="Guide">
+                    <content>
+                        <!-- <fx:include source="pages/GuidePage.fxml"/> -->
+                    </content>
+                </Tab>
+                <Tab text="Settings">
+                    <content>
+                        <!-- <fx:include source="pages/SSTSettingsPage.fxml"/> -->
+                    </content>
+                </Tab>
+                <Tab text="Tour Creation">
+                    <content>
+                        <!-- <fx:include source="pages/TourCreationPage.fxml"/> -->
+                    </content>
+                </Tab>
+                <Tab text="Payment">
+                    <content>
+                        <!-- <fx:include source="pages/PaymentPage.fxml"/> -->
+                    </content>
+                </Tab>
+                <Tab text="Tour Status">
+                    <content>
+                        <!-- <fx:include source="pages/TourStatusPage.fxml"/> -->
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <Separator prefHeight="0.0" prefWidth="851.0" VBox.vgrow="ALWAYS" />
+    </children>
+</VBox>
