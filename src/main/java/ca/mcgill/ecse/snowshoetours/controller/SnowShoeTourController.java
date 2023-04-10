@@ -144,6 +144,16 @@ public class SnowShoeTourController {
 	public static List<String> getGuides() {
 		return ssts.getGuides().stream().map(Guide::getAccountName).toList();
 	}
+
+	/**
+	 * Getting a list of all the participant emails
+	 * 
+	 * @author Jennifer Tram Su @jennifertramsu
+	 * @return
+	 */
+	public static List<String> getParticipants() {
+		return ssts.getParticipants().stream().map(Participant::getAccountName).toList();
+	}
 	
 	/**
 	 * Getting a list of all the start weeks of the tours
