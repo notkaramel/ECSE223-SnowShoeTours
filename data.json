@@ -17,9 +17,9 @@
       {
         "Participant": {
           "accountName": "A@A.ca",
-          "password": "A",
+          "password": "a",
           "name": "A",
-          "emergencyContact": "A",
+          "emergencyContact": "a",
           "nrWeeks": 1,
           "weekAvailableFrom": 1,
           "weekAvailableUntil": 2,
