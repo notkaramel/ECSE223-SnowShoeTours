@@ -170,9 +170,13 @@ public class SnowShoeTourController {
 	 * @author Antoine Phan @notkaramel
 	 */
 	public static List<TOSnowShoeTour> getSnowShoeTours() {
-		List<TOSnowShoeTour> tours = new ArrayList<>();
+		List<TOSnowShoeTour> tours = new ArrayList<TOSnowShoeTour>();
 		for (Tour tour : ssts.getTours()) {
-			tours.add(getSnowShoeTour(tour.getId()));
+			for(Participant participant : tour.getParticipants()){
+				TOParticipantCost toPC = new TOParticipantCost(participant.getAccountName(), participant.getName(), 0, 0);
+				TOSnowShoeTour toTour = new TOSnowShoeTour(tour.getId(), tour.getStartWeek(), tour.getEndWeek(), tour.getGuide().getAccountName(), tour.getGuide().getName(), 0, toPC);
+				tours.add(toTour);
+			}
 		}
 		return tours;
 	}
