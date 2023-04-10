@@ -144,7 +144,12 @@ public class SnowShoeTourController {
 	public static List<String> getGuides() {
 		return ssts.getGuides().stream().map(Guide::getAccountName).toList();
 	}
-
+	public static List<String> getGears() {
+		return ssts.getGear().stream().map(Gear::getName).toList();
+	}
+	public static List<String> getCombos() {
+		return ssts.getCombos().stream().map(Combo::getName).toList();
+	}
 	/**
 	 * Getting a list of all the participant emails
 	 * 

@@ -1,8 +1,8 @@
 {
   "SnowShoeTour": {
-    "startDate": "2024-03-13",
-    "nrWeeks": 10,
-    "priceOfGuidePerWeek": 100,
+    "startDate": "1969-12-31",
+    "nrWeeks": 5,
+    "priceOfGuidePerWeek": 0,
     "manager": {
       "accountName": "manager",
       "password": "manager",
@@ -11,506 +11,63 @@
       }
     },
     "guides": [
-      {
-        "Guide": [
-          {
-            "accountName": "jeff@email.com",
-            "password": "pass1",
-            "name": "Jeff",
-            "emergencyContact": "(555)555-5555",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "tours": [
-              {
-                "Tour": [
-                  {
-                    "id": 1,
-                    "startWeek": 1,
-                    "endWeek": 1,
-                    "participants": [
-                      {
-                        "Participant": [
-                          {
-                            "accountName": "peter@email.com",
-                            "password": "pass1",
-                            "name": "Peter",
-                            "emergencyContact": "(666)555-5555",
-                            "nrWeeks": 1,
-                            "weekAvailableFrom": 1,
-                            "weekAvailableUntil": 2,
-                            "lodgeRequired": true,
-                            "authorizationCode": "",
-                            "refundedPercentageAmount": 0,
-                            "status": "NotAssigned",
-                            "snowShoeTour": {
-                              "@reference": "../../../../../../.."
-                            },
-                            "tour": {
-                              "@reference": "../../.."
-                            },
-                            "bookedItems": [
-                              {
-                                "BookedItem": [
-                                  {
-                                    "quantity": 1,
-                                    "snowShoeTour": {
-                                      "@reference": "../../../../../../../../.."
-                                    },
-                                    "participant": {
-                                      "@reference": "../../.."
-                                    },
-                                    "item": {
-                                      "@class": "Gear",
-                                      "name": "snowshoe",
-                                      "bookedItems": [
-                                        {
-                                          "BookedItem": {
-                                            "@reference": "../../.."
-                                          }
-                                        }
-                                      ],
-                                      "pricePerWeek": 25,
-                                      "snowShoeTour": {
-                                        "@reference": "../../../../../../../../../.."
-                                      },
-                                      "comboItems": [
-                                        {
-                                          "ComboItem": [
-                                            {
-                                              "quantity": 2,
-                                              "snowShoeTour": {
-                                                "@reference": "../../../../../../../../../../../.."
-                                              },
-                                              "combo": {
-                                                "name": "small combo",
-                                                "bookedItems": [
-                                                  {
-                                                    "BookedItem": {
-                                                      "quantity": 1,
-                                                      "snowShoeTour": {
-                                                        "@reference": "../../../../../../../../../../../../../../.."
-                                                      },
-                                                      "participant": {
-                                                        "@reference": "../../../../../../../../.."
-                                                      },
-                                                      "item": {
-                                                        "@class": "Combo",
-                                                        "@reference": "../../.."
-                                                      },
-                                                      "cachedHashCode": -1,
-                                                      "canSetParticipant": true,
-                                                      "canSetItem": true
-                                                    }
-                                                  }
-                                                ],
-                                                "discount": 10,
-                                                "snowShoeTour": {
-                                                  "@reference": "../../../../../../../../../../../../.."
-                                                },
-                                                "comboItems": [
-                                                  {
-                                                    "ComboItem": [
-                                                      {
-                                                        "quantity": 1,
-                                                        "snowShoeTour": {
-                                                          "@reference": "../../../../../../../../../../../../../../.."
-                                                        },
-                                                        "combo": {
-                                                          "@reference": "../../.."
-                                                        },
-                                                        "gear": {
-                                                          "name": "pole",
-                                                          "bookedItems": [
-                                                            ""
-                                                          ],
-                                                          "pricePerWeek": 150,
-                                                          "snowShoeTour": {
-                                                            "@reference": "../../../../../../../../../../../../../../../.."
-                                                          },
-                                                          "comboItems": [
-                                                            {
-                                                              "ComboItem": [
-                                                                {
-                                                                  "@reference": "../../.."
-                                                                },
-                                                                {
-                                                                  "quantity": 1,
-                                                                  "snowShoeTour": {
-                                                                    "@reference": "../../../../../../../../../../../../../../../../../.."
-                                                                  },
-                                                                  "combo": {
-                                                                    "name": "large combo",
-                                                                    "bookedItems": [
-                                                                      {
-                                                                        "BookedItem": [
-                                                                          {
-                                                                            "quantity": 2,
-                                                                            "snowShoeTour": {
-                                                                              "@reference": "../../../../../../../../../../../../../../../../../../../../.."
-                                                                            },
-                                                                            "participant": {
-                                                                              "accountName": "tyler@email.com",
-                                                                              "password": "pass2",
-                                                                              "name": "Tyler",
-                                                                              "emergencyContact": "(777)444-4444",
-                                                                              "nrWeeks": 2,
-                                                                              "weekAvailableFrom": 2,
-                                                                              "weekAvailableUntil": 5,
-                                                                              "lodgeRequired": false,
-                                                                              "authorizationCode": "",
-                                                                              "refundedPercentageAmount": 0,
-                                                                              "status": "NotAssigned",
-                                                                              "snowShoeTour": {
-                                                                                "@reference": "../../../../../../../../../../../../../../../../../../../../../.."
-                                                                              },
-                                                                              "tour": {
-                                                                                "id": 2,
-                                                                                "startWeek": 2,
-                                                                                "endWeek": 3,
-                                                                                "participants": [
-                                                                                  {
-                                                                                    "Participant": {
-                                                                                      "@reference": "../../.."
-                                                                                    }
-                                                                                  }
-                                                                                ],
-                                                                                "guide": {
-                                                                                  "@reference": "../../../../../../../../../../../../../../../../../../../../.."
-                                                                                },
-                                                                                "snowShoeTour": {
-                                                                                  "@reference": "../../../../../../../../../../../../../../../../../../../../../../.."
-                                                                                }
-                                                                              },
-                                                                              "bookedItems": [
-                                                                                {
-                                                                                  "BookedItem": {
-                                                                                    "@reference": "../../.."
-                                                                                  }
-                                                                                }
-                                                                              ]
-                                                                            },
-                                                                            "item": {
-                                                                              "@class": "Combo",
-                                                                              "@reference": "../../.."
-                                                                            },
-                                                                            "cachedHashCode": -1,
-                                                                            "canSetParticipant": true,
-                                                                            "canSetItem": true
-                                                                          },
-                                                                          {
-                                                                            "quantity": 1,
-                                                                            "snowShoeTour": {
-                                                                              "@reference": "../../../../../../../../../../../../../../../../../../../../.."
-                                                                            },
-                                                                            "participant": {
-                                                                              "accountName": "mary@email.com",
-                                                                              "password": "pass3",
-                                                                              "name": "Mary",
-                                                                              "emergencyContact": "(555)666-6666",
-                                                                              "nrWeeks": 1,
-                                                                              "weekAvailableFrom": 1,
-                                                                              "weekAvailableUntil": 2,
-                                                                              "lodgeRequired": false,
-                                                                              "authorizationCode": "",
-                                                                              "refundedPercentageAmount": 0,
-                                                                              "status": "NotAssigned",
-                                                                              "snowShoeTour": {
-                                                                                "@reference": "../../../../../../../../../../../../../../../../../../../../../.."
-                                                                              },
-                                                                              "tour": {
-                                                                                "@reference": "../../../../../../../../../../../../../../../../../.."
-                                                                              },
-                                                                              "bookedItems": [
-                                                                                {
-                                                                                  "BookedItem": {
-                                                                                    "@reference": "../../.."
-                                                                                  }
-                                                                                }
-                                                                              ]
-                                                                            },
-                                                                            "item": {
-                                                                              "@class": "Combo",
-                                                                              "@reference": "../../.."
-                                                                            },
-                                                                            "cachedHashCode": -1,
-                                                                            "canSetParticipant": true,
-                                                                            "canSetItem": true
-                                                                          }
-                                                                        ]
-                                                                      }
-                                                                    ],
-                                                                    "discount": 25,
-                                                                    "snowShoeTour": {
-                                                                      "@reference": "../../../../../../../../../../../../../../../../../../.."
-                                                                    },
-                                                                    "comboItems": [
-                                                                      {
-                                                                        "ComboItem": [
-                                                                          {
-                                                                            "@reference": "../../.."
-                                                                          },
-                                                                          {
-                                                                            "quantity": 2,
-                                                                            "snowShoeTour": {
-                                                                              "@reference": "../../../../../../../../../../../../../../../../../../../../.."
-                                                                            },
-                                                                            "combo": {
-                                                                              "@reference": "../../.."
-                                                                            },
-                                                                            "gear": {
-                                                                              "@reference": "../../../../../../../../../../../.."
-                                                                            },
-                                                                            "cachedHashCode": -1,
-                                                                            "canSetCombo": true,
-                                                                            "canSetGear": true
-                                                                          },
-                                                                          {
-                                                                            "quantity": 2,
-                                                                            "snowShoeTour": {
-                                                                              "@reference": "../../../../../../../../../../../../../../../../../../../../.."
-                                                                            },
-                                                                            "combo": {
-                                                                              "@reference": "../../.."
-                                                                            },
-                                                                            "gear": {
-                                                                              "name": "backpack",
-                                                                              "bookedItems": [
-                                                                                {
-                                                                                  "BookedItem": {
-                                                                                    "quantity": 2,
-                                                                                    "snowShoeTour": {
-                                                                                      "@reference": "../../../../../../../../../../../../../../../../../../../../../../../.."
-                                                                                    },
-                                                                                    "participant": {
-                                                                                      "@reference": "../../../../../../../../../../../../../../../../../.."
-                                                                                    },
-                                                                                    "item": {
-                                                                                      "@class": "Gear",
-                                                                                      "@reference": "../../.."
-                                                                                    },
-                                                                                    "cachedHashCode": -1,
-                                                                                    "canSetParticipant": true,
-                                                                                    "canSetItem": true
-                                                                                  }
-                                                                                }
-                                                                              ],
-                                                                              "pricePerWeek": 19,
-                                                                              "snowShoeTour": {
-                                                                                "@reference": "../../../../../../../../../../../../../../../../../../../../../.."
-                                                                              },
-                                                                              "comboItems": [
-                                                                                {
-                                                                                  "ComboItem": {
-                                                                                    "@reference": "../../.."
-                                                                                  }
-                                                                                }
-                                                                              ]
-                                                                            },
-                                                                            "cachedHashCode": -1,
-                                                                            "canSetCombo": true,
-                                                                            "canSetGear": true
-                                                                          }
-                                                                        ]
-                                                                      }
-                                                                    ]
-                                                                  },
-                                                                  "gear": {
-                                                                    "@reference": "../../.."
-                                                                  },
-                                                                  "cachedHashCode": -1,
-                                                                  "canSetCombo": true,
-                                                                  "canSetGear": true
-                                                                }
-                                                              ]
-                                                            }
-                                                          ]
-                                                        },
-                                                        "cachedHashCode": -1,
-                                                        "canSetCombo": true,
-                                                        "canSetGear": true
-                                                      },
-                                                      {
-                                                        "@reference": "../../.."
-                                                      }
-                                                    ]
-                                                  }
-                                                ]
-                                              },
-                                              "gear": {
-                                                "@reference": "../../.."
-                                              },
-                                              "cachedHashCode": -1,
-                                              "canSetCombo": true,
-                                              "canSetGear": true
-                                            },
-                                            {
-                                              "@reference": "../ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[2]"
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    "cachedHashCode": -1,
-                                    "canSetParticipant": true,
-                                    "canSetItem": true
-                                  },
-                                  {
-                                    "@reference": "../BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[3]/gear/bookedItems/BookedItem"
-                                  },
-                                  {
-                                    "@reference": "../BookedItem/item/comboItems/ComboItem/combo/bookedItems/BookedItem"
-                                  }
-                                ]
-                              }
-                            ]
-                          },
-                          {
-                            "@reference": "../Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem[2]/participant"
-                          }
-                        ]
-                      }
-                    ],
-                    "guide": {
-                      "@reference": "../../.."
-                    },
-                    "snowShoeTour": {
-                      "@reference": "../../../../.."
-                    }
-                  },
-                  {
-                    "@reference": "../Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem/participant/tour"
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            "accountName": "john@email.com",
-            "password": "pass2",
-            "name": "John",
-            "emergencyContact": "(444)444-4444",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "tours": [
-              ""
-            ]
-          }
-        ]
-      }
+      ""
     ],
     "participants": [
-      {
-        "Participant": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem/participant"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem[2]/participant"
-          }
-        ]
-      }
+      ""
     ],
     "bookedItems": [
-      {
-        "BookedItem": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[3]/gear/bookedItems/BookedItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/bookedItems/BookedItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem[2]"
-          }
-        ]
-      }
+      ""
     ],
     "gear": [
       {
-        "Gear": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item"
+        "Gear": {
+          "name": "banana",
+          "bookedItems": [
+            ""
+          ],
+          "pricePerWeek": 4,
+          "snowShoeTour": {
+            "@reference": "../../.."
           },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[3]/gear"
-          },
-          {
-            "name": "flashlight",
-            "bookedItems": [
-              ""
-            ],
-            "pricePerWeek": 15,
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "comboItems": [
-              ""
-            ]
-          }
-        ]
+          "comboItems": [
+            ""
+          ]
+        }
       }
     ],
     "combos": [
       {
-        "Combo": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo"
+        "Combo": {
+          "name": "bananaegg",
+          "bookedItems": [
+            ""
+          ],
+          "discount": 4,
+          "snowShoeTour": {
+            "@reference": "../../.."
           },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo"
-          }
-        ]
+          "comboItems": [
+            {
+              "ComboItem": {
+                "quantity": 1,
+                "cachedHashCode": -1,
+                "canSetCombo": true,
+                "canSetGear": true
+              }
+            }
+          ]
+        }
       }
     ],
     "comboItems": [
-      {
-        "ComboItem": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[2]"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[3]"
-          }
-        ]
-      }
+      ""
     ],
     "lodges": [
       ""
     ],
     "tours": [
-      {
-        "Tour": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem/participant/tour"
-          }
-        ]
-      }
+      ""
     ]
   }
 }
