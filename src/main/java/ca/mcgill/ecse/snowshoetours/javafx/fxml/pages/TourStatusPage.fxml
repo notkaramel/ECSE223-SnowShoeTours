@@ -35,6 +35,6 @@
          </font>
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Participant" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <ChoiceBox fx:id="participantChoiceBox1" prefWidth="150.0" GridPane.columnIndex="2" />
+      <ChoiceBox fx:id="weekChoiceBox" prefWidth="150.0" GridPane.columnIndex="2" />
    </children>
 </GridPane>
