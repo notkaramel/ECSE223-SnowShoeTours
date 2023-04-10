@@ -9,7 +9,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.PaymentPageController" 
+maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="0.0" prefWidth="0.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="194.0" minWidth="0.0" prefWidth="25.0" />

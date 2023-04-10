@@ -1,9 +1,8 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
-import ca.mcgill.ecse.snowshoetours.controller.TOParticipantCost;
-import ca.mcgill.ecse.snowshoetours.model.Lodge;
-import ca.mcgill.ecse.snowshoetours.model.Participant;
+import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
+import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourCreationController;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import javafx.scene.control.TextField;
 */
 
 public class PaymentPageController implements Initializable{
-	private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
 
     @FXML
     private ResourceBundle resources;
@@ -41,28 +39,27 @@ public class PaymentPageController implements Initializable{
     
     String authorizationCode;
     
-    private ArrayList<String> notPaidParticipantsList = new ArrayList<String>();
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
-    	for (Participant participant : sst.getParticipants()) {
-    		
-    		if (participant.getStatusFullName() == "Assigned") {
-    			notPaidParticipantsList.add(participant.getAccountName());
-    		}
-	    	
-    		paymentParticipantChoiceBox.getItems().addAll(notPaidParticipantsList);
-	    }
+    	
+    	paymentParticipantChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
+    		paymentParticipantChoiceBox.setItems(ViewUtils.getParticipants());
+    		paymentParticipantChoiceBox.setValue(null);});
+			
+    	MainPageView.getInstance().registerRefreshEvent(paymentParticipantChoiceBox);
+    	
 	}
     
     @FXML
     void authorizeParticipantPayment(ActionEvent event) {
     	authorizationCode = paymentAuthorizationCodeInput.getText();
     	email = paymentParticipantChoiceBox.getValue();
+  
     	
-    	
-    	//TODO: call pay
-    	//refresh participants list?
+    	if (ViewUtils.successful(SnowShoeTourCreationController.payForTrip(email, authorizationCode))){
+    		paymentAuthorizationCodeInput.clear();
+		}
     }
 
 }

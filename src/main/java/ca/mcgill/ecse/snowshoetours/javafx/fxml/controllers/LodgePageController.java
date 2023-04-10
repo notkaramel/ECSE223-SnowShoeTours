@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+import ca.mcgill.ecse.snowshoetours.controller.LodgeController;
+import ca.mcgill.ecse.snowshoetours.controller.ParticipantController;
+import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.Lodge;
 import ca.mcgill.ecse.snowshoetours.model.Lodge.LodgeRating;
@@ -43,6 +46,7 @@ public class LodgePageController implements Initializable {
     String name;
     String address;
     String stars;
+    int nrStars;
     LodgeRating rating;
     
     private String[] lodgeRating = {"One Star", "Two Stars", "Three Stars", "Four Stars", "Five Stars"};
@@ -52,13 +56,20 @@ public class LodgePageController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+			
 		for (Lodge lodge : sst.getLodges()) {
 			String lodgeName = lodge.getName();
 	    	lodgeList.add(lodgeName);
 	    }
 		
+		lodgeChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
+			lodgeChoiceBox.getItems().addAll(lodgeList);
+			lodgeChoiceBox.setValue(null);});
+		
 		lodgeChoiceBox.getItems().addAll(lodgeList);
 		lodgeRatingChoiceBox.getItems().addAll(lodgeRating);
+		
+		
 	}
 
     @FXML
@@ -68,45 +79,40 @@ public class LodgePageController implements Initializable {
     	stars = lodgeRatingChoiceBox.getValue();
     	
     	if (stars == "One Star") {
-    		rating = LodgeRating.OneStar;
+    		nrStars = 1;
     	}
     	else if (stars == "Two Stars") {
-    		rating = LodgeRating.TwoStars;
+    		nrStars = 2;
     	}
     	else if (stars == "Three Stars") {
-    		rating = LodgeRating.ThreeStars;
+    		nrStars = 3;
     	}
     	else if (stars == "Four Stars") {
-    		rating = LodgeRating.FourStars;
+    		nrStars = 4;
     	}
     	else if (stars == "Five Stars") {
-    		rating = LodgeRating.FiveStars;
+    		nrStars = 5;
     	}
     	
-		sst.addLodge(name, address, rating);
-		
-		lodgeList.add(name);
-		
-		//TODO: refresh?
-		//TODO: add error pages
+		if (ViewUtils.successful(LodgeController.addLodge(name, address, nrStars))){
+			lodgeNameTextField.clear();
+	    	lodgeAddressTextField.clear();
+	    	lodgeRatingChoiceBox.getSelectionModel().clearSelection();
+	    	lodgeChoiceBox.getItems().add(name);
+		}
     }
 
     
     @FXML
     void deleteLodge(ActionEvent event) {
-    	String lodgeNameToDelete = lodgeChoiceBox.getValue();
-    	
-    	Lodge lodgeToDelete = Lodge.getWithName(lodgeNameToDelete);
+    	String lodgeNameToDelete = lodgeChoiceBox.getValue().toString();
     		
-    	sst.removeLodge(lodgeToDelete);
+    	LodgeController.deleteLodge(lodgeNameToDelete);
     	
-    	lodgeList.remove(Lodge.getWithName(lodgeNameToDelete));
+    	lodgeChoiceBox.getItems().remove(lodgeNameToDelete);
     	
-    	//TODO: refresh?
-    	//TODO: add error pages
-
+    	MainPageView.getInstance().registerRefreshEvent(lodgeChoiceBox);
     }
-
 }
 
 
