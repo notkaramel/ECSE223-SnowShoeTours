@@ -41,6 +41,9 @@ public class GuidePageController {
             guideChoiceBox.setItems(ViewUtils.getGuides());
             guideChoiceBox.setValue(null);
         });
+
+        // Register the refreshable nodes
+        MainPageView.getInstance().registerRefreshEvent(guideChoiceBox);
     }
 
     @FXML
@@ -63,5 +66,4 @@ public class GuidePageController {
             guideEmergencyTextField.clear();
         }
     }
-
 }

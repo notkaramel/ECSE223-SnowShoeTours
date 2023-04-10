@@ -55,6 +55,9 @@ public class ParticipantPageController {
 			participantChoiceBox.setItems(ViewUtils.getParticipants());
 			participantChoiceBox.setValue(null);
 		});
+
+        // Register the refreshable nodes
+        MainPageView.getInstance().registerRefreshEvent(participantChoiceBox);
     }
 
     @FXML
