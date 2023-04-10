@@ -50,6 +50,9 @@ public class GuidePageController {
     void deleteGuideClicked(ActionEvent event) {
         String email = guideChoiceBox.getValue().toString();
         GuideController.deleteGuide(email);
+
+        // Refresh the choice box
+        MainPageView.getInstance().refresh();
     }
 
     @FXML
