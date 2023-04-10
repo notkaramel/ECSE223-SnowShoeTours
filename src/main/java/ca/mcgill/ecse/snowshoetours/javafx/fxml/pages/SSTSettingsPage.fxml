@@ -26,7 +26,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="noWeekstTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="noWeeksTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Weeks :" textAlignment="RIGHT" wrappingWidth="137.51288223266602" GridPane.rowIndex="2" />
          </children>
    <padding>
