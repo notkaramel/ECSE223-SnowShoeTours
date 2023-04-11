@@ -16,13 +16,13 @@
     "participants": [
       {
         "Participant": {
-          "accountName": "A@A.ca",
-          "password": "a",
-          "name": "A",
-          "emergencyContact": "a",
-          "nrWeeks": 1,
+          "accountName": "emma@c.ca",
+          "password": 40,
+          "name": "Emma",
+          "emergencyContact": 333,
+          "nrWeeks": 5,
           "weekAvailableFrom": 1,
-          "weekAvailableUntil": 2,
+          "weekAvailableUntil": 5,
           "lodgeRequired": false,
           "authorizationCode": "",
           "refundedPercentageAmount": 0,
@@ -49,7 +49,19 @@
       ""
     ],
     "lodges": [
-      ""
+      {
+        "Lodge": {
+          "name": "Emma",
+          "address": 50,
+          "rating": "FiveStars",
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "tours": [
+            ""
+          ]
+        }
+      }
     ],
     "tours": [
       ""
