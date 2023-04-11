@@ -40,6 +40,8 @@ public class TourStatusPageController {
         String result = SnowShoeTourCreationController.cancelParticipantTrip(email);
         if (!result.isEmpty()) {
             ViewUtils.showError(result); // Display the error message or handle it accordingly
+        } else {
+            ViewUtils.makePopupWindow("Cancelled", "Participant" + email + " successfully cancelled");
         }
     }
 
@@ -54,16 +56,14 @@ public class TourStatusPageController {
         }
     }
 
-
-    
-
-
     @FXML
     void startTrip(ActionEvent event) {
         int week = weekChoiceBox.getValue();
         String result = SnowShoeTourCreationController.startAllTripsForSpecificWeek(week);
         if (!result.isEmpty()) {
-            System.out.println(result); // Display the error message or handle it accordingly
+            ViewUtils.showError(result); // Display the error message or handle it accordingly
+        } else {
+            ViewUtils.makePopupWindow("Success !!!", "All Trips for Week " + week + " Successfully Started");
         }
 
     }

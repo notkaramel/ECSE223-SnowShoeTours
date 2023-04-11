@@ -30,13 +30,14 @@ public class SnowShoeToursApplication {
 
   private static void demoReset() {
     snowShoeTour = new SnowShoeTour(new Date(0), 10, 0);
-    snowShoeTour.addParticipant("emma@frosty.bite", "emma123", "Emma", "(438)333-2222", 3, 2, 6, true,
-        "LovelyDay", 0);
-    snowShoeTour.addParticipant("antoine@noeclipse.pls", "antoine123", "Antoine", "(438)333-2222", 3,
-        2, 6, true, "EclipseBad", 0);
-    snowShoeTour.addParticipant("sameer@vscode.love", "", "Sameer", "(438)333-2222", 3, 2,
-        6, true, "", 0);
-
+    snowShoeTour.addParticipant("emma_1@frosty.bite", "emma123", "Emma", "(438)333-2222", 3, 1, 6,
+        true, "LovelyDay", 0);
+    snowShoeTour.addParticipant("antoine_2@noeclipse.pls", "antoine123", "Antoine", "(438)333-2222",
+        2, 2, 6, true, "EclipseBad", 0);
+    snowShoeTour.addParticipant("jennifer_4@hybrid.ide", "jennifer123", "Jennifer", "(438)333-2222",
+    3, 4, 6, true, "", 0);
+    snowShoeTour.addParticipant("sameer_6@vscode.love", "", "Sameer", "(438)333-2222", 3, 6, 8, true,
+    "", 0);
 
     snowShoeTour.addGuide("bilar@creation.ctrl", "bmok", "Bilar", "(438)987-6543");
     snowShoeTour.addGuide("angela@whyeclipse.why", "angela", "Angela", "(438)987-6543");

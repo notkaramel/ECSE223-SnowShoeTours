@@ -52,9 +52,17 @@ public class PaymentPageController implements Initializable{
     	String authorizationCode = paymentAuthorizationCodeInput.getText();
     	String email = paymentParticipantChoiceBox.getValue();
   
-    	if (ViewUtils.successful(SnowShoeTourCreationController.payForTrip(email, authorizationCode))){
-    		paymentAuthorizationCodeInput.clear();
-		}
+        String result = SnowShoeTourCreationController.payForTrip(email, authorizationCode);
+        if (!result.isEmpty()) {
+            ViewUtils.showError(result); // Display the error message or handle it accordingly
+        } else {
+            ViewUtils.makePopupWindow("ACCEPTED!",
+                    "Payment for participant " + email + " has been accepted!");
+        }
+    	// if (ViewUtils.successful(SnowShoeTourCreationController.payForTrip(email, authorizationCode))){
+    	// 	paymentAuthorizationCodeInput.clear();
+		// }
+
     }
 
 }

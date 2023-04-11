@@ -10,6 +10,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -21,7 +22,6 @@ public class MainPageView extends Application{
   public static final EventType<Event> REFRESH_EVENT = new EventType<>("REFRESH");
   private static MainPageView instance;
   private List<Node> refreshableNodes = new ArrayList<>();
-
   @Override
   public void start(Stage primaryStage) {
     instance = this;

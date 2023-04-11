@@ -173,7 +173,7 @@ public class SnowShoeTourCreationController {
                             return ("Cannot start tour because the participant has finished their tour");
                         case "Paid": {
                             participant.start();
-                            break;
+                            return "";
                         }
                     }
                 }

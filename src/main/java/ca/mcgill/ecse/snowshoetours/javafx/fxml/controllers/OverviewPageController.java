@@ -46,6 +46,7 @@ public class OverviewPageController {
         overviewTable.getColumns().add(createTableColumn("Guide Name", "guideName"));
         overviewTable.getColumns()
                 .add(createTableColumn("Guide Cost", "totalCostForGuide"));
+        // overviewTable.getColumns().add(createTableColumn("Participant Name", "participantName"));
         overviewTable.getColumns().add(createTableColumn("Participant Cost", "participantCosts"));
 
         
