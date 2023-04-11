@@ -3,6 +3,7 @@ package ca.mcgill.ecse.snowshoetours.controller;
 import java.util.*;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 import ca.mcgill.ecse.snowshoetours.model.*;
 import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 
@@ -11,6 +12,13 @@ public class SnowShoeTourCreationController {
 
     private SnowShoeTourCreationController() {}
 
+  /**
+   * This method initiates the creation of snow tours using available guides and participants in the
+   * system.
+   * 
+   * @author Bilar Mokhtari @bmokhtari
+   * @return
+   */
 
     /**
      * This method initiates the creation of snow tours using available guides and participants in
