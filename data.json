@@ -26,7 +26,7 @@
             ]
           },
           {
-            "accountName": "angela@eclipse.why",
+            "accountName": "angela@whyeclipse.why",
             "password": "angela",
             "name": "Angela",
             "emergencyContact": "(438)987-6543",
@@ -83,14 +83,14 @@
           },
           {
             "accountName": "sameer@vscode.love",
-            "password": "sameer123",
+            "password": "",
             "name": "Sameer",
             "emergencyContact": "(438)333-2222",
             "nrWeeks": 3,
             "weekAvailableFrom": 2,
             "weekAvailableUntil": 6,
             "lodgeRequired": true,
-            "authorizationCode": "VSCodeBest",
+            "authorizationCode": "",
             "refundedPercentageAmount": 0,
             "status": "NotAssigned",
             "snowShoeTour": {
@@ -174,7 +174,19 @@
       ""
     ],
     "lodges": [
-      ""
+      {
+        "Lodge": {
+          "name": "Jennifer Inn",
+          "address": "Trottier Basement",
+          "rating": "FiveStars",
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "tours": [
+            ""
+          ]
+        }
+      }
     ],
     "tours": [
       ""

@@ -15,11 +15,6 @@ xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
                         <fx:include source="pages/WelcomePage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Overview">
-                    <content>
-                        <fx:include source="pages/OverviewPage.fxml" />
-                    </content>
-                </Tab>
                 <Tab text="Gear and Combo">
                     <content>
                         <fx:include source="pages/GearAndComboPage.fxml"/>
@@ -30,7 +25,7 @@ xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
                         <fx:include source="pages/LodgePage.fxml"/> 
                     </content>
                 </Tab>
-                <Tab text="Participants">
+                <Tab text="Participant">
                     <content>
                         <fx:include source="pages/ParticipantPage.fxml"/>
                     </content>
@@ -40,7 +35,7 @@ xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
                         <fx:include source="pages/GuidePage.fxml"/>
                     </content>
                 </Tab>
-                <Tab text="Settings">
+                <Tab text="SST Settings">
                     <content>
                         <fx:include source="pages/SSTSettingsPage.fxml"/>
                     </content>
@@ -48,6 +43,11 @@ xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
                 <Tab text="Tour Creation">
                     <content>
                         <fx:include source="pages/TourCreationPage.fxml"/>
+                    </content>
+                </Tab>
+                <Tab text="Tour Overview">
+                    <content>
+                        <fx:include source="pages/OverviewPage.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Payment">

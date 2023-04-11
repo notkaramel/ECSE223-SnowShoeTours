@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane hgap="10.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.WelcomePageController">
+<GridPane alignment="TOP_CENTER" hgap="10.0" prefWidth="800.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.WelcomePageController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.20000000000002" minWidth="10.0" prefWidth="25.60000610351563" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.20000000000002" minWidth="0.0" prefWidth="141.1999938964844" />
@@ -18,9 +18,9 @@
       
          </columnConstraints>
    <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Frosty Snow Shoe Tours!" textAlignment="CENTER" wrappingWidth="574.9366416931152" GridPane.columnIndex="1">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Frosty Snow Shoe Tours!" textAlignment="CENTER" wrappingWidth="574.9366416931152" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font size="30.0" />
          </font>
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="How can we help you today?" wrappingWidth="496.13671493530273" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -29,15 +29,15 @@
          </font>
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. View a Summary of Each Tour (Registered Participant and Assigned Guide)" wrappingWidth="411.73669052124023" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <Button fx:id="goToOverview" mnemonicParsing="false" onAction="#goToOverviewClicked" prefHeight="25.0" prefWidth="152.0" text="Overview" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-      <Button fx:id="goToGearAndCombo" mnemonicParsing="false" onAction="#goToGearAndComboClicked" prefHeight="25.0" prefWidth="152.0" text="Gear and Combo" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-      <Button fx:id="goToLodge" mnemonicParsing="false" onAction="#goToLodgeClicked" prefHeight="25.0" prefWidth="152.0" text="Lodge" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-      <Button fx:id="goToParticipants" mnemonicParsing="false" onAction="#goToParticipantsClicked" prefHeight="25.0" prefWidth="152.0" text="Participants" GridPane.columnIndex="4" GridPane.rowIndex="8" />
-      <Button fx:id="goToGuide" mnemonicParsing="false" onAction="#goToGuideClicked" prefHeight="25.0" prefWidth="153.0" text="Guide" GridPane.columnIndex="4" GridPane.rowIndex="9" />
-      <Button fx:id="goToSettings" mnemonicParsing="false" onAction="#goToSettingsClicked" prefHeight="25.0" prefWidth="153.0" text="Settings" GridPane.columnIndex="4" GridPane.rowIndex="10" />
-      <Button fx:id="goToTourCreation" mnemonicParsing="false" onAction="#goToTourCreationClicked" prefHeight="25.0" prefWidth="152.0" text="Tour Creation" GridPane.columnIndex="4" GridPane.rowIndex="11" />
-      <Button fx:id="goToPayment" mnemonicParsing="false" onAction="#goToPaymentClicked" prefHeight="25.0" prefWidth="152.0" text="Payment" GridPane.columnIndex="4" GridPane.rowIndex="12" />
-      <Button fx:id="goToStatus" mnemonicParsing="false" onAction="#goToStatusClicked" prefHeight="25.0" prefWidth="152.0" text="Tour Status" GridPane.columnIndex="4" GridPane.rowIndex="13" />
+      <Button fx:id="goToOverview" mnemonicParsing="false" onAction="#goToOverviewClicked" prefHeight="25.0" prefWidth="152.0" text="Overview" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+      <Button fx:id="goToGearAndCombo" mnemonicParsing="false" onAction="#goToGearAndComboClicked" prefHeight="25.0" prefWidth="152.0" text="Gear and Combo" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
+      <Button fx:id="goToLodge" mnemonicParsing="false" onAction="#goToLodgeClicked" prefHeight="25.0" prefWidth="152.0" text="Lodge" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Button fx:id="goToParticipants" mnemonicParsing="false" onAction="#goToParticipantsClicked" prefHeight="25.0" prefWidth="152.0" text="Participants" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+      <Button fx:id="goToGuide" mnemonicParsing="false" onAction="#goToGuideClicked" prefHeight="25.0" prefWidth="153.0" text="Guide" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+      <Button fx:id="goToSettings" mnemonicParsing="false" onAction="#goToSettingsClicked" prefHeight="25.0" prefWidth="153.0" text="Settings" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+      <Button fx:id="goToTourCreation" mnemonicParsing="false" onAction="#goToTourCreationClicked" prefHeight="25.0" prefWidth="152.0" text="Tour Creation" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
+      <Button fx:id="goToPayment" mnemonicParsing="false" onAction="#goToPaymentClicked" prefHeight="25.0" prefWidth="152.0" text="Payment" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
+      <Button fx:id="goToStatus" mnemonicParsing="false" onAction="#goToStatusClicked" prefHeight="25.0" prefWidth="152.0" text="Tour Status" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Add or Delete Combos / Add or Delete Gear / Add or Delete Gears from Combos" wrappingWidth="338.2133102416992" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Add or Delete a Lodge" GridPane.columnIndex="1" GridPane.rowIndex="7" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4. Register or Remove a Participant from a Tour / Add or Remove Gear or   Combo From Participant" wrappingWidth="413.5992736816406" GridPane.columnIndex="1" GridPane.rowIndex="8" />
