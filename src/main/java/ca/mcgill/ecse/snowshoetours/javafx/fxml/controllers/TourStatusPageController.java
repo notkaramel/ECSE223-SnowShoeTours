@@ -76,10 +76,22 @@ public class TourStatusPageController {
         participantChoiceBox.setValue(null);
         });
 
-    // Register the refreshable nodes
+        // Register the refreshable nodes
         MainPageView.getInstance().registerRefreshEvent(participantChoiceBox);
 
-            // Use the getParticipants() method from the ViewUtils class
-            participantChoiceBox.setItems(ViewUtils.getParticipants());
+        // Use the getParticipants() method from the ViewUtils class
+        participantChoiceBox.setItems(ViewUtils.getParticipants());
+
+        // Participant choice box is refreshable
+        weekChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
+            weekChoiceBox.setItems(ViewUtils.getTourWeeks());
+            weekChoiceBox.setValue(null);
+        });
+
+        // Register the refreshable nodes
+        MainPageView.getInstance().registerRefreshEvent(weekChoiceBox);
+
+        // Use the getParticipants() method from the ViewUtils class
+        weekChoiceBox.setItems(ViewUtils.getTourWeeks());
     }
 }

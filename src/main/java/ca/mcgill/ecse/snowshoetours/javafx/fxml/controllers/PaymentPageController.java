@@ -35,10 +35,6 @@ public class PaymentPageController implements Initializable{
     @FXML
     private ChoiceBox<String> paymentParticipantChoiceBox;
     
-    String email;
-    
-    String authorizationCode;
-    
     
     @Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -53,10 +49,9 @@ public class PaymentPageController implements Initializable{
     
     @FXML
     void authorizeParticipantPayment(ActionEvent event) {
-    	authorizationCode = paymentAuthorizationCodeInput.getText();
-    	email = paymentParticipantChoiceBox.getValue();
+    	String authorizationCode = paymentAuthorizationCodeInput.getText();
+    	String email = paymentParticipantChoiceBox.getValue();
   
-    	
     	if (ViewUtils.successful(SnowShoeTourCreationController.payForTrip(email, authorizationCode))){
     		paymentAuthorizationCodeInput.clear();
 		}

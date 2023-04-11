@@ -22,45 +22,7 @@
               "@reference": "../../.."
             },
             "tours": [
-              {
-                "Tour": {
-                  "id": 2,
-                  "startWeek": 2,
-                  "endWeek": 4,
-                  "participants": [
-                    {
-                      "Participant": {
-                        "accountName": "antoine@noeclipse.pls",
-                        "password": "antoine123",
-                        "name": "Antoine",
-                        "emergencyContact": "(438)333-2222",
-                        "nrWeeks": 3,
-                        "weekAvailableFrom": 2,
-                        "weekAvailableUntil": 6,
-                        "lodgeRequired": true,
-                        "authorizationCode": "EclipseBad",
-                        "refundedPercentageAmount": 0,
-                        "status": "Assigned",
-                        "snowShoeTour": {
-                          "@reference": "../../../../../../.."
-                        },
-                        "tour": {
-                          "@reference": "../../.."
-                        },
-                        "bookedItems": [
-                          ""
-                        ]
-                      }
-                    }
-                  ],
-                  "guide": {
-                    "@reference": "../../.."
-                  },
-                  "snowShoeTour": {
-                    "@reference": "../../../../.."
-                  }
-                }
-              }
+              ""
             ]
           },
           {
@@ -72,84 +34,7 @@
               "@reference": "../../.."
             },
             "tours": [
-              {
-                "Tour": [
-                  {
-                    "id": 1,
-                    "startWeek": 2,
-                    "endWeek": 4,
-                    "participants": [
-                      {
-                        "Participant": {
-                          "accountName": "emma@frosty.bite",
-                          "password": "emma123",
-                          "name": "Emma",
-                          "emergencyContact": "(438)333-2222",
-                          "nrWeeks": 3,
-                          "weekAvailableFrom": 2,
-                          "weekAvailableUntil": 6,
-                          "lodgeRequired": true,
-                          "authorizationCode": "LovelyDay",
-                          "refundedPercentageAmount": 0,
-                          "status": "Assigned",
-                          "snowShoeTour": {
-                            "@reference": "../../../../../../.."
-                          },
-                          "tour": {
-                            "@reference": "../../.."
-                          },
-                          "bookedItems": [
-                            ""
-                          ]
-                        }
-                      }
-                    ],
-                    "guide": {
-                      "@reference": "../../.."
-                    },
-                    "snowShoeTour": {
-                      "@reference": "../../../../.."
-                    }
-                  },
-                  {
-                    "id": 3,
-                    "startWeek": 2,
-                    "endWeek": 4,
-                    "participants": [
-                      {
-                        "Participant": {
-                          "accountName": "sameer@vscode.love",
-                          "password": "sameer123",
-                          "name": "Sameer",
-                          "emergencyContact": "(438)333-2222",
-                          "nrWeeks": 3,
-                          "weekAvailableFrom": 2,
-                          "weekAvailableUntil": 6,
-                          "lodgeRequired": true,
-                          "authorizationCode": "VSCodeBest",
-                          "refundedPercentageAmount": 0,
-                          "status": "Assigned",
-                          "snowShoeTour": {
-                            "@reference": "../../../../../../.."
-                          },
-                          "tour": {
-                            "@reference": "../../.."
-                          },
-                          "bookedItems": [
-                            ""
-                          ]
-                        }
-                      }
-                    ],
-                    "guide": {
-                      "@reference": "../../.."
-                    },
-                    "snowShoeTour": {
-                      "@reference": "../../../../.."
-                    }
-                  }
-                ]
-              }
+              ""
             ]
           }
         ]
@@ -159,13 +44,61 @@
       {
         "Participant": [
           {
-            "@reference": "../../guides/Guide[2]/tours/Tour/participants/Participant"
+            "accountName": "emma@frosty.bite",
+            "password": "emma123",
+            "name": "Emma",
+            "emergencyContact": "(438)333-2222",
+            "nrWeeks": 3,
+            "weekAvailableFrom": 2,
+            "weekAvailableUntil": 6,
+            "lodgeRequired": true,
+            "authorizationCode": "LovelyDay",
+            "refundedPercentageAmount": 0,
+            "status": "NotAssigned",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "bookedItems": [
+              ""
+            ]
           },
           {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant"
+            "accountName": "antoine@noeclipse.pls",
+            "password": "antoine123",
+            "name": "Antoine",
+            "emergencyContact": "(438)333-2222",
+            "nrWeeks": 3,
+            "weekAvailableFrom": 2,
+            "weekAvailableUntil": 6,
+            "lodgeRequired": true,
+            "authorizationCode": "EclipseBad",
+            "refundedPercentageAmount": 0,
+            "status": "NotAssigned",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "bookedItems": [
+              ""
+            ]
           },
           {
-            "@reference": "../../guides/Guide[2]/tours/Tour[2]/participants/Participant"
+            "accountName": "sameer@vscode.love",
+            "password": "sameer123",
+            "name": "Sameer",
+            "emergencyContact": "(438)333-2222",
+            "nrWeeks": 3,
+            "weekAvailableFrom": 2,
+            "weekAvailableUntil": 6,
+            "lodgeRequired": true,
+            "authorizationCode": "VSCodeBest",
+            "refundedPercentageAmount": 0,
+            "status": "NotAssigned",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "bookedItems": [
+              ""
+            ]
           }
         ]
       }
@@ -244,19 +177,7 @@
       ""
     ],
     "tours": [
-      {
-        "Tour": [
-          {
-            "@reference": "../../guides/Guide[2]/tours/Tour"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour"
-          },
-          {
-            "@reference": "../../guides/Guide[2]/tours/Tour[2]"
-          }
-        ]
-      }
+      ""
     ]
   }
 }

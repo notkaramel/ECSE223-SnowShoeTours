@@ -81,6 +81,10 @@ public class ViewUtils {
         return FXCollections.observableList(SnowShoeTourController.getParticipants());
     }
 
+    public static ObservableList<Integer> getTourWeeks() {
+        return FXCollections.observableList(SnowShoeTourController.getTourWeeks());
+    }
+
     public static ObservableList<String> getGuides() {
         return FXCollections.observableList(SnowShoeTourController.getGuides());
     }

@@ -33,7 +33,7 @@ maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infi
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not Paid Participants" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Authorization Code" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <TextField fx:id="paymentAuthorizationCode" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <TextField fx:id="paymentAuthorizationCodeInput" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       <Button fx:id="paymentAuthorizationButton" mnemonicParsing="false" onAction="#authorizeParticipantPayment" text="Authorize Payment" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <ChoiceBox fx:id="paymentParticipantChoiceBox" prefWidth="150.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
    </children>
