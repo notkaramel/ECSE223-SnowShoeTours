@@ -167,7 +167,7 @@ public class SnowShoeTourController {
 	 * @return
 	 */
 	public static List<Integer> getTourWeeks() {
-		return ssts.getTours().stream().map(Tour::getStartWeek).toList();
+		return ssts.getTours().stream().map(t -> t.getStartWeek()).toList();
 	}
 
 	/**
@@ -177,7 +177,7 @@ public class SnowShoeTourController {
 	 * @return
 	 */
 	public static List<Integer> getTourIDs() {
-		return ssts.getTours().stream().map(Tour::getId).toList();
+		return ssts.getTours().stream().map(t -> t.getId()).toList();
 	}
 
 	/**

@@ -52,6 +52,7 @@ public class OverviewPageController {
         
         // overviewTable.getItems().addAll(MainPageView.getSnowShoeTour().getTOSnowShoeTours());
         // overview table if a refreshable element
+        
         overviewTable.addEventHandler(MainPageView.REFRESH_EVENT, e -> overviewTable.setItems(ViewUtils.getSnowShoeTours()));
         
         // overviewTable.getItems().addAll(ViewUtils.getSnowShoeTours());
