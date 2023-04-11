@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <TabPane tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
             <tabs>
                 <Tab text="Welcome">
                     <content>
-                        <!--<fx:include source="pages/WelcomePage.fxml" />-->
+                        <fx:include source="pages/WelcomePage.fxml" />
                     </content>
                 </Tab>
                 <Tab text="Overview">
@@ -22,12 +22,12 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
                 </Tab>
                 <Tab text="Gear and Combo">
                     <content>
-                        <!-- <fx:include source="pages/GearAndComboPage.fxml"/> -->
+                        <fx:include source="pages/GearAndComboPage.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Lodge">
                     <content>
-                        <!-- <fx:include source="pages/LodgePage.fxml"/> -->
+                        <fx:include source="pages/LodgePage.fxml"/> 
                     </content>
                 </Tab>
                 <Tab text="Participants">
@@ -42,22 +42,22 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
                 </Tab>
                 <Tab text="Settings">
                     <content>
-                        <!-- <fx:include source="pages/SSTSettingsPage.fxml"/> -->
+                        <fx:include source="pages/SSTSettingsPage.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Tour Creation">
                     <content>
-                        <!-- <fx:include source="pages/TourCreationPage.fxml"/> -->
+                        <fx:include source="pages/TourCreationPage.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Payment">
                     <content>
-                        <!-- <fx:include source="pages/PaymentPage.fxml"/> -->
+                        <fx:include source="pages/PaymentPage.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Tour Status">
                     <content>
-                        <!-- <fx:include source="pages/TourStatusPage.fxml"/> -->
+                        <fx:include source="pages/TourStatusPage.fxml"/>
                     </content>
                 </Tab>
             </tabs>
