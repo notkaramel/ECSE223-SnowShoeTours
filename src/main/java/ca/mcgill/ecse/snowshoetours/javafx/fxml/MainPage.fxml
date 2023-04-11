@@ -12,8 +12,9 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
             <tabs>
                 <!-- <Tab text="Welcome">
                     <content>
-                        <fx:include source="pages/WelcomePage.fxml" />
-                    </content>
+<!--                         <fx:include source="pages/WelcomePage.fxml" />
+ -->                    </content>
+
                 </Tab>
                 <Tab text="Overview">
                     <content>
@@ -27,7 +28,7 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
                 </Tab>
                 <Tab text="Lodge">
                     <content>
-                        <!-- <fx:include source="pages/LodgePage.fxml"/> -->
+                        <fx:include source="pages/LodgePage.fxml"/> 
                     </content>
                 </Tab>
                 <Tab text="Participants">
@@ -52,7 +53,7 @@ xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
                 </Tab>
                 <Tab text="Payment">
                     <content>
-                        <!-- <fx:include source="pages/PaymentPage.fxml"/> -->
+                        <fx:include source="pages/PaymentPage.fxml"/>
                     </content>
                 </Tab>
                 <Tab text="Tour Status">

@@ -14,57 +14,54 @@
       ""
     ],
     "participants": [
-      ""
+      {
+        "Participant": {
+          "accountName": "emma@c.ca",
+          "password": 40,
+          "name": "Emma",
+          "emergencyContact": 333,
+          "nrWeeks": 5,
+          "weekAvailableFrom": 1,
+          "weekAvailableUntil": 5,
+          "lodgeRequired": false,
+          "authorizationCode": "",
+          "refundedPercentageAmount": 0,
+          "status": "NotAssigned",
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "bookedItems": [
+            ""
+          ]
+        }
+      }
     ],
     "bookedItems": [
       ""
     ],
     "gear": [
-      {
-        "Gear": {
-          "name": "banana",
-          "bookedItems": [
-            ""
-          ],
-          "pricePerWeek": 4,
-          "snowShoeTour": {
-            "@reference": "../../.."
-          },
-          "comboItems": [
-            ""
-          ]
-        }
-      }
+      ""
     ],
     "combos": [
-      {
-        "Combo": {
-          "name": "bananaegg",
-          "bookedItems": [
-            ""
-          ],
-          "discount": 4,
-          "snowShoeTour": {
-            "@reference": "../../.."
-          },
-          "comboItems": [
-            {
-              "ComboItem": {
-                "quantity": 1,
-                "cachedHashCode": -1,
-                "canSetCombo": true,
-                "canSetGear": true
-              }
-            }
-          ]
-        }
-      }
+      ""
     ],
     "comboItems": [
       ""
     ],
     "lodges": [
-      ""
+      {
+        "Lodge": {
+          "name": "Emma",
+          "address": 50,
+          "rating": "FiveStars",
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "tours": [
+            ""
+          ]
+        }
+      }
     ],
     "tours": [
       ""
