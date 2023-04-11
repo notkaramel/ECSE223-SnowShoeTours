@@ -64,6 +64,7 @@ public class GuideController {
 		} catch (Exception e) {
 			return "Error: something went wrong";
 		}	
+	}
 
 	/**
 	 * @author: Sameer Riaz (@SRIAZ77)

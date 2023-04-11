@@ -19,7 +19,7 @@ xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
                     <content>
                         <fx:include source="pages/OverviewPage.fxml" />
                     </content>
-                </Tab> -->
+                </Tab>
                 <Tab text="Gear and Combo">
                     <content>
                         <fx:include source="pages/GearAndComboPage.fxml"/>
