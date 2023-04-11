@@ -64,6 +64,9 @@ public class ParticipantPageController {
     void deleteParticipantClicked(ActionEvent event) {
         String email = participantChoiceBox.getValue().toString();
         ParticipantController.deleteParticipant(email);
+        
+        // Refresh the choice box
+        MainPageView.getInstance().refresh();
     }
 
     @FXML
@@ -75,7 +78,7 @@ public class ParticipantPageController {
         int nrWeeks = Integer.parseInt(participantAvailabilityTextField.getText());
         int weekAvailableFrom = Integer.parseInt(weekFromTextField.getText());
         int weekAvailableUntil = Integer.parseInt(weekToTextField.getText());
-        boolean lodgeRequired = false; // I think it should be initialized with a default value, like false maybe
+        boolean lodgeRequired = false;
 
         if (lodgeRequestCheckBox.isSelected()) {
             lodgeRequired = true;

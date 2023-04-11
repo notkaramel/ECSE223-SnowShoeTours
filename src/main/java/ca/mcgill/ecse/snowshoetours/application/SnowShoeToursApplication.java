@@ -4,7 +4,6 @@ import java.sql.Date;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.model.Manager;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
-import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 import javafx.application.Application;
 
 public class SnowShoeToursApplication {

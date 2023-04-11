@@ -14,27 +14,7 @@
       ""
     ],
     "participants": [
-      {
-        "Participant": {
-          "accountName": "emma@c.ca",
-          "password": 40,
-          "name": "Emma",
-          "emergencyContact": 333,
-          "nrWeeks": 5,
-          "weekAvailableFrom": 1,
-          "weekAvailableUntil": 5,
-          "lodgeRequired": false,
-          "authorizationCode": "",
-          "refundedPercentageAmount": 0,
-          "status": "NotAssigned",
-          "snowShoeTour": {
-            "@reference": "../../.."
-          },
-          "bookedItems": [
-            ""
-          ]
-        }
-      }
+      ""
     ],
     "bookedItems": [
       ""
@@ -49,19 +29,7 @@
       ""
     ],
     "lodges": [
-      {
-        "Lodge": {
-          "name": "Emma",
-          "address": 50,
-          "rating": "FiveStars",
-          "snowShoeTour": {
-            "@reference": "../../.."
-          },
-          "tours": [
-            ""
-          ]
-        }
-      }
+      ""
     ],
     "tours": [
       ""
