@@ -84,6 +84,13 @@ public class ViewUtils {
     public static ObservableList<String> getGuides() {
         return FXCollections.observableList(SnowShoeTourController.getGuides());
     }
+    public static ObservableList<String> getGears() {
+        return FXCollections.observableList(SnowShoeTourController.getGears());
+    }
+    public static ObservableList<String> getCombos() {
+        return FXCollections.observableList(SnowShoeTourController.getCombos());
+    }
+
 
     // public static ObservableList<String> getPersons() {
     //     List<String> persons = FMSController.getPersons();
