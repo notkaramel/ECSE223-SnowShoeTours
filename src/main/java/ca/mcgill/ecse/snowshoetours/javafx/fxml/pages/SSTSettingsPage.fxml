@@ -1,1 +1,44 @@
-<!-- Angela -->
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane hgap="10.0" prefHeight="194.0" prefWidth="427.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.SSTSettingsPageController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.20000000000002" minWidth="0.0" prefWidth="137.60001220703126" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="561.0" minWidth="0.0" prefWidth="269.5999877929687" />    
+         </columnConstraints>
+   <children>
+      <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="137.0" text="Start Date (yyyy-mm-dd):" GridPane.rowIndex="1" />
+      <TextField fx:id="startDateTextField" prefHeight="25.0" prefWidth="153.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />    
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="137.0" text="Weekly Guide Cost:" GridPane.rowIndex="3" />
+      <TextField fx:id="guideCostTextField" prefHeight="25.0" prefWidth="138.0" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" />
+      <Button fx:id="setSeasonButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#setSeasonClicked" prefHeight="25.0" prefWidth="163.0" text="Update Season Settings" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SEASON SETTINGS" textAlignment="CENTER" wrappingWidth="417.33681869506836">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <TextField fx:id="noWeeksTextField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Weeks :" textAlignment="RIGHT" wrappingWidth="137.51288223266602" GridPane.rowIndex="2" />
+         </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+   <rowConstraints>
+      <RowConstraints maxHeight="42.80001220703125" minHeight="10.0" prefHeight="26.800012207031255" />
+      <RowConstraints maxHeight="32.39999389648437" minHeight="12.799987792968743" prefHeight="28.799987792968743" />
+      <RowConstraints maxHeight="32.39999389648437" minHeight="12.799987792968743" prefHeight="30.0" />
+      <RowConstraints maxHeight="32.39999389648437" minHeight="12.799987792968743" prefHeight="30.0" />
+      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+      <RowConstraints />
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
