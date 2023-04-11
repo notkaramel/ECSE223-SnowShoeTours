@@ -20,7 +20,7 @@ public class SnowShoeToursApplication {
     if (snowShoeTour == null) {
       // snowShoeTour = SnowShoeTourPersistence.load();
       // these attributes are default, you should set them later with the setters
-      snowShoeTour = new SnowShoeTour(new Date(0), 5, 0);
+      snowShoeTour = new SnowShoeTour(new Date(0), 10, 0);
     }
     if (snowShoeTour.getManager() == null){
       snowShoeTour.setManager(new Manager("manager", "manager", snowShoeTour));
