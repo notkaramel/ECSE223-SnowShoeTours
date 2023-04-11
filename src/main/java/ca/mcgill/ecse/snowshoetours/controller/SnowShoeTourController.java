@@ -187,11 +187,12 @@ public class SnowShoeTourController {
 	public static List<TOSnowShoeTour> getSnowShoeTours() {
 		List<TOSnowShoeTour> tours = new ArrayList<TOSnowShoeTour>();
 		for (Tour tour : ssts.getTours()) {
-			for(Participant participant : tour.getParticipants()){
-				TOParticipantCost toPC = new TOParticipantCost(participant.getAccountName(), participant.getName(), 0, 0);
-				TOSnowShoeTour toTour = new TOSnowShoeTour(tour.getId(), tour.getStartWeek(), tour.getEndWeek(), tour.getGuide().getAccountName(), tour.getGuide().getName(), 0, toPC);
-				tours.add(toTour);
-			}
+			tours.add(getSnowShoeTour(tour.getId()));
+			// for(Participant participant : tour.getParticipants()){
+			// 	TOParticipantCost toPC = new TOParticipantCost(participant.getAccountName(), participant.getName(), );
+			// 	TOSnowShoeTour toTour = new TOSnowShoeTour(tour.getId(), tour.getStartWeek(), tour.getEndWeek(), tour.getGuide().getAccountName(), tour.getGuide().getName(), ssts.getPriceOfGuidePerWeek(), toPC);
+			// 	tours.add(toTour);
+			// }
 		}
 		return tours;
 	}

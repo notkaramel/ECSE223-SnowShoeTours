@@ -1,11 +1,11 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
-import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+// import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
-import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
+// import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourCreationController;
 
 import java.net.URL;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

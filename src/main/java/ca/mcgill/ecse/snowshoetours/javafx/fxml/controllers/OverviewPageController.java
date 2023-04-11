@@ -7,8 +7,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
+import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+// import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
 import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourCreationController;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
@@ -27,13 +27,15 @@ public class OverviewPageController {
     void refreshOverview(MouseEvent event) {
         if (event.getClickCount() == 1) {
             System.out.println("refreshing overview!!");
+            SnowShoeToursApplication.getSnowShoeTour();
+            MainPageView.getInstance().refresh();
         }
-        // initialize();
+        initialize();
     }
 
     @FXML
     void initialize() {
-        SnowShoeTourCreationController.initiateSnowToursCreation();
+        // SnowShoeTourCreationController.initiateSnowToursCreation();
 
         assert overviewTable != null : "fx:id=\"overviewTable\" was not injected: check your FXML file 'OverviewPage.fxml'.";
         overviewTable.getColumns().clear();
@@ -43,7 +45,10 @@ public class OverviewPageController {
 
         overviewTable.getColumns().add(createTableColumn("Guide Name", "guideName"));
         overviewTable.getColumns()
-                .add(createTableColumn("Total Cost For Guide", "totalCostForGuide"));
+                .add(createTableColumn("Guide Cost", "totalCostForGuide"));
+        overviewTable.getColumns().add(createTableColumn("Participant Cost", "participantCosts"));
+
+        
         // overviewTable.getItems().addAll(MainPageView.getSnowShoeTour().getTOSnowShoeTours());
         // overview table if a refreshable element
         overviewTable.addEventHandler(MainPageView.REFRESH_EVENT, e -> overviewTable.setItems(ViewUtils.getSnowShoeTours()));

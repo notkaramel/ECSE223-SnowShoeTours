@@ -1,9 +1,9 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
-import com.sun.tools.javac.Main;
+// import com.sun.tools.javac.Main;
 
 import ca.mcgill.ecse.snowshoetours.controller.GearController;
-import ca.mcgill.ecse.snowshoetours.controller.GuideController;
+// import ca.mcgill.ecse.snowshoetours.controller.GuideController;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

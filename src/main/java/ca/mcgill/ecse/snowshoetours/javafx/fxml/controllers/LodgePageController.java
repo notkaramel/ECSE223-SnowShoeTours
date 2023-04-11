@@ -5,7 +5,7 @@ import java.util.ResourceBundle;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.controller.LodgeController;
-import ca.mcgill.ecse.snowshoetours.controller.ParticipantController;
+// import ca.mcgill.ecse.snowshoetours.controller.ParticipantController;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.Lodge;
