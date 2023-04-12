@@ -14,54 +14,132 @@
       ""
     ],
     "participants": [
-      {
-        "Participant": {
-          "accountName": "emma@c.ca",
-          "password": 40,
-          "name": "Emma",
-          "emergencyContact": 333,
-          "nrWeeks": 5,
-          "weekAvailableFrom": 1,
-          "weekAvailableUntil": 5,
-          "lodgeRequired": false,
-          "authorizationCode": "",
-          "refundedPercentageAmount": 0,
-          "status": "NotAssigned",
-          "snowShoeTour": {
-            "@reference": "../../.."
-          },
-          "bookedItems": [
-            ""
-          ]
-        }
-      }
+      ""
     ],
     "bookedItems": [
       ""
     ],
     "gear": [
-      ""
+      {
+        "Gear": [
+          {
+            "name": "banana",
+            "bookedItems": [
+              ""
+            ],
+            "pricePerWeek": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              {
+                "ComboItem": {
+                  "quantity": 2,
+                  "snowShoeTour": {
+                    "@reference": "../../../../.."
+                  },
+                  "combo": {
+                    "name": "combo",
+                    "bookedItems": [
+                      ""
+                    ],
+                    "discount": 10,
+                    "snowShoeTour": {
+                      "@reference": "../../../../../.."
+                    },
+                    "comboItems": [
+                      {
+                        "ComboItem": [
+                          {
+                            "quantity": 1,
+                            "cachedHashCode": -1,
+                            "canSetCombo": true,
+                            "canSetGear": true
+                          },
+                          {
+                            "@reference": "../../.."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "gear": {
+                    "@reference": "../../.."
+                  },
+                  "cachedHashCode": -1,
+                  "canSetCombo": true,
+                  "canSetGear": true
+                }
+              }
+            ]
+          },
+          {
+            "name": "boot",
+            "bookedItems": [
+              ""
+            ],
+            "pricePerWeek": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              ""
+            ]
+          },
+          {
+            "name": "shoe",
+            "bookedItems": [
+              ""
+            ],
+            "pricePerWeek": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              ""
+            ]
+          }
+        ]
+      }
     ],
     "combos": [
-      ""
+      {
+        "Combo": [
+          {
+            "@reference": "../../gear/Gear/comboItems/ComboItem/combo"
+          },
+          {
+            "name": "combo2",
+            "bookedItems": [
+              ""
+            ],
+            "discount": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              {
+                "ComboItem": {
+                  "quantity": 1,
+                  "cachedHashCode": -1,
+                  "canSetCombo": true,
+                  "canSetGear": true
+                }
+              }
+            ]
+          }
+        ]
+      }
     ],
     "comboItems": [
-      ""
-    ],
-    "lodges": [
       {
-        "Lodge": {
-          "name": "Emma",
-          "address": 50,
-          "rating": "FiveStars",
-          "snowShoeTour": {
-            "@reference": "../../.."
-          },
-          "tours": [
-            ""
-          ]
+        "ComboItem": {
+          "@reference": "../../gear/Gear/comboItems/ComboItem"
         }
       }
+    ],
+    "lodges": [
+      ""
     ],
     "tours": [
       ""

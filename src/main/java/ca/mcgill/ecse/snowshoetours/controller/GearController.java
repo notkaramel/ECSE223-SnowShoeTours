@@ -288,7 +288,7 @@ public class GearController {
 
 	public static boolean comboContainsGear(Combo combo, Gear gear) {
 		for (ComboItem comboItem : combo.getComboItems()) {
-			if (comboItem.getGear().equals(gear)) {
+			if (comboItem.getGear() != null && comboItem.getGear().equals(gear)) {
 				return true;
 			}
 		}
