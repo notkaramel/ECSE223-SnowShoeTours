@@ -74,7 +74,7 @@ public class ViewUtils {
     }
 
     public static ObservableList<TOSnowShoeTour> getSnowShoeTours() {
-        return FXCollections.observableList(SnowShoeTourController.getSnowShoeTours());
+        return FXCollections.observableList(SnowShoeTourController.getToursTO());
     }
 
     public static ObservableList<String> getParticipants() {
