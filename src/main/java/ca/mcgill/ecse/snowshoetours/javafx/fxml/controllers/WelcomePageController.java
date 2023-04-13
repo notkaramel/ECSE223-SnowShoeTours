@@ -43,6 +43,7 @@ public class WelcomePageController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	
 
 	public void goToOverviewClicked(ActionEvent event) throws IOException {
 		root = FXMLLoader.load(getClass().getResource("OverviewPage.fxml"));
@@ -118,12 +119,6 @@ public class WelcomePageController {
 		stage.show();
 	}
 
-	public void initialize() {
-		logo = new ImageView();
-		Image LOGO = new Image(
-				"file:src/main/java/ca/mcgill/ecse/snowshoetours/javafx/fxml/controllers/logo.png");
-		logo.setImage(LOGO);
-		MainPageView.getInstance().refresh();
-	}
+	
 
 }
