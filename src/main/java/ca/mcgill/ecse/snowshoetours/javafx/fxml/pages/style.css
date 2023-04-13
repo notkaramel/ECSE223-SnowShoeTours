@@ -12,7 +12,7 @@
 }
 
 .tab-pane {
-  -fx-tab-min-width: 20px; /* minimum width of each tab button */
+  -fx-tab-min-width: 50px; /* minimum width of each tab button */
 }
 
 .tab-close-button {

@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="MainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView">
     <children>
-        <TabPane stylesheets="@pages/style.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <TabPane fx:id="tabPane" stylesheets="@pages/style.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
             <tabs>
-                <Tab text="Welcome">
+                <Tab fx:id="WelcomePage" text="Welcome">
                     <content>
                         <fx:include source="pages/WelcomePage.fxml" />
                     </content>
@@ -19,42 +19,47 @@
                         <fx:include source="pages/OverviewPage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Gear and Combo">
+                <Tab fx:id="GearAndComboPage" text="Gear and Combo">
                     <content>
-                        <fx:include source="pages/GearAndComboPage.fxml"/>
+                        <fx:include source="pages/GearAndComboPage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Lodge">
+                <Tab fx:id="LodgePage" text="Lodge">
                     <content>
-                        <fx:include source="pages/LodgePage.fxml"/>
+                        <fx:include source="pages/LodgePage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Participants">
+                <Tab fx:id="ParticipantPage" text="Participants">
                     <content>
                         <fx:include source="pages/ParticipantPage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Guide">
+                <Tab fx:id="GuidePage" text="Guide">
                     <content>
                         <fx:include source="pages/GuidePage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Settings">
+                <Tab fx:id="SSTSettingsPage" text="Settings">
                     <content>
-                        <fx:include source="pages/SSTSettingsPage.fxml"/>
+                        <fx:include source="pages/SSTSettingsPage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Tour Creation">
+                <Tab fx:id="TourCreationPage" text="Tour Creation">
                     <content>
                         <fx:include source="pages/TourCreationPage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Payment">
+                <Tab fx:id="OverviewPage" text="Tour Overview">
                     <content>
-                        <fx:include source="pages/PaymentPage.fxml"/>
+                        <fx:include source="pages/OverviewPage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Tour Status">
+                <Tab fx:id="PaymentPage" text="Payment">
+                    <content>
+                        <fx:include source="pages/PaymentPage.fxml" />
+                    </content>
+                </Tab>
+                <Tab fx:id="TourStatusPage" text="Tour Status">
                     <content>
                         <fx:include source="pages/TourStatusPage.fxml" />
                     </content>

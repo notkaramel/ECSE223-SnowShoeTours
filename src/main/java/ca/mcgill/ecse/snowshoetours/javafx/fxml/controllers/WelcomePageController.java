@@ -1,6 +1,5 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import javafx.event.ActionEvent;
@@ -10,17 +9,16 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 /**
- * @author Angela Zhu @angelaxzhu
+ * @author Angela Zhu @angelaxzhu, Jennifer Tram Su @jennifertramsu
  */
 public class WelcomePageController {
+	
 	@FXML
 	private ImageView logo;
-
 	@FXML
 	private Button goToOverview;
 	@FXML
@@ -44,81 +42,156 @@ public class WelcomePageController {
 	private Scene scene;
 	private Parent root;
 	
-
 	public void goToOverviewClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("OverviewPage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
+
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getOverviewPage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void goToGearAndComboClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("GearAndComboPage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
 
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getGearAndComboPage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void goToLodgeClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("LodgePage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
 
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getLodgePage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void goToParticipantsClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("ParticipantPage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
+
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getParticipantPage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void goToGuideClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("GuidePage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
+
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getGuidePage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void goToSettingsClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("SSTSettingsPage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
+
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getSSTSettingsPage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void goToTourCreationClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("TourCreationPage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
+
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getTourCreationPage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void goToPaymentClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("../pages/PaymentPage.fxml"));
-		// stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
+
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getPaymentPage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void goToStatusClicked(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("TourStatusPage.fxml"));
-		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(root);
-		stage.setScene(scene);
-		stage.show();
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
+		root = (Parent) loader.load();
+		MainPageView mainPageView = loader.getController();
+
+		try {
+			mainPageView.init();
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getTourStatusPage());
+			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene = new Scene(root);
+			stage.setScene(scene);
+			stage.show();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
-	
-
 }

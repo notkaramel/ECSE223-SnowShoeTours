@@ -1,11 +1,10 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.controller.LodgeController;
-// import ca.mcgill.ecse.snowshoetours.controller.ParticipantController;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.model.Lodge;
@@ -20,10 +19,8 @@ import javafx.scene.control.TextField;
 /**
  * @author Emma Friesen @emma-friesen
  */
-
 public class LodgePageController implements Initializable {
 	private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
-
 
     @FXML
     private Button lodgeAddButton;
@@ -56,7 +53,6 @@ public class LodgePageController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-			
 		for (Lodge lodge : sst.getLodges()) {
 			String lodgeName = lodge.getName();
 	    	lodgeList.add(lodgeName);
@@ -68,8 +64,6 @@ public class LodgePageController implements Initializable {
 		
 		lodgeChoiceBox.getItems().addAll(lodgeList);
 		lodgeRatingChoiceBox.getItems().addAll(lodgeRating);
-		
-		
 	}
 
     @FXML
@@ -101,7 +95,6 @@ public class LodgePageController implements Initializable {
 	    	lodgeChoiceBox.getItems().add(name);
 		}
     }
-
     
     @FXML
     void deleteLodge(ActionEvent event) {
@@ -114,7 +107,3 @@ public class LodgePageController implements Initializable {
     	MainPageView.getInstance().registerRefreshEvent(lodgeChoiceBox);
     }
 }
-
-
-
-
