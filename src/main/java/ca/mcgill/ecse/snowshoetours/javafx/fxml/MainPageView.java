@@ -156,5 +156,4 @@ public class MainPageView extends Application{
   public Tab getSSTSettingsPage() {
     return SSTSettingsPage;
   }
-
 }
