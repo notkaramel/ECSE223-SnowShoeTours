@@ -401,19 +401,7 @@
       }
     ],
     "participants": [
-      {
-        "Participant": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem/participant"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem[2]/participant"
-          }
-        ]
-      }
+      ""
     ],
     "bookedItems": [
       {
@@ -440,20 +428,75 @@
       {
         "Gear": [
           {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[3]/gear"
-          },
-          {
-            "name": "flashlight",
+            "name": "banana",
             "bookedItems": [
               ""
             ],
-            "pricePerWeek": 15,
+            "pricePerWeek": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              {
+                "ComboItem": {
+                  "quantity": 2,
+                  "snowShoeTour": {
+                    "@reference": "../../../../.."
+                  },
+                  "combo": {
+                    "name": "combo",
+                    "bookedItems": [
+                      ""
+                    ],
+                    "discount": 10,
+                    "snowShoeTour": {
+                      "@reference": "../../../../../.."
+                    },
+                    "comboItems": [
+                      {
+                        "ComboItem": [
+                          {
+                            "quantity": 1,
+                            "cachedHashCode": -1,
+                            "canSetCombo": true,
+                            "canSetGear": true
+                          },
+                          {
+                            "@reference": "../../.."
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "gear": {
+                    "@reference": "../../.."
+                  },
+                  "cachedHashCode": -1,
+                  "canSetCombo": true,
+                  "canSetGear": true
+                }
+              }
+            ]
+          },
+          {
+            "name": "boot",
+            "bookedItems": [
+              ""
+            ],
+            "pricePerWeek": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              ""
+            ]
+          },
+          {
+            "name": "shoe",
+            "bookedItems": [
+              ""
+            ],
+            "pricePerWeek": 10,
             "snowShoeTour": {
               "@reference": "../../.."
             },
@@ -468,36 +511,42 @@
       {
         "Combo": [
           {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo"
+            "@reference": "../../gear/Gear/comboItems/ComboItem/combo"
           },
           {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo"
+            "name": "combo2",
+            "bookedItems": [
+              ""
+            ],
+            "discount": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              {
+                "ComboItem": {
+                  "quantity": 1,
+                  "cachedHashCode": -1,
+                  "canSetCombo": true,
+                  "canSetGear": true
+                }
+              }
+            ]
           }
         ]
       }
     ],
     "comboItems": [
       {
-        "ComboItem": [
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[2]"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/comboItems/ComboItem[3]"
-          }
-        ]
+        "ComboItem": {
+          "@reference": "../../gear/Gear/comboItems/ComboItem"
+        }
       }
     ],
     "lodges": [
+      ""
+    ],
+    "tours": [
       ""
     ],
     "tours": [
