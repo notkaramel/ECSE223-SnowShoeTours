@@ -1,9 +1,6 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
-// import com.sun.tools.javac.Main;
-
 import ca.mcgill.ecse.snowshoetours.controller.GearController;
-// import ca.mcgill.ecse.snowshoetours.controller.GuideController;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -42,8 +39,6 @@ public class GearAndComboPageController {
     @FXML
     private ChoiceBox <String> gearToRemoveFromComboSelectBox;
 
-    
-
     @FXML
 	public void initialize() {
 		// the combo boxes are refreshable
@@ -72,12 +67,6 @@ public class GearAndComboPageController {
 			gearToAddToComboSelectBox.setItems(ViewUtils.getGears());
 			gearToAddToComboSelectBox.setValue(null);
 		});
-
-
-		// flightToAirportChoiceBox.addEventHandler(FMSFxmlView.REFRESH_EVENT, e -> {
-		// 	flightToAirportChoiceBox.setItems(ViewUtils.getAirports());
-		// 	flightToAirportChoiceBox.setValue(null);
-		// });
 
 		// register the refreshable nodes
 		MainPageView.getInstance().registerRefreshEvent(gearToRemoveSelectBox, comboToRemoveSelectBox, comboSelectBox, gearToRemoveFromComboSelectBox,gearToAddToComboSelectBox );

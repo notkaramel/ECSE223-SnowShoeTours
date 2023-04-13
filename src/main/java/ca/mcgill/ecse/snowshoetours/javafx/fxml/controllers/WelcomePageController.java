@@ -1,6 +1,5 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import javafx.event.ActionEvent;
@@ -10,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
@@ -18,9 +16,9 @@ import javafx.stage.Stage;
  * @author Angela Zhu @angelaxzhu, Jennifer Tram Su @jennifertramsu
  */
 public class WelcomePageController {
+	
 	@FXML
 	private ImageView logo;
-
 	@FXML
 	private Button goToOverview;
 	@FXML
@@ -44,7 +42,6 @@ public class WelcomePageController {
 	private Scene scene;
 	private Parent root;
 	
-
 	public void goToOverviewClicked(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
 		root = (Parent) loader.load();
@@ -103,7 +100,7 @@ public class WelcomePageController {
 
 		try {
 			mainPageView.init();
-			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getParticipantsPage());
+			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getParticipantPage());
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

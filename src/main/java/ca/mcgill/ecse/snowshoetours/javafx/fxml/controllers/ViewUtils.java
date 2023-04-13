@@ -10,13 +10,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
 
+/*
+ * @author Antoine Phan @notkaramel, Jennifer Tram Su @jennifertramsu
+ */
 public class ViewUtils {
-    // private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
 
     /** Calls the controller and shows an error, if applicable. */
     public static boolean callController(String result) {

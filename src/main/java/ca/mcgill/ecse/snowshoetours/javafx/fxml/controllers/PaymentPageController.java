@@ -1,11 +1,8 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
-// import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
-import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
-// import ca.mcgill.ecse.snowshoetours.model.SnowShoeTour;
-import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourCreationController;
 
+import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
+import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourCreationController;
 import java.net.URL;
-// import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,7 +14,6 @@ import javafx.scene.control.TextField;
 /**
 * @author Emma Friesen @emma-friesen
 */
-
 public class PaymentPageController implements Initializable{
 
     @FXML
@@ -44,7 +40,6 @@ public class PaymentPageController implements Initializable{
     		paymentParticipantChoiceBox.setValue(null);});
 			
     	MainPageView.getInstance().registerRefreshEvent(paymentParticipantChoiceBox);
-    	
 	}
     
     @FXML
@@ -59,10 +54,5 @@ public class PaymentPageController implements Initializable{
             ViewUtils.makePopupWindow("ACCEPTED!",
                     "Payment for participant " + email + " has been accepted!");
         }
-    	// if (ViewUtils.successful(SnowShoeTourCreationController.payForTrip(email, authorizationCode))){
-    	// 	paymentAuthorizationCodeInput.clear();
-		// }
-
     }
-
 }

@@ -3,7 +3,6 @@ package ca.mcgill.ecse.snowshoetours.javafx.fxml;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.event.EventType;
@@ -13,13 +12,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * @author Antoine Phan @notkaramel
+ * @author Antoine Phan @notkaramel, Jennifer Tram Su @jennifertramsu
  */
 public class MainPageView extends Application{
 

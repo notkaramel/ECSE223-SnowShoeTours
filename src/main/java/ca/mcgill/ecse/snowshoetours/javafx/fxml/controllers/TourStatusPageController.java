@@ -1,16 +1,14 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
-
-import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
 import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourCreationController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
+
 public class TourStatusPageController {
 
     @FXML
@@ -65,7 +63,6 @@ public class TourStatusPageController {
         } else {
             ViewUtils.makePopupWindow("Success !!!", "All Trips for Week " + week + " Successfully Started");
         }
-
     }
 
     @FXML
