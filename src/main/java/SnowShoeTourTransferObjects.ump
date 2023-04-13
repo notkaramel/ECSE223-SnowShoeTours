@@ -18,3 +18,10 @@ class TOParticipantCost {
   Integer totalCostForBookableItems;
   Integer totalCostForSnowShoeTour;
 }
+
+class TOSnowShoeTourSeason {
+  immutable;
+  Date startDate;
+  Integer nrWeeks;
+  Integer guideCost;
+}

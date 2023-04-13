@@ -20,7 +20,7 @@ public class SnowShoeToursApplication {
   public static SnowShoeTour getSnowShoeTour() {
     if (snowShoeTour == null) {
       snowShoeTour = SnowShoeTourPersistence.load();
-      // demoReset();
+      //demoReset();
       // reset();
     }
     if (snowShoeTour.getManager() == null) {
