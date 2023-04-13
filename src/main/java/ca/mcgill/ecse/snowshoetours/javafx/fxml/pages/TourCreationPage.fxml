@@ -9,10 +9,9 @@
 
 <GridPane alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.TourCreationPageController">
   <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="567.0" minWidth="10.0" prefWidth="117.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="567.0" minWidth="10.0" prefWidth="227.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="567.0" minWidth="10.0" prefWidth="161.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="567.0" minWidth="10.0" prefWidth="119.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="567.0" minWidth="0.0" prefWidth="0.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="593.0" minWidth="10.0" prefWidth="593.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="567.0" minWidth="0.0" prefWidth="0.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints />
@@ -20,12 +19,12 @@
       <RowConstraints maxHeight="246.0" minHeight="10.0" prefHeight="246.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="initiateSnowToursCreationButton" mnemonicParsing="false" onAction="#handleInitiateSnowToursCreation" prefHeight="97.0" prefWidth="606.0" text="Create Tour" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <Button fx:id="initiateSnowToursCreationButton" mnemonicParsing="false" onAction="#handleInitiateSnowToursCreation" prefHeight="97.0" prefWidth="360.0" text="Create Tour" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
          <font>
             <Font size="32.0" />
          </font>
       </Button>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Initiate Tour Creation" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Initiate Tour Creation" textAlignment="CENTER" wrappingWidth="370.830078125" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <font>
             <Font size="36.0" />
          </font>
