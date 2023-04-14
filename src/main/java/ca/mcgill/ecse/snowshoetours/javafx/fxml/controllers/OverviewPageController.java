@@ -8,7 +8,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
-import ca.mcgill.ecse.snowshoetours.controller.TOParticipantCost;
 import ca.mcgill.ecse.snowshoetours.controller.TOParticipant;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
@@ -61,7 +60,6 @@ public class OverviewPageController {
         MainPageView.getInstance().registerRefreshEvent(ParticipantOverviewTable);
     }
 
-
     /**
      * Helper method to make TourOverviewTable
      * @author Antoine Phan @notkaramel
@@ -79,6 +77,7 @@ public class OverviewPageController {
 
         MainPageView.getInstance().registerRefreshEvent(TourOverviewTable);
     }
+    
     /**
      * Helper method to create a table column
      * 

@@ -83,6 +83,7 @@ public class GearAndComboPageController {
             ViewUtils.makePopupWindow("Success", "Gear added Successfully");
 		}
 	}
+
     @FXML
 	public void addComboButtonClicked(ActionEvent event) {
 		Integer discount = Integer.parseInt(newComboDiscountBox.getText());
@@ -94,6 +95,7 @@ public class GearAndComboPageController {
             ViewUtils.makePopupWindow("Success", "Combo added Successfully");
 		}
 	}
+
     public void removeGearButtonClicked(ActionEvent event) {
 		var gearToRemove = gearToRemoveSelectBox.getValue();
 
@@ -101,6 +103,7 @@ public class GearAndComboPageController {
             ViewUtils.makePopupWindow("Success", "Gear removed Successfully");
 		}
 	}
+
     public void removeComboButtonClicked(ActionEvent event) {
 		var comboToRemove = comboToRemoveSelectBox.getValue();
         if (ViewUtils.successful("")) {
@@ -109,6 +112,7 @@ public class GearAndComboPageController {
             ViewUtils.makePopupWindow("Success", "Gear removed Successfully");
 		}
 	}
+
     public void removeGearFromComboButtonClicked(ActionEvent event) {
 		var gearToRemove = gearToRemoveFromComboSelectBox.getValue();
         var selectedCombo = comboSelectBox.getValue();
@@ -118,6 +122,7 @@ public class GearAndComboPageController {
             MainPageView.getInstance().refresh();
 		}
 	}
+    
     public void addGearToComboButtonClicked(ActionEvent event) {
 		var gearToAdd = gearToAddToComboSelectBox.getValue();
         var selectedCombo = comboSelectBox.getValue();
