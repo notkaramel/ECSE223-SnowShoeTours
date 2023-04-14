@@ -52,16 +52,9 @@ public class LodgeController {
 	 * @author: Sameer Riaz (@SRIAZ77)
 	 */
 	public static void deleteLodge(String name) {
-		// ADD VALIDATION
 		if (Lodge.hasWithName(name)) {
-			try {
-				if(sst.removeLodge(Lodge.getWithName(name)))
-				{
-					System.out.println("Lodge deleted");
-				};
-				SnowShoeTourPersistence.save();
-			} catch (Exception e) {
-			}
+			Lodge.getWithName(name).delete();
 		}
+		SnowShoeTourPersistence.save();
 	}
 }

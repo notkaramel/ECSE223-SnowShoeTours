@@ -71,9 +71,8 @@ public class GuideController {
 	 */
 	public static void deleteGuide(String email) {
 		if (User.hasWithAccountName(email)) {
-			if (Guide.getWithAccountName(email) instanceof Guide) { // CHECK IF INPUTTED USER IS A
-																	// GUIDE TO NOT REMOVE
-																	// PARTICIPANT
+			if (Guide.getWithAccountName(email) instanceof Guide) {
+				// CHECK IF INPUTTED USER IS A GUIDE TO NOT REMOVE PARTICIPANT
 				try {
 					Guide.getWithAccountName(email).delete();
 					SnowShoeTourPersistence.save();
