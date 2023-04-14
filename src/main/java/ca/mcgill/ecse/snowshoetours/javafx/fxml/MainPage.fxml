@@ -14,6 +14,11 @@
                         <fx:include source="pages/WelcomePage.fxml" />
                     </content>
                 </Tab>
+                <Tab fx:id="OverviewPage" text="Overview">
+                    <content>
+                        <fx:include source="pages/OverviewPage.fxml" />
+                    </content>
+                </Tab>
                 <Tab fx:id="SSTSettingsPage" text="Settings">
                     <content>
                         <fx:include source="pages/SSTSettingsPage.fxml" />
@@ -52,11 +57,6 @@
                 <Tab fx:id="TourStatusPage" text="Tour Status">
                     <content>
                         <fx:include source="pages/TourStatusPage.fxml" />
-                    </content>
-                </Tab>
-                <Tab fx:id="OverviewPage" text="Overview">
-                    <content>
-                        <fx:include source="pages/OverviewPage.fxml" />
                     </content>
                 </Tab>
             </tabs>
