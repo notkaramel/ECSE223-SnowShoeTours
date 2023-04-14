@@ -101,7 +101,7 @@ public class ParticipantPageController {
                 choiceBox.setItems(ViewUtils.getCombos());
             }
         });
-
+        MainPageView.getInstance().registerRefreshEvent(choiceBox);
     }
 
     /**
@@ -120,7 +120,6 @@ public class ParticipantPageController {
         ComboRadioOption.setSelected(false);
 
         initGearAndComboChoiceBox(GearComboChoiceBox);
-        MainPageView.getInstance().registerRefreshEvent(GearComboChoiceBox);
     }
 
     /**
@@ -129,11 +128,15 @@ public class ParticipantPageController {
      */
     @FXML
     void deleteParticipantClicked(ActionEvent event) {
-        String email = participantChoiceBoxDelete.getValue().toString();
-        ParticipantController.deleteParticipant(email);
+        try {
+            String email = participantChoiceBoxDelete.getValue().toString();
+            ParticipantController.deleteParticipant(email);
+            // Refresh the choice box
+            MainPageView.getInstance().refresh();
+        } catch (Exception e) {
+            ViewUtils.makePopupWindow("Error", "Please select a participant");
+        }
 
-        // Refresh the choice box
-        MainPageView.getInstance().refresh();
     }
 
     /**
@@ -142,34 +145,41 @@ public class ParticipantPageController {
      */
     @FXML
     void registerParticipantClicked(ActionEvent event) {
-        String name = participantNameTextField.getText();
-        String email = participantEmailTextField.getText();
-        String password = participantPasswordTextField.getText();
-        String emergencyContact = participantEmergencyTextField.getText();
-        int nrWeeks = Integer.parseInt(participantAvailabilityTextField.getText());
-        int weekAvailableFrom = Integer.parseInt(weekFromTextField.getText());
-        int weekAvailableUntil = Integer.parseInt(weekToTextField.getText());
-        boolean lodgeRequired = false;
+        try {
 
-        if (lodgeRequestCheckBox.isSelected()) {
-            lodgeRequired = true;
-        } else if (!lodgeRequestCheckBox.isSelected()) {
-            lodgeRequired = false;
+            String name = participantNameTextField.getText();
+            String email = participantEmailTextField.getText();
+            String password = participantPasswordTextField.getText();
+            String emergencyContact = participantEmergencyTextField.getText();
+            int nrWeeks = Integer.parseInt(participantAvailabilityTextField.getText());
+            int weekAvailableFrom = Integer.parseInt(weekFromTextField.getText());
+            int weekAvailableUntil = Integer.parseInt(weekToTextField.getText());
+            boolean lodgeRequired = false;
+
+            if (lodgeRequestCheckBox.isSelected()) {
+                lodgeRequired = true;
+            } else if (!lodgeRequestCheckBox.isSelected()) {
+                lodgeRequired = false;
+            }
+
+            // Reset text fields if successful
+            if (ViewUtils.successful(ParticipantController.registerParticipant(email, password,
+                    name, emergencyContact, nrWeeks, weekAvailableFrom, weekAvailableUntil,
+                    lodgeRequired))) {
+                participantNameTextField.clear();
+                participantEmailTextField.clear();
+                participantPasswordTextField.clear();
+                participantEmergencyTextField.clear();
+                participantAvailabilityTextField.clear();
+                weekFromTextField.clear();
+                weekToTextField.clear();
+                lodgeRequestCheckBox.setSelected(false);
+                ViewUtils.makePopupWindow("Success", "Successfully registered " + name);
+            }
+        } catch (Exception e) {
+            ViewUtils.makePopupWindow("Error", "Error registering participant");
         }
 
-        // Reset text fields if successful
-        if (ViewUtils.successful(ParticipantController.registerParticipant(email, password, name,
-                emergencyContact, nrWeeks, weekAvailableFrom, weekAvailableUntil, lodgeRequired))) {
-            participantNameTextField.clear();
-            participantEmailTextField.clear();
-            participantPasswordTextField.clear();
-            participantEmergencyTextField.clear();
-            participantAvailabilityTextField.clear();
-            weekFromTextField.clear();
-            weekToTextField.clear();
-            lodgeRequestCheckBox.setSelected(false);
-            ViewUtils.makePopupWindow("Success", "Successfully registered " + name);
-        }
     }
 
     /**
@@ -177,17 +187,26 @@ public class ParticipantPageController {
      */
     @FXML
     void addGearComboAction(ActionEvent event) {
+        try {
 
-        String email = participantChoiceBoxGearCombo.getValue().toString();
-        String gearCombo = GearComboChoiceBox.getValue().toString();
-        if (ViewUtils
-                .successful(ParticipantController.addBookableItemToParticipant(email, gearCombo))) {
-            // Refresh the choice box
-            ViewUtils.makePopupWindow("Successfully Added",
-                    "Successfully added " + gearCombo + " to " + email);
-            MainPageView.getInstance().refresh();
-        } else {
-            ViewUtils.makePopupWindow("Error", "Error adding " + gearCombo + " to " + email);
+            String email = participantChoiceBoxGearCombo.getValue().toString();
+            String gearCombo = GearComboChoiceBox.getValue().toString();
+            if (gearCombo.equals("Select a gear") || gearCombo.equals("Select a combo")) {
+                ViewUtils.makePopupWindow("Error", "Please select a gear/combo");
+            } else {
+                if (ViewUtils.successful(
+                        ParticipantController.addBookableItemToParticipant(email, gearCombo))) {
+                    // Refresh the choice box
+                    ViewUtils.makePopupWindow("Successfully Added",
+                            "Successfully added " + gearCombo + " to " + email);
+                    MainPageView.getInstance().refresh();
+                } else {
+                    ViewUtils.makePopupWindow("Error",
+                            "Error adding " + gearCombo + " to " + email);
+                }
+            }
+        } catch (Exception e) {
+            ViewUtils.makePopupWindow("Error", "Please select a participant");
         }
     }
 
@@ -196,16 +215,26 @@ public class ParticipantPageController {
      */
     @FXML
     void removeGearComboAction(ActionEvent event) {
-        String email = participantChoiceBoxGearCombo.getValue().toString();
-        String gearCombo = GearComboChoiceBox.getValue().toString();
-        if (ViewUtils.successful(
-                ParticipantController.removeBookableItemFromParticipant(email, gearCombo))) {
-            ViewUtils.makePopupWindow("Successfully Removed",
-                    "Successfully removed " + gearCombo + " from " + email);
-            // Refresh the choice box
-            MainPageView.getInstance().refresh();
-        } else {
-            ViewUtils.makePopupWindow("Error", "Error removing " + gearCombo + " from " + email);
+        try {
+
+            String email = participantChoiceBoxGearCombo.getValue().toString();
+            String gearCombo = GearComboChoiceBox.getValue().toString();
+            if (gearCombo.equals("Select a gear") || gearCombo.equals("Select a combo")) {
+                ViewUtils.makePopupWindow("Error", "Please select a gear/combo");
+            } else {
+                if (ViewUtils.successful(ParticipantController
+                        .removeBookableItemFromParticipant(email, gearCombo))) {
+                    ViewUtils.makePopupWindow("Successfully Removed",
+                            "Successfully removed " + gearCombo + " from " + email);
+                    // Refresh the choice box
+                    MainPageView.getInstance().refresh();
+                } else {
+                    ViewUtils.makePopupWindow("Error",
+                            "Error removing " + gearCombo + " from " + email);
+                }
+            }
+        } catch (Exception e) {
+            ViewUtils.makePopupWindow("Error", "Please select a participant");
         }
     }
 

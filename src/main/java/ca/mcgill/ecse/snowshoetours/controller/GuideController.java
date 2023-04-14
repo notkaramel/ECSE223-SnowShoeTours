@@ -17,6 +17,10 @@ public class GuideController {
 			String emergencyContact) {
 
 		// Input validation
+		if (name == null || name.equals("")) {
+			return "Name cannot be empty";
+		}
+		
 		if (email == null || email.equals("")) {
 			return "Email cannot be empty";
 		} else if (email.contains(" ")) {
@@ -42,9 +46,6 @@ public class GuideController {
 			return "Password cannot be empty";
 		}
 
-		if (name == null || name.equals("")) {
-			return "Name cannot be empty";
-		}
 
 		if (emergencyContact == null || emergencyContact.equals("")) {
 			return "Emergency contact cannot be empty";

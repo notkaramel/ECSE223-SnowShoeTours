@@ -56,11 +56,16 @@ public class GuidePageController {
 
     @FXML
     void deleteGuideClicked(ActionEvent event) {
-        String email = guideChoiceBox.getValue().toString();
-        GuideController.deleteGuide(email);
+        try {
 
-        // Refresh the choice box
-        MainPageView.getInstance().refresh();
+            String email = guideChoiceBox.getValue().toString();
+            GuideController.deleteGuide(email);
+            
+            // Refresh the choice box
+            MainPageView.getInstance().refresh();
+        } catch (Exception e) {
+            ViewUtils.makePopupWindow("Error","Please select a guide to delete");
+        }
     }
 
     @FXML

@@ -21,12 +21,14 @@ public class TourCreationPageController {
 
     @FXML
     void handleInitiateSnowToursCreation(ActionEvent event) {
-        String result = SnowShoeTourCreationController.initiateSnowToursCreation();
-        if (!result.isEmpty()) {
-            ViewUtils.showError(result);
-        } else {
+        try {
+            SnowShoeTourCreationController.initiateSnowToursCreation();
             ViewUtils.makePopupWindow("", "Tour Successfully Created");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            ViewUtils.makePopupWindow("", "Tour is already initialized");
         }
+        
     }
 
     @FXML
