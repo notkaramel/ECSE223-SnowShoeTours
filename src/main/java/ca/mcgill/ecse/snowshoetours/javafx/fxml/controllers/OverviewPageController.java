@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.controller.TOParticipant;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
@@ -33,10 +32,8 @@ public class OverviewPageController {
 
     @FXML
     void refreshOverview(ActionEvent event) {
-        System.out.println("refreshing overview!!");
-        SnowShoeToursApplication.getSnowShoeTour();
         MainPageView.getInstance().refresh();
-        initialize();
+
     }
 
     @FXML
