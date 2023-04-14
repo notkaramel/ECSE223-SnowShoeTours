@@ -50,7 +50,7 @@
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="9. Start Tours / End a Participant's Tour / Cancel a Participant's Tour" wrappingWidth="483.033935546875" GridPane.columnIndex="1" GridPane.rowIndex="13" />
       <ImageView fx:id="logo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.vgrow="ALWAYS">
          <image>
-            <Image url="@../controllers/logo.png" />
+            <Image url="@logo.png" />
          </image></ImageView>
  
          </children>
