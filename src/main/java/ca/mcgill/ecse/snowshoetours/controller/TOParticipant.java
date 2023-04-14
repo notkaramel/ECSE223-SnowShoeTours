@@ -3,30 +3,32 @@
 
 package ca.mcgill.ecse.snowshoetours.controller;
 
-// line 14 "../../../../../../SnowShoeTourTransferObjects.ump"
-public class TOParticipantCost
+// line 22 "../../../../../../SnowShoeTourTransferObjects.ump"
+public class TOParticipant
 {
 
   //------------------------
   // MEMBER VARIABLES
   //------------------------
 
-  //TOParticipantCost Attributes
+  //TOParticipant Attributes
   private String participantEmail;
   private String participantName;
-  private int totalCostForBookableItems;
-  private int totalCostForSnowShoeTour;
+  private String authorizationCode;
+  private int totalCost;
+  private String status;
 
   //------------------------
   // CONSTRUCTOR
   //------------------------
 
-  public TOParticipantCost(String aParticipantEmail, String aParticipantName, int aTotalCostForBookableItems, int aTotalCostForSnowShoeTour)
+  public TOParticipant(String aParticipantEmail, String aParticipantName, String aAuthorizationCode, int aTotalCost, String aStatus)
   {
     participantEmail = aParticipantEmail;
     participantName = aParticipantName;
-    totalCostForBookableItems = aTotalCostForBookableItems;
-    totalCostForSnowShoeTour = aTotalCostForSnowShoeTour;
+    authorizationCode = aAuthorizationCode;
+    totalCost = aTotalCost;
+    status = aStatus;
   }
 
   //------------------------
@@ -43,14 +45,19 @@ public class TOParticipantCost
     return participantName;
   }
 
-  public int getTotalCostForBookableItems()
+  public String getAuthorizationCode()
   {
-    return totalCostForBookableItems;
+    return authorizationCode;
   }
 
-  public int getTotalCostForSnowShoeTour()
+  public int getTotalCost()
   {
-    return totalCostForSnowShoeTour;
+    return totalCost;
+  }
+
+  public String getStatus()
+  {
+    return status;
   }
 
   public void delete()
@@ -62,7 +69,8 @@ public class TOParticipantCost
     return super.toString() + "["+
             "participantEmail" + ":" + getParticipantEmail()+ "," +
             "participantName" + ":" + getParticipantName()+ "," +
-            "totalCostForBookableItems" + ":" + getTotalCostForBookableItems()+ "," +
-            "totalCostForSnowShoeTour" + ":" + getTotalCostForSnowShoeTour()+ "]";
+            "authorizationCode" + ":" + getAuthorizationCode()+ "," +
+            "totalCost" + ":" + getTotalCost()+ "," +
+            "status" + ":" + getStatus()+ "]";
   }
 }

@@ -18,3 +18,25 @@ class TOParticipantCost {
   Integer totalCostForBookableItems;
   Integer totalCostForSnowShoeTour;
 }
+
+class TOParticipant {
+  immutable;
+  participantEmail;
+  participantName;
+  authorizationCode;
+  Integer totalCost;
+  status;
+}
+
+class TOSnowShoeTourSeason {
+  immutable;
+  Date startDate;
+  Integer nrWeeks;
+  Integer guideCost;
+}
+
+class TOGuide {
+  immutable;
+  guideName;
+  guideEmail;
+}

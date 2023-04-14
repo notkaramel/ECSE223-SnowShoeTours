@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.OverviewPageController">
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="249.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="241.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="241.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+      <RowConstraints maxHeight="126.0" minHeight="0.0" prefHeight="78.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="126.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="234.0" minHeight="10.0" prefHeight="208.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="274.0" minHeight="5.0" prefHeight="16.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="332.0" minHeight="10.0" prefHeight="194.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="274.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+      <RowConstraints />
+  </rowConstraints>
+   <children>
+      <TableView fx:id="TourOverviewTable" maxWidth="-Infinity" prefHeight="220.0" prefWidth="700.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="392.0" text="SYSTEM OVERVIEW" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <font>
+            <Font name="Arial Black" size="30.0" />
+         </font>
+      </Label>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#refreshOverview" prefHeight="32.0" prefWidth="122.0" text="REFRESH" textAlignment="CENTER" textFill="#030000" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <TableView fx:id="ParticipantOverviewTable" maxWidth="-Infinity" prefHeight="153.0" prefWidth="700.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="7" GridPane.vgrow="SOMETIMES" />
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="236.0" text="Tour Overview" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="228.0" text="Participant Overview" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Label>
+      <Separator prefHeight="16.0" prefWidth="838.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+      <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="5" />
+   </children>
+</GridPane>

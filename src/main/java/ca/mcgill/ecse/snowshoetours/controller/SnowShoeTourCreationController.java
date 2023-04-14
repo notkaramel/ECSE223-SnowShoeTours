@@ -3,14 +3,21 @@ package ca.mcgill.ecse.snowshoetours.controller;
 import java.util.*;
 
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
-import ca.mcgill.ecse.snowshoetours.model.*;
 import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
+import ca.mcgill.ecse.snowshoetours.model.*;
 
 public class SnowShoeTourCreationController {
     private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
 
     private SnowShoeTourCreationController() {}
 
+  /**
+   * This method initiates the creation of snow tours using available guides and participants in the
+   * system.
+   * 
+   * @author Bilar Mokhtari @bmokhtari
+   * @return
+   */
 
     /**
      * This method initiates the creation of snow tours using available guides and participants in
@@ -25,6 +32,15 @@ public class SnowShoeTourCreationController {
         List<Guide> unAssignedGuides = sst.getGuides();
         List<Participant> unAssignedParticipants = sst.getParticipants();
         int id = 1;
+        if (unAssignedParticipants.isEmpty()) {
+            // Return an error message or handle the situation when no guides are available.
+            return "No unassigned participants available.";
+        }
+        if (unAssignedGuides.isEmpty()) {
+            // Return an error message or handle the situation when no guides are available.
+            return "No unassigned guides available.";
+        }
+
 
         // Iterate through all unassigned participants
         for (Participant p : unAssignedParticipants) {
@@ -156,7 +172,7 @@ public class SnowShoeTourCreationController {
                             return ("Cannot start tour because the participant has finished their tour");
                         case "Paid": {
                             participant.start();
-                            break;
+                            return "";
                         }
                     }
                 }
