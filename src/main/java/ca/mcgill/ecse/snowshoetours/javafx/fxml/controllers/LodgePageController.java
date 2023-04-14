@@ -49,23 +49,24 @@ public class LodgePageController implements Initializable {
 	private String[] lodgeRating =
 			{"One Star", "Two Stars", "Three Stars", "Four Stars", "Five Stars"};
 
-	private ArrayList<String> lodgeList = new ArrayList<String>();
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		for (Lodge lodge : sst.getLodges()) {
-			String lodgeName = lodge.getName();
-			lodgeList.add(lodgeName);
-		}
+		// for (Lodge lodge : sst.getLodges()) {
+		// 	String lodgeName = lodge.getName();
+		// 	lodgeList.add(lodgeName);
+		// }
 
 		lodgeChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
-			lodgeChoiceBox.getItems().addAll(lodgeList);
+			lodgeChoiceBox.setItems(ViewUtils.getLodges());
 			lodgeChoiceBox.setValue(null);
 		});
 
-		lodgeChoiceBox.getItems().addAll(lodgeList);
+		// lodgeChoiceBox.getItems().addAll(lodgeList);
 		lodgeRatingChoiceBox.getItems().addAll(lodgeRating);
+		MainPageView.getInstance().registerRefreshEvent(lodgeChoiceBox);
+		MainPageView.getInstance().registerRefreshEvent(lodgeRatingChoiceBox);
+
 	}
 
 	@FXML
@@ -89,19 +90,22 @@ public class LodgePageController implements Initializable {
 		if (ViewUtils.successful(LodgeController.addLodge(name, address, nrStars))) {
 			lodgeNameTextField.clear();
 			lodgeAddressTextField.clear();
-			lodgeRatingChoiceBox.getSelectionModel().clearSelection();
-			lodgeChoiceBox.getItems().add(name);
+			lodgeRatingChoiceBox.setValue(null);
+			// lodgeChoiceBox.getItems().add(name);
 		}
+		MainPageView.getInstance().refresh();
 	}
 
 	@FXML
 	void deleteLodge(ActionEvent event) {
-		String lodgeNameToDelete = lodgeChoiceBox.getValue().toString();
-
+		String lodgeNameToDelete = lodgeChoiceBox.getValue();
 		LodgeController.deleteLodge(lodgeNameToDelete);
+			
+		// lodgeChoiceBox.getItems().remove(lodgeNameToDelete);
+			
+		// ViewUtils.makePopupWindow("Error", "Please select a lodge to delete");
 
-		lodgeChoiceBox.getItems().remove(lodgeNameToDelete);
-
-		MainPageView.getInstance().registerRefreshEvent(lodgeChoiceBox);
+		// lodgeChoiceBox.setValue(null);
+		MainPageView.getInstance().refresh();
 	}
 }

@@ -108,4 +108,8 @@ public class ViewUtils {
     public static TOSnowShoeTourSeason getSeason() {
         return SnowShoeTourController.getSnowShoeTourSeason();
     }
+
+    public static ObservableList<String> getLodges() {
+        return FXCollections.observableList(SnowShoeTourController.getLodges());
+    }
 }

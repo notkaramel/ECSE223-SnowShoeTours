@@ -383,17 +383,30 @@
     ],
     "lodges": [
       {
-        "Lodge": {
-          "name": "Jennifer Inn",
-          "address": "Trottier Basement",
-          "rating": "FiveStars",
-          "snowShoeTour": {
-            "@reference": "../../.."
+        "Lodge": [
+          {
+            "name": "asdf",
+            "address": "asdf",
+            "rating": "FiveStars",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "tours": [
+              ""
+            ]
           },
-          "tours": [
-            ""
-          ]
-        }
+          {
+            "name": 124,
+            "address": 1235,
+            "rating": "FiveStars",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "tours": [
+              ""
+            ]
+          }
+        ]
       }
     ],
     "tours": [

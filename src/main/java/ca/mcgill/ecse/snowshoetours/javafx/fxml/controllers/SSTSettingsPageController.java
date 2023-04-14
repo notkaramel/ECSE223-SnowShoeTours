@@ -34,13 +34,18 @@ public class SSTSettingsPageController {
 
 	@FXML
 	public void setSeasonClicked(ActionEvent event) {
-		Date start_week = Date.valueOf(startDateTextField.getText());
-		int no_weeks = Integer.parseInt(noWeeksTextField.getText());
-		int cost = Integer.parseInt(guideCostTextField.getText());
+		try {
+			Date start_week = Date.valueOf(startDateTextField.getText());
+			int no_weeks = Integer.parseInt(noWeeksTextField.getText());
+			int cost = Integer.parseInt(guideCostTextField.getText());
 
-		if (ViewUtils.successful(
-				SnowShoeTourController.updateSnowShoeTour(start_week, no_weeks, cost))) {
-			ViewUtils.makePopupWindow("Successful!", "Successfully updated the season!");
+			if (ViewUtils.successful(
+					SnowShoeTourController.updateSnowShoeTour(start_week, no_weeks, cost))) {
+				ViewUtils.makePopupWindow("Successful!", "Successfully updated the season!");
+			}
+		} catch (Exception e) {
+			ViewUtils.makePopupWindow("Error", "Please enter valid values for the season!");
 		}
 	}
+
 }

@@ -271,4 +271,12 @@ public class SnowShoeTourController {
 		}
 		return guides;
 	}
+
+	/**
+	 * Get all the lodges as List of String
+	 * @author Antoine Phan @notkaramel
+	 */
+	public static List<String> getLodges() {
+		return ssts.getLodges().stream().map(Lodge::getName).toList();
+	}
 }

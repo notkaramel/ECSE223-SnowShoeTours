@@ -55,7 +55,10 @@ public class LodgeController {
 		// ADD VALIDATION
 		if (Lodge.hasWithName(name)) {
 			try {
-				sst.removeLodge(Lodge.getWithName(name));
+				if(sst.removeLodge(Lodge.getWithName(name)))
+				{
+					System.out.println("Lodge deleted");
+				};
 				SnowShoeTourPersistence.save();
 			} catch (Exception e) {
 			}

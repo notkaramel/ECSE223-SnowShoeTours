@@ -76,25 +76,39 @@ public class GearAndComboPageController {
 
     @FXML
     public void addGearButtonClicked(ActionEvent event) {
-        Integer cost = Integer.parseInt(newGearCostBox.getText());
-        String name = newGearNameBox.getText();
+        try {
 
-        if (ViewUtils.successful(GearController.addGear(name, cost))) {
-            newGearCostBox.setText("");
-            newGearNameBox.setText("");
-            ViewUtils.makePopupWindow("Success", "Gear added Successfully");
+            Integer cost = Integer.parseInt(newGearCostBox.getText());
+            String name = newGearNameBox.getText();
+
+            if (ViewUtils.successful(GearController.addGear(name, cost))) {
+                newGearCostBox.setText("");
+                newGearNameBox.setText("");
+                ViewUtils.makePopupWindow("Success", "Gear added Successfully");
+            }
+        } catch (Exception e) {
+            if (e instanceof NumberFormatException) {
+                ViewUtils.makePopupWindow("Error", "Cost must be a number");
+            }
         }
     }
 
     @FXML
     public void addComboButtonClicked(ActionEvent event) {
-        Integer discount = Integer.parseInt(newComboDiscountBox.getText());
-        String name = newComboNameBox.getText();
+        try {
 
-        if (ViewUtils.successful(GearController.addCombo(name, discount))) {
-            newComboDiscountBox.setText("");
-            newComboNameBox.setText("");
-            ViewUtils.makePopupWindow("Success", "Combo added Successfully");
+            Integer discount = Integer.parseInt(newComboDiscountBox.getText());
+            String name = newComboNameBox.getText();
+
+            if (ViewUtils.successful(GearController.addCombo(name, discount))) {
+                newComboDiscountBox.setText("");
+                newComboNameBox.setText("");
+                ViewUtils.makePopupWindow("Success", "Combo added Successfully");
+            }
+        } catch (Exception e) {
+            if (e instanceof NumberFormatException) {
+                ViewUtils.makePopupWindow("Error", "Discount must be a number");
+            }
         }
     }
 
