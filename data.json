@@ -82,25 +82,6 @@
             ]
           },
           {
-            "accountName": "jennifer_4@hybrid.ide",
-            "password": "jennifer123",
-            "name": "Jennifer",
-            "emergencyContact": "(438)333-2222",
-            "nrWeeks": 3,
-            "weekAvailableFrom": 4,
-            "weekAvailableUntil": 6,
-            "lodgeRequired": true,
-            "authorizationCode": "",
-            "refundedPercentageAmount": 0,
-            "status": "NotAssigned",
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "bookedItems": [
-              ""
-            ]
-          },
-          {
             "accountName": "sameer_6@vscode.love",
             "password": "",
             "name": "Sameer",

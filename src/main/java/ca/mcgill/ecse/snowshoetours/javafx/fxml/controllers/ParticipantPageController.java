@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 
 /*
@@ -24,9 +25,11 @@ public class ParticipantPageController {
     @FXML // fx:id="participantAvailabilityTextField"
     private TextField participantAvailabilityTextField; // Value injected by FXMLLoader
 
-    @FXML // fx:id="participantChoiceBox"
-    private ChoiceBox<String> participantChoiceBox; // Value injected by FXMLLoader
+    @FXML // fx:id="participantChoiceBoxDelete", for delete participant feature
+    private ChoiceBox<String> participantChoiceBoxDelete; // Value injected by FXMLLoader
 
+    @FXML // fx:id="participantChoiceBoxGearCombo", for adding/deleting gear & combo feature
+    private ChoiceBox<String> participantChoiceBoxGearCombo;
     @FXML // fx:id="participantEmailTextField"
     private TextField participantEmailTextField; // Value injected by FXMLLoader
 
@@ -48,21 +51,49 @@ public class ParticipantPageController {
     @FXML // fx:id="weekToTextField"
     private TextField weekToTextField; // Value injected by FXMLLoader
 
+
+    @FXML
+    private Button AddGearComboButton;
+
+    @FXML
+    private RadioButton ComboRadioOption;
+
+    @FXML
+    private ChoiceBox<?> GearComboChoiceBox;
+
+    @FXML
+    private RadioButton GearRadioOption;
+
+    @FXML
+    private Button RemoveGearComboButton;
+
+    /**
+     * Helper method to initialize the choice box
+     * 
+     * @author Antoine Phan @notkaramel
+     * @param choiceBox
+     */
+    private void initChoiceBox(ChoiceBox<String> choiceBox) {
+        choiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
+            choiceBox.setItems(ViewUtils.getParticipants());
+            choiceBox.setValue(null);
+        });
+        
+        // Register the refreshable nodes
+        MainPageView.getInstance().registerRefreshEvent(choiceBox);
+    }
+
     @FXML // This method is called by the FXMLLoader when initialization is complete
     public void initialize() {
         // Participant choice box is refreshable
-        participantChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
-			participantChoiceBox.setItems(ViewUtils.getParticipants());
-			participantChoiceBox.setValue(null);
-		});
+        initChoiceBox(participantChoiceBoxDelete);
+        initChoiceBox(participantChoiceBoxGearCombo);
 
-        // Register the refreshable nodes
-        MainPageView.getInstance().registerRefreshEvent(participantChoiceBox);
     }
 
     @FXML
     void deleteParticipantClicked(ActionEvent event) {
-        String email = participantChoiceBox.getValue().toString();
+        String email = participantChoiceBoxDelete.getValue().toString();
         ParticipantController.deleteParticipant(email);
         
         // Refresh the choice box
@@ -98,5 +129,26 @@ public class ParticipantPageController {
             lodgeRequestCheckBox.setSelected(false);
         }
     }
+
+    @FXML
+    void addGearComboAction(ActionEvent event) {
+        
+    }
+
+    @FXML
+    void removeGearComboAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void optionComboSelected(ActionEvent event) {
+
+    }
+
+    @FXML
+    void optionGearSelected(ActionEvent event) {
+
+    }
+
 
 }
