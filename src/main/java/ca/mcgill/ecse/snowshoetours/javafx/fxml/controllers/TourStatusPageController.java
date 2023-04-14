@@ -37,37 +37,50 @@ public class TourStatusPageController {
 
     @FXML
     void cancelParticipantTrip(ActionEvent event) {
-        String email = participantChoiceBox.getValue().toString();
-        String result = SnowShoeTourCreationController.cancelParticipantTrip(email);
-        if (!result.isEmpty()) {
-            ViewUtils.showError(result); // Display the error message or handle it accordingly
-        } else {
-            ViewUtils.makePopupWindow("Cancelled",
-                    "Participant" + email + " successfully cancelled");
+        try {
+
+            String email = participantChoiceBox.getValue().toString();
+            String result = SnowShoeTourCreationController.cancelParticipantTrip(email);
+            if (!result.isEmpty()) {
+                ViewUtils.showError(result); // Display the error message or handle it accordingly
+            } else {
+                ViewUtils.makePopupWindow("Cancelled",
+                        "Participant" + email + " successfully cancelled");
+            }
+        } catch (Exception e) {
+            ViewUtils.showError("Please select a participant");
         }
     }
 
     @FXML
     void finishParticipantTrip(ActionEvent event) {
-        String email = participantChoiceBox.getValue().toString();
-        String result = SnowShoeTourCreationController.finishParticipantTrip(email);
-        if (!result.isEmpty()) {
-            ViewUtils.showError(result); // Display the error message or handle it accordingly
-        } else {
-            ViewUtils.makePopupWindow("Success !!!",
-                    "Participant Successfully Finished their Trip");
+        try {
+            String email = participantChoiceBox.getValue().toString();
+            String result = SnowShoeTourCreationController.finishParticipantTrip(email);
+            if (!result.isEmpty()) {
+                ViewUtils.showError(result); // Display the error message or handle it accordingly
+            } else {
+                ViewUtils.makePopupWindow("Success !!!",
+                        "Participant Successfully Finished their Trip");
+            }
+        } catch (Exception e) {
+            ViewUtils.showError("Please select a participant");
         }
     }
 
     @FXML
     void startTrip(ActionEvent event) {
-        int week = weekChoiceBox.getValue();
-        String result = SnowShoeTourCreationController.startAllTripsForSpecificWeek(week);
-        if (!result.isEmpty()) {
-            ViewUtils.showError(result); // Display the error message or handle it accordingly
-        } else {
-            ViewUtils.makePopupWindow("Success !!!",
-                    "All Trips for Week " + week + " Successfully Started");
+        try {
+            int week = weekChoiceBox.getValue();
+            String result = SnowShoeTourCreationController.startAllTripsForSpecificWeek(week);
+            if (!result.isEmpty()) {
+                ViewUtils.showError(result); // Display the error message or handle it accordingly
+            } else {
+                ViewUtils.makePopupWindow("Success !!!",
+                "All Trips for Week " + week + " Successfully Started");
+            }
+        } catch (Exception e) {
+            ViewUtils.showError("Please select a week");
         }
     }
 
