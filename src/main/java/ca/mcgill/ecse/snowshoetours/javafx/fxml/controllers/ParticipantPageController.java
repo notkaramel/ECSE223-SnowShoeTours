@@ -10,6 +10,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 /*
 * @author Jennifer Tram Su (@jennifertramsu)
@@ -67,6 +68,7 @@ public class ParticipantPageController {
     @FXML
     private Button RemoveGearComboButton;
 
+    private boolean gearOptionSelected = true;
     /**
      * Helper method to initialize the choice box
      * 
@@ -83,6 +85,22 @@ public class ParticipantPageController {
         MainPageView.getInstance().registerRefreshEvent(choiceBox);
     }
 
+    private void initGearAndComboChoiceBox(ChoiceBox<String> choiceBox) {
+        System.out.println(gearOptionSelected);
+        
+        choiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
+            if (gearOptionSelected) {
+                choiceBox.setValue("Select a gear");
+                choiceBox.setItems(ViewUtils.getGears());
+            } else {
+                choiceBox.setValue("Select a combo");
+                choiceBox.setItems(ViewUtils.getCombos());
+            }
+        });
+        
+        // Register the refreshable nodes
+        MainPageView.getInstance().refresh();
+    }
     @FXML // This method is called by the FXMLLoader when initialization is complete
     public void initialize() {
         // Initialize the choice box
@@ -92,9 +110,9 @@ public class ParticipantPageController {
         // initialize the radio buttons
         GearRadioOption.setSelected(true);
         ComboRadioOption.setSelected(false);
-
-        // TODO: Initialize GearComboChoiceBox based on the gear and combo available and the RadioOption selected
         
+        initGearAndComboChoiceBox(GearComboChoiceBox);
+        MainPageView.getInstance().registerRefreshEvent(GearComboChoiceBox);
     }
 
     @FXML
@@ -138,6 +156,7 @@ public class ParticipantPageController {
 
     @FXML
     void addGearComboAction(ActionEvent event) {
+        
         String email = participantChoiceBoxGearCombo.getValue().toString();
         String gearCombo = GearComboChoiceBox.getValue().toString();
         if (ViewUtils.successful(ParticipantController.addBookableItemToParticipant(email, gearCombo))) {
@@ -160,11 +179,21 @@ public class ParticipantPageController {
     void optionComboSelected(ActionEvent event) {
         ComboRadioOption.setSelected(true);
         GearRadioOption.setSelected(false);
+        gearOptionSelected = false;
+        MainPageView.getInstance().refresh();
     }
 
     @FXML
     void optionGearSelected(ActionEvent event) {
         ComboRadioOption.setSelected(false);
         GearRadioOption.setSelected(true);
+        gearOptionSelected = true;
+        initGearAndComboChoiceBox(GearComboChoiceBox);
     }
+
+    @FXML
+    void mouseClicked(MouseEvent event) {
+        initGearAndComboChoiceBox(GearComboChoiceBox);
+    }
+
 }
