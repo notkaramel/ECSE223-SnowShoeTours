@@ -78,38 +78,7 @@
               "@reference": "../../.."
             },
             "bookedItems": [
-              {
-                "BookedItem": {
-                  "quantity": 1,
-                  "snowShoeTour": {
-                    "@reference": "../../../../.."
-                  },
-                  "participant": {
-                    "@reference": "../../.."
-                  },
-                  "item": {
-                    "@class": "Gear",
-                    "name": "pole",
-                    "bookedItems": [
-                      {
-                        "BookedItem": {
-                          "@reference": "../../.."
-                        }
-                      }
-                    ],
-                    "pricePerWeek": 10,
-                    "snowShoeTour": {
-                      "@reference": "../../../../../.."
-                    },
-                    "comboItems": [
-                      ""
-                    ]
-                  },
-                  "cachedHashCode": -1,
-                  "canSetParticipant": true,
-                  "canSetItem": true
-                }
-              }
+              ""
             ]
           },
           {
@@ -154,17 +123,23 @@
       }
     ],
     "bookedItems": [
-      {
-        "BookedItem": {
-          "@reference": "../../participants/Participant[2]/bookedItems/BookedItem"
-        }
-      }
+      ""
     ],
     "gear": [
       {
         "Gear": [
           {
-            "@reference": "../../participants/Participant[2]/bookedItems/BookedItem/item"
+            "name": "pole",
+            "bookedItems": [
+              ""
+            ],
+            "pricePerWeek": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              ""
+            ]
           },
           {
             "name": "shoe",
