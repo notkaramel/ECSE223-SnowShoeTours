@@ -14,8 +14,8 @@
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.20000000000002" minWidth="10.0" prefWidth="25.60000610351563" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.20000000000002" minWidth="0.0" prefWidth="141.1999938964844" />
-      <ColumnConstraints hgrow="ALWAYS" maxWidth="561.0" minWidth="0.0" prefWidth="142.79999542236328" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="561.0" minWidth="0.0" prefWidth="107.59996337890624" />
+      <ColumnConstraints hgrow="ALWAYS" maxWidth="561.0" minWidth="0.0" prefWidth="381.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="561.0" minWidth="0.0" prefWidth="19.0" />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="561.0" minWidth="10.0" prefWidth="181.20002441406245" />
       
          </columnConstraints>
@@ -30,24 +30,24 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. View a Summary of Each Tour (Registered Participant and Assigned Guide)" wrappingWidth="411.73669052124023" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1. View an overview of the system (Tours and Participants information)" wrappingWidth="522.7366905212402" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <Button fx:id="goToOverview" mnemonicParsing="false" onAction="#goToOverviewClicked" prefHeight="25.0" prefWidth="152.0" text="Overview" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-      <Button fx:id="goToGearAndCombo" mnemonicParsing="false" onAction="#goToGearAndComboClicked" prefHeight="25.0" prefWidth="152.0" text="Gear and Combo" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
-      <Button fx:id="goToLodge" mnemonicParsing="false" onAction="#goToLodgeClicked" prefHeight="25.0" prefWidth="152.0" text="Lodge" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
-      <Button fx:id="goToParticipants" mnemonicParsing="false" onAction="#goToParticipantsClicked" prefHeight="25.0" prefWidth="152.0" text="Participants" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
-      <Button fx:id="goToGuide" mnemonicParsing="false" onAction="#goToGuideClicked" prefHeight="25.0" prefWidth="153.0" text="Guide" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
-      <Button fx:id="goToSettings" mnemonicParsing="false" onAction="#goToSettingsClicked" prefHeight="25.0" prefWidth="153.0" text="Settings" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+      <Button fx:id="goToGearAndCombo" mnemonicParsing="false" onAction="#goToGearAndComboClicked" prefHeight="25.0" prefWidth="152.0" text="Gear and Combo" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
+      <Button fx:id="goToLodge" mnemonicParsing="false" onAction="#goToLodgeClicked" prefHeight="25.0" prefWidth="152.0" text="Lodge" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="8" />
+      <Button fx:id="goToParticipants" mnemonicParsing="false" onAction="#goToParticipantsClicked" prefHeight="25.0" prefWidth="152.0" text="Participants" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="9" />
+      <Button fx:id="goToGuide" mnemonicParsing="false" onAction="#goToGuideClicked" prefHeight="25.0" prefWidth="153.0" text="Guide" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="10" />
+      <Button fx:id="goToSettings" mnemonicParsing="false" onAction="#goToSettingsClicked" prefHeight="25.0" prefWidth="153.0" text="Settings" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
       <Button fx:id="goToTourCreation" mnemonicParsing="false" onAction="#goToTourCreationClicked" prefHeight="25.0" prefWidth="152.0" text="Tour Creation" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="11" />
       <Button fx:id="goToPayment" mnemonicParsing="false" onAction="#goToPaymentClicked" prefHeight="25.0" prefWidth="152.0" text="Payment" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="12" />
       <Button fx:id="goToStatus" mnemonicParsing="false" onAction="#goToStatusClicked" prefHeight="25.0" prefWidth="152.0" text="Tour Status" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="13" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Add or Delete Combos / Add or Delete Gear / Add or Delete Gears from Combos" wrappingWidth="338.2133102416992" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Add or Delete a Lodge" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4. Register or Remove a Participant from a Tour / Add or Remove Gear or   Combo From Participant" wrappingWidth="413.5992736816406" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5. Register or Delete a Guide from a Tour" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6. Update Snow Shoe Tour General Information (Season and Guide Cost)" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="7. Create Tours" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="8. Pay for a Tour" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="9. Start Tours / End a Participant's Tour / Cancel a Participant's Tour" GridPane.columnIndex="1" GridPane.rowIndex="13" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3. Add or Delete Combos / Add or Delete Gear / Add or Delete Gears from Combos" wrappingWidth="531.2133102416992" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4. Add or Delete a Lodge" wrappingWidth="523.1759796142578" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="5. Register/Remove a Participant. Add/Remove Gear or Combo to/from Participant" wrappingWidth="528.5992736816406" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="6. Register/Remove a Guide from the system" wrappingWidth="412.2370300292969" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2. Update Snow Shoe Tour General Information (Season and Guide Cost)" wrappingWidth="490.5579528808594" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="7. Assign Tours to Guides and Participants" wrappingWidth="524.6379928588867" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="8. Pay for a Tour" wrappingWidth="217.72299194335938" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="9. Start Tours / End a Participant's Tour / Cancel a Participant's Tour" wrappingWidth="483.033935546875" GridPane.columnIndex="1" GridPane.rowIndex="13" />
       <ImageView fx:id="logo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.vgrow="ALWAYS">
          <image>
             <Image url="@../controllers/logo.png" />

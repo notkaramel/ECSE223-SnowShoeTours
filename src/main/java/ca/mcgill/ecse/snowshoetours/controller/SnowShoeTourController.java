@@ -144,12 +144,15 @@ public class SnowShoeTourController {
 	public static List<String> getGuides() {
 		return ssts.getGuides().stream().map(Guide::getAccountName).toList();
 	}
+
 	public static List<String> getGears() {
 		return ssts.getGear().stream().map(Gear::getName).toList();
 	}
+
 	public static List<String> getCombos() {
 		return ssts.getCombos().stream().map(Combo::getName).toList();
 	}
+
 	/**
 	 * Getting a list of all the participant emails
 	 * 
@@ -159,7 +162,7 @@ public class SnowShoeTourController {
 	public static List<String> getParticipants() {
 		return ssts.getParticipants().stream().map(Participant::getAccountName).toList();
 	}
-	
+
 	/**
 	 * Getting a list of all the start weeks of the tours
 	 * 
@@ -181,36 +184,67 @@ public class SnowShoeTourController {
 	}
 
 	/**
-	 * Get tours as TOSnowShoeTour
+	 * * Get tours as TOSnowShoeTour
+	 * 
 	 * @author Antoine Phan @notkaramel
+	 * @return
 	 */
-	public static List<TOSnowShoeTour> getSnowShoeTours() {
+	public static List<TOSnowShoeTour> getTOSnowShoeTourList() {
 		List<TOSnowShoeTour> tours = new ArrayList<TOSnowShoeTour>();
 		for (Tour tour : ssts.getTours()) {
 			tours.add(getSnowShoeTour(tour.getId()));
-			// for(Participant participant : tour.getParticipants()){
-			// 	TOParticipantCost toPC = new TOParticipantCost(participant.getAccountName(), participant.getName(), );
-			// 	TOSnowShoeTour toTour = new TOSnowShoeTour(tour.getId(), tour.getStartWeek(), tour.getEndWeek(), tour.getGuide().getAccountName(), tour.getGuide().getName(), ssts.getPriceOfGuidePerWeek(), toPC);
-			// 	tours.add(toTour);
-			// }
 		}
 		return tours;
 	}
 
 	/**
+	 * Get Participants as TOParticipant
+	 * @author Antoine Phan @notkaramel
+	 * @return
+	 */
+	public static List<TOParticipant> getParticipantTO() {
+		List<TOParticipant> participantTO = new ArrayList<TOParticipant>();
+		for (Participant p : ssts.getParticipants()) {
+			// Getting all info of the participant
+			String email = p.getAccountName();
+			String name = p.getName();
+			// might cause error
+			TOParticipantCost pCost;
+			if (p.getTour() != null)
+			{
+				pCost = getSnowShoeTour(p.getTour().getId()).getParticipantCost(0);
+			}
+			else
+			{
+				pCost = new TOParticipantCost(email, name, 0, 0);
+			}
+			int cost = pCost.getTotalCostForBookableItems();
+
+			String authCode = p.getAuthorizationCode();
+			String status = p.getStatusFullName();
+
+			participantTO.add(new TOParticipant(email, name, authCode, cost, status));
+		}
+		return participantTO;
+	}
+
+	/**
 	 * Get tours as TOSnowShoeTour
+	 * 
 	 * @author Bilar Mokhtari @bmok
+	 * @return List of TOSnowShoeTour
 	 */
 	public static List<Integer> getWeeksWithParticipants() {
 		List<Integer> weeks = new ArrayList<>();
 		List<Tour> tours = ssts.getTours();
-	
+
 		for (Tour tour : tours) {
 			int week = tour.getStartWeek();
 			if (!weeks.contains(week) && !tour.getParticipants().isEmpty()) {
 				weeks.add(week);
 			}
 		}
+	
 		Collections.sort(weeks);
 		return weeks;
 	}

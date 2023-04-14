@@ -12,6 +12,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
+import ca.mcgill.ecse.snowshoetours.controller.TOParticipant;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTourSeason;
 
@@ -72,11 +73,15 @@ public class ViewUtils {
     }
 
     public static ObservableList<TOSnowShoeTour> getSnowShoeTours() {
-        return FXCollections.observableList(SnowShoeTourController.getSnowShoeTours());
+        return FXCollections.observableList(SnowShoeTourController.getTOSnowShoeTourList());
     }
 
     public static ObservableList<String> getParticipants() {
         return FXCollections.observableList(SnowShoeTourController.getParticipants());
+    }
+
+    public static ObservableList<TOParticipant> getParticipantsInfo() {
+        return FXCollections.observableList(SnowShoeTourController.getParticipantTO());
     }
 
     public static ObservableList<Integer> getTourWeeks() {

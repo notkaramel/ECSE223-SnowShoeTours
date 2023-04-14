@@ -1,6 +1,6 @@
 .tab {
   -fx-pref-height: 40px; /* default height of the tabs */
-  -fx-padding: 0 20px; /* adds some padding to the tab buttons */
+  padding: 0 20px; /* adds some padding to the tab buttons */
 }
 
 .tab:selected {
@@ -8,7 +8,7 @@
 }
 
 .tab-header-area {
-  -fx-padding: 0 20px; /* adds some padding to the tab header area */
+  padding: 0 20px; /* adds some padding to the tab header area */
 }
 
 .tab-pane {
@@ -16,32 +16,26 @@
 }
 
 .tab-close-button {
-  -fx-padding: 0 10px; /* adds some padding to the close button */
+  padding: 0 10px; /* adds some padding to the close button */
 }
 
 /* Resize tabs when the window is resized */
 .tab-pane .tab {
-  -fx-min-width: 0; /* allow tabs to shrink smaller than their preferred width */
-  -fx-max-width: 100%; /* prevent tabs from growing larger than their preferred width */
-  -fx-pref-width: 1fr; /* default width of the tabs */
-}
-
-/* Make the selected tab wider when the TabPane is wider than the sum of the tab widths */
-.tab-pane:focused .tab:selected {
-  -fx-pref-width: 2fr; /* increase the width of the selected tab button */
+  min-width: 0; /* allow tabs to shrink smaller than their preferred width */
+  max-width: 100%; /* prevent tabs from growing larger than their preferred width */
 }
 
 /* Add space between tab buttons when the TabPane is wider than the sum of the tab widths */
 .tab-pane:focused > .tab-header-area > .headers-region > .tab {
-  -fx-border-color: transparent transparent #333 transparent; /* adds a transparent border below the tabs */
-  -fx-border-width: 0 0 4px 0; /* sets the border width */
-  -fx-border-radius: 0; /* removes the rounded corners of the border */
-  -fx-margin-right: 20px; /* adds space between the tab buttons */
-  -fx-pref-width: calc((100% - 9 * 20px) / 10); /* dynamic percentage-based width */
+  border-color: transparent transparent #333 transparent; /* adds a transparent border below the tabs */
+  border-width: 0 0 4px 0; /* sets the border width */
+  border-radius: 0; /* removes the rounded corners of the border */
+  margin-right: 20px; /* adds space between the tab buttons */
+  /* -fx-pref-width: calc((100% - 9 * 20px) / 10); dynamic percentage-based width */
 }
 
 /* Hide the border on the rightmost tab button */
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:last-of-type {
-  -fx-border-width: 0;
-  -fx-margin-right: 0;
+  border-width: 0;
+  margin-right: 0;
 }

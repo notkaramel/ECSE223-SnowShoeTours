@@ -1,6 +1,6 @@
 {
   "SnowShoeTour": {
-    "startDate": "2024-03-13",
+    "startDate": "1969-12-31",
     "nrWeeks": 10,
     "priceOfGuidePerWeek": 100,
     "manager": {
@@ -428,10 +428,23 @@
             "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/bookedItems/BookedItem"
           },
           {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem"
-          },
-          {
-            "@reference": "../../guides/Guide/tours/Tour/participants/Participant/bookedItems/BookedItem/item/comboItems/ComboItem/combo/comboItems/ComboItem/gear/comboItems/ComboItem[2]/combo/bookedItems/BookedItem[2]"
+            "accountName": "sameer_6@vscode.love",
+            "password": "",
+            "name": "Sameer",
+            "emergencyContact": "(438)333-2222",
+            "nrWeeks": 3,
+            "weekAvailableFrom": 6,
+            "weekAvailableUntil": 8,
+            "lodgeRequired": true,
+            "authorizationCode": "",
+            "refundedPercentageAmount": 0,
+            "status": "NotAssigned",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "bookedItems": [
+              ""
+            ]
           }
         ]
       }
