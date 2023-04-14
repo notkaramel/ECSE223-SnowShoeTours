@@ -14,9 +14,9 @@
                         <fx:include source="pages/WelcomePage.fxml" />
                     </content>
                 </Tab>
-                <Tab text="Overview">
+                <Tab fx:id="SSTSettingsPage" text="Settings">
                     <content>
-                        <fx:include source="pages/OverviewPage.fxml" />
+                        <fx:include source="pages/SSTSettingsPage.fxml" />
                     </content>
                 </Tab>
                 <Tab fx:id="GearAndComboPage" text="Gear and Combo">
@@ -39,19 +39,9 @@
                         <fx:include source="pages/GuidePage.fxml" />
                     </content>
                 </Tab>
-                <Tab fx:id="SSTSettingsPage" text="Settings">
-                    <content>
-                        <fx:include source="pages/SSTSettingsPage.fxml" />
-                    </content>
-                </Tab>
                 <Tab fx:id="TourCreationPage" text="Tour Creation">
                     <content>
                         <fx:include source="pages/TourCreationPage.fxml" />
-                    </content>
-                </Tab>
-                <Tab fx:id="OverviewPage" text="Tour Overview">
-                    <content>
-                        <fx:include source="pages/OverviewPage.fxml" />
                     </content>
                 </Tab>
                 <Tab fx:id="PaymentPage" text="Payment">
@@ -62,6 +52,11 @@
                 <Tab fx:id="TourStatusPage" text="Tour Status">
                     <content>
                         <fx:include source="pages/TourStatusPage.fxml" />
+                    </content>
+                </Tab>
+                <Tab fx:id="OverviewPage" text="Overview">
+                    <content>
+                        <fx:include source="pages/OverviewPage.fxml" />
                     </content>
                 </Tab>
             </tabs>

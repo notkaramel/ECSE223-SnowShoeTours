@@ -18,3 +18,12 @@ class TOParticipantCost {
   Integer totalCostForBookableItems;
   Integer totalCostForSnowShoeTour;
 }
+
+class TOParticipant {
+  immutable;
+  participantEmail;
+  participantName;
+  authorizationCode;
+  Integer totalCost;
+  status;
+}

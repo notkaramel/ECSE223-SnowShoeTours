@@ -189,7 +189,7 @@ public class SnowShoeTourController {
 	 * @author Antoine Phan @notkaramel
 	 * @return
 	 */
-	public static List<TOSnowShoeTour> getToursTO() {
+	public static List<TOSnowShoeTour> getTOSnowShoeTourList() {
 		List<TOSnowShoeTour> tours = new ArrayList<TOSnowShoeTour>();
 		for (Tour tour : ssts.getTours()) {
 			tours.add(getSnowShoeTour(tour.getId()));
@@ -198,15 +198,41 @@ public class SnowShoeTourController {
 	}
 
 	/**
-	 * Get Participants as TOParticipantCost
-	 * @
+	 * Get Participants as TOParticipant
+	 * @author Antoine Phan @notkaramel
 	 * @return
 	 */
+	public static List<TOParticipant> getParticipantTO() {
+		List<TOParticipant> participantTO = new ArrayList<TOParticipant>();
+		for (Participant p : ssts.getParticipants()) {
+			// Getting all info of the participant
+			String email = p.getAccountName();
+			String name = p.getName();
+			// might cause error
+			TOParticipantCost pCost;
+			if (p.getTour() != null)
+			{
+				pCost = getSnowShoeTour(p.getTour().getId()).getParticipantCost(0);
+			}
+			else
+			{
+				pCost = new TOParticipantCost(email, name, 0, 0);
+			}
+			int cost = pCost.getTotalCostForBookableItems();
+
+			String authCode = p.getAuthorizationCode();
+			String status = p.getStatusFullName();
+
+			participantTO.add(new TOParticipant(email, name, authCode, cost, status));
+		}
+		return participantTO;
+	}
 
 	/**
 	 * Get tours as TOSnowShoeTour
 	 * 
 	 * @author Bilar Mokhtari @bmok
+	 * @return List of TOSnowShoeTour
 	 */
 	public static List<Integer> getWeeksWithParticipants() {
 		List<Integer> weeks = new ArrayList<>();

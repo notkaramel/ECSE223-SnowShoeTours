@@ -2,12 +2,14 @@ package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
+import ca.mcgill.ecse.snowshoetours.controller.TOParticipantCost;
+import ca.mcgill.ecse.snowshoetours.controller.TOParticipant;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 
@@ -20,45 +22,77 @@ public class OverviewPageController {
     private URL location;
 
     @FXML
-    private TableView<TOSnowShoeTour> overviewTable;
+    private TableView<TOParticipant> ParticipantOverviewTable;
 
     @FXML
-    void refreshOverview(MouseEvent event) {
-        if (event.getClickCount() == 1) {
-            System.out.println("refreshing overview!!");
-            SnowShoeToursApplication.getSnowShoeTour();
-            MainPageView.getInstance().refresh();
-        }
+    private TableView<TOSnowShoeTour> TourOverviewTable;
+
+    @FXML
+    void refreshOverview(ActionEvent event) {
+        System.out.println("refreshing overview!!");
+        SnowShoeToursApplication.getSnowShoeTour();
+        MainPageView.getInstance().refresh();
         initialize();
     }
 
     @FXML
     void initialize() {
-        // SnowShoeTourCreationController.initiateSnowToursCreation();
+        assert ParticipantOverviewTable != null : "fx:id=\"ParticipantOverviewTable\" was not injected: check your FXML file 'OverviewPage.fxml'.";
+        assert TourOverviewTable != null : "fx:id=\"TourOverviewTable\" was not injected: check your FXML file 'OverviewPage.fxml'.";
+        makeParticipantOverviewTable();
+        makeTourOverviewTable();
+    }
 
-        assert overviewTable != null : "fx:id=\"overviewTable\" was not injected: check your FXML file 'OverviewPage.fxml'.";
-        overviewTable.getColumns().clear();
-        overviewTable.getColumns().add(createTableColumn("Number", "id"));
-        overviewTable.getColumns().add(createTableColumn("Start Week", "startWeek"));
-        overviewTable.getColumns().add(createTableColumn("End Week", "endWeek"));
+    /**
+     * Helper method to make ParticipantOverviewTable
+     * @author Antoine Phan @notkaramel
+     */
+    private void makeParticipantOverviewTable() {
+        ParticipantOverviewTable.getColumns().clear();
+        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Name", "participantName"));
+        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Email", "participantEmail"));
+        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Total Cost", "totalCost"));
+        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Auth Code", "authorizationCode"));
+        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Status", "status"));
 
-        overviewTable.getColumns().add(createTableColumn("Guide Name", "guideName"));
-        overviewTable.getColumns()
-                .add(createTableColumn("Guide Cost", "totalCostForGuide"));
-        // overviewTable.getColumns().add(createTableColumn("Participant Name", "participantName"));
-        overviewTable.getColumns().add(createTableColumn("Participant Cost", "participantCosts"));
+        ParticipantOverviewTable.addEventHandler(MainPageView.REFRESH_EVENT,
+                e -> ParticipantOverviewTable.setItems(ViewUtils.getParticipantsInfo()));
 
-        
-        // overviewTable.getItems().addAll(MainPageView.getSnowShoeTour().getTOSnowShoeTours());
-        // overview table if a refreshable element
-        
-        overviewTable.addEventHandler(MainPageView.REFRESH_EVENT, e -> overviewTable.setItems(ViewUtils.getSnowShoeTours()));
-        
-        // overviewTable.getItems().addAll(ViewUtils.getSnowShoeTours());
+        MainPageView.getInstance().registerRefreshEvent(ParticipantOverviewTable);
+    }
 
-        // register refreshable nodes
-        MainPageView.getInstance().registerRefreshEvent(overviewTable);
 
+    /**
+     * Helper method to make TourOverviewTable
+     * @author Antoine Phan @notkaramel
+     */
+    public void makeTourOverviewTable() {
+        TourOverviewTable.getColumns().clear();
+        TourOverviewTable.getColumns().add(createTourColumn("Number", "id"));
+        TourOverviewTable.getColumns().add(createTourColumn("Start Week", "startWeek"));
+        TourOverviewTable.getColumns().add(createTourColumn("End Week", "endWeek"));
+        TourOverviewTable.getColumns().add(createTourColumn("Guide Name", "guideName"));
+        TourOverviewTable.getColumns().add(createTourColumn("Guide Cost", "totalCostForGuide"));
+
+        TourOverviewTable.addEventHandler(MainPageView.REFRESH_EVENT,
+                e -> TourOverviewTable.setItems(ViewUtils.getSnowShoeTours()));
+
+        MainPageView.getInstance().registerRefreshEvent(TourOverviewTable);
+    }
+    /**
+     * Helper method to create a table column
+     * 
+     * Given to us from Tutorial 9
+     * 
+     * @param header
+     * @param propertyName
+     * @return
+     */
+    private TableColumn<TOSnowShoeTour, ?> createTourColumn(String header,
+            String propertyName) {
+        TableColumn<TOSnowShoeTour, ?> column = new TableColumn<>(header);
+        column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        return column;
     }
 
     /**
@@ -70,9 +104,8 @@ public class OverviewPageController {
      * @param propertyName
      * @return
      */
-    public static TableColumn<TOSnowShoeTour, ?> createTableColumn(String header,
-            String propertyName) {
-        TableColumn<TOSnowShoeTour, ?> column = new TableColumn<>(header);
+    private TableColumn<TOParticipant, ?> createParticipantColumn(String header, String propertyName) {
+        TableColumn<TOParticipant, ?> column = new TableColumn<>(header);
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return column;
     }
