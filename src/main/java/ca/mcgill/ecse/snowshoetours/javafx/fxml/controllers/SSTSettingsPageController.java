@@ -44,5 +44,6 @@ public class SSTSettingsPageController {
 			noWeeksTextField.setText("");
 			guideCostTextField.setText("");
 		}
+		initialize();
 	}    
 }
