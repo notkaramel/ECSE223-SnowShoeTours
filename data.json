@@ -14,13 +14,47 @@
       ""
     ],
     "participants": [
-      ""
+      {
+        "Participant": {
+          "accountName": "jen@gmail.com",
+          "password": "kldfms",
+          "name": "jen",
+          "emergencyContact": "kmldfsl",
+          "nrWeeks": 1,
+          "weekAvailableFrom": 2,
+          "weekAvailableUntil": 4,
+          "lodgeRequired": true,
+          "authorizationCode": "",
+          "refundedPercentageAmount": 0,
+          "status": "NotAssigned",
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "bookedItems": [
+            ""
+          ]
+        }
+      }
     ],
     "bookedItems": [
       ""
     ],
     "gear": [
-      ""
+      {
+        "Gear": {
+          "name": "jen",
+          "bookedItems": [
+            ""
+          ],
+          "pricePerWeek": 1,
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "comboItems": [
+            ""
+          ]
+        }
+      }
     ],
     "combos": [
       ""

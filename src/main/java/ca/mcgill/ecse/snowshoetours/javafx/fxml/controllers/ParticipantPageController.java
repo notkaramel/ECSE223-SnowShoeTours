@@ -51,7 +51,7 @@ public class ParticipantPageController {
     @FXML // fx:id="weekToTextField"
     private TextField weekToTextField; // Value injected by FXMLLoader
 
-
+    // Add/Remove Gear & Combo feature
     @FXML
     private Button AddGearComboButton;
 
@@ -59,7 +59,7 @@ public class ParticipantPageController {
     private RadioButton ComboRadioOption;
 
     @FXML
-    private ChoiceBox<?> GearComboChoiceBox;
+    private ChoiceBox<String> GearComboChoiceBox;
 
     @FXML
     private RadioButton GearRadioOption;
@@ -73,7 +73,7 @@ public class ParticipantPageController {
      * @author Antoine Phan @notkaramel
      * @param choiceBox
      */
-    private void initChoiceBox(ChoiceBox<String> choiceBox) {
+    private void initParticipantChoiceBox(ChoiceBox<String> choiceBox) {
         choiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
             choiceBox.setItems(ViewUtils.getParticipants());
             choiceBox.setValue(null);
@@ -85,10 +85,16 @@ public class ParticipantPageController {
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     public void initialize() {
-        // Participant choice box is refreshable
-        initChoiceBox(participantChoiceBoxDelete);
-        initChoiceBox(participantChoiceBoxGearCombo);
+        // Initialize the choice box
+        initParticipantChoiceBox(participantChoiceBoxDelete);
+        initParticipantChoiceBox(participantChoiceBoxGearCombo);
+        
+        // initialize the radio buttons
+        GearRadioOption.setSelected(true);
+        ComboRadioOption.setSelected(false);
 
+        // TODO: Initialize GearComboChoiceBox based on the gear and combo available and the RadioOption selected
+        
     }
 
     @FXML
@@ -132,23 +138,33 @@ public class ParticipantPageController {
 
     @FXML
     void addGearComboAction(ActionEvent event) {
-        
+        String email = participantChoiceBoxGearCombo.getValue().toString();
+        String gearCombo = GearComboChoiceBox.getValue().toString();
+        if (ViewUtils.successful(ParticipantController.addBookableItemToParticipant(email, gearCombo))) {
+            // Refresh the choice box
+            MainPageView.getInstance().refresh();
+        }
     }
 
     @FXML
     void removeGearComboAction(ActionEvent event) {
-
+        String email = participantChoiceBoxGearCombo.getValue().toString();
+        String gearCombo = GearComboChoiceBox.getValue().toString();
+        if (ViewUtils.successful(ParticipantController.removeBookableItemFromParticipant(email, gearCombo))) {
+            // Refresh the choice box
+            MainPageView.getInstance().refresh();
+        }
     }
 
     @FXML
     void optionComboSelected(ActionEvent event) {
-
+        ComboRadioOption.setSelected(true);
+        GearRadioOption.setSelected(false);
     }
 
     @FXML
     void optionGearSelected(ActionEvent event) {
-
+        ComboRadioOption.setSelected(false);
+        GearRadioOption.setSelected(true);
     }
-
-
 }
