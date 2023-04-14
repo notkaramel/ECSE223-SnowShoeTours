@@ -62,7 +62,8 @@ public class GuidePageController {
         String password = guidePasswordTextField.getText();
         String emergencyContact = guideEmergencyTextField.getText();
 
-        if (ViewUtils.successful(GuideController.registerGuide(email, password, name, emergencyContact))) {
+        if (ViewUtils.successful(
+                GuideController.registerGuide(email, password, name, emergencyContact))) {
             guideNameTextField.clear();
             guideEmailTextField.clear();
             guidePasswordTextField.clear();

@@ -85,9 +85,13 @@ public class ParticipantPageController {
         MainPageView.getInstance().registerRefreshEvent(choiceBox);
     }
 
+    /**
+     * A helper method to initialize the gear and combo choice box
+     * 
+     * @author Antoine Phan @notkaramel
+     * @param choiceBox
+     */
     private void initGearAndComboChoiceBox(ChoiceBox<String> choiceBox) {
-        System.out.println(gearOptionSelected);
-
         choiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
             if (gearOptionSelected) {
                 choiceBox.setValue("Select a gear");

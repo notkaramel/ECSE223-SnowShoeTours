@@ -1,6 +1,6 @@
 {
   "SnowShoeTour": {
-    "startDate": "1969-12-31",
+    "startDate": "1970-12-31",
     "nrWeeks": 10,
     "priceOfGuidePerWeek": 500,
     "manager": {

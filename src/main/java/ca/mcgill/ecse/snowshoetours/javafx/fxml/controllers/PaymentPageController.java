@@ -12,9 +12,9 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
 /**
-* @author Emma Friesen @emma-friesen
-*/
-public class PaymentPageController implements Initializable{
+ * @author Emma Friesen @emma-friesen
+ */
+public class PaymentPageController implements Initializable {
 
     @FXML
     private ResourceBundle resources;
@@ -30,23 +30,24 @@ public class PaymentPageController implements Initializable{
 
     @FXML
     private ChoiceBox<String> paymentParticipantChoiceBox;
-    
-    
+
+
     @Override
-	public void initialize(URL location, ResourceBundle resources) {
-    	
-    	paymentParticipantChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
-    		paymentParticipantChoiceBox.setItems(ViewUtils.getParticipants());
-    		paymentParticipantChoiceBox.setValue(null);});
-			
-    	MainPageView.getInstance().registerRefreshEvent(paymentParticipantChoiceBox);
-	}
-    
+    public void initialize(URL location, ResourceBundle resources) {
+
+        paymentParticipantChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
+            paymentParticipantChoiceBox.setItems(ViewUtils.getParticipants());
+            paymentParticipantChoiceBox.setValue(null);
+        });
+
+        MainPageView.getInstance().registerRefreshEvent(paymentParticipantChoiceBox);
+    }
+
     @FXML
     void authorizeParticipantPayment(ActionEvent event) {
-    	String authorizationCode = paymentAuthorizationCodeInput.getText();
-    	String email = paymentParticipantChoiceBox.getValue();
-  
+        String authorizationCode = paymentAuthorizationCodeInput.getText();
+        String email = paymentParticipantChoiceBox.getValue();
+
         String result = SnowShoeTourCreationController.payForTrip(email, authorizationCode);
         if (!result.isEmpty()) {
             ViewUtils.showError(result); // Display the error message or handle it accordingly

@@ -12,6 +12,11 @@ import ca.mcgill.ecse.snowshoetours.controller.TOParticipant;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 
+/**
+ * Controller for the Overview Page
+ * 
+ * @author Antoine Phan @notkaramel
+ */
 public class OverviewPageController {
 
     @FXML
@@ -44,14 +49,19 @@ public class OverviewPageController {
 
     /**
      * Helper method to make ParticipantOverviewTable
+     * 
      * @author Antoine Phan @notkaramel
      */
     private void makeParticipantOverviewTable() {
         ParticipantOverviewTable.getColumns().clear();
-        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Name", "participantName"));
-        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Email", "participantEmail"));
-        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Total Cost", "totalCost"));
-        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Auth Code", "authorizationCode"));
+        ParticipantOverviewTable.getColumns()
+                .add(createParticipantColumn("Name", "participantName"));
+        ParticipantOverviewTable.getColumns()
+                .add(createParticipantColumn("Email", "participantEmail"));
+        ParticipantOverviewTable.getColumns()
+                .add(createParticipantColumn("Total Cost", "totalCost"));
+        ParticipantOverviewTable.getColumns()
+                .add(createParticipantColumn("Auth Code", "authorizationCode"));
         ParticipantOverviewTable.getColumns().add(createParticipantColumn("Status", "status"));
 
         ParticipantOverviewTable.addEventHandler(MainPageView.REFRESH_EVENT,
@@ -62,6 +72,7 @@ public class OverviewPageController {
 
     /**
      * Helper method to make TourOverviewTable
+     * 
      * @author Antoine Phan @notkaramel
      */
     public void makeTourOverviewTable() {
@@ -77,18 +88,17 @@ public class OverviewPageController {
 
         MainPageView.getInstance().registerRefreshEvent(TourOverviewTable);
     }
-    
+
     /**
      * Helper method to create a table column
      * 
-     * Given to us from Tutorial 9
+     * Given to us from Tutorial 9 by TA Katrina
      * 
      * @param header
      * @param propertyName
      * @return
      */
-    private TableColumn<TOSnowShoeTour, ?> createTourColumn(String header,
-            String propertyName) {
+    private TableColumn<TOSnowShoeTour, ?> createTourColumn(String header, String propertyName) {
         TableColumn<TOSnowShoeTour, ?> column = new TableColumn<>(header);
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return column;
@@ -103,7 +113,8 @@ public class OverviewPageController {
      * @param propertyName
      * @return
      */
-    private TableColumn<TOParticipant, ?> createParticipantColumn(String header, String propertyName) {
+    private TableColumn<TOParticipant, ?> createParticipantColumn(String header,
+            String propertyName) {
         TableColumn<TOParticipant, ?> column = new TableColumn<>(header);
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return column;

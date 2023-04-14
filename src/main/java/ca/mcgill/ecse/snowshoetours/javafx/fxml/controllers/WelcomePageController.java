@@ -16,7 +16,7 @@ import javafx.stage.Stage;
  * @author Angela Zhu @angelaxzhu, Jennifer Tram Su @jennifertramsu
  */
 public class WelcomePageController {
-	
+
 	@FXML
 	private ImageView logo;
 	@FXML
@@ -41,7 +41,7 @@ public class WelcomePageController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
+
 	public void goToOverviewClicked(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainPage.fxml"));
 		root = (Parent) loader.load();
@@ -66,7 +66,8 @@ public class WelcomePageController {
 
 		try {
 			mainPageView.init();
-			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getGearAndComboPage());
+			mainPageView.getTabPane().getSelectionModel()
+					.select(mainPageView.getGearAndComboPage());
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);
@@ -151,7 +152,8 @@ public class WelcomePageController {
 
 		try {
 			mainPageView.init();
-			mainPageView.getTabPane().getSelectionModel().select(mainPageView.getTourCreationPage());
+			mainPageView.getTabPane().getSelectionModel()
+					.select(mainPageView.getTourCreationPage());
 			stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 			scene = new Scene(root);
 			stage.setScene(scene);

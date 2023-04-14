@@ -38,12 +38,9 @@ public class SSTSettingsPageController {
 		int no_weeks = Integer.parseInt(noWeeksTextField.getText());
 		int cost = Integer.parseInt(guideCostTextField.getText());
 
-		if (ViewUtils.successful(SnowShoeTourController.updateSnowShoeTour(start_week, no_weeks, cost))) {
-			
-			startDateTextField.setText("");
-			noWeeksTextField.setText("");
-			guideCostTextField.setText("");
+		if (ViewUtils.successful(
+				SnowShoeTourController.updateSnowShoeTour(start_week, no_weeks, cost))) {
+			ViewUtils.makePopupWindow("Successful!", "Successfully updated the season!");
 		}
-		initialize();
-	}    
+	}
 }

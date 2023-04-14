@@ -17,7 +17,7 @@ import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTourSeason;
 
 /*
- * @author Antoine Phan @notkaramel, Jennifer Tram Su @jennifertramsu
+ * @author Antoine Phan @notkaramel, Jennifer Tram Su @jennifertramsu, Sameer Riaz @SRIAZ77
  */
 public class ViewUtils {
 
@@ -91,14 +91,16 @@ public class ViewUtils {
     public static ObservableList<String> getGuides() {
         return FXCollections.observableList(SnowShoeTourController.getGuides());
     }
+
     public static ObservableList<String> getGears() {
         return FXCollections.observableList(SnowShoeTourController.getGears());
     }
+
     public static ObservableList<String> getCombos() {
         return FXCollections.observableList(SnowShoeTourController.getCombos());
     }
-    
+
     public static TOSnowShoeTourSeason getSeason() {
-    	return SnowShoeTourController.getSnowShoeTourSeason();
+        return SnowShoeTourController.getSnowShoeTourSeason();
     }
 }

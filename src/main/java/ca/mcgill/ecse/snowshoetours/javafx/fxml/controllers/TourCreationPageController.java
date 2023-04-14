@@ -7,6 +7,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+/**
+ * @author Bilar Mokhtari @bmokhtari
+ */
 public class TourCreationPageController {
 
     @FXML
@@ -21,7 +24,7 @@ public class TourCreationPageController {
         String result = SnowShoeTourCreationController.initiateSnowToursCreation();
         if (!result.isEmpty()) {
             ViewUtils.showError(result);
-        }else{
+        } else {
             ViewUtils.makePopupWindow("", "Tour Successfully Created");
         }
     }

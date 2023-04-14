@@ -9,6 +9,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 
+/**
+ * @author Bilar Mokhtari @bmokhtari
+ */
 public class TourStatusPageController {
 
     @FXML
@@ -39,7 +42,8 @@ public class TourStatusPageController {
         if (!result.isEmpty()) {
             ViewUtils.showError(result); // Display the error message or handle it accordingly
         } else {
-            ViewUtils.makePopupWindow("Cancelled", "Participant" + email + " successfully cancelled");
+            ViewUtils.makePopupWindow("Cancelled",
+                    "Participant" + email + " successfully cancelled");
         }
     }
 
@@ -49,8 +53,9 @@ public class TourStatusPageController {
         String result = SnowShoeTourCreationController.finishParticipantTrip(email);
         if (!result.isEmpty()) {
             ViewUtils.showError(result); // Display the error message or handle it accordingly
-        }else {
-            ViewUtils.makePopupWindow("Success !!!", "Participant Successfully Finished their Trip");
+        } else {
+            ViewUtils.makePopupWindow("Success !!!",
+                    "Participant Successfully Finished their Trip");
         }
     }
 
@@ -61,7 +66,8 @@ public class TourStatusPageController {
         if (!result.isEmpty()) {
             ViewUtils.showError(result); // Display the error message or handle it accordingly
         } else {
-            ViewUtils.makePopupWindow("Success !!!", "All Trips for Week " + week + " Successfully Started");
+            ViewUtils.makePopupWindow("Success !!!",
+                    "All Trips for Week " + week + " Successfully Started");
         }
     }
 
@@ -69,8 +75,8 @@ public class TourStatusPageController {
     void initialize() {
         // Participant choice box is refreshable
         participantChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
-        participantChoiceBox.setItems(ViewUtils.getParticipants());
-        participantChoiceBox.setValue(null);
+            participantChoiceBox.setItems(ViewUtils.getParticipants());
+            participantChoiceBox.setValue(null);
         });
 
         // Register the refreshable nodes
