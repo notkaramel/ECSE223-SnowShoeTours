@@ -78,7 +78,38 @@
               "@reference": "../../.."
             },
             "bookedItems": [
-              ""
+              {
+                "BookedItem": {
+                  "quantity": 1,
+                  "snowShoeTour": {
+                    "@reference": "../../../../.."
+                  },
+                  "participant": {
+                    "@reference": "../../.."
+                  },
+                  "item": {
+                    "@class": "Combo",
+                    "name": "Frosty",
+                    "bookedItems": [
+                      {
+                        "BookedItem": {
+                          "@reference": "../../.."
+                        }
+                      }
+                    ],
+                    "discount": 30,
+                    "snowShoeTour": {
+                      "@reference": "../../../../../.."
+                    },
+                    "comboItems": [
+                      ""
+                    ]
+                  },
+                  "cachedHashCode": -1,
+                  "canSetParticipant": true,
+                  "canSetItem": true
+                }
+              }
             ]
           },
           {
@@ -123,7 +154,11 @@
       }
     ],
     "bookedItems": [
-      ""
+      {
+        "BookedItem": {
+          "@reference": "../../participants/Participant[2]/bookedItems/BookedItem"
+        }
+      }
     ],
     "gear": [
       {
@@ -174,17 +209,7 @@
             ]
           },
           {
-            "name": "Frosty",
-            "bookedItems": [
-              ""
-            ],
-            "discount": 30,
-            "snowShoeTour": {
-              "@reference": "../../.."
-            },
-            "comboItems": [
-              ""
-            ]
+            "@reference": "../../participants/Participant[2]/bookedItems/BookedItem/item"
           }
         ]
       }

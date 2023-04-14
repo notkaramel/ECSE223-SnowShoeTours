@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane hgap="10.0" prefHeight="194.0" prefWidth="800.0" vgap="5.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.SSTSettingsPageController">
+<GridPane hgap="10.0" prefHeight="194.0" prefWidth="800.0" vgap="5.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.SSTSettingsPageController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="211.20000000000002" minWidth="0.0" prefWidth="137.60001220703126" />
       <ColumnConstraints hgrow="ALWAYS" maxWidth="561.0" minWidth="0.0" prefWidth="269.5999877929687" />    
