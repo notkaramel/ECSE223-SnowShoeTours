@@ -5,7 +5,6 @@ import java.util.*;
 import ca.mcgill.ecse.snowshoetours.application.SnowShoeToursApplication;
 import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 import ca.mcgill.ecse.snowshoetours.model.*;
-import ca.mcgill.ecse.snowshoetours.persistence.SnowShoeTourPersistence;
 
 public class SnowShoeTourCreationController {
     private static SnowShoeTour sst = SnowShoeToursApplication.getSnowShoeTour();
