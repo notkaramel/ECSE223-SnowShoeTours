@@ -25,18 +25,13 @@
   max-width: 100%; /* prevent tabs from growing larger than their preferred width */
 }
 
-/* Make the selected tab wider when the TabPane is wider than the sum of the tab widths */
-.tab-pane:focused .tab:selected {
-  -fx-pref-width: 2fr; /* increase the width of the selected tab button */
-}
-
 /* Add space between tab buttons when the TabPane is wider than the sum of the tab widths */
 .tab-pane:focused > .tab-header-area > .headers-region > .tab {
   border-color: transparent transparent #333 transparent; /* adds a transparent border below the tabs */
   border-width: 0 0 4px 0; /* sets the border width */
   border-radius: 0; /* removes the rounded corners of the border */
   margin-right: 20px; /* adds space between the tab buttons */
-  -fx-pref-width: calc((100% - 9 * 20px) / 10); /* dynamic percentage-based width */
+  /* -fx-pref-width: calc((100% - 9 * 20px) / 10); dynamic percentage-based width */
 }
 
 /* Hide the border on the rightmost tab button */
