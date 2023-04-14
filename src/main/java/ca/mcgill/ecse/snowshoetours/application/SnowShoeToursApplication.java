@@ -19,9 +19,9 @@ public class SnowShoeToursApplication {
 
   public static SnowShoeTour getSnowShoeTour() {
     if (snowShoeTour == null) {
-      snowShoeTour = SnowShoeTourPersistence.load();
+      //snowShoeTour = SnowShoeTourPersistence.load();
       //demoReset();
-      // reset();
+      reset();
     }
     if (snowShoeTour.getManager() == null) {
       snowShoeTour.setManager(new Manager("manager", "manager", snowShoeTour));

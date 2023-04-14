@@ -81,8 +81,5 @@ public class GuideController {
 				}
 			}
 		}
-		if (email == "manager") {
-
-		}
 	}
 }

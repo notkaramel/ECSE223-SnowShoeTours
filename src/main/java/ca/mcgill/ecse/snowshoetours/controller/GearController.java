@@ -83,7 +83,6 @@ public class GearController {
 		}
 
 		// TRY DELETING GEAR
-
 		try {
 
 			Gear gear = (Gear) Gear.getWithName(name);
@@ -145,7 +144,6 @@ public class GearController {
 		} catch (Exception e) {
 			return "Error: something went wrong";
 		}
-
 	}
 
 	/**
@@ -219,8 +217,6 @@ public class GearController {
 			return "The piece of gear does not exist";
 		}
 
-
-
 		// get gear and combo with gearName and comboName, respectively,
 		// then creates a comboItem using the helper method getComboItem
 		Gear gear = (Gear) BookableItem.getWithName(gearName);
@@ -254,7 +250,6 @@ public class GearController {
 			return "Something went wrong";
 		}
 		return "";
-
 	}
 
 	/**

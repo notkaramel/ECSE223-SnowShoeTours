@@ -45,7 +45,6 @@ public class LodgeController {
 			} catch (Exception e) {
 				return ("Error: Something went wrong");
 			}
-
 		}
 	}
 
@@ -61,6 +60,5 @@ public class LodgeController {
 			} catch (Exception e) {
 			}
 		}
-
 	}
 }
