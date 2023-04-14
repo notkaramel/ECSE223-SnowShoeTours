@@ -256,4 +256,19 @@ public class SnowShoeTourController {
 		return new TOSnowShoeTourSeason(ssts.getStartDate(), ssts.getNrWeeks(),
 				ssts.getPriceOfGuidePerWeek());
 	}
+
+	/**
+	 * Get all the guides as TOGuide List
+	 * 
+	 * @author Antoine Phan @notkaramel
+	 * @return
+	 */
+	public static List<TOGuide> getTOGuideList() {
+		List<TOGuide> guides = new ArrayList<TOGuide>();
+		for (Guide g : ssts.getGuides())
+		{
+			guides.add(new TOGuide(g.getName(), g.getAccountName()));
+		}
+		return guides;
+	}
 }

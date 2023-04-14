@@ -34,3 +34,9 @@ class TOSnowShoeTourSeason {
   Integer nrWeeks;
   Integer guideCost;
 }
+
+class TOGuide {
+  immutable;
+  guideName;
+  guideEmail;
+}

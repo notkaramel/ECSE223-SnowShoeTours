@@ -77,11 +77,11 @@ public class OverviewPageController {
      */
     public void makeTourOverviewTable() {
         TourOverviewTable.getColumns().clear();
-        TourOverviewTable.getColumns().add(createTourColumn("Number", "id"));
-        TourOverviewTable.getColumns().add(createTourColumn("Start Week", "startWeek"));
-        TourOverviewTable.getColumns().add(createTourColumn("End Week", "endWeek"));
-        TourOverviewTable.getColumns().add(createTourColumn("Guide Name", "guideName"));
-        TourOverviewTable.getColumns().add(createTourColumn("Guide Cost", "totalCostForGuide"));
+        TourOverviewTable.getColumns().add(createTourColumn("ID", "id", 50));
+        TourOverviewTable.getColumns().add(createTourColumn("Start Week", "startWeek", 100));
+        TourOverviewTable.getColumns().add(createTourColumn("End Week", "endWeek", 100));
+        TourOverviewTable.getColumns().add(createTourColumn("Guide Name", "guideName", 120));
+        TourOverviewTable.getColumns().add(createTourColumn("Guide Cost", "totalCostForGuide", 100));
 
         TourOverviewTable.addEventHandler(MainPageView.REFRESH_EVENT,
                 e -> TourOverviewTable.setItems(ViewUtils.getSnowShoeTours()));
@@ -98,9 +98,10 @@ public class OverviewPageController {
      * @param propertyName
      * @return
      */
-    private TableColumn<TOSnowShoeTour, ?> createTourColumn(String header, String propertyName) {
+    private TableColumn<TOSnowShoeTour, ?> createTourColumn(String header, String propertyName, Integer width) {
         TableColumn<TOSnowShoeTour, ?> column = new TableColumn<>(header);
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        column.setPrefWidth(width);
         return column;
     }
 
@@ -111,6 +112,7 @@ public class OverviewPageController {
      * 
      * @param header
      * @param propertyName
+     * @param width
      * @return
      */
     private TableColumn<TOParticipant, ?> createParticipantColumn(String header,

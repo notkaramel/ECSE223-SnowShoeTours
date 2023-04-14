@@ -1,13 +1,17 @@
 package ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers;
 
 import ca.mcgill.ecse.snowshoetours.controller.GuideController;
+import ca.mcgill.ecse.snowshoetours.controller.TOGuide;
 import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /*
  * @author Jennifer Tram Su (@jennifertramsu)
@@ -36,14 +40,18 @@ public class GuidePageController {
     private Button registerGuideButton;
 
     @FXML
+    private TableView<TOGuide> guideTableView;
+
+    @FXML
     void initialize() {
         guideChoiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
             guideChoiceBox.setItems(ViewUtils.getGuides());
             guideChoiceBox.setValue(null);
         });
-
+        makeGuideTable();
         // Register the refreshable nodes
         MainPageView.getInstance().registerRefreshEvent(guideChoiceBox);
+        MainPageView.getInstance().registerRefreshEvent(guideTableView);
     }
 
     @FXML
@@ -69,5 +77,37 @@ public class GuidePageController {
             guidePasswordTextField.clear();
             guideEmergencyTextField.clear();
         }
+        MainPageView.getInstance().refresh();
     }
+
+    /**
+     * Helper method to make Guide Table
+     * 
+     * @author Antoine Phan @notkaramel
+     */
+    public void makeGuideTable() {
+        guideTableView.getColumns().clear();
+        guideTableView.getColumns().add(createGuideColumn("Name", "guideName", 120));
+        guideTableView.getColumns().add(createGuideColumn("Email", "guideEmail", 200));
+
+        guideTableView.addEventHandler(MainPageView.REFRESH_EVENT,
+                e -> guideTableView.setItems(ViewUtils.getGuidesInfo()));
+
+        MainPageView.getInstance().registerRefreshEvent(guideTableView);
+    }
+
+    /**
+     * Helper method to create a table column
+
+     * @param header
+     * @param propertyName
+     * @return
+     */
+    private TableColumn<TOGuide, ?> createGuideColumn(String header, String propertyName, Integer width) {
+        TableColumn<TOGuide, ?> column = new TableColumn<>(header);
+        column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        column.setPrefWidth(width);
+        return column;
+    }
+
 }

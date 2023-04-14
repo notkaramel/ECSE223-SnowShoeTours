@@ -1,13 +1,10 @@
-//%% NEW FILE TOSnowShoeSeason BEGINS HERE %%
-
 /*PLEASE DO NOT EDIT THIS CODE*/
 /*This code was generated using the UMPLE 1.32.1.6535.66c005ced modeling language!*/
 
 package ca.mcgill.ecse.snowshoetours.controller;
 import java.sql.Date;
 
-// line 4 "../../../../../../model.ump"
-// line 14 "../../../../../../model.ump"
+// line 31 "../../../../../../SnowShoeTourTransferObjects.ump"
 public class TOSnowShoeTourSeason
 {
 
@@ -15,7 +12,7 @@ public class TOSnowShoeTourSeason
   // MEMBER VARIABLES
   //------------------------
 
-  //TOSnowShoeSeason Attributes
+  //TOSnowShoeTourSeason Attributes
   private Date startDate;
   private int nrWeeks;
   private int guideCost;
