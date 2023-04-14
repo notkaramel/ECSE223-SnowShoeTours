@@ -244,9 +244,16 @@ public class SnowShoeTourController {
 				weeks.add(week);
 			}
 		}
-
+	
 		Collections.sort(weeks);
 		return weeks;
 	}
 
+	/*
+	 * @author Jennifer Tram Su @jennifertramsu
+	 */
+	public static TOSnowShoeTourSeason getSnowShoeTourSeason() {
+		return new TOSnowShoeTourSeason(ssts.getStartDate(), ssts.getNrWeeks(),
+				ssts.getPriceOfGuidePerWeek());
+	}
 }

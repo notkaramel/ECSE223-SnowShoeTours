@@ -27,3 +27,10 @@ class TOParticipant {
   Integer totalCost;
   status;
 }
+
+class TOSnowShoeTourSeason {
+  immutable;
+  Date startDate;
+  Integer nrWeeks;
+  Integer guideCost;
+}

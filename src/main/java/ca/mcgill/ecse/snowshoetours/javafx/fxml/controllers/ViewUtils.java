@@ -14,6 +14,7 @@ import ca.mcgill.ecse.snowshoetours.javafx.fxml.MainPageView;
 import ca.mcgill.ecse.snowshoetours.controller.SnowShoeTourController;
 import ca.mcgill.ecse.snowshoetours.controller.TOParticipant;
 import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTour;
+import ca.mcgill.ecse.snowshoetours.controller.TOSnowShoeTourSeason;
 
 /*
  * @author Antoine Phan @notkaramel, Jennifer Tram Su @jennifertramsu
@@ -95,5 +96,9 @@ public class ViewUtils {
     }
     public static ObservableList<String> getCombos() {
         return FXCollections.observableList(SnowShoeTourController.getCombos());
+    }
+    
+    public static TOSnowShoeTourSeason getSeason() {
+    	return SnowShoeTourController.getSnowShoeTourSeason();
     }
 }
