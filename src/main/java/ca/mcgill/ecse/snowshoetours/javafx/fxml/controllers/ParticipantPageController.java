@@ -12,9 +12,9 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-/*
-* @author Jennifer Tram Su (@jennifertramsu)
-*/
+/**
+ * @author Jennifer Tram Su (@jennifertramsu)
+ */
 public class ParticipantPageController {
 
     @FXML // fx:id="deleteParticipantButton"
@@ -69,6 +69,7 @@ public class ParticipantPageController {
     private Button RemoveGearComboButton;
 
     private boolean gearOptionSelected = true;
+
     /**
      * Helper method to initialize the choice box
      * 
@@ -80,14 +81,14 @@ public class ParticipantPageController {
             choiceBox.setItems(ViewUtils.getParticipants());
             choiceBox.setValue(null);
         });
-        
+
         // Register the refreshable nodes
         MainPageView.getInstance().registerRefreshEvent(choiceBox);
     }
 
     private void initGearAndComboChoiceBox(ChoiceBox<String> choiceBox) {
         System.out.println(gearOptionSelected);
-        
+
         choiceBox.addEventHandler(MainPageView.REFRESH_EVENT, e -> {
             if (gearOptionSelected) {
                 choiceBox.setValue("Select a gear");
@@ -97,33 +98,45 @@ public class ParticipantPageController {
                 choiceBox.setItems(ViewUtils.getCombos());
             }
         });
-        
-        // Register the refreshable nodes
-        MainPageView.getInstance().refresh();
+
     }
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+
+    /**
+     * This method is called by the FXMLLoader when initialization is complete
+     * 
+     * @author Jennifer Tram Su (@jennifertramsu), Antoine Phan (@notkaramel)
+     */
+    @FXML
     public void initialize() {
         // Initialize the choice box
         initParticipantChoiceBox(participantChoiceBoxDelete);
         initParticipantChoiceBox(participantChoiceBoxGearCombo);
-        
+
         // initialize the radio buttons
         GearRadioOption.setSelected(true);
         ComboRadioOption.setSelected(false);
-        
+
         initGearAndComboChoiceBox(GearComboChoiceBox);
         MainPageView.getInstance().registerRefreshEvent(GearComboChoiceBox);
     }
 
+    /**
+     * @author Jennifer Tram Su (@jennifertramsu)
+     * @param event
+     */
     @FXML
     void deleteParticipantClicked(ActionEvent event) {
         String email = participantChoiceBoxDelete.getValue().toString();
         ParticipantController.deleteParticipant(email);
-        
+
         // Refresh the choice box
         MainPageView.getInstance().refresh();
     }
 
+    /**
+     * @author Jennifer Tram Su (@jennifertramsu)
+     * @param event
+     */
     @FXML
     void registerParticipantClicked(ActionEvent event) {
         String name = participantNameTextField.getText();
@@ -142,7 +155,8 @@ public class ParticipantPageController {
         }
 
         // Reset text fields if successful
-        if (ViewUtils.successful(ParticipantController.registerParticipant(email, password, name, emergencyContact, nrWeeks, weekAvailableFrom, weekAvailableUntil, lodgeRequired))) {
+        if (ViewUtils.successful(ParticipantController.registerParticipant(email, password, name,
+                emergencyContact, nrWeeks, weekAvailableFrom, weekAvailableUntil, lodgeRequired))) {
             participantNameTextField.clear();
             participantEmailTextField.clear();
             participantPasswordTextField.clear();
@@ -151,49 +165,83 @@ public class ParticipantPageController {
             weekFromTextField.clear();
             weekToTextField.clear();
             lodgeRequestCheckBox.setSelected(false);
+            ViewUtils.makePopupWindow("Success", "Successfully registered " + name);
         }
     }
 
+    /**
+     * @author Jennifer Tram Su (@jennifertramsu), Antoine Phan (@notkaramel)
+     */
     @FXML
     void addGearComboAction(ActionEvent event) {
-        
+
         String email = participantChoiceBoxGearCombo.getValue().toString();
         String gearCombo = GearComboChoiceBox.getValue().toString();
-        if (ViewUtils.successful(ParticipantController.addBookableItemToParticipant(email, gearCombo))) {
+        if (ViewUtils
+                .successful(ParticipantController.addBookableItemToParticipant(email, gearCombo))) {
             // Refresh the choice box
+            ViewUtils.makePopupWindow("Successfully Added",
+                    "Successfully added " + gearCombo + " to " + email);
             MainPageView.getInstance().refresh();
+        } else {
+            ViewUtils.makePopupWindow("Error", "Error adding " + gearCombo + " to " + email);
         }
     }
 
+    /**
+     * @author Jennifer Tram Su (@jennifertramsu), Antoine Phan (@notkaramel)
+     */
     @FXML
     void removeGearComboAction(ActionEvent event) {
         String email = participantChoiceBoxGearCombo.getValue().toString();
         String gearCombo = GearComboChoiceBox.getValue().toString();
-        if (ViewUtils.successful(ParticipantController.removeBookableItemFromParticipant(email, gearCombo))) {
+        if (ViewUtils.successful(
+                ParticipantController.removeBookableItemFromParticipant(email, gearCombo))) {
+            ViewUtils.makePopupWindow("Successfully Removed",
+                    "Successfully removed " + gearCombo + " from " + email);
             // Refresh the choice box
             MainPageView.getInstance().refresh();
+        } else {
+            ViewUtils.makePopupWindow("Error", "Error removing " + gearCombo + " from " + email);
         }
     }
 
+    /**
+     * @author Antoine Phan (@notkaramel)
+     * @param event
+     */
     @FXML
     void optionComboSelected(ActionEvent event) {
+        String email = "";
+        try {
+            email = participantChoiceBoxGearCombo.getValue().toString();
+        } catch (NullPointerException e) {
+            System.out.println("No participant selected");
+        }
+
         ComboRadioOption.setSelected(true);
         GearRadioOption.setSelected(false);
         gearOptionSelected = false;
         MainPageView.getInstance().refresh();
+        participantChoiceBoxGearCombo.setValue(email);
     }
 
+    /**
+     * @author Antoine Phan (@notkaramel)
+     * @param event
+     */
     @FXML
     void optionGearSelected(ActionEvent event) {
+        String email = "";
+        try {
+            email = participantChoiceBoxGearCombo.getValue().toString();
+        } catch (NullPointerException e) {
+            System.out.println("No participant selected");
+        }
         ComboRadioOption.setSelected(false);
         GearRadioOption.setSelected(true);
         gearOptionSelected = true;
-        initGearAndComboChoiceBox(GearComboChoiceBox);
+        MainPageView.getInstance().refresh();
+        participantChoiceBoxGearCombo.setValue(email);
     }
-
-    @FXML
-    void mouseClicked(MouseEvent event) {
-        initGearAndComboChoiceBox(GearComboChoiceBox);
-    }
-
 }

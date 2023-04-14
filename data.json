@@ -2,7 +2,7 @@
   "SnowShoeTour": {
     "startDate": "1969-12-31",
     "nrWeeks": 10,
-    "priceOfGuidePerWeek": 0,
+    "priceOfGuidePerWeek": 500,
     "manager": {
       "accountName": "manager",
       "password": "manager",
@@ -11,59 +11,226 @@
       }
     },
     "guides": [
-      ""
+      {
+        "Guide": [
+          {
+            "accountName": "bilar@creation.ctrl",
+            "password": "bmok",
+            "name": "Bilar",
+            "emergencyContact": "(438)987-6543",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "tours": [
+              ""
+            ]
+          },
+          {
+            "accountName": "angela@whyeclipse.why",
+            "password": "angela",
+            "name": "Angela",
+            "emergencyContact": "(438)987-6543",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "tours": [
+              ""
+            ]
+          }
+        ]
+      }
     ],
     "participants": [
       {
-        "Participant": {
-          "accountName": "jen@gmail.com",
-          "password": "kldfms",
-          "name": "jen",
-          "emergencyContact": "kmldfsl",
-          "nrWeeks": 1,
-          "weekAvailableFrom": 2,
-          "weekAvailableUntil": 4,
-          "lodgeRequired": true,
-          "authorizationCode": "",
-          "refundedPercentageAmount": 0,
-          "status": "NotAssigned",
-          "snowShoeTour": {
-            "@reference": "../../.."
+        "Participant": [
+          {
+            "accountName": "emma_1@frosty.bite",
+            "password": "emma123",
+            "name": "Emma",
+            "emergencyContact": "(438)333-2222",
+            "nrWeeks": 3,
+            "weekAvailableFrom": 1,
+            "weekAvailableUntil": 6,
+            "lodgeRequired": true,
+            "authorizationCode": "LovelyDay",
+            "refundedPercentageAmount": 0,
+            "status": "NotAssigned",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "bookedItems": [
+              ""
+            ]
           },
-          "bookedItems": [
-            ""
-          ]
-        }
+          {
+            "accountName": "antoine_2@noeclipse.pls",
+            "password": "antoine123",
+            "name": "Antoine",
+            "emergencyContact": "(438)333-2222",
+            "nrWeeks": 2,
+            "weekAvailableFrom": 2,
+            "weekAvailableUntil": 6,
+            "lodgeRequired": true,
+            "authorizationCode": "EclipseBad",
+            "refundedPercentageAmount": 0,
+            "status": "NotAssigned",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "bookedItems": [
+              {
+                "BookedItem": {
+                  "quantity": 1,
+                  "snowShoeTour": {
+                    "@reference": "../../../../.."
+                  },
+                  "participant": {
+                    "@reference": "../../.."
+                  },
+                  "item": {
+                    "@class": "Gear",
+                    "name": "pole",
+                    "bookedItems": [
+                      {
+                        "BookedItem": {
+                          "@reference": "../../.."
+                        }
+                      }
+                    ],
+                    "pricePerWeek": 10,
+                    "snowShoeTour": {
+                      "@reference": "../../../../../.."
+                    },
+                    "comboItems": [
+                      ""
+                    ]
+                  },
+                  "cachedHashCode": -1,
+                  "canSetParticipant": true,
+                  "canSetItem": true
+                }
+              }
+            ]
+          },
+          {
+            "accountName": "jennifer_4@hybrid.ide",
+            "password": "jennifer123",
+            "name": "Jennifer",
+            "emergencyContact": "(438)333-2222",
+            "nrWeeks": 3,
+            "weekAvailableFrom": 4,
+            "weekAvailableUntil": 6,
+            "lodgeRequired": true,
+            "authorizationCode": "",
+            "refundedPercentageAmount": 0,
+            "status": "NotAssigned",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "bookedItems": [
+              ""
+            ]
+          },
+          {
+            "accountName": "sameer_6@vscode.love",
+            "password": "",
+            "name": "Sameer",
+            "emergencyContact": "(438)333-2222",
+            "nrWeeks": 3,
+            "weekAvailableFrom": 6,
+            "weekAvailableUntil": 8,
+            "lodgeRequired": true,
+            "authorizationCode": "",
+            "refundedPercentageAmount": 0,
+            "status": "NotAssigned",
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "bookedItems": [
+              ""
+            ]
+          }
+        ]
       }
     ],
     "bookedItems": [
-      ""
-    ],
-    "gear": [
       {
-        "Gear": {
-          "name": "jen",
-          "bookedItems": [
-            ""
-          ],
-          "pricePerWeek": 1,
-          "snowShoeTour": {
-            "@reference": "../../.."
-          },
-          "comboItems": [
-            ""
-          ]
+        "BookedItem": {
+          "@reference": "../../participants/Participant[2]/bookedItems/BookedItem"
         }
       }
     ],
+    "gear": [
+      {
+        "Gear": [
+          {
+            "@reference": "../../participants/Participant[2]/bookedItems/BookedItem/item"
+          },
+          {
+            "name": "shoe",
+            "bookedItems": [
+              ""
+            ],
+            "pricePerWeek": 10,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              ""
+            ]
+          }
+        ]
+      }
+    ],
     "combos": [
-      ""
+      {
+        "Combo": [
+          {
+            "name": "Bestie",
+            "bookedItems": [
+              ""
+            ],
+            "discount": 20,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              ""
+            ]
+          },
+          {
+            "name": "Frosty",
+            "bookedItems": [
+              ""
+            ],
+            "discount": 30,
+            "snowShoeTour": {
+              "@reference": "../../.."
+            },
+            "comboItems": [
+              ""
+            ]
+          }
+        ]
+      }
     ],
     "comboItems": [
       ""
     ],
     "lodges": [
-      ""
+      {
+        "Lodge": {
+          "name": "Jennifer Inn",
+          "address": "Trottier Basement",
+          "rating": "FiveStars",
+          "snowShoeTour": {
+            "@reference": "../../.."
+          },
+          "tours": [
+            ""
+          ]
+        }
+      }
     ],
     "tours": [
       ""

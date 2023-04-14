@@ -20,8 +20,8 @@ public class SnowShoeToursApplication {
   public static SnowShoeTour getSnowShoeTour() {
     if (snowShoeTour == null) {
       //snowShoeTour = SnowShoeTourPersistence.load();
-      //demoReset();
-      reset();
+      demoReset();
+      // reset();
     }
     if (snowShoeTour.getManager() == null) {
       snowShoeTour.setManager(new Manager("manager", "manager", snowShoeTour));
@@ -35,7 +35,7 @@ public class SnowShoeToursApplication {
     SnowShoeTourPersistence.save();
   }
   private static void demoReset() {
-    snowShoeTour = new SnowShoeTour(new Date(0), 10, 0);
+    snowShoeTour = new SnowShoeTour(new Date(0), 10, 500);
     snowShoeTour.addParticipant("emma_1@frosty.bite", "emma123", "Emma", "(438)333-2222", 3, 1, 6,
         true, "LovelyDay", 0);
     snowShoeTour.addParticipant("antoine_2@noeclipse.pls", "antoine123", "Antoine", "(438)333-2222",
