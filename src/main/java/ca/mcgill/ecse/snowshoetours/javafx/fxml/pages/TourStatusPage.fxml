@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.TourStatusPageController">
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.TourStatusPageController">
     <children>
         <VBox centerShape="true" layoutX="0" layoutY="0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <children>
@@ -32,9 +32,9 @@
                     <children>
                         <ChoiceBox fx:id="participantChoiceBox" prefHeight="26.0" prefWidth="221.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                         <Button fx:id="startTripButton" mnemonicParsing="false" onAction="#startTrip" prefHeight="28.0" prefWidth="85.0" text="Start Trip" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Week" textAlignment="CENTER" wrappingWidth="204.453125" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT WEEK" textAlignment="CENTER" wrappingWidth="225.2530517578125" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                             <font>
-                                <Font size="27.0" />
+                                <Font name="Arial Black" size="27.0" />
                             </font></Text>
                         <Button fx:id="finishTripButton" mnemonicParsing="false" onAction="#finishParticipantTrip" prefHeight="28.0" prefWidth="107.0" text="Finish Trip" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                         <Button fx:id="cancelTripButton" mnemonicParsing="false" onAction="#cancelParticipantTrip" prefHeight="28.0" prefWidth="126.0" text="Cancel Trip" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
@@ -43,9 +43,9 @@
                                 <Font size="20.0" />
                             </font>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Participant" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT PARTICIPANT" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                             <font>
-                                <Font size="29.0" />
+                                <Font name="Arial Black" size="29.0" />
                             </font></Text>
                         <ChoiceBox fx:id="weekChoiceBox" prefHeight="26.0" prefWidth="151.0" GridPane.columnIndex="3" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                     </children>

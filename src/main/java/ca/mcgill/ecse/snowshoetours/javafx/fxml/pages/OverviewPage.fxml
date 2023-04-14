@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.OverviewPageController">
+<GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.OverviewPageController">
   <columnConstraints>
     <ColumnConstraints />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="294.0" minWidth="10.0" prefWidth="249.0" />
@@ -32,7 +32,7 @@
       <TableView fx:id="TourOverviewTable" maxWidth="-Infinity" prefHeight="220.0" prefWidth="700.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.vgrow="SOMETIMES" />
       <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="392.0" text="SYSTEM OVERVIEW" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <font>
-            <Font size="32.0" />
+            <Font name="Arial Black" size="30.0" />
          </font>
       </Label>
       <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#refreshOverview" prefHeight="32.0" prefWidth="122.0" text="REFRESH" textAlignment="CENTER" textFill="#030000" textOverrun="WORD_ELLIPSIS" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER">

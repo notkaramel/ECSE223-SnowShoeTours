@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.LodgePageController">
+<GridPane alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="324.0" prefWidth="614.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ca.mcgill.ecse.snowshoetours.javafx.fxml.controllers.LodgePageController">
   <columnConstraints>
     <ColumnConstraints maxWidth="134.49999237060547" minWidth="23.5" prefWidth="33.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="290.0" minWidth="10.0" prefWidth="104.0" />
@@ -36,12 +36,12 @@
       <Button fx:id="lodgeAddButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addLodge" prefHeight="26.0" prefWidth="106.0" text="Add Lodge" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DELETE LODGE" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font name="Arial Black" size="24.0" />
          </font>
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ADD LODGE" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER">
          <font>
-            <Font size="24.0" />
+            <Font name="Arial Black" size="24.0" />
          </font>
       </Text>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lodge" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
