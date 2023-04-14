@@ -55,14 +55,14 @@ public class OverviewPageController {
     private void makeParticipantOverviewTable() {
         ParticipantOverviewTable.getColumns().clear();
         ParticipantOverviewTable.getColumns()
-                .add(createParticipantColumn("Name", "participantName"));
+                .add(createParticipantColumn("Name", "participantName", 120));
         ParticipantOverviewTable.getColumns()
-                .add(createParticipantColumn("Email", "participantEmail"));
+                .add(createParticipantColumn("Email", "participantEmail", 200));
         ParticipantOverviewTable.getColumns()
-                .add(createParticipantColumn("Total Cost", "totalCost"));
+                .add(createParticipantColumn("Total Cost", "totalCost", 80));
         ParticipantOverviewTable.getColumns()
-                .add(createParticipantColumn("Auth Code", "authorizationCode"));
-        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Status", "status"));
+                .add(createParticipantColumn("Auth Code", "authorizationCode", 100));
+        ParticipantOverviewTable.getColumns().add(createParticipantColumn("Status", "status", 200));
 
         ParticipantOverviewTable.addEventHandler(MainPageView.REFRESH_EVENT,
                 e -> ParticipantOverviewTable.setItems(ViewUtils.getParticipantsInfo()));
@@ -114,9 +114,10 @@ public class OverviewPageController {
      * @return
      */
     private TableColumn<TOParticipant, ?> createParticipantColumn(String header,
-            String propertyName) {
+            String propertyName, Integer width) {
         TableColumn<TOParticipant, ?> column = new TableColumn<>(header);
         column.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        column.setPrefWidth(width);
         return column;
     }
 }
